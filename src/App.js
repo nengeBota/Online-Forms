@@ -1,10 +1,13 @@
 import styled from 'styled-components'
 import CorporateStructureAndServices from "./pages/CorporateStructureAndServices";
+import Image from "react-bootstrap/Image";
 
 function App() {
   return (
     <PageWrapper>
-      <div>Petroleum Commission Ghana</div>
+      <div>
+        <Image src="/logo.png"/>
+      </div>
       <CorporateStructureAndServices />
     </PageWrapper>
   );
@@ -24,5 +27,10 @@ const PageWrapper = styled.div`
 
   input {
     margin-bottom: 20px;
+  }
+  
+  img {
+    width: 100%;
+    margin-bottom: 30px;
   }
 `;
