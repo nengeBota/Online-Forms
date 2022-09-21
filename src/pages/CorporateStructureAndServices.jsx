@@ -1,30 +1,8 @@
 import { useState } from 'react';
 import { Form, Table } from 'react-bootstrap';
+import DynamicTable from '../components/DynamicTable';
 
-function CorporateStructureAndServices() {
-	const [data, setData] = useState({
-		applicantName: '',
-		dateOfIncorporation: '',
-		placeOfIncorporation: '',
-		contactDetails: {
-			officeAddress: '',
-			postalAddress: '',
-			city: '',
-			region: '',
-			country: '',
-		},
-		emailAddress: '',
-		website: '',
-		contactPerson: {
-			name: '',
-			mobileNumber: '',
-		},
-		nameOfSubsidiaryOrAffiliate: '',
-		nationalityOfAffiliate: '',
-		corporateStructure: '',
-		description:''
-	});
-
+function CorporateStructureAndServices({ data, setData }) {
 	const {
 		applicantName,
 		dateOfIncorporation,
@@ -36,7 +14,8 @@ function CorporateStructureAndServices() {
 		nameOfSubsidiaryOrAffiliate,
 		nationalityOfAffiliate,
 		corporateStructure,
-		description
+		description,
+		shareholders,
 	} = data;
 
 	return (
@@ -205,43 +184,88 @@ function CorporateStructureAndServices() {
 				</Form.Group>
 
 				<Form.Group>
-					<Form.Label>5. Nationality of Parent Company or Affiliate (if applicable)</Form.Label>
-					<Form.Control placeholder='Nationality of Parent Company/ Affiliate' value={nationalityOfAffiliate} onChange={(e) =>
-						setData((prev) => ({
-							...prev,
-							nationalityOfAffiliate: e.target.value,
-						}))
-					} />
+					<Form.Label>
+						5. Nationality of Parent Company or Affiliate (if applicable)
+					</Form.Label>
+					<Form.Control
+						placeholder="Nationality of Parent Company/ Affiliate"
+						value={nationalityOfAffiliate}
+						onChange={(e) =>
+							setData((prev) => ({
+								...prev,
+								nationalityOfAffiliate: e.target.value,
+							}))
+						}
+					/>
 				</Form.Group>
 				<Form.Group>
-					<Form.Label>6. Give an outline of the corporate structure, including an explanatory diagram, if appropriate, showing parent, subsidiary and affiliate companies (if applicable).</Form.Label>
-					<Form.Control type='file' value={corporateStructure} onChange={(e) =>
-						setData((prev) => ({
-							...prev,
-							corporateStructure: e.target.value,
-						}))
-					} />
+					<Form.Label>
+						6. Give an outline of the corporate structure, including an explanatory
+						diagram, if appropriate, showing parent, subsidiary and affiliate companies
+						(if applicable).
+					</Form.Label>
+					<Form.Control
+						type="file"
+						value={corporateStructure}
+						onChange={(e) =>
+							setData((prev) => ({
+								...prev,
+								corporateStructure: e.target.value,
+							}))
+						}
+					/>
 				</Form.Group>
 
 				<Form.Group>
 					<Form.Label>
 						7a. List all Individuals/Companies with shares in the applicant company.
 					</Form.Label>
-					<Table>
-						<thead>
-							<tr>
-								<th>Shareholders</th>
-								<th>Address</th>
-								<th>Nationality</th>
-								<th>Percentage</th>
-							</tr>
-						</thead>
 
-					</Table>
+					<DynamicTable
+						columns={[
+							{ name: 'Shareholders', key: 'name' },
+							{ name: 'Address', key: 'address' },
+							{ name: 'Nationality', key: 'nationality' },
+							{ name: 'Percentage', key: 'percentage' },
+						]}
+						data={shareholders}
+						addNewRow={() =>
+							setData((prev) => ({
+								...prev,
+								shareholders: [
+									...prev.shareholders,
+									{
+										name: '',
+										address: '',
+										nationality: '',
+										percentage: '',
+										isEditing: true,
+									},
+								],
+							}))
+						}
+						updateRow={(index, key, value) => {
+							data.shareholders[index][key] = value;
+							setData((prev) => ({ ...prev, shareholders: [...data.shareholders] }));
+						}}
+						saveRow={(index) => {
+							data.shareholders[index]['isEditing'] = false;
+							setData((prev) => ({ ...prev, shareholders: [...data.shareholders] }));
+						}}
+						editRow={(index) => {
+							data.shareholders[index]['isEditing'] = true;
+							setData((prev) => ({ ...prev, shareholders: [...data.shareholders] }));
+						}}
+						deleteRow={(index) => {
+							data.shareholders.splice(index, 1);
+							setData((prev) => ({ ...prev, shareholders: [...data.shareholders] }));
+						}}
+					/>
 				</Form.Group>
 				<Form.Group>
 					<Form.Label>
-						7b. Beneficial Ownership - if shareholders in 7a. are companies, please provide a list all individual shareholders in the company stated in 7a.
+						7b. Beneficial Ownership - if shareholders in 7a. are companies, please
+						provide a list all individual shareholders in the company stated in 7a.
 					</Form.Label>
 					<Table>
 						<thead>
@@ -255,79 +279,99 @@ function CorporateStructureAndServices() {
 					</Table>
 				</Form.Group>
 				<Form.Group>
-					<Form.Label>
-						8. Directors and Management (check later)
-					</Form.Label>
+					<Form.Label>8. Directors and Management (check later)</Form.Label>
+				</Form.Group>
+
+				<Form.Group>
+					<Form.Label>9. Category of Permit applied for</Form.Label>
+					<Form.Check inline label="Specialized" type={'radio'} />
+					<Form.Check inline label="General" type={'radio'} />
 				</Form.Group>
 
 				<Form.Group>
 					<Form.Label>
-						9. Category of Permit applied for
+						10. a. i. Indicate at most two (2) activities in order of preference from
+						either Category A or B from the Commission’s Classification Of Upstream
+						Petroleum Industry Companies list provided [Specialized].
 					</Form.Label>
-					<Form.Check inline label='Specialized' type={'radio'} />
-					<Form.Check inline label='General' type={'radio'} />
+					<Form.Check label="Aviation Support Services" type={'checkbox'} />
+					<Form.Check label="Calibration Services" type={'checkbox'} />
+					<Form.Check label="Data Measurement Services" type={'checkbox'} />
+					<Form.Check label="Diving and Hyperbaric Services" type={'checkbox'} />
+					<Form.Check label="Dredging Services" type={'checkbox'} />
+					<Form.Check label="Drilling/Production Services" type={'checkbox'} />
+					<Form.Check label="Environmental Services" type={'checkbox'} />
+					<Form.Check label="Exploration Services" type={'checkbox'} />
+					<Form.Check
+						label="Installation Services/ Marine Contracting"
+						type={'checkbox'}
+					/>
+					<Form.Check label="Integrated Services" type={'checkbox'} />
+					<Form.Check label="Integrity Test and Inspection Services" type={'checkbox'} />
+					<Form.Check label="Laboratory Services" type={'checkbox'} />
+					<Form.Check label="Major Construction Services" type={'checkbox'} />
+					<Form.Check label="Marine Support Services" type={'checkbox'} />
+					<Form.Check label="Onshore/Offshore Pipeline Services" type={'checkbox'} />
+					<Form.Check label="Research and Development Services" type={'checkbox'} />
+					<Form.Check label="Rope Access" type={'checkbox'} />
+					<Form.Check label="Special Transportation" type={'checkbox'} />
+					<Form.Check label="Surveying/Positioning Services" type={'checkbox'} />
+					<Form.Check label="Technical Consultancy" type={'checkbox'} />
+					<Form.Check label="Waste Management Services" type={'checkbox'} />
 				</Form.Group>
 
 				<Form.Group>
 					<Form.Label>
-						10. a. i.  Indicate at most two (2) activities in order of preference from either Category A or B from the Commission’s Classification Of Upstream Petroleum Industry Companies list provided [Specialized].
+						10. a. ii. Indicate at most two (2) activities in order of preference from
+						either Category A or B from the Commission’s Classification Of Upstream
+						Petroleum Industry Companies list provided [General].
 					</Form.Label>
-					<Form.Check label='Aviation Support Services' type={'checkbox'} />
-					<Form.Check label='Calibration Services' type={'checkbox'} />
-					<Form.Check label='Data Measurement Services' type={'checkbox'} />
-					<Form.Check label='Diving and Hyperbaric Services' type={'checkbox'} />
-					<Form.Check label='Dredging Services' type={'checkbox'} />
-					<Form.Check label='Drilling/Production Services' type={'checkbox'} />
-					<Form.Check label='Environmental Services' type={'checkbox'} />
-					<Form.Check label='Exploration Services' type={'checkbox'} />
-					<Form.Check label='Installation Services/ Marine Contracting' type={'checkbox'} />
-					<Form.Check label='Integrated Services' type={'checkbox'} />
-					<Form.Check label='Integrity Test and Inspection Services' type={'checkbox'} />
-					<Form.Check label='Laboratory Services' type={'checkbox'} />
-					<Form.Check label='Major Construction Services' type={'checkbox'} />
-					<Form.Check label='Marine Support Services' type={'checkbox'} />
-					<Form.Check label='Onshore/Offshore Pipeline Services' type={'checkbox'} />
-					<Form.Check label='Research and Development Services' type={'checkbox'} />
-					<Form.Check label='Rope Access' type={'checkbox'} />
-					<Form.Check label='Special Transportation' type={'checkbox'} />
-					<Form.Check label='Surveying/Positioning Services' type={'checkbox'} />
-					<Form.Check label='Technical Consultancy' type={'checkbox'} />
-					<Form.Check label='Waste Management Services' type={'checkbox'} />
+					<Form.Check label="Automobile Services" type={'checkbox'} />
+					<Form.Check label="Banking/Financial Services" type={'checkbox'} />
+					<Form.Check
+						label="Construction/Rehabilitation/Fabrication Works"
+						type={'checkbox'}
+					/>
+					<Form.Check label="Equipment/Material Supply Services" type={'checkbox'} />
+					<Form.Check label="General Consultancy Services" type={'checkbox'} />
+					<Form.Check
+						label="Haulage/ Freight / Clearing and Forwarding (International/Domestic)"
+						type={'checkbox'}
+					/>
+					<Form.Check label="Heavy Duty Equipment Supply" type={'checkbox'} />
+					<Form.Check label="Hospital/ Medical Services" type={'checkbox'} />
+					<Form.Check label="Hospitality Services" type={'checkbox'} />
+					<Form.Check
+						label="Information Technology/ Communication Services"
+						type={'checkbox'}
+					/>
+					<Form.Check label="Insurance Service" type={'checkbox'} />
+					<Form.Check label="Maintenance" type={'checkbox'} />
+					<Form.Check label="Manpower Supply" type={'checkbox'} />
+					<Form.Check label="Printing Services" type={'checkbox'} />
+					<Form.Check label="Protocol and Logistics Services" type={'checkbox'} />
+					<Form.Check label="Sanitation" type={'checkbox'} />
+					<Form.Check label="Supply" type={'checkbox'} />
+					<Form.Check label="Supply of Petroleum Products" type={'checkbox'} />
+					<Form.Check label="Water Borehole Services" type={'checkbox'} />
+					<Form.Check label="Works" type={'checkbox'} />
 				</Form.Group>
-
 				<Form.Group>
 					<Form.Label>
-						10. a. ii.  Indicate at most two (2) activities in order of preference from either Category A or B from the Commission’s Classification Of Upstream Petroleum Industry Companies list provided [General].
+						10. b. Provide a description of the range of activities applicant proposes
+						to undertake in relation to 10. a.
 					</Form.Label>
-					<Form.Check label='Automobile Services' type={'checkbox'} />
-					<Form.Check label='Banking/Financial Services' type={'checkbox'} />
-					<Form.Check label='Construction/Rehabilitation/Fabrication Works' type={'checkbox'} />
-					<Form.Check label='Equipment/Material Supply Services' type={'checkbox'} />
-					<Form.Check label='General Consultancy Services' type={'checkbox'} />
-					<Form.Check label='Haulage/ Freight / Clearing and Forwarding (International/Domestic)' type={'checkbox'} />
-					<Form.Check label='Heavy Duty Equipment Supply' type={'checkbox'} />
-					<Form.Check label='Hospital/ Medical Services' type={'checkbox'} />
-					<Form.Check label='Hospitality Services' type={'checkbox'} />
-					<Form.Check label='Information Technology/ Communication Services' type={'checkbox'} />
-					<Form.Check label='Insurance Service' type={'checkbox'} />
-					<Form.Check label='Maintenance' type={'checkbox'} />
-					<Form.Check label='Manpower Supply' type={'checkbox'} />
-					<Form.Check label='Printing Services' type={'checkbox'} />
-					<Form.Check label='Protocol and Logistics Services' type={'checkbox'} />
-					<Form.Check label='Sanitation' type={'checkbox'} />
-					<Form.Check label='Supply' type={'checkbox'} />
-					<Form.Check label='Supply of Petroleum Products' type={'checkbox'} />
-					<Form.Check label='Water Borehole Services' type={'checkbox'} />
-					<Form.Check label='Works' type={'checkbox'} />
-				</Form.Group>
-				<Form.Group>
-					<Form.Label>10. b. Provide a description of the range of activities applicant proposes to undertake in relation to 10. a.</Form.Label>
-					<Form.Control as="textarea" rows={3} value={description} onChange={(e) =>
-						setData((prev) => ({
-							...prev,
-							description: e.target.value,
-						}))
-					}  />
+					<Form.Control
+						as="textarea"
+						rows={3}
+						value={description}
+						onChange={(e) =>
+							setData((prev) => ({
+								...prev,
+								description: e.target.value,
+							}))
+						}
+					/>
 				</Form.Group>
 			</Form>
 		</div>
