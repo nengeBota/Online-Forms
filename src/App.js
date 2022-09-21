@@ -26,19 +26,13 @@ function App() {
 		nationalityOfAffiliate: '',
 		shareholders: [
 			{
-				name: 'name 1',
-				address: 'address 1',
-				nationality: 'nationality 1',
-				percentage: 'percentage 1',
-				isEditing: false,
+				name: '',
+				address: '',
+				nationality: '',
+				percentage: '',
+				isEditing: true,
 			},
-			{
-				name: 'name 2',
-				address: 'address 2',
-				nationality: 'nationality 2',
-				percentage: 'percentage 2',
-				isEditing: false,
-			},
+			
 		],
 		corporateStructure: '',
 		description: '',
