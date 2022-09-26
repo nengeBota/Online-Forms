@@ -1,12 +1,13 @@
 import { useState } from 'react';
 import styled from 'styled-components';
 import CorporateStructureAndServices from './pages/CorporateStructureAndServices';
+import FinancialCapabilityAndTechnicalCompetency from './pages/FinancialCapabilityAndTechnicalCompetency';
 import Image from 'react-bootstrap/Image';
 
 export const PERMIT_CATEGORIES = {
-  specialised:'specialized',
-  general: 'general',
-}
+	specialised: 'specialized',
+	general: 'general',
+};
 
 function App() {
 	const [data, setData] = useState({
@@ -28,8 +29,8 @@ function App() {
 		},
 
 		nameOfSubsidiaryOrAffiliate: '',
-    permitCategory: PERMIT_CATEGORIES.general,
 		nationalityOfAffiliate: '',
+		permitCategory: PERMIT_CATEGORIES.general,
 		shareholders: [
 			{
 				name: '',
@@ -38,7 +39,15 @@ function App() {
 				percentage: '',
 				isEditing: true,
 			},
-			
+		],
+		beneficial: [
+			{
+				name: '',
+				address: '',
+				nationality: '',
+				percentage: '',
+				isEditing: true,
+			},
 		],
 		corporateStructure: '',
 		description: '',

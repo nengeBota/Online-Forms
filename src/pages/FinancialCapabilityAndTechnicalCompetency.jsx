@@ -1,5 +1,9 @@
-import { useState } from 'react';
-import { Form, Table } from 'react-bootstrap';
+import { Form} from 'react-bootstrap';
+
+function FinancialCapabilityAndTechnicalCompetency({ data, setData }) {
+	const {
+
+	} = data;
 
 return(
     <div>
@@ -7,4 +11,7 @@ return(
             
         </Form>
     </div>
-)
+);
+}
+
+export default FinancialCapabilityAndTechnicalCompetency;
