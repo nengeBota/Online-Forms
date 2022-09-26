@@ -3,6 +3,11 @@ import styled from 'styled-components';
 import CorporateStructureAndServices from './pages/CorporateStructureAndServices';
 import Image from 'react-bootstrap/Image';
 
+export const PERMIT_CATEGORIES = {
+  specialised:'specialized',
+  general: 'general',
+}
+
 function App() {
 	const [data, setData] = useState({
 		applicantName: '',
@@ -23,6 +28,7 @@ function App() {
 		},
 
 		nameOfSubsidiaryOrAffiliate: '',
+    permitCategory: PERMIT_CATEGORIES.general,
 		nationalityOfAffiliate: '',
 		shareholders: [
 			{

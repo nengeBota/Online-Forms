@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { Form, Table } from 'react-bootstrap';
+import { PERMIT_CATEGORIES } from '../App';
 import DynamicTable from '../components/DynamicTable';
 
 function CorporateStructureAndServices({ data, setData }) {
@@ -16,6 +17,7 @@ function CorporateStructureAndServices({ data, setData }) {
 		corporateStructure,
 		description,
 		shareholders,
+		permitCategory,
 	} = data;
 
 	return (
@@ -284,78 +286,108 @@ function CorporateStructureAndServices({ data, setData }) {
 
 				<Form.Group>
 					<Form.Label>9. Category of Permit applied for</Form.Label>
-					<Form.Check inline label="Specialized" type={'radio'} />
-					<Form.Check inline label="General" type={'radio'} />
+					<br />
+					<Form.Check
+						inline
+						label="Specialized"
+						type={'radio'}
+						checked={permitCategory === PERMIT_CATEGORIES.specialised}
+						onChange={() =>
+							setData((prev) => ({
+								...prev,
+								permitCategory: PERMIT_CATEGORIES.specialised,
+							}))
+						}
+					/>
+					<Form.Check
+						inline
+						label="General"
+						type={'radio'}
+						checked={permitCategory === PERMIT_CATEGORIES.general}
+						onChange={() =>
+							setData((prev) => ({
+								...prev,
+								permitCategory: PERMIT_CATEGORIES.general,
+							}))
+						}
+					/>
 				</Form.Group>
 
-				<Form.Group>
-					<Form.Label>
-						10. a. i. Indicate at most two (2) activities in order of preference from
-						either Category A or B from the Commission’s Classification Of Upstream
-						Petroleum Industry Companies list provided [Specialized].
-					</Form.Label>
-					<Form.Check label="Aviation Support Services" type={'checkbox'} />
-					<Form.Check label="Calibration Services" type={'checkbox'} />
-					<Form.Check label="Data Measurement Services" type={'checkbox'} />
-					<Form.Check label="Diving and Hyperbaric Services" type={'checkbox'} />
-					<Form.Check label="Dredging Services" type={'checkbox'} />
-					<Form.Check label="Drilling/Production Services" type={'checkbox'} />
-					<Form.Check label="Environmental Services" type={'checkbox'} />
-					<Form.Check label="Exploration Services" type={'checkbox'} />
-					<Form.Check
-						label="Installation Services/ Marine Contracting"
-						type={'checkbox'}
-					/>
-					<Form.Check label="Integrated Services" type={'checkbox'} />
-					<Form.Check label="Integrity Test and Inspection Services" type={'checkbox'} />
-					<Form.Check label="Laboratory Services" type={'checkbox'} />
-					<Form.Check label="Major Construction Services" type={'checkbox'} />
-					<Form.Check label="Marine Support Services" type={'checkbox'} />
-					<Form.Check label="Onshore/Offshore Pipeline Services" type={'checkbox'} />
-					<Form.Check label="Research and Development Services" type={'checkbox'} />
-					<Form.Check label="Rope Access" type={'checkbox'} />
-					<Form.Check label="Special Transportation" type={'checkbox'} />
-					<Form.Check label="Surveying/Positioning Services" type={'checkbox'} />
-					<Form.Check label="Technical Consultancy" type={'checkbox'} />
-					<Form.Check label="Waste Management Services" type={'checkbox'} />
-				</Form.Group>
+				{permitCategory === PERMIT_CATEGORIES.specialised && (
+					<Form.Group>
+						<Form.Label>
+							10. a. i. Indicate at most two (2) activities in order of preference
+							from either Category A or B from the Commission’s Classification Of
+							Upstream Petroleum Industry Companies list provided [Specialized].
+						</Form.Label>
+						<Form.Check label="Aviation Support Services" type={'checkbox'} />
+						<Form.Check label="Calibration Services" type={'checkbox'} />
+						<Form.Check label="Data Measurement Services" type={'checkbox'} />
+						<Form.Check label="Diving and Hyperbaric Services" type={'checkbox'} />
+						<Form.Check label="Dredging Services" type={'checkbox'} />
+						<Form.Check label="Drilling/Production Services" type={'checkbox'} />
+						<Form.Check label="Environmental Services" type={'checkbox'} />
+						<Form.Check label="Exploration Services" type={'checkbox'} />
+						<Form.Check
+							label="Installation Services/ Marine Contracting"
+							type={'checkbox'}
+						/>
+						<Form.Check label="Integrated Services" type={'checkbox'} />
+						<Form.Check
+							label="Integrity Test and Inspection Services"
+							type={'checkbox'}
+						/>
+						<Form.Check label="Laboratory Services" type={'checkbox'} />
+						<Form.Check label="Major Construction Services" type={'checkbox'} />
+						<Form.Check label="Marine Support Services" type={'checkbox'} />
+						<Form.Check label="Onshore/Offshore Pipeline Services" type={'checkbox'} />
+						<Form.Check label="Research and Development Services" type={'checkbox'} />
+						<Form.Check label="Rope Access" type={'checkbox'} />
+						<Form.Check label="Special Transportation" type={'checkbox'} />
+						<Form.Check label="Surveying/Positioning Services" type={'checkbox'} />
+						<Form.Check label="Technical Consultancy" type={'checkbox'} />
+						<Form.Check label="Waste Management Services" type={'checkbox'} />
+					</Form.Group>
+				)}
 
-				<Form.Group>
-					<Form.Label>
-						10. a. ii. Indicate at most two (2) activities in order of preference from
-						either Category A or B from the Commission’s Classification Of Upstream
-						Petroleum Industry Companies list provided [General].
-					</Form.Label>
-					<Form.Check label="Automobile Services" type={'checkbox'} />
-					<Form.Check label="Banking/Financial Services" type={'checkbox'} />
-					<Form.Check
-						label="Construction/Rehabilitation/Fabrication Works"
-						type={'checkbox'}
-					/>
-					<Form.Check label="Equipment/Material Supply Services" type={'checkbox'} />
-					<Form.Check label="General Consultancy Services" type={'checkbox'} />
-					<Form.Check
-						label="Haulage/ Freight / Clearing and Forwarding (International/Domestic)"
-						type={'checkbox'}
-					/>
-					<Form.Check label="Heavy Duty Equipment Supply" type={'checkbox'} />
-					<Form.Check label="Hospital/ Medical Services" type={'checkbox'} />
-					<Form.Check label="Hospitality Services" type={'checkbox'} />
-					<Form.Check
-						label="Information Technology/ Communication Services"
-						type={'checkbox'}
-					/>
-					<Form.Check label="Insurance Service" type={'checkbox'} />
-					<Form.Check label="Maintenance" type={'checkbox'} />
-					<Form.Check label="Manpower Supply" type={'checkbox'} />
-					<Form.Check label="Printing Services" type={'checkbox'} />
-					<Form.Check label="Protocol and Logistics Services" type={'checkbox'} />
-					<Form.Check label="Sanitation" type={'checkbox'} />
-					<Form.Check label="Supply" type={'checkbox'} />
-					<Form.Check label="Supply of Petroleum Products" type={'checkbox'} />
-					<Form.Check label="Water Borehole Services" type={'checkbox'} />
-					<Form.Check label="Works" type={'checkbox'} />
-				</Form.Group>
+				{permitCategory === PERMIT_CATEGORIES.general && (
+					<Form.Group>
+						<Form.Label>
+							10. a. ii. Indicate at most two (2) activities in order of preference
+							from either Category A or B from the Commission’s Classification Of
+							Upstream Petroleum Industry Companies list provided [General].
+						</Form.Label>
+						<Form.Check label="Automobile Services" type={'checkbox'} />
+						<Form.Check label="Banking/Financial Services" type={'checkbox'} />
+						<Form.Check
+							label="Construction/Rehabilitation/Fabrication Works"
+							type={'checkbox'}
+						/>
+						<Form.Check label="Equipment/Material Supply Services" type={'checkbox'} />
+						<Form.Check label="General Consultancy Services" type={'checkbox'} />
+						<Form.Check
+							label="Haulage/ Freight / Clearing and Forwarding (International/Domestic)"
+							type={'checkbox'}
+						/>
+						<Form.Check label="Heavy Duty Equipment Supply" type={'checkbox'} />
+						<Form.Check label="Hospital/ Medical Services" type={'checkbox'} />
+						<Form.Check label="Hospitality Services" type={'checkbox'} />
+						<Form.Check
+							label="Information Technology/ Communication Services"
+							type={'checkbox'}
+						/>
+						<Form.Check label="Insurance Service" type={'checkbox'} />
+						<Form.Check label="Maintenance" type={'checkbox'} />
+						<Form.Check label="Manpower Supply" type={'checkbox'} />
+						<Form.Check label="Printing Services" type={'checkbox'} />
+						<Form.Check label="Protocol and Logistics Services" type={'checkbox'} />
+						<Form.Check label="Sanitation" type={'checkbox'} />
+						<Form.Check label="Supply" type={'checkbox'} />
+						<Form.Check label="Supply of Petroleum Products" type={'checkbox'} />
+						<Form.Check label="Water Borehole Services" type={'checkbox'} />
+						<Form.Check label="Works" type={'checkbox'} />
+					</Form.Group>
+				)}
 				<Form.Group>
 					<Form.Label>
 						10. b. Provide a description of the range of activities applicant proposes
