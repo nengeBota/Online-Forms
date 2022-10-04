@@ -1,5 +1,4 @@
-import { useState } from 'react';
-import { Form, Table } from 'react-bootstrap';
+import { Form } from 'react-bootstrap';
 import { PERMIT_CATEGORIES } from '../App';
 import DynamicTable from '../components/DynamicTable';
 
@@ -17,6 +16,7 @@ function CorporateStructureAndServices({ data, setData }) {
 		corporateStructure,
 		description,
 		shareholders,
+		beneficial,
 		permitCategory,
 	} = data;
 
@@ -269,16 +269,47 @@ function CorporateStructureAndServices({ data, setData }) {
 						7b. Beneficial Ownership - if shareholders in 7a. are companies, please
 						provide a list all individual shareholders in the company stated in 7a.
 					</Form.Label>
-					<Table>
-						<thead>
-							<tr>
-								<th>Beneficial</th>
-								<th>Address</th>
-								<th>Nationality</th>
-								<th>Percentage</th>
-							</tr>
-						</thead>
-					</Table>
+
+					<DynamicTable
+						columns={[
+							{ name: 'Beneficial', key: 'name' },
+							{ name: 'Address', key: 'address' },
+							{ name: 'Nationality', key: 'nationality' },
+							{ name: 'Percentage', key: 'percentage' },
+						]}
+						data={beneficial}
+						addNewRow={() =>
+							setData((prev) => ({
+								...prev,
+								beneficial: [
+									...prev.beneficial,
+									{
+										name: '',
+										address: '',
+										nationality: '',
+										percentage: '',
+										isEditing: true,
+									},
+								],
+							}))
+						}
+						updateRow={(index, key, value) => {
+							data.beneficial[index][key] = value;
+							setData((prev) => ({ ...prev, beneficial: [...data.beneficial] }));
+						}}
+						saveRow={(index) => {
+							data.beneficial[index]['isEditing'] = false;
+							setData((prev) => ({ ...prev, beneficial: [...data.beneficial] }));
+						}}
+						editRow={(index) => {
+							data.beneficial[index]['isEditing'] = true;
+							setData((prev) => ({ ...prev, beneficial: [...data.beneficial] }));
+						}}
+						deleteRow={(index) => {
+							data.beneficial.splice(index, 1);
+							setData((prev) => ({ ...prev, beneficial: [...data.beneficial] }));
+						}}
+					/>
 				</Form.Group>
 				<Form.Group>
 					<Form.Label>8. Directors and Management (check later)</Form.Label>

@@ -1,14 +1,19 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import CorporateStructureAndServices from './pages/CorporateStructureAndServices';
+import FinancialCapabilityAndTechnicalCompetency from './pages/FinancialCapabilityAndTechnicalCompetency';
 import Image from 'react-bootstrap/Image';
+import { categoryfxn } from './api';
+
 
 export const PERMIT_CATEGORIES = {
-  specialised:'specialized',
-  general: 'general',
-}
+	specialised: 'specialized',
+	general: 'general',
+};
 
 function App() {
+	const [category, setcategory]=useState([])
+
 	const [data, setData] = useState({
 		applicantName: '',
 		dateOfIncorporation: '',
@@ -28,8 +33,8 @@ function App() {
 		},
 
 		nameOfSubsidiaryOrAffiliate: '',
-    permitCategory: PERMIT_CATEGORIES.general,
 		nationalityOfAffiliate: '',
+		permitCategory: PERMIT_CATEGORIES.general,
 		shareholders: [
 			{
 				name: '',
@@ -38,11 +43,26 @@ function App() {
 				percentage: '',
 				isEditing: true,
 			},
-			
+		],
+		beneficial: [
+			{
+				name: '',
+				address: '',
+				nationality: '',
+				percentage: '',
+				isEditing: true,
+			},
 		],
 		corporateStructure: '',
 		description: '',
 	});
+
+	async function fetchcategories(){
+		const result= await categoryfxn()
+		setcategory(result.data);
+	}
+	
+useEffect(function(){fetchcategories()},[])
 
 	return (
 		<PageWrapper>
