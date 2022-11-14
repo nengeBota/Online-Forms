@@ -9,10 +9,26 @@ import { Button, ButtonGroup } from "react-bootstrap";
 import ManagementAndTechnicalCompetencies from "./pages/ManagementAndTEchnicalCompetencies";
 import DetailsOfExperience from "./pages/DetailsOfExperience";
 import PlansAndProgrammes from "./pages/PlansAndProgrammes";
+import LocalContent from "./pages/LocalContent";
 
 export const PERMIT_CATEGORIES = {
 	specialised: "specialized",
 	general: "general",
+};
+
+export const NEW_VALUE_OF_SERVICE = {
+	isEditing: true,
+	typeOfService: "",
+	contractSum: "",
+	nameOfClientCompany: "",
+};
+
+export const NEW_RAW_MATERIALS_TO_BE_USED = {
+	isEditing: true,
+	name: "",
+	occupation: "",
+	nationality: "",
+	companyPosition: "",
 };
 
 const initialState = {
@@ -67,8 +83,18 @@ const initialState = {
 			contractValue: "",
 		},
 	],
+
+	// PART 4. LOCAL CONTENT
+	valueOfServiceOfferedByOtherCompaniesToApplicant: [
+		{ ...NEW_VALUE_OF_SERVICE },
+	],
+	valueOfServiceOfferedByApplicantToOtherCompanies: [
+		{ ...NEW_VALUE_OF_SERVICE },
+	],
+	rawMaterialsToBeUtilized: [{ ...NEW_RAW_MATERIALS_TO_BE_USED }],
 };
 
+//info: the position of the page determines its page number. so CorporateStructureAndServices is page 1 because its first in this array, etc..
 const pages = [
 	// PART 1
 	CorporateStructureAndServices,
@@ -80,11 +106,14 @@ const pages = [
 
 	// PART 3
 	PlansAndProgrammes,
+
+	// PART 4
+	LocalContent,
 ];
 
 function App() {
 	const [category, setcategory] = useState([]);
-	const [page, setPage] = useState(5);
+	const [page, setPage] = useState(6);
 
 	const [data, setData] = useState(initialState);
 

@@ -6,3 +6,7 @@ shouldn't be able to go to the next page if the current page has errors or hasn'
 
 part 2 - details of experience
 the contract duration field in the table should be start date - end date. and the date fields should be date fields.
+
+part 4 - local content
+- auto-calculate the total number in the table
+- 5. list of raw materials to be used. the nationality field should be a dropdown

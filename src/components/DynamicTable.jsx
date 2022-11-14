@@ -10,9 +10,9 @@ function DynamicTable({
 	columns,
 	data,
 	addNewRow,
-	updateRow,
+	updateRow, // change the value of the row
 	saveRow,
-	editRow,
+	editRow, // set the row to isEditing: true
 	deleteRow,
 }) {
 	return (
