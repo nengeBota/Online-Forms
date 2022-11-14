@@ -8,6 +8,7 @@ import FinancialCapability from "./pages/FinancialCapability";
 import { Button, ButtonGroup } from "react-bootstrap";
 import ManagementAndTechnicalCompetencies from "./pages/ManagementAndTEchnicalCompetencies";
 import DetailsOfExperience from "./pages/DetailsOfExperience";
+import PlansAndProgrammes from "./pages/PlansAndProgrammes";
 
 export const PERMIT_CATEGORIES = {
 	specialised: "specialized",
@@ -68,18 +69,22 @@ const initialState = {
 	],
 };
 
-
-
 const pages = [
+	// PART 1
 	CorporateStructureAndServices,
 	FinancialCapability,
+
+	// PART 2
 	ManagementAndTechnicalCompetencies,
 	DetailsOfExperience,
+
+	// PART 3
+	PlansAndProgrammes,
 ];
 
 function App() {
 	const [category, setcategory] = useState([]);
-	const [page, setPage] = useState(1);
+	const [page, setPage] = useState(5);
 
 	const [data, setData] = useState(initialState);
 
