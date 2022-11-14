@@ -2,14 +2,14 @@ import styled from "styled-components";
 
 const pageNumbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15];
 
-function Pagination({ currentPage = 1, onClickPage = () => {} }) {
+function Pagination({ currentPage = 1, setPage = () => {} }) {
 	return (
 		<Wrapper>
 			{pageNumbers.map((each) => {
 				return (
 					<PaginationButton
 						isCurrentPage={each === currentPage}
-						onClick={() => onClickPage(each)}
+						onClick={() => setPage(each)}
 						type="button"
 					>
 						{each}
