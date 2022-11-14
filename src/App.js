@@ -2,76 +2,86 @@ import { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import CorporateStructureAndServices from './pages/CorporateStructureAndServices';
 import FinancialCapabilityAndTechnicalCompetency from './pages/FinancialCapabilityAndTechnicalCompetency';
+import Pagination from "./components/Pagination";
 import Image from 'react-bootstrap/Image';
 import { categoryfxn } from './api';
 
 
 export const PERMIT_CATEGORIES = {
-	specialised: 'specialized',
-	general: 'general',
+  specialised: 'specialized',
+  general: 'general',
 };
 
+const initialState = {
+  applicantName: '',
+  dateOfIncorporation: '',
+  placeOfIncorporation: '',
+  contactDetails: {
+    officeAddress: '',
+    postalAddress: '',
+    city: '',
+    region: '',
+    country: '',
+  },
+  emailAddress: '',
+  website: '',
+  contactPerson: {
+    name: '',
+    mobileNumber: '',
+  },
+
+  nameOfSubsidiaryOrAffiliate: '',
+  nationalityOfAffiliate: '',
+  permitCategory: PERMIT_CATEGORIES.general,
+  shareholders: [
+    {
+      name: '',
+      address: '',
+      nationality: '',
+      percentage: '',
+      isEditing: true,
+    },
+  ],
+  beneficial: [
+    {
+      name: '',
+      address: '',
+      nationality: '',
+      percentage: '',
+      isEditing: true,
+    },
+  ],
+  corporateStructure: '',
+  description: '',
+}
+
+const pages = [CorporateStructureAndServices, FinancialCapabilityAndTechnicalCompetency,]
+
 function App() {
-	const [category, setcategory]=useState([])
+  const [category, setcategory] = useState([])
+  const [page, setPage] = useState(1);
 
-	const [data, setData] = useState({
-		applicantName: '',
-		dateOfIncorporation: '',
-		placeOfIncorporation: '',
-		contactDetails: {
-			officeAddress: '',
-			postalAddress: '',
-			city: '',
-			region: '',
-			country: '',
-		},
-		emailAddress: '',
-		website: '',
-		contactPerson: {
-			name: '',
-			mobileNumber: '',
-		},
+  const [data, setData] = useState(initialState);
 
-		nameOfSubsidiaryOrAffiliate: '',
-		nationalityOfAffiliate: '',
-		permitCategory: PERMIT_CATEGORIES.general,
-		shareholders: [
-			{
-				name: '',
-				address: '',
-				nationality: '',
-				percentage: '',
-				isEditing: true,
-			},
-		],
-		beneficial: [
-			{
-				name: '',
-				address: '',
-				nationality: '',
-				percentage: '',
-				isEditing: true,
-			},
-		],
-		corporateStructure: '',
-		description: '',
-	});
+  async function fetchcategories() {
+    const result = await categoryfxn()
+    setcategory(result.data);
+  }
 
-	async function fetchcategories(){
-		const result= await categoryfxn()
-		setcategory(result.data);
-	}
-	
-useEffect(function(){fetchcategories()},[])
+  useEffect(function () { fetchcategories() }, [])
 
-	return (
-		<PageWrapper>
-			<div>
-				<Image src="/logo.png" />
-			</div>
-			<CorporateStructureAndServices data={data} setData={setData} />
-		</PageWrapper>
-	);
+  const CurrentPage = pages[page - 1];
+
+  return (
+    <PageWrapper>
+      <div>
+        <Image src="/logo.png" />
+      </div>
+      <Pagination currentPage={page} setPage={setPage} />
+      <CurrentPage data={data} setData={setData} />
+      <Pagination currentPage={page} setPage={setPage} />
+    </PageWrapper>
+  );
 }
 
 export default App;
