@@ -13,6 +13,7 @@ import LocalContent from "./pages/LocalContent";
 import HealthSafetySecurityEnvironment from "./pages/HealthSafetySecurityEnvironment";
 import Miscellaneous from "./pages/Miscellaneous";
 import Declaration from "./pages/Declaration";
+import CoverPage from "./pages/CoverPage";
 
 export const PERMIT_CATEGORIES = {
 	specialised: "specialized",
@@ -121,11 +122,13 @@ const pages = [
 
 	// part 7
 	Declaration,
+
+	CoverPage,
 ];
 
 function App() {
 	const [category, setcategory] = useState([]);
-	const [page, setPage] = useState(9);
+	const [page, setPage] = useState(10);
 
 	const [data, setData] = useState(initialState);
 
