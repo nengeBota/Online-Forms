@@ -1,0 +1,3 @@
+handling errors for each of the pages
+once all errors are fixed, let the user know that they've all been fixed. means we'll be updating the fixing of errors in real time
+
