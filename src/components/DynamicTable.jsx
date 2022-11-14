@@ -1,6 +1,20 @@
-import { Button, ButtonGroup, Table } from 'react-bootstrap';
+import { Button, ButtonGroup, Table } from "react-bootstrap";
 
-function DynamicTable({ columns, data, addNewRow, updateRow, saveRow, editRow, deleteRow }) {
+/**
+ *
+ * column [{name, key, }]
+ * data [{isEditing, columnName: colValue, }]
+ */
+
+function DynamicTable({
+	columns,
+	data,
+	addNewRow,
+	updateRow,
+	saveRow,
+	editRow,
+	deleteRow,
+}) {
 	return (
 		<Table>
 			<thead>
@@ -24,16 +38,28 @@ function DynamicTable({ columns, data, addNewRow, updateRow, saveRow, editRow, d
 							) : (
 								<td>
 									<input
-										style={{ width: '100px', minWidth: '0' }}
+										style={{
+											width: "100px",
+											minWidth: "0",
+										}}
 										value={val[col.key]}
-										onChange={(e) => updateRow(index, col.key, e.target.value)}
+										onChange={(e) =>
+											updateRow(
+												index,
+												col.key,
+												e.target.value
+											)
+										}
 									/>
 								</td>
 							)
 						)}
 						<td>
 							{val.isEditing ? (
-								<Button size="sm" onClick={() => saveRow(index)}>
+								<Button
+									size="sm"
+									onClick={() => saveRow(index)}
+								>
 									save
 								</Button>
 							) : (

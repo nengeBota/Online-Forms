@@ -26,8 +26,8 @@ function ManagementAndTechnicalCompetencies() {
 					c. Indicate expertise to be sourced locally and
 					internationally. * <br />
 					<textarea />
-				</div>
-
+        </div>
+        
 				<br />
 
 				<div>

@@ -2,3 +2,7 @@ handling errors for each of the pages
 once all errors are fixed, let the user know that they've all been fixed. means we'll be updating the fixing of errors in real time
 
 shouldn't be able to go to the next page if the current page has errors or hasn't been completed
+
+
+part 2 - details of experience
+the contract duration field in the table should be start date - end date. and the date fields should be date fields.
