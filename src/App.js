@@ -6,6 +6,7 @@ import Image from 'react-bootstrap/Image';
 import { categoryfxn } from './api';
 import FinancialCapability from "./pages/FinancialCapability";
 import { Button, ButtonGroup } from "react-bootstrap";
+import ManagementAndTechnicalCompetencies from "./pages/ManagementAndTEchnicalCompetencies";
 
 
 export const PERMIT_CATEGORIES = {
@@ -59,6 +60,7 @@ const initialState = {
 const pages = [
   CorporateStructureAndServices,
   FinancialCapability,
+  ManagementAndTechnicalCompetencies,
 ]
 
 function App() {
@@ -87,7 +89,7 @@ function App() {
         <Image src="/logo.png" />
       </div>
       <Pagination currentPage={page} setPage={onClickSetPage} />
-      
+
       <CurrentPage data={data} setData={setData} />
 
       <div style={{ display: 'flex', alignItems: 'space-between', }}>
