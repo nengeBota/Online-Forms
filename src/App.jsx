@@ -14,6 +14,7 @@ import HealthSafetySecurityEnvironment from "./pages/HealthSafetySecurityEnviron
 import Miscellaneous from "./pages/Miscellaneous";
 import Declaration from "./pages/Declaration";
 import CoverPage from "./pages/CoverPage";
+import AnnexesAndAttachments from "./pages/AnnexesAndAttachments";
 
 export const PERMIT_CATEGORIES = {
 	specialised: "specialized",
@@ -124,11 +125,13 @@ const pages = [
 	Declaration,
 
 	CoverPage,
+
+	AnnexesAndAttachments,
 ];
 
 function App() {
 	const [category, setcategory] = useState([]);
-	const [page, setPage] = useState(10);
+	const [page, setPage] = useState(11);
 
 	const [data, setData] = useState(initialState);
 
@@ -168,13 +171,22 @@ function App() {
 				</Button>
 
 				<ButtonGroup>
-					<Button>Save</Button>
-					<Button
-						disabled={page === pages.length}
-						onClick={() => setPage((prev) => prev + 1)}
-					>
-						Next
-					</Button>
+					{page === pages.length ? (
+						<Button variant="secondary">Preview</Button>
+					) : (
+						<Button>Save</Button>
+					)}
+
+					{pages < pages.length ? (
+						<Button
+							disabled={page === pages.length}
+							onClick={() => setPage((prev) => prev + 1)}
+						>
+							Next
+						</Button>
+					) : (
+						<Button variant="success"> Submit</Button>
+					)}
 				</ButtonGroup>
 			</div>
 
