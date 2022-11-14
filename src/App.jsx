@@ -12,6 +12,7 @@ import PlansAndProgrammes from "./pages/PlansAndProgrammes";
 import LocalContent from "./pages/LocalContent";
 import HealthSafetySecurityEnvironment from "./pages/HealthSafetySecurityEnvironment";
 import Miscellaneous from "./pages/Miscellaneous";
+import Declaration from "./pages/Declaration";
 
 export const PERMIT_CATEGORIES = {
 	specialised: "specialized",
@@ -117,11 +118,14 @@ const pages = [
 
 	// part 6
 	Miscellaneous,
+
+	// part 7
+	Declaration,
 ];
 
 function App() {
 	const [category, setcategory] = useState([]);
-	const [page, setPage] = useState(8);
+	const [page, setPage] = useState(9);
 
 	const [data, setData] = useState(initialState);
 
