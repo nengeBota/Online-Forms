@@ -40,12 +40,17 @@ function FinancialCapability() {
 							year projected revenue for intended upstream oil and
 							gas activities.
 						</p>
-					</li>
-
-					<br />
-					<li>
+						<br />
 						Please upload documents as per your choice *
 						<input type="file" />
+					</li>
+
+					<li>
+						Indicate sources where applicant intends raising funds
+						for its operations in Ghana *
+						<FormGroup>
+							<textarea />
+						</FormGroup>
 					</li>
 				</ol>
 			</FormGroup>

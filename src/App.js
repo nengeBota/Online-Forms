@@ -5,6 +5,7 @@ import Pagination from "./components/Pagination";
 import Image from 'react-bootstrap/Image';
 import { categoryfxn } from './api';
 import FinancialCapability from "./pages/FinancialCapability";
+import { Button, ButtonGroup } from "react-bootstrap";
 
 
 export const PERMIT_CATEGORIES = {
@@ -86,7 +87,18 @@ function App() {
         <Image src="/logo.png" />
       </div>
       <Pagination currentPage={page} setPage={onClickSetPage} />
+      
       <CurrentPage data={data} setData={setData} />
+
+      <div style={{ display: 'flex', alignItems: 'space-between', }}>
+        <Button>Back</Button>
+
+        <ButtonGroup >
+          <Button>Save</Button>
+          <Button>Next</Button>
+        </ButtonGroup>
+      </div>
+
       <Pagination currentPage={page} setPage={onClickSetPage} />
     </PageWrapper>
   );
