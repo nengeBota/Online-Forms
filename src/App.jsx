@@ -28,14 +28,6 @@ export const NEW_VALUE_OF_SERVICE = {
 	nameOfClientCompany: "",
 };
 
-export const NEW_RAW_MATERIALS_TO_BE_USED = {
-	isEditing: true,
-	name: "",
-	occupation: "",
-	nationality: "",
-	companyPosition: "",
-};
-
 const initialState = {
 	applicantName: "",
 	dateOfIncorporation: "",
@@ -96,7 +88,6 @@ const initialState = {
 	valueOfServiceOfferedByApplicantToOtherCompanies: [
 		{ ...NEW_VALUE_OF_SERVICE },
 	],
-	rawMaterialsToBeUtilized: [{ ...NEW_RAW_MATERIALS_TO_BE_USED }],
 };
 
 //info: the position of the page determines its page number. so CorporateStructureAndServices is page 1 because its first in this array, etc..

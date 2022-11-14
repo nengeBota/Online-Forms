@@ -1,18 +1,11 @@
 import { Form, FormGroup, FormLabel, Table } from "react-bootstrap";
-import { NEW_RAW_MATERIALS_TO_BE_USED, NEW_VALUE_OF_SERVICE } from "../App";
+import { NEW_VALUE_OF_SERVICE } from "../App";
 import DynamicTable from "../components/DynamicTable";
 
 const valueOfServiceColumns = [
 	{ name: "Type of Service", key: "typeOfService" },
 	{ name: "Contract Sum", key: "contractSum" },
 	{ name: "Name of Company (Client)", key: "nameOfClientCompany" },
-];
-
-const rawMaterialsToBeUsedColumns = [
-	{ name: "Name", key: "name" },
-	{ name: "Occupation / Profession", key: "occupation" },
-	{ name: "Nationality", key: "nationality" },
-	{ name: "Position in the Company", key: "companyPosition" },
 ];
 
 function LocalContent({ data, setData }) {
@@ -172,32 +165,7 @@ function LocalContent({ data, setData }) {
 					5. List raw materials to be utilized (This applies to
 					companies which use raw materials in their activities) *
 				</FormLabel>
-				<DynamicTable
-					columns={rawMaterialsToBeUsedColumns}
-					data={data.rawMaterialsToBeUtilized}
-					addNewRow={() => {
-						data.rawMaterialsToBeUtilized.push({
-							...NEW_RAW_MATERIALS_TO_BE_USED,
-						});
-						setData({ ...data });
-					}}
-					editRow={(index) => {
-						data.rawMaterialsToBeUtilized[index].isEditing = true;
-						setData({ ...data });
-					}}
-					deleteRow={(index) => {
-						data.rawMaterialsToBeUtilized.splice(index, 1);
-						setData({ ...data });
-					}}
-					saveRow={(index) => {
-						data.rawMaterialsToBeUtilized[index].isEditing = false;
-						setData({ ...data });
-					}}
-					updateRow={(index, key, value) => {
-						data.rawMaterialsToBeUtilized[index][key] = value;
-						setData({ ...data });
-					}}
-				/>
+				<textarea />
 			</FormGroup>
 
 			<FormGroup>
