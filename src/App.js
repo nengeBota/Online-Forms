@@ -1,10 +1,10 @@
 import { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import CorporateStructureAndServices from './pages/CorporateStructureAndServices';
-import FinancialCapabilityAndTechnicalCompetency from './pages/FinancialCapabilityAndTechnicalCompetency';
 import Pagination from "./components/Pagination";
 import Image from 'react-bootstrap/Image';
 import { categoryfxn } from './api';
+import FinancialCapability from "./pages/FinancialCapability";
 
 
 export const PERMIT_CATEGORIES = {
@@ -55,7 +55,10 @@ const initialState = {
   description: '',
 }
 
-const pages = [CorporateStructureAndServices, FinancialCapabilityAndTechnicalCompetency,]
+const pages = [
+  CorporateStructureAndServices,
+  FinancialCapability,
+]
 
 function App() {
   const [category, setcategory] = useState([])
@@ -72,14 +75,19 @@ function App() {
 
   const CurrentPage = pages[page - 1];
 
+  const onClickSetPage = (value) => {
+    if (value > pages.length) return;
+    setPage(value)
+  }
+
   return (
     <PageWrapper>
       <div>
         <Image src="/logo.png" />
       </div>
-      <Pagination currentPage={page} setPage={setPage} />
+      <Pagination currentPage={page} setPage={onClickSetPage} />
       <CurrentPage data={data} setData={setData} />
-      <Pagination currentPage={page} setPage={setPage} />
+      <Pagination currentPage={page} setPage={onClickSetPage} />
     </PageWrapper>
   );
 }
