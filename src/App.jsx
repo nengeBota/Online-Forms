@@ -168,7 +168,7 @@ function App() {
 						<Button>Save</Button>
 					)}
 
-					{pages < pages.length ? (
+					{page < pages.length ? (
 						<Button
 							disabled={page === pages.length}
 							onClick={() => setPage((prev) => prev + 1)}
