@@ -88,16 +88,15 @@ function App() {
       <div>
         <Image src="/logo.png" />
       </div>
-      <Pagination currentPage={page} setPage={onClickSetPage} />
 
       <CurrentPage data={data} setData={setData} />
 
       <div style={{ display: 'flex', alignItems: 'space-between', }}>
-        <Button>Back</Button>
+        <Button disabled={page === 1} onClick={() => setPage(prev => prev - 1)}>Back</Button>
 
         <ButtonGroup >
           <Button>Save</Button>
-          <Button>Next</Button>
+          <Button disabled={page === pages.length} onClick={() => setPage(prev => prev + 1)}>Next</Button>
         </ButtonGroup>
       </div>
 

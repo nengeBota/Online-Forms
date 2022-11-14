@@ -1,10 +1,11 @@
-import { FormGroup, InputGroup } from "react-bootstrap";
+import { FormGroup } from "react-bootstrap";
 
 function FinancialCapability() {
 	return (
 		<div>
 			<h1>Part Two - Financial Capability and Technical Competency</h1>
-			<h3>A. Financial Capability</h3>
+      <h3>A. Financial Capability</h3>
+      <hr />
 
 			<FormGroup>
 				<ol>
