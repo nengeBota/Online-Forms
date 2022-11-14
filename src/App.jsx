@@ -122,7 +122,7 @@ const pages = [
 
 function App() {
 	const [category, setcategory] = useState([]);
-	const [page, setPage] = useState(11);
+	const [page, setPage] = useState(1);
 
 	const [data, setData] = useState(initialState);
 
