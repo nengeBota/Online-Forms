@@ -10,6 +10,7 @@ import ManagementAndTechnicalCompetencies from "./pages/ManagementAndTEchnicalCo
 import DetailsOfExperience from "./pages/DetailsOfExperience";
 import PlansAndProgrammes from "./pages/PlansAndProgrammes";
 import LocalContent from "./pages/LocalContent";
+import HealthSafetySecurityEnvironment from "./pages/HealthSafetySecurityEnvironment";
 
 export const PERMIT_CATEGORIES = {
 	specialised: "specialized",
@@ -109,11 +110,14 @@ const pages = [
 
 	// PART 4
 	LocalContent,
+
+	// Part 5
+	HealthSafetySecurityEnvironment,
 ];
 
 function App() {
 	const [category, setcategory] = useState([]);
-	const [page, setPage] = useState(6);
+	const [page, setPage] = useState(7);
 
 	const [data, setData] = useState(initialState);
 
