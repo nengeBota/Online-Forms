@@ -4,6 +4,57 @@ once all errors are fixed, let the user know that they've all been fixed. means 
 shouldn't be able to go to the next page if the current page has errors or hasn't been completed
 
 
+page 1
+- if there's an error, we show it in a similar fashion to how the current app does
+  - update in real time, when every field gets updated.
+  - when all errors are fixed, show the user that all the errors have been fixed.
+  - if a question has an error, the background of that section should be dark red. sounds like it's time for a component here.
+- name of applicant
+- date of incorporation
+- place of incorporation
+- contact details
+  - office address
+  - postal address
+  - city
+  - region
+  - country
+- email
+  - validation: email
+- website
+  - validation: url
+- contact person
+  - validation: string
+- mobile number of contact person
+  - validation: phone number
+- name of subsidiary or affiliate
+  - validation: string
+- nationality of parent company or affiliate
+  - should select from dropdown
+- outline of corporate structure
+  - document. should be able to hold the document in the data structure
+  - validation: can this field be empty?
+- list of individuals / companies in the applicant company
+  - none of the created fields should be empty
+  - if there's a field that's empty, it should be highlighted and shown to the user
+- list of shareholders of companies
+  - if this has only one row with no values in the row, that's fine. otherwise everything has to be filled.
+- category of permit applied for
+  - required
+
+- 10.
+  a.
+  - selecting a third option should deselect the first option. so that there's only 2 options selected at any time.
+  - required
+  b.
+  - required
+
+- the buttons. format them well.
+
+
+
+
+
+
 part 2 - details of experience
 the contract duration field in the table should be start date - end date. and the date fields should be date fields.
 
