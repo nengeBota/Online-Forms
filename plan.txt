@@ -9,9 +9,14 @@ page 1
   - update in real time, when every field gets updated.
   - when all errors are fixed, show the user that all the errors have been fixed.
   - if a question has an error, the background of that section should be dark red. sounds like it's time for a component here.
+
+
 - name of applicant
+  - reflecting in state? ✅
 - date of incorporation
+  - reflecting in state? ✅
 - place of incorporation
+  - reflecting in state? ✅
 - contact details
   - office address
   - postal address

@@ -15,80 +15,9 @@ import Miscellaneous from "./pages/Miscellaneous";
 import Declaration from "./pages/Declaration";
 import CoverPage from "./pages/CoverPage";
 import AnnexesAndAttachments from "./pages/AnnexesAndAttachments";
+import { initialErrorState, initialState } from "./constants";
 
-export const PERMIT_CATEGORIES = {
-	specialised: "specialized",
-	general: "general",
-};
 
-export const NEW_VALUE_OF_SERVICE = {
-	isEditing: true,
-	typeOfService: "",
-	contractSum: "",
-	nameOfClientCompany: "",
-};
-
-const initialState = {
-	applicantName: "",
-	dateOfIncorporation: "",
-	placeOfIncorporation: "",
-	contactDetails: {
-		officeAddress: "",
-		postalAddress: "",
-		city: "",
-		region: "",
-		country: "",
-	},
-	emailAddress: "",
-	website: "",
-	contactPerson: {
-		name: "",
-		mobileNumber: "",
-	},
-
-	nameOfSubsidiaryOrAffiliate: "",
-	nationalityOfAffiliate: "",
-	permitCategory: PERMIT_CATEGORIES.general,
-	shareholders: [
-		{
-			name: "",
-			address: "",
-			nationality: "",
-			percentage: "",
-			isEditing: true,
-		},
-	],
-	beneficial: [
-		{
-			name: "",
-			address: "",
-			nationality: "",
-			percentage: "",
-			isEditing: true,
-		},
-	],
-	corporateStructure: "",
-	description: "",
-	// PART 2
-	// C. DETAILS OF EXPERIENCE
-	detailsOfExperience: [
-		{
-			isEditing: true,
-			descriptionOfContract: "",
-			nameOfCompanyWorkWasDoneFor: "",
-			contractDuration: "",
-			contractValue: "",
-		},
-	],
-
-	// PART 4. LOCAL CONTENT
-	valueOfServiceOfferedByOtherCompaniesToApplicant: [
-		{ ...NEW_VALUE_OF_SERVICE },
-	],
-	valueOfServiceOfferedByApplicantToOtherCompanies: [
-		{ ...NEW_VALUE_OF_SERVICE },
-	],
-};
 
 //info: the position of the page determines its page number. so CorporateStructureAndServices is page 1 because its first in this array, etc..
 const pages = [
@@ -119,6 +48,7 @@ const pages = [
 
 	AnnexesAndAttachments,
 ];
+
 
 function App() {
 	const [category, setcategory] = useState([]);

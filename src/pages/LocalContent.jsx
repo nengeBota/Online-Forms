@@ -1,5 +1,5 @@
 import { Form, FormGroup, FormLabel, Table } from "react-bootstrap";
-import { NEW_VALUE_OF_SERVICE } from "../App";
+import { NEW_VALUE_OF_SERVICE } from "../constants";
 import DynamicTable from "../components/DynamicTable";
 
 const valueOfServiceColumns = [
