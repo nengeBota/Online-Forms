@@ -1,10 +1,16 @@
 
+export const FIN_CAPABILITY_WHAT_APPLIES_OPTIONS = {
+  upstreamPetroleumIndustryOnly: 'upstreamPetroleumIndustryOnly',
+  upstreamPetroleumIndustryAndOtherSectors: 'upstreamPetroleumIndustryAndOtherSectors',
+  existingButNewToUpstreamPetroleumIndustry: 'existingButNewToUpstreamPetroleumIndustry',
+  newlyIncorporated: 'newlyIncorporated',
+}
 
 export const fieldNames = {
+  // PAGE 1 - CORPORATE STRUCTURE AND SERVICES
   applicantName: "applicantName",
   dateOfIncorporation: "dateOfIncorporation",
   placeOfIncorporation: "placeOfIncorporation",
-  // contactDetails: "contactDetails",
   contactDetails: {
     _: "contactDetails",
     officeAddress: 'officeAddress',
@@ -13,26 +19,16 @@ export const fieldNames = {
     region: 'region',
     country: 'country',
   },
-
   emailAddress: "emailAddress",
   website: "website",
-  // contactPerson: "contactPerson",
   contactPerson: {
     _: 'contactPerson',
     name: 'name',
     mobileNumber: 'mobileNumber',
   },
-  // "contactPerson.name": "name",
-  // "contactPerson.mobileNumber": "mobileNumber",
   nameOfSubsidiaryOrAffiliate: "nameOfSubsidiaryOrAffiliate",
   nationalityOfAffiliate: "nationalityOfAffiliate",
   permitCategory: "permitCategory",
-  // shareholders: "shareholders",
-  // "shareholders.name": "name",
-  // "shareholders.address": "address",
-  // "shareholders.nationality": "nationality",
-  // "shareholders.percentage": "percentage",
-  // "shareholders.isEditing": "isEditing",
   shareholders: {
     _: "shareholders",
     name: 'name',
@@ -41,12 +37,6 @@ export const fieldNames = {
     percentage: 'percentage',
     isEditing: 'isEditing',
   },
-  // beneficial: "beneficial",
-  // "beneficial.name": "name",
-  // "beneficial.address": "address",
-  // "beneficial.nationality": "nationality",
-  // "beneficial.percenatage": "percentage",
-  // "beneficial.isEditing": "isEditing",
   beneficial: {
     _: 'beneficial',
     name: 'name',
@@ -59,13 +49,16 @@ export const fieldNames = {
   activities: "activities",
   corporateStructure: "corporateStructure",
   description: "description",
-  // detailsOfExperience: "detailsOfExperience",
-  // "detailsOfExperience.isEditing": "isEditing",
-  // "detailsOfExperience.descriptionOfContract": "descriptionOfContract",
-  // "detailsOfExperience.nameOfCompanyWorkWasDoneFor":
-  //   "nameOfCompanyWorkWasDoneFor",
-  // "details.contractDuration": "contractDuration",
-  // "details.contractValue": "contractValue",
+
+
+  // PART 2 - financial capability
+  finCapability: {
+    _: "financialCapability",
+    whatApplies: "whatApplies",
+    whatAppliesUploadedDocument: "uploadedDocument",
+    sourceOfFunds: 'sourceOfFunds',
+  },
+
   detailsOfExperience: {
     _: 'detailsOfExperience',
     isEditing: 'isEditing',
@@ -75,15 +68,6 @@ export const fieldNames = {
     contractValue: 'contractValue',
   },
 
-  // valueOfServiceOfferedByApplicantToOtherCompanies:
-  //   "valueOfServiceOfferedByApplicantToOtherCompanies",
-  // "valueOfServiceOfferedByApplicantToOtherCompanies.isEditing": "isEditing",
-  // "valueOfServiceOfferedByApplicantToOtherCompanies.typeOfService":
-  //   "typeOfService",
-  // "valueOfServiceOfferedByApplicantToOtherCompanies.contractSum":
-  //   "contractSum",
-  // "valueOfServiceOfferedByApplicantToOtherCompanies.nameOfClientCompany":
-  //   "nameOfClientCompany",
   valueOfServiceOfferedByApplicantToOtherCompanies: {
     _: "valueOfServiceOfferedByApplicantToOtherCompanies",
     isEditing: 'isEditing',
@@ -92,15 +76,6 @@ export const fieldNames = {
     nameOfClientCompany: 'nameOfClientCompany',
   },
 
-  // valueOfServiceOfferedByOtherCompaniesToApplicant:
-  //   "valueOfServiceOfferedByOtherCompaniesToApplicant",
-  // "valueOfServiceOfferedByOtherCompaniesToApplicant.isEditing": "isEditing",
-  // "valueOfServiceOfferedByOtherCompaniesToApplicant.typeOfService":
-  //   "typeOfService",
-  // "valueOfServiceOfferedByOtherCompaniesToApplicant.contractSum":
-  //   "contractSum",
-  // "valueOfServiceOfferedByOtherCompaniesToApplicant.nameOfClientCompany":
-  //   "nameOfClientCompany",
   valueOfServiceOfferedByOtherCompaniesToApplicant: {
     _: "valueOfServiceOfferedByOtherCompaniesToApplicant",
     isEditing: 'isEditing',
@@ -168,6 +143,15 @@ export const initialErrorState = {
   [fieldNames.corporateStructure]: "",
   [fieldNames.description]: "",
   // PART 2
+
+  // financial capability
+  [fieldNames.finCapability._]: {
+    [fieldNames.finCapability.whatApplies]: "",
+    [fieldNames.finCapability.whatAppliesUploadedDocument]: '',
+    [fieldNames.finCapability.sourceOfFunds]: '',
+
+  },
+
   // C. DETAILS OF EXPERIENCE
   [fieldNames.detailsOfExperience._]: [
     {
@@ -235,6 +219,13 @@ export const initialState = {
   [fieldNames.corporateStructure]: "",
   [fieldNames.description]: "",
   // PART 2
+
+  // financial capability
+  [fieldNames.finCapability._]: {
+    [fieldNames.finCapability.whatApplies]: "",
+    [fieldNames.finCapability.whatAppliesUploadedDocument]: '',
+    [fieldNames.finCapability.sourceOfFunds]: '',
+  },
   // C. DETAILS OF EXPERIENCE
   [fieldNames.detailsOfExperience._]: [
     {
@@ -301,3 +292,29 @@ export const permitCategoryOptions = {
     { label: 'Works', name: 'works' }
   ],
 }
+
+
+export const financialCapabilityOptions = [
+  {
+    value: FIN_CAPABILITY_WHAT_APPLIES_OPTIONS.upstreamPetroleumIndustryOnly, text: `For existing companies which undertake services
+  solely for the upstream petroleum industry, provide
+  Audited Financial Reports for the past three years`},
+  {
+    value: FIN_CAPABILITY_WHAT_APPLIES_OPTIONS.upstreamPetroleumIndustryAndOtherSectors, text: `For existing companies which undertake services for
+  the upstream petroleum industry and other sectors,
+  in addition to Audited Financial Reports, provide
+  leter from Auditors showing your upstream oil and
+  gas revenue for the past year under audit.`},
+  {
+    value: FIN_CAPABILITY_WHAT_APPLIES_OPTIONS.existingButNewToUpstreamPetroleumIndustry, text: `For existing companies which are new to the upstream
+  petroleum industry (ie. Companies which have never
+  received a contract for service in the upstream
+  petroleum industry), provide AUdited Financial
+  Report for the past year and a three year projected
+  revenue for intended upstream oil and gas
+  activities.`},
+  {
+    value: FIN_CAPABILITY_WHAT_APPLIES_OPTIONS.newlyIncorporated, text: `For newly incorporated companies, provide a three
+  year projected revenue for intended upstream oil and
+  gas activities.`}
+]

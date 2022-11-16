@@ -1,56 +1,91 @@
 import { FormGroup } from "react-bootstrap";
+import { fieldNames, financialCapabilityOptions } from "../constants";
 
-function FinancialCapability() {
+function FinancialCapability({ data, setData }) {
+	const { financialCapability } = data;
+	const { whatApplies, uploadedDocument, sourceOfFunds } =
+		financialCapability;
+
 	return (
 		<div>
 			<h1>Part Two - Financial Capability and Technical Competency</h1>
-      <h3>A. Financial Capability</h3>
-      <hr />
+			<h3>A. Financial Capability</h3>
+			<hr />
 
 			<FormGroup>
 				<ol>
 					<li>
 						Please provide what applies to your company *
-						<p>
-							<input type="radio" />
-							For existing companies which undertake services
-							solely for the upstream petroleum industry, provide
-							Audited Financial Reports for the past three years
-						</p>
-						<p>
-							<input type="radio" />
-							For existing companies which undertake services for
-							the upstream petroleum industry and other sectors,
-							in addition to Audited Financial Reports, provide
-							leter from Auditors showing your upstream oil and
-							gas revenue for the past year under audit.
-						</p>
-						<p>
-							<input type="radio" />
-							For existing companies which are new to the upstream
-							petroleum industry (ie. Companies which have never
-							received a contract for service in the upstream
-							petroleum industry), provide AUdited Financial
-							Report for the past year and a three year projected
-							revenue for intended upstream oil and gas
-							activities.
-						</p>
-						<p>
-							<input type="radio" />
-							For newly incorporated companies, provide a three
-							year projected revenue for intended upstream oil and
-							gas activities.
-						</p>
+						{financialCapabilityOptions.map((each, i) => (
+							<p key={i}>
+								<input
+									key={i}
+									type="radio"
+									name="whatApplies"
+									value={each.value}
+									checked={whatApplies === each.value}
+									style={{
+										marginRight: "10px",
+										marginBottom: 0,
+									}}
+									onChange={(e) => {
+										console.log("event -> ", e);
+										setData((prev) => ({
+											...prev,
+											[fieldNames.finCapability._]: {
+												...prev[
+													fieldNames.finCapability._
+												],
+												[fieldNames.finCapability
+													.whatApplies]:
+													e.target.value,
+											},
+										}));
+									}}
+								/>
+								{each.text}
+							</p>
+						))}
 						<br />
 						Please upload documents as per your choice *
-						<input type="file" />
+						<input
+							type="file"
+							value={uploadedDocument}
+							onChange={(e) =>
+								setData((prev) => {
+									console.log("value of e => ", e);
+
+									return {
+										...prev,
+										[fieldNames.finCapability._]: {
+											...prev[fieldNames.finCapability._],
+											[fieldNames.finCapability
+												.whatAppliesUploadedDocument]:
+												e.target.value,
+										},
+									};
+								})
+							}
+						/>
 					</li>
 
 					<li>
 						Indicate sources where applicant intends raising funds
 						for its operations in Ghana *
 						<FormGroup>
-							<textarea />
+							<textarea
+								value={sourceOfFunds}
+								onChange={(e) => {
+									setData((prev) => ({
+										...prev,
+										[fieldNames.finCapability._]: {
+											...prev[fieldNames.finCapability._],
+											[fieldNames.finCapability
+												.sourceOfFunds]: e.target.value,
+										},
+									}));
+								}}
+							/>
 						</FormGroup>
 					</li>
 				</ol>
