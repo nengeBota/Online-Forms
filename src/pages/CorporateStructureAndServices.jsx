@@ -1,7 +1,7 @@
 import { Form } from "react-bootstrap";
 import DynamicTable from "../components/DynamicTable";
 import Section from "../components/Section";
-import { PERMIT_CATEGORIES } from "../constants";
+import { permitCategoryOptions, PERMIT_CATEGORIES } from "../constants";
 
 function CorporateStructureAndServices({ data, setData }) {
 	const {
@@ -19,7 +19,38 @@ function CorporateStructureAndServices({ data, setData }) {
 		shareholders,
 		beneficial,
 		permitCategory,
+		executiveDirectors,
+		activities,
 	} = data;
+
+	const selectedPermitCategories =
+		permitCategory === PERMIT_CATEGORIES.specialised
+			? permitCategoryOptions.specialised
+			: permitCategoryOptions.general;
+
+	const isActivityChecked = (value) => {
+		if (Array.isArray(activities))
+			return activities?.some((each) => each === value);
+
+		return false;
+	};
+
+	const onToggleActivity = (e) => {
+		const { name, checked } = e.target;
+
+		if (checked) {
+			activities.push(name);
+			setData((prev) => ({
+				...prev,
+				activities,
+			}));
+		} else {
+			const updatedActivities = activities.filter(
+				(each) => each !== name
+			);
+			setData((prev) => ({ ...prev, activities: updatedActivities }));
+		}
+	};
 
 	return (
 		<div>
@@ -188,6 +219,7 @@ function CorporateStructureAndServices({ data, setData }) {
 					<Form.Control
 						placeholder="23326262626"
 						value={contactPerson?.mobileNumber}
+						type="number"
 						onChange={(e) =>
 							setData((prev) => ({
 								...prev,
@@ -240,12 +272,12 @@ function CorporateStructureAndServices({ data, setData }) {
 					<Form.Control
 						type="file"
 						value={corporateStructure}
-						onChange={(e) =>
+						onChange={(e) => {
 							setData((prev) => ({
 								...prev,
 								corporateStructure: e.target.value,
-							}))
-						}
+							}));
+						}}
 					/>
 				</Section>
 
@@ -375,7 +407,15 @@ function CorporateStructureAndServices({ data, setData }) {
 						directors)
 					</Form.Label>{" "}
 					<br />
-					<textarea />
+					<textarea
+						value={executiveDirectors}
+						onChange={(e) => {
+							setData((prev) => ({
+								...prev,
+								executiveDirectors: e.target.value,
+							}));
+						}}
+					/>
 				</Section>
 
 				<Section>
@@ -392,6 +432,7 @@ function CorporateStructureAndServices({ data, setData }) {
 							setData((prev) => ({
 								...prev,
 								permitCategory: PERMIT_CATEGORIES.specialised,
+								activities: [],
 							}))
 						}
 					/>
@@ -404,180 +445,36 @@ function CorporateStructureAndServices({ data, setData }) {
 							setData((prev) => ({
 								...prev,
 								permitCategory: PERMIT_CATEGORIES.general,
+								activities: [],
 							}))
 						}
 					/>
 				</Section>
 
-				{permitCategory === PERMIT_CATEGORIES.specialised && (
-					<Section>
-						<Form.Label>
-							10. a. i. Indicate at most two (2) activities in
+				<Section>
+					<Form.Label>
+						{permitCategory === PERMIT_CATEGORIES.specialised
+							? `10. a. i. Indicate at most two (2) activities in
 							order of preference from either Category A or B from
 							the Commission’s Classification Of Upstream
 							Petroleum Industry Companies list provided
-							[Specialized].
-						</Form.Label>
+							[Specialized].`
+							: `10. a. ii. Indicate at most two (2) activities in
+							order of preference from either Category A or B from
+							the Commission’s Classification Of Upstream
+							Petroleum Industry Companies list provided
+							[General].`}
+					</Form.Label>
+					{selectedPermitCategories.map((each) => (
 						<Form.Check
-							label="Aviation Support Services"
-							type={"checkbox"}
+							label={each.label}
+							name={each.name}
+							onChange={onToggleActivity}
+							checked={isActivityChecked(each.name)}
 						/>
-						<Form.Check
-							label="Calibration Services"
-							type={"checkbox"}
-						/>
-						<Form.Check
-							label="Data Measurement Services"
-							type={"checkbox"}
-						/>
-						<Form.Check
-							label="Diving and Hyperbaric Services"
-							type={"checkbox"}
-						/>
-						<Form.Check
-							label="Dredging Services"
-							type={"checkbox"}
-						/>
-						<Form.Check
-							label="Drilling/Production Services"
-							type={"checkbox"}
-						/>
-						<Form.Check
-							label="Environmental Services"
-							type={"checkbox"}
-						/>
-						<Form.Check
-							label="Exploration Services"
-							type={"checkbox"}
-						/>
-						<Form.Check
-							label="Installation Services/ Marine Contracting"
-							type={"checkbox"}
-						/>
-						<Form.Check
-							label="Integrated Services"
-							type={"checkbox"}
-						/>
-						<Form.Check
-							label="Integrity Test and Inspection Services"
-							type={"checkbox"}
-						/>
-						<Form.Check
-							label="Laboratory Services"
-							type={"checkbox"}
-						/>
-						<Form.Check
-							label="Major Construction Services"
-							type={"checkbox"}
-						/>
-						<Form.Check
-							label="Marine Support Services"
-							type={"checkbox"}
-						/>
-						<Form.Check
-							label="Onshore/Offshore Pipeline Services"
-							type={"checkbox"}
-						/>
-						<Form.Check
-							label="Research and Development Services"
-							type={"checkbox"}
-						/>
-						<Form.Check label="Rope Access" type={"checkbox"} />
-						<Form.Check
-							label="Special Transportation"
-							type={"checkbox"}
-						/>
-						<Form.Check
-							label="Surveying/Positioning Services"
-							type={"checkbox"}
-						/>
-						<Form.Check
-							label="Technical Consultancy"
-							type={"checkbox"}
-						/>
-						<Form.Check
-							label="Waste Management Services"
-							type={"checkbox"}
-						/>
-					</Section>
-				)}
+					))}
+				</Section>
 
-				{permitCategory === PERMIT_CATEGORIES.general && (
-					<Section>
-						<Form.Label>
-							10. a. ii. Indicate at most two (2) activities in
-							order of preference from either Category A or B from
-							the Commission’s Classification Of Upstream
-							Petroleum Industry Companies list provided
-							[General].
-						</Form.Label>
-						<Form.Check
-							label="Automobile Services"
-							type={"checkbox"}
-						/>
-						<Form.Check
-							label="Banking/Financial Services"
-							type={"checkbox"}
-						/>
-						<Form.Check
-							label="Construction/Rehabilitation/Fabrication Works"
-							type={"checkbox"}
-						/>
-						<Form.Check
-							label="Equipment/Material Supply Services"
-							type={"checkbox"}
-						/>
-						<Form.Check
-							label="General Consultancy Services"
-							type={"checkbox"}
-						/>
-						<Form.Check
-							label="Haulage/ Freight / Clearing and Forwarding (International/Domestic)"
-							type={"checkbox"}
-						/>
-						<Form.Check
-							label="Heavy Duty Equipment Supply"
-							type={"checkbox"}
-						/>
-						<Form.Check
-							label="Hospital/ Medical Services"
-							type={"checkbox"}
-						/>
-						<Form.Check
-							label="Hospitality Services"
-							type={"checkbox"}
-						/>
-						<Form.Check
-							label="Information Technology/ Communication Services"
-							type={"checkbox"}
-						/>
-						<Form.Check
-							label="Insurance Service"
-							type={"checkbox"}
-						/>
-						<Form.Check label="Maintenance" type={"checkbox"} />
-						<Form.Check label="Manpower Supply" type={"checkbox"} />
-						<Form.Check
-							label="Printing Services"
-							type={"checkbox"}
-						/>
-						<Form.Check
-							label="Protocol and Logistics Services"
-							type={"checkbox"}
-						/>
-						<Form.Check label="Sanitation" type={"checkbox"} />
-						<Form.Check label="Supply" type={"checkbox"} />
-						<Form.Check
-							label="Supply of Petroleum Products"
-							type={"checkbox"}
-						/>
-						<Form.Check
-							label="Water Borehole Services"
-							type={"checkbox"}
-						/>
-						<Form.Check label="Works" type={"checkbox"} />
-					</Section>
-				)}
 				<Section>
 					<Form.Label>
 						10. b. Provide a description of the range of activities

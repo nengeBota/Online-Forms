@@ -55,6 +55,8 @@ export const fieldNames = {
     percentage: 'percentage',
     isEditing: 'isEditing',
   },
+  executiveDirectors: "executiveDirectors",
+  activities: "activities",
   corporateStructure: "corporateStructure",
   description: "description",
   // detailsOfExperience: "detailsOfExperience",
@@ -161,6 +163,8 @@ export const initialErrorState = {
       [fieldNames.beneficial.isEditing]: true,
     },
   ],
+  [fieldNames.executiveDirectors]: "",
+  [fieldNames.activities]: "",
   [fieldNames.corporateStructure]: "",
   [fieldNames.description]: "",
   // PART 2
@@ -175,6 +179,8 @@ export const initialErrorState = {
     },
   ],
 
+
+
   // PART 4. LOCAL CONTENT
   [fieldNames.valueOfServiceOfferedByOtherCompaniesToApplicant._]: [
     { ...NEW_VALUE_OF_SERVICE },
@@ -185,6 +191,7 @@ export const initialErrorState = {
 };
 
 export const initialState = {
+  // PAGE 1 - CORPORATE STRUCTURE AND SERVICES
   [fieldNames.applicantName]: "",
   [fieldNames.dateOfIncorporation]: "",
   [fieldNames.placeOfIncorporation]: "",
@@ -223,6 +230,8 @@ export const initialState = {
       [fieldNames.beneficial.isEditing]: true,
     },
   ],
+  [fieldNames.executiveDirectors]: "",
+  [fieldNames.activities]: [],
   [fieldNames.corporateStructure]: "",
   [fieldNames.description]: "",
   // PART 2
@@ -239,11 +248,56 @@ export const initialState = {
 
 
   // PART 4. LOCAL CONTENT
-  [fieldNames.valueOfServiceOfferedByOtherCompaniesToApplicant]: [
+  [fieldNames.valueOfServiceOfferedByOtherCompaniesToApplicant._]: [
     { ...NEW_VALUE_OF_SERVICE },
   ],
-  [fieldNames.valueOfServiceOfferedByApplicantToOtherCompanies]: [
+  [fieldNames.valueOfServiceOfferedByApplicantToOtherCompanies._]: [
     { ...NEW_VALUE_OF_SERVICE },
   ],
 };
 
+export const permitCategoryOptions = {
+  specialised: [
+    { label: "Aviation Support Services", name: 'aviationSupportServices', },
+    { label: 'Calibration Services', name: 'calibrationServices' },
+    { label: 'Data Measurement Services', name: 'dataMeasurementServices' },
+    { label: 'Diving and Hyperbaric Services', name: 'divingAndHyperbaricServices' },
+    { label: 'Dredging Services', name: 'dredgingServices' },
+    { label: 'Drilling / Production Services', name: 'drillingOrProductionServices' },
+    { label: 'Environmental Services', name: 'environmentalServices' },
+    { label: 'Exploration Seration Serrvices', name: 'explorationServices' },
+    { label: 'Installation Services / Marine Contracting', name: 'installationServicesAndMarineContracting' },
+    { label: 'Integrated Services', name: 'integratedServices' },
+    { label: 'Integrity Test and Inspection Services', name: 'integrityTestAndInspectionServices' },
+    { label: 'Laboratory Services', name: 'laboratoryServices' },
+    { label: 'Major Construction Services', name: 'majorConstructionServices' },
+    { label: 'Marine Support Services', name: 'marineSupportServices' },
+    { label: 'Onshore / Offshore Pipeline Services', name: 'onshoreAndOffshorePipelineServices' },
+    { label: 'Research and Development Services', name: 'researchAndDevelopmentServices' },
+    { label: 'Rope Access', name: 'ropeAccess' },
+    { label: 'Special Transportation', name: 'specialTransportation' },
+    { label: 'Surveying / Positioning Services', name: 'surveyingAndPositioningServices' },
+    { label: 'Technical Consultancy', name: 'technicalConsultancy' },
+    { label: 'Waste Management Services', name: 'wasteManagementServices' },
+  ],
+  general: [
+    { label: 'Automobile Services', name: 'automobileServices' },
+    { label: 'Banking / Financial Services', name: 'bankingAndFinancialServices' },
+    { label: 'Construction / Rehabilitation / Fabrication works', name: 'constructionAndRehabilitationAndFabricationWorks' },
+    { label: 'Equipment / Material Supply Services', name: 'equipmentAndMaterialSupplyServices' },
+    { label: 'General Consultancy Services', name: 'generalConsultancyServices' },
+    { label: 'Haulage / Freight / Clearing and Forwarding (International / Domestic)', name: 'haulageAndFreightAndClearingAndForwarding' },
+    { label: 'Heavy Duty Equipment Supply', name: 'heavyDutyEquipmentSupply' },
+    { label: 'Hospital / Medical Services', name: 'hospitalAndMedicalServices' },
+    { label: 'Information Technology / Communication Services', name: 'informationTechnologyAndCommunicationServices' },
+    { label: 'Insurance Services', name: 'insuranceServices' },
+    { label: 'Maintenance', name: 'maintenance' },
+    { label: 'Manpower Supply', name: 'manpowerSupply' },
+    { label: 'Printing Services', name: 'printingServices' },
+    { label: 'Protocol and Logistics Services', name: 'protocolAndLogisticsServices' },
+    { label: 'Sanitation', name: 'sanitation' },
+    { label: 'Supply of Petroleum Products', name: 'supplyOfPetroleumProducts' },
+    { label: 'Water Borehole Services', name: 'waterBoreholeServices' },
+    { label: 'Works', name: 'works' }
+  ],
+}
