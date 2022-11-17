@@ -53,8 +53,6 @@ function FinancialCapability({ data, setData }) {
 							value={uploadedDocument}
 							onChange={(e) =>
 								setData((prev) => {
-									console.log("value of e => ", e);
-
 									return {
 										...prev,
 										[fieldNames.finCapability._]: {
