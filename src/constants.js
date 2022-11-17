@@ -70,11 +70,16 @@ export const fieldNames = {
 
   detailsOfExperience: {
     _: 'detailsOfExperience',
-    isEditing: 'isEditing',
-    descriptionOfContract: 'descriptionOfContract',
-    nameOfCompanyWorkWasDoneFor: 'nameOfCompanyWorkWasDoneFor',
-    contractDuration: 'contractDuration',
-    contractValue: 'contractValue',
+    companyExperience: 'companyExperience',
+    countries: 'countries',
+    contractsExecuted: {
+      _: 'contractsExecuted',
+      isEditing: 'isEditing',
+      descriptionOfContract: 'descriptionOfContract',
+      nameOfCompanyWorkWasDoneFor: 'nameOfCompanyWorkWasDoneFor',
+      contractDuration: 'contractDuration',
+      contractValue: 'contractValue',
+    },
   },
 
   valueOfServiceOfferedByApplicantToOtherCompanies: {
@@ -161,24 +166,28 @@ export const initialErrorState = {
 
   },
 
-    // management and technical competencies
-    [fieldNames.mgtAndTechnicalCompetencies._]: {
-      [fieldNames.mgtAndTechnicalCompetencies.orgChart]: '',
-      [fieldNames.mgtAndTechnicalCompetencies.detailedStaffInfo]: '',
-      [fieldNames.mgtAndTechnicalCompetencies.requiredExpertise]: '',
-      [fieldNames.mgtAndTechnicalCompetencies.sourcesOfEquipment]: '',
-    },
+  // management and technical competencies
+  [fieldNames.mgtAndTechnicalCompetencies._]: {
+    [fieldNames.mgtAndTechnicalCompetencies.orgChart]: '',
+    [fieldNames.mgtAndTechnicalCompetencies.detailedStaffInfo]: '',
+    [fieldNames.mgtAndTechnicalCompetencies.requiredExpertise]: '',
+    [fieldNames.mgtAndTechnicalCompetencies.sourcesOfEquipment]: '',
+  },
 
   // C. DETAILS OF EXPERIENCE
-  [fieldNames.detailsOfExperience._]: [
-    {
-      [fieldNames.detailsOfExperience.isEditing]: true,
-      [fieldNames.detailsOfExperience.descriptionOfContract]: "",
-      [fieldNames.detailsOfExperience.nameOfCompanyWorkWasDoneFor]: "",
-      [fieldNames.detailsOfExperience.contractDuration]: "",
-      [fieldNames.detailsOfExperience.contractValue]: "",
-    },
-  ],
+  [fieldNames.detailsOfExperience._]: {
+    [fieldNames.detailsOfExperience.companyExperience]: '',
+    [fieldNames.detailsOfExperience.countries]: '',
+    [fieldNames.detailsOfExperience.contractsExecuted._]: [
+      {
+        [fieldNames.detailsOfExperience.isEditing]: '',
+        [fieldNames.detailsOfExperience.descriptionOfContract]: "",
+        [fieldNames.detailsOfExperience.nameOfCompanyWorkWasDoneFor]: "",
+        [fieldNames.detailsOfExperience.contractDuration]: "",
+        [fieldNames.detailsOfExperience.contractValue]: "",
+      },
+    ]
+  },
 
 
 
@@ -254,16 +263,19 @@ export const initialState = {
 
 
   // C. DETAILS OF EXPERIENCE
-  [fieldNames.detailsOfExperience._]: [
-    {
-      [fieldNames.detailsOfExperience.isEditing]: true,
-      [fieldNames.detailsOfExperience.descriptionOfContract]: "",
-      [fieldNames.detailsOfExperience.nameOfCompanyWorkWasDoneFor]: "",
-      [fieldNames.detailsOfExperience.contractDuration]: "",
-      [fieldNames.detailsOfExperience.contractValue]: "",
-    },
-  ],
-
+  [fieldNames.detailsOfExperience._]: {
+    [fieldNames.detailsOfExperience.companyExperience]: '',
+    [fieldNames.detailsOfExperience.countries]: '',
+    [fieldNames.detailsOfExperience.contractsExecuted._]: [
+      {
+        [fieldNames.detailsOfExperience.contractsExecuted.isEditing]: true,
+        [fieldNames.detailsOfExperience.contractsExecuted.descriptionOfContract]: "",
+        [fieldNames.detailsOfExperience.contractsExecuted.nameOfCompanyWorkWasDoneFor]: "",
+        [fieldNames.detailsOfExperience.contractsExecuted.contractDuration]: "",
+        [fieldNames.detailsOfExperience.contractsExecuted.contractValue]: "",
+      },
+    ]
+  },
 
   // PART 4. LOCAL CONTENT
   [fieldNames.valueOfServiceOfferedByOtherCompaniesToApplicant._]: [
@@ -273,6 +285,8 @@ export const initialState = {
     { ...NEW_VALUE_OF_SERVICE },
   ],
 };
+
+
 
 export const permitCategoryOptions = {
   specialised: [

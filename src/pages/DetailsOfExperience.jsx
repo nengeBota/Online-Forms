@@ -1,21 +1,26 @@
-import { useState } from "react";
 import { Form, FormGroup } from "react-bootstrap";
 import DynamicTable from "../components/DynamicTable";
+import { fieldNames } from "../constants";
 
 const columns = [
 	{
 		name: "Description of Contract",
-		key: "descriptionOfContract",
+		key: fieldNames.detailsOfExperience.contractsExecuted
+			.descriptionOfContract,
 	},
 	{
 		name: "Name of company work was done for",
-		key: "nameOfCompanyWorkWasDoneFor",
+		key: fieldNames.detailsOfExperience.contractsExecuted
+			.nameOfCompanyWorkWasDoneFor,
 	},
 	{
 		name: "Contract Duration (Start date - end date)",
-		key: "contractDuration",
+		key: fieldNames.detailsOfExperience.contractsExecuted.contractDuration,
 	},
-	{ name: "Contract Value", key: "contractValue" },
+	{
+		name: "Contract Value",
+		key: fieldNames.detailsOfExperience.contractsExecuted.contractValue,
+	},
 ];
 
 const newDetailsOfExperience = {
@@ -27,6 +32,29 @@ const newDetailsOfExperience = {
 };
 
 function DetailsOfExperience({ data, setData }) {
+	const companyExperience =
+		data[fieldNames.detailsOfExperience._][
+			fieldNames.detailsOfExperience.companyExperience
+		];
+	const countries =
+		data[fieldNames.detailsOfExperience._][
+			fieldNames.detailsOfExperience.countries
+		];
+	const contractsExecuted =
+		data[fieldNames.detailsOfExperience._][
+			fieldNames.detailsOfExperience.contractsExecuted._
+		];
+
+	const onChange = (field, value) => {
+		setData((prev) => ({
+			...prev,
+			[fieldNames.detailsOfExperience._]: {
+				...prev[fieldNames.detailsOfExperience._],
+				[field]: value,
+			},
+		}));
+	};
+
 	return (
 		<Form>
 			<h1>C. Details of Experience</h1>
@@ -39,14 +67,30 @@ function DetailsOfExperience({ data, setData }) {
 				experience of the applicant and not the Affiliate/Parent
 				Company) *
 				<br />
-				<textarea />
+				<textarea
+					value={companyExperience}
+					onChange={(e) =>
+						onChange(
+							fieldNames.detailsOfExperience.companyExperience,
+							e.target.value
+						)
+					}
+				/>
 			</FormGroup>
 
 			<FormGroup>
 				6. In which countries do applicant, parent company and
 				affiliates currently have Petroleum industry activities or
 				contracts? List all current operations globally. * <br />
-				<textarea />
+				<textarea
+					value={countries}
+					onChange={(e) =>
+						onChange(
+							fieldNames.detailsOfExperience.countries,
+							e.target.value
+						)
+					}
+				/>
 			</FormGroup>
 
 			<FormGroup>
@@ -55,31 +99,41 @@ function DetailsOfExperience({ data, setData }) {
 				<br />
 				<DynamicTable
 					columns={columns}
-					data={data.detailsOfExperience}
+					data={contractsExecuted}
 					addNewRow={() => {
-						setData((prev) => ({
-							...prev,
-							detailsOfExperience: [
-								...prev.detailsOfExperience,
-								newDetailsOfExperience,
-							],
-						}));
+						contractsExecuted.push(newDetailsOfExperience);
+						onChange(
+							fieldNames.detailsOfExperience.contractsExecuted._,
+							contractsExecuted
+						);
 					}}
 					updateRow={(index, key, value) => {
-						data.detailsOfExperience[index][key] = value;
-						setData({ ...data });
+						contractsExecuted[index][key] = value;
+						onChange(
+							fieldNames.detailsOfExperience.contractsExecuted._,
+							contractsExecuted
+						);
 					}}
 					saveRow={(index) => {
-						data.detailsOfExperience[index].isEditing = false;
-						setData({ ...data });
+						contractsExecuted[index].isEditing = false;
+						onChange(
+							fieldNames.detailsOfExperience.contractsExecuted._,
+							contractsExecuted
+						);
 					}}
 					editRow={(index) => {
-						data.detailsOfExperience[index].isEditing = true;
-						setData({ ...data });
+						contractsExecuted[index].isEditing = true;
+						onChange(
+							fieldNames.detailsOfExperience.contractsExecuted._,
+							contractsExecuted
+						);
 					}}
 					deleteRow={(index) => {
-						data.detailsOfExperience.splice(index, 1);
-						setData({ ...data });
+						contractsExecuted.splice(index, 1);
+						onChange(
+							fieldNames.detailsOfExperience.contractsExecuted._,
+							contractsExecuted
+						);
 					}}
 				/>
 			</FormGroup>
