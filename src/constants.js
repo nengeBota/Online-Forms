@@ -59,6 +59,15 @@ export const fieldNames = {
     sourceOfFunds: 'sourceOfFunds',
   },
 
+  // management and technical competencies
+  mgtAndTechnicalCompetencies: {
+    _: "mgtAndTechnicalCompetencies",
+    orgChart: 'orgChart',
+    detailedStaffInfo: 'detailedStaffInfo',
+    requiredExpertise: 'requiredExpertise',
+    sourcesOfEquipment: 'sourcesOfEquipment',
+  },
+
   detailsOfExperience: {
     _: 'detailsOfExperience',
     isEditing: 'isEditing',
@@ -152,6 +161,14 @@ export const initialErrorState = {
 
   },
 
+    // management and technical competencies
+    [fieldNames.mgtAndTechnicalCompetencies._]: {
+      [fieldNames.mgtAndTechnicalCompetencies.orgChart]: '',
+      [fieldNames.mgtAndTechnicalCompetencies.detailedStaffInfo]: '',
+      [fieldNames.mgtAndTechnicalCompetencies.requiredExpertise]: '',
+      [fieldNames.mgtAndTechnicalCompetencies.sourcesOfEquipment]: '',
+    },
+
   // C. DETAILS OF EXPERIENCE
   [fieldNames.detailsOfExperience._]: [
     {
@@ -226,6 +243,16 @@ export const initialState = {
     [fieldNames.finCapability.whatAppliesUploadedDocument]: '',
     [fieldNames.finCapability.sourceOfFunds]: '',
   },
+
+  // management and technical competencies
+  [fieldNames.mgtAndTechnicalCompetencies._]: {
+    [fieldNames.mgtAndTechnicalCompetencies.orgChart]: '',
+    [fieldNames.mgtAndTechnicalCompetencies.detailedStaffInfo]: '',
+    [fieldNames.mgtAndTechnicalCompetencies.requiredExpertise]: '',
+    [fieldNames.mgtAndTechnicalCompetencies.sourcesOfEquipment]: '',
+  },
+
+
   // C. DETAILS OF EXPERIENCE
   [fieldNames.detailsOfExperience._]: [
     {
