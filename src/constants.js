@@ -82,6 +82,17 @@ export const fieldNames = {
     },
   },
 
+  // part 3
+  // organisational development programme and budget
+  orgDevProgramAndBudget: {
+    _: 'orgDevProgramAndBudget',
+    orgDevStrategy: 'orgDevStrategy',
+    employmentPlan: 'employmentPlan',
+    techTransferProgramAndBudget: 'techTransferProgramAndBudget',
+    trainingProgramAndBudget: 'trainingProgramAndBudget',
+    csrAndSocialDevProgramAndBudget: 'scrAndSocialDevProgramAndBudget',
+  },
+
   valueOfServiceOfferedByApplicantToOtherCompanies: {
     _: "valueOfServiceOfferedByApplicantToOtherCompanies",
     isEditing: 'isEditing',
@@ -275,6 +286,16 @@ export const initialState = {
         [fieldNames.detailsOfExperience.contractsExecuted.contractValue]: "",
       },
     ]
+  },
+
+  // part 3 - plans and programmes
+  // organisational development programme and budget
+  [fieldNames.orgDevProgramAndBudget._]: {
+    [fieldNames.orgDevProgramAndBudget.orgDevStrategy]: '',
+    [fieldNames.orgDevProgramAndBudget.employmentPlan]: '',
+    [fieldNames.orgDevProgramAndBudget.techTransferProgramAndBudget]: '',
+    [fieldNames.orgDevProgramAndBudget.trainingProgramAndBudget]: '',
+    [fieldNames.orgDevProgramAndBudget.csrAndSocialDevProgramAndBudget]: '',
   },
 
   // PART 4. LOCAL CONTENT
