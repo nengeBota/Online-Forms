@@ -1,4 +1,4 @@
-import { Button, ButtonGroup, Table } from "react-bootstrap";
+import { Button, ButtonGroup, Form, Table } from "react-bootstrap";
 
 /**
  *
@@ -15,6 +15,8 @@ function DynamicTable({
 	editRow, // set the row to isEditing: true
 	deleteRow,
 }) {
+  console.log('value of data -> ', data);
+  
 	return (
 		<Table>
 			<thead>
@@ -37,7 +39,7 @@ function DynamicTable({
 								<td>{val[col.key]}</td>
 							) : (
 								<td>
-									<input
+									<Form.Control
 										style={{
 											width: "100px",
 											minWidth: "0",

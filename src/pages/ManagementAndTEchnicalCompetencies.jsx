@@ -74,7 +74,8 @@ function ManagementAndTechnicalCompetencies({ data, setData }) {
 				<div>
 					c. Indicate expertise to be sourced locally and
 					internationally. * <br />
-					<textarea
+					<Form.Control
+						as="textarea"
 						value={requiredExpertise}
 						onChange={(e) => {
 							onChange(
@@ -92,7 +93,8 @@ function ManagementAndTechnicalCompetencies({ data, setData }) {
 					4. Indicate sources from which applicant proposes to obtain
 					equipment and other facilities to support petroleum
 					activities. * <br />
-					<textarea
+					<Form.Control
+						as="textarea"
 						value={sourcesOfEquipment}
 						onChange={(e) => {
 							onChange(

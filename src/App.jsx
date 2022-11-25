@@ -17,8 +17,6 @@ import CoverPage from "./pages/CoverPage";
 import AnnexesAndAttachments from "./pages/AnnexesAndAttachments";
 import { initialErrorState, initialState } from "./constants";
 
-
-
 //info: the position of the page determines its page number. so CorporateStructureAndServices is page 1 because its first in this array, etc..
 const pages = [
 	// PART 1
@@ -49,7 +47,6 @@ const pages = [
 	AnnexesAndAttachments,
 ];
 
-
 function App() {
 	const [category, setcategory] = useState([]);
 	const [page, setPage] = useState(1);
@@ -61,9 +58,9 @@ function App() {
 		setcategory(result.data);
 	}
 
-	useEffect(function () {
-		fetchcategories();
-	}, []);
+	// useEffect(function () {
+	// 	fetchcategories();
+	// }, []);
 
 	const CurrentPage = pages[page - 1];
 
@@ -94,9 +91,8 @@ function App() {
 				<ButtonGroup>
 					{page === pages.length ? (
 						<Button variant="secondary">Preview</Button>
-					) : (
-						<Button>Save</Button>
-					)}
+					) : null //<Button>Save</Button>
+					}
 
 					{page < pages.length ? (
 						<Button

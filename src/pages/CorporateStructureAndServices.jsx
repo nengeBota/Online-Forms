@@ -407,7 +407,8 @@ function CorporateStructureAndServices({ data, setData }) {
 						directors)
 					</Form.Label>{" "}
 					<br />
-					<textarea
+          <Form.Control
+            as="textarea"
 						value={executiveDirectors}
 						onChange={(e) => {
 							setData((prev) => ({

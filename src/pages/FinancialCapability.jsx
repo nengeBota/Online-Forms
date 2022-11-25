@@ -1,4 +1,4 @@
-import { FormGroup } from "react-bootstrap";
+import { Form, FormGroup } from "react-bootstrap";
 import { fieldNames, financialCapabilityOptions } from "../constants";
 
 function FinancialCapability({ data, setData }) {
@@ -71,7 +71,8 @@ function FinancialCapability({ data, setData }) {
 						Indicate sources where applicant intends raising funds
 						for its operations in Ghana *
 						<FormGroup>
-							<textarea
+              <Form.Control
+                as="textarea"
 								value={sourceOfFunds}
 								onChange={(e) => {
 									setData((prev) => ({

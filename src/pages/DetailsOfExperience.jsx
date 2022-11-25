@@ -67,7 +67,8 @@ function DetailsOfExperience({ data, setData }) {
 				experience of the applicant and not the Affiliate/Parent
 				Company) *
 				<br />
-				<textarea
+				<Form.Control
+					as="textarea"
 					value={companyExperience}
 					onChange={(e) =>
 						onChange(
@@ -82,7 +83,8 @@ function DetailsOfExperience({ data, setData }) {
 				6. In which countries do applicant, parent company and
 				affiliates currently have Petroleum industry activities or
 				contracts? List all current operations globally. * <br />
-				<textarea
+				<Form.Control
+					as="textarea"
 					value={countries}
 					onChange={(e) =>
 						onChange(
