@@ -1,6 +1,18 @@
 import { Form, FormGroup, FormLabel } from "react-bootstrap";
+import { fieldNames } from "../constants";
 
-function Miscellaneous() {
+const getFields = (data) => {
+	const miscFiles = data[fieldNames.miscFiles];
+	return { miscFiles };
+};
+
+function Miscellaneous({ data, setData }) {
+	const { miscFiles } = getFields(data);
+
+  const onChange = (value) => {
+		setData((prev) => ({ ...prev, [fieldNames.miscFiles]: value }));
+	};
+
 	return (
 		<Form>
 			<h1>Part Six - Miscellaneous</h1>
@@ -18,7 +30,14 @@ function Miscellaneous() {
 					You may attach multiple relevant documents
 				</FormLabel>
 				<br />
-				<input type="file" />
+				<Form.Control
+					type="file"
+					multiple
+					value={miscFiles}
+          onChange={(e) => {
+            onChange(e.target.value)
+          }}
+				/>
 			</FormGroup>
 
 			<br />

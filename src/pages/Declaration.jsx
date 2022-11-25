@@ -1,6 +1,29 @@
 import { Form, FormGroup, FormLabel } from "react-bootstrap";
+import { fieldNames } from "../constants";
 
-function Declaration() {
+const getFields = (data) => {
+  const fields = data[fieldNames.declaration._];
+	const name = fields[fieldNames.declaration.name];
+	const position = fields[fieldNames.declaration.position];
+	const signature = fields[fieldNames.declaration.signature];
+	const date = fields[fieldNames.declaration.date];
+
+	return { position, signature, name, date };
+};
+
+const onChange = (field, value, setData) => {
+	setData((prev) => ({
+		...prev,
+		[fieldNames.declaration._]: {
+			...prev[fieldNames.declaration._],
+			[field]: value,
+		},
+	}));
+};
+
+function Declaration({ data, setData }) {
+	const { name, position, signature, date } = getFields(data);
+
 	return (
 		<Form>
 			<h1>Declaration by the applicant</h1>
@@ -18,21 +41,61 @@ function Declaration() {
 			<FormGroup>
 				<FormLabel>Name of applicant</FormLabel>
 				<br />
-				<input type="text" />
+				<Form.Control
+					type="text"
+					value={name}
+					onChange={(e) => {
+						onChange(
+							fieldNames.declaration.name,
+							e.target.value,
+							setData
+						);
+					}}
+				/>
 				<br />
 				<FormLabel>Position</FormLabel>
 				<br />
-				<input type="text" />
+				<Form.Control
+					type="text"
+					value={position}
+					onChange={(e) => {
+						onChange(
+							fieldNames.declaration.position,
+							e.target.value,
+							setData
+						);
+					}}
+				/>
 				<br />
 
 				<FormLabel>Signature</FormLabel>
 				<br />
-				<input type="file" />
+				<Form.Control
+					type="file"
+					value={signature}
+					onChange={(e) => {
+						onChange(
+							fieldNames.declaration.signature,
+							e.target.value,
+							setData
+						);
+					}}
+				/>
 				<br />
 
 				<FormLabel>Date</FormLabel>
 				<br />
-				<input type="date" />
+				<Form.Control
+					type="date"
+					value={date}
+					onChange={(e) => {
+						onChange(
+							fieldNames.declaration.date,
+							e.target.value,
+							setData
+						);
+					}}
+				/>
 				<br />
 			</FormGroup>
 			<br />
