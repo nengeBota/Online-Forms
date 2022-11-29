@@ -1,6 +1,9 @@
 import { Form, FormGroup, FormLabel } from "react-bootstrap";
+import { fieldNames } from "../constants";
 
-function CoverPage() {
+function CoverPage({ data, setData }) {
+	const coverPage = data[fieldNames.coverPage];
+
 	return (
 		<Form>
 			<h1>Cover Page</h1>
@@ -9,7 +12,16 @@ function CoverPage() {
 			<FormGroup>
 				<FormLabel>Upload Cover Page *</FormLabel>
 				<br />
-				<input type="file" />
+				<Form.Control
+					type="file"
+					value={coverPage}
+					onChange={(e) => {
+						setData((prev) => ({
+							...prev,
+							[fieldNames.coverPage]: e.target.value,
+						}));
+					}}
+				/>
 			</FormGroup>
 		</Form>
 	);

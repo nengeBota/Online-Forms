@@ -139,6 +139,27 @@ export const fieldNames = {
     signature: 'signature',
     date: 'date',
 
+  },
+
+  // cover page
+  coverPage: 'coverPage',
+
+  // checklist
+  checkList: {
+    _: 'checkList',
+    coverPage: 'coverPage',
+    applicationForm: 'applicationForm',
+    certificateOfIncorporation: 'certificateOfIncorporation',
+    certificateToCommenceBusiness: 'certificateToCommenceBusiness',
+    companyRegulations: 'companyRegulations',
+    signedHssePolicyAndObj: 'signedHssePolicyAndObj',
+    currentAuditedFinReportsOrProjectedRevenue: 'currentAuditedFinReportsOrProjectedRevenue',
+    validTaxClearanceCertificate: 'validTaxClearanceCertificate',
+    vatCertificate: 'vatCertificate',
+    originalSsnitClearanceCertificate: 'originalSsnitClearanceCertificate',
+    somethingImportantThatsMissing: 'somethingImportantThatsMissing',
+    copiesOfOtherRegulatoryCerts: 'copiesOfOtherRegulatoryCerts',
+    copyOfApplicationPackReceipt: 'copyOfApplicationPackReceipt',
   }
 };
 
@@ -373,6 +394,26 @@ export const initialState = {
     [fieldNames.declaration.position]: '',
     [fieldNames.declaration.signature]: '',
     [fieldNames.declaration.date]: '',
+  },
+
+  // cover page
+  [fieldNames.coverPage]: '',
+
+  // checklist
+  [fieldNames.checkList._]: {
+    [fieldNames.checkList.coverPage]: false,
+    [fieldNames.checkList.applicationForm]: false,
+    [fieldNames.checkList.certificateOfIncorporation]: false,
+    [fieldNames.checkList.certificateToCommenceBusiness]: false,
+    [fieldNames.checkList.companyRegulations]: false,
+    [fieldNames.checkList.signedHssePolicyAndObj]: false,
+    [fieldNames.checkList.currentAuditedFinReportsOrProjectedRevenue]: false,
+    [fieldNames.checkList.validTaxClearanceCertificate]: false,
+    [fieldNames.checkList.vatCertificate]: false,
+    [fieldNames.checkList.originalSsnitClearanceCertificate]: false,
+    [fieldNames.checkList.somethingImportantThatsMissing]: false,
+    [fieldNames.checkList.copiesOfOtherRegulatoryCerts]: false,
+    [fieldNames.checkList.copyOfApplicationPackReceipt]: false,
   }
 };
 
