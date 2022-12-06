@@ -9,48 +9,51 @@ export const FIN_CAPABILITY_WHAT_APPLIES_OPTIONS = {
 
 export const fieldNames = {
   // PAGE 1 - CORPORATE STRUCTURE AND SERVICES
-  applicantName: "applicantName",
-  dateOfIncorporation: "dateOfIncorporation",
-  placeOfIncorporation: "placeOfIncorporation",
-  contactDetails: {
-    _: "contactDetails",
-    officeAddress: "officeAddress",
-    postalAddress: "postalAddress",
-    city: "city",
-    region: "region",
-    country: "country",
-  },
-  emailAddress: "emailAddress",
-  website: "website",
-  contactPerson: {
-    _: "contactPerson",
-    name: "name",
-    mobileNumber: "mobileNumber",
-  },
-  nameOfSubsidiaryOrAffiliate: "nameOfSubsidiaryOrAffiliate",
-  nationalityOfAffiliate: "nationalityOfAffiliate",
-  permitCategory: "permitCategory",
-  shareholders: {
-    _: "shareholders",
-    name: "name",
-    address: "address",
-    nationality: "nationality",
-    percentage: "percentage",
-    isEditing: "isEditing",
-  },
-  beneficial: {
-    _: "beneficial",
-    name: "name",
-    address: "address",
-    nationality: "nationality",
-    percentage: "percentage",
-    isEditing: "isEditing",
-  },
-  executiveDirectors: "executiveDirectors",
-  activities: "activities",
-  corporateStructure: "corporateStructure",
-  description: "description",
+  corporateStructureAndServices: {
+    _: "corporateStructureAndServices",
+    applicantName: 'applicantName',
+    dateOfIncorporation: 'dateOfIncorporation',
+    placeOfIncorporation: 'placeOfIncorporation',
+    contactDetails: {
+      _: "contactDetails",
+      officeAddress: "officeAddress",
+      postalAddress: "postalAddress",
+      city: "city",
+      region: "region",
+      country: "country",
+    },
+    emailAddress: "emailAddress",
+    website: "website",
+    contactPerson: {
+      _: "contactPerson",
+      name: "name",
+      mobileNumber: "mobileNumber",
+    },
+    nameOfSubsidiaryOrAffiliate: "nameOfSubsidiaryOrAffiliate",
+    nationalityOfAffiliate: "nationalityOfAffiliate",
+    permitCategory: "permitCategory",
+    shareholders: {
+      _: "shareholders",
+      name: "name",
+      address: "address",
+      nationality: "nationality",
+      percentage: "percentage",
+      isEditing: "isEditing",
+    },
+    beneficial: {
+      _: "beneficial",
+      name: "name",
+      address: "address",
+      nationality: "nationality",
+      percentage: "percentage",
+      isEditing: "isEditing",
+    },
+    executiveDirectors: "executiveDirectors",
+    activities: "activities",
+    corporateStructure: "corporateStructure",
+    description: "description",
 
+  },
   // PART 2 - financial capability
   finCapability: {
     _: "financialCapability",
@@ -176,127 +179,218 @@ export const NEW_VALUE_OF_SERVICE = {
 };
 
 export const initialErrorState = {
-  // page 1 - corporate structure and services
-  [fieldNames.applicantName]: "",
-  [fieldNames.dateOfIncorporation]: "",
-  [fieldNames.placeOfIncorporation]: "",
-  [fieldNames.contactDetails._]: {
-    [fieldNames.contactDetails.officeAddress]: "",
-    [fieldNames.contactDetails.postalAddress]: "",
-    [fieldNames.contactDetails.city]: "",
-    [fieldNames.contactDetails.region]: "",
-    [fieldNames.contactDetails.country]: "",
-  },
-  [fieldNames.emailAddress]: "",
-  [fieldNames.website]: "",
-  [fieldNames.contactPerson._]: {
-    [fieldNames.contactPerson.name]: "",
-    [fieldNames.contactPerson.mobileNumber]: "",
-  },
+  // PAGE 1 - CORPORATE STRUCTURE AND SERVICES
+  [fieldNames.corporateStructureAndServices._]: {
+    [fieldNames.corporateStructureAndServices.applicantName]: [],
+    [fieldNames.corporateStructureAndServices.dateOfIncorporation]: [],
+    [fieldNames.corporateStructureAndServices.placeOfIncorporation]: [],
+    [fieldNames.corporateStructureAndServices.contactDetails._]: {
+      [fieldNames.corporateStructureAndServices.contactDetails.officeAddress]: [],
+      [fieldNames.corporateStructureAndServices.contactDetails.postalAddress]: [],
+      [fieldNames.corporateStructureAndServices.contactDetails.city]: [],
+      [fieldNames.corporateStructureAndServices.contactDetails.region]: [],
+      [fieldNames.corporateStructureAndServices.contactDetails.country]: [],
+    },
+    [fieldNames.corporateStructureAndServices.emailAddress]: [],
+    [fieldNames.corporateStructureAndServices.website]: [],
+    [fieldNames.corporateStructureAndServices.contactPerson._]: {
+      [fieldNames.corporateStructureAndServices.contactPerson.name]: [],
+      [fieldNames.corporateStructureAndServices.contactPerson.mobileNumber]: [],
+    },
 
-  [fieldNames.nameOfSubsidiaryOrAffiliate]: "",
-  [fieldNames.nationalityOfAffiliate]: "",
-  [fieldNames.permitCategory]: PERMIT_CATEGORIES.general,
-  [fieldNames.shareholders._]: [
-    {
-      [fieldNames.shareholders.name]: "",
-      [fieldNames.shareholders.address]: "",
-      [fieldNames.shareholders.nationality]: "",
-      [fieldNames.shareholders.percentage]: "",
-      [fieldNames.shareholders.isEditing]: true,
-    },
-  ],
-  [fieldNames.beneficial._]: [
-    {
-      [fieldNames.beneficial.name]: "",
-      [fieldNames.beneficial.address]: "",
-      [fieldNames.beneficial.nationality]: "",
-      [fieldNames.beneficial.percentage]: "",
-      [fieldNames.beneficial.isEditing]: true,
-    },
-  ],
-  [fieldNames.executiveDirectors]: "",
-  [fieldNames.activities]: "",
-  [fieldNames.corporateStructure]: "",
-  [fieldNames.description]: "",
+    [fieldNames.corporateStructureAndServices.nameOfSubsidiaryOrAffiliate]: [],
+    [fieldNames.corporateStructureAndServices.nationalityOfAffiliate]: [],
+    [fieldNames.corporateStructureAndServices.permitCategory]: PERMIT_CATEGORIES.general,
+    [fieldNames.corporateStructureAndServices.shareholders._]: [
+      {
+        [fieldNames.corporateStructureAndServices.shareholders.name]: [],
+        [fieldNames.corporateStructureAndServices.shareholders.address]: [],
+        [fieldNames.corporateStructureAndServices.shareholders.nationality]: [],
+        [fieldNames.corporateStructureAndServices.shareholders.percentage]: [],
+        [fieldNames.corporateStructureAndServices.shareholders.isEditing]: true,
+      },
+    ],
+    [fieldNames.corporateStructureAndServices.beneficial._]: [
+      {
+        [fieldNames.corporateStructureAndServices.beneficial.name]: [],
+        [fieldNames.corporateStructureAndServices.beneficial.address]: [],
+        [fieldNames.corporateStructureAndServices.beneficial.nationality]: [],
+        [fieldNames.corporateStructureAndServices.beneficial.percentage]: [],
+        [fieldNames.corporateStructureAndServices.beneficial.isEditing]: true,
+      },
+    ],
+    [fieldNames.corporateStructureAndServices.executiveDirectors]: [],
+    [fieldNames.corporateStructureAndServices.activities]: [],
+    [fieldNames.corporateStructureAndServices.corporateStructure]: [],
+    [fieldNames.corporateStructureAndServices.description]: [],
+  },
   // PART 2
 
   // financial capability
   [fieldNames.finCapability._]: {
-    [fieldNames.finCapability.whatApplies]: "",
-    [fieldNames.finCapability.whatAppliesUploadedDocument]: "",
-    [fieldNames.finCapability.sourceOfFunds]: "",
+    [fieldNames.finCapability.whatApplies]: [],
+    [fieldNames.finCapability.whatAppliesUploadedDocument]: [],
+    [fieldNames.finCapability.sourceOfFunds]: [],
   },
 
   // management and technical competencies
   [fieldNames.mgtAndTechnicalCompetencies._]: {
-    [fieldNames.mgtAndTechnicalCompetencies.orgChart]: "",
-    [fieldNames.mgtAndTechnicalCompetencies.detailedStaffInfo]: "",
-    [fieldNames.mgtAndTechnicalCompetencies.requiredExpertise]: "",
-    [fieldNames.mgtAndTechnicalCompetencies.sourcesOfEquipment]: "",
+    [fieldNames.mgtAndTechnicalCompetencies.orgChart]: [],
+    [fieldNames.mgtAndTechnicalCompetencies.detailedStaffInfo]: [],
+    [fieldNames.mgtAndTechnicalCompetencies.requiredExpertise]: [],
+    [fieldNames.mgtAndTechnicalCompetencies.sourcesOfEquipment]: [],
   },
 
   // C. DETAILS OF EXPERIENCE
   [fieldNames.detailsOfExperience._]: {
-    [fieldNames.detailsOfExperience.companyExperience]: "",
-    [fieldNames.detailsOfExperience.countries]: "",
+    [fieldNames.detailsOfExperience.companyExperience]: [],
+    [fieldNames.detailsOfExperience.countries]: [],
     [fieldNames.detailsOfExperience.contractsExecuted._]: [
       {
-        [fieldNames.detailsOfExperience.isEditing]: "",
-        [fieldNames.detailsOfExperience.descriptionOfContract]: "",
-        [fieldNames.detailsOfExperience.nameOfCompanyWorkWasDoneFor]:
-          "",
-        [fieldNames.detailsOfExperience.contractDuration]: "",
-        [fieldNames.detailsOfExperience.contractValue]: "",
+        [fieldNames.detailsOfExperience.contractsExecuted
+          .isEditing]: true,
+        [fieldNames.detailsOfExperience.contractsExecuted
+          .descriptionOfContract]: [],
+        [fieldNames.detailsOfExperience.contractsExecuted
+          .nameOfCompanyWorkWasDoneFor]: [],
+        [fieldNames.detailsOfExperience.contractsExecuted
+          .contractDuration]: [],
+        [fieldNames.detailsOfExperience.contractsExecuted
+          .contractValue]: [],
       },
     ],
   },
+
+  // part 3 - plans and programmes
+  // organisational development programme and budget
+  [fieldNames.orgDevProgramAndBudget._]: {
+    [fieldNames.orgDevProgramAndBudget.orgDevStrategy]: [],
+    [fieldNames.orgDevProgramAndBudget.employmentPlan]: [],
+    [fieldNames.orgDevProgramAndBudget.techTransferProgramAndBudget]: [],
+    [fieldNames.orgDevProgramAndBudget.trainingProgramAndBudget]: [],
+    [fieldNames.orgDevProgramAndBudget.csrAndSocialDevProgramAndBudget]: [],
+  },
+
+  // local content
+  [fieldNames.localContent._]: {
+    [fieldNames.localContent.percentageOfGhanaianParticipation]: [],
+    [fieldNames.localContent.ghanaianMgtStaffBreakdown]: [],
+    [fieldNames.localContent.foreignMgtStaffBreakdown]: [],
+    [fieldNames.localContent.totalMgtStaffBreakdown]: [],
+    [fieldNames.localContent.ghanaianOtherStaffBreakdown]: [],
+    [fieldNames.localContent.foreignOtherStaffBreakdown]: [],
+    [fieldNames.localContent.totalOtherStaffBreakdown]: [],
+    [fieldNames.localContent.infraExpenditure]: [],
+    [fieldNames.localContent.rawMaterials]: [],
+    [fieldNames.localContent.ghanaianFinishedGoods]: [],
+    [fieldNames.localContent.valueOfServiceProvided._]: [
+      {
+        [fieldNames.localContent.valueOfServiceProvided
+          .isEditing]: [],
+        [fieldNames.localContent.valueOfServiceProvided.typeOfService]:
+          [],
+        [fieldNames.localContent.valueOfServiceProvided.contractSum]:
+          [],
+        [fieldNames.localContent.valueOfServiceProvided
+          .nameOfClientCompany]: [],
+      },
+    ],
+    [fieldNames.localContent.valueOfServiceReceived._]: [
+      {
+        [fieldNames.localContent.valueOfServiceReceived
+          .isEditing]: [],
+        [fieldNames.localContent.valueOfServiceReceived.typeOfService]:
+          [],
+        [fieldNames.localContent.valueOfServiceReceived.contractSum]:
+          [],
+        [fieldNames.localContent.valueOfServiceReceived
+          .nameOfClientCompany]: [],
+      },
+    ],
+  },
+
+  [fieldNames.healthSafetySecurityEnv._]: {
+    [fieldNames.healthSafetySecurityEnv.hssePolicyAndObj]: [],
+  },
+
+  [fieldNames.miscFiles]: [],
+
+  // applicant declaration
+  [fieldNames.declaration._]: {
+    [fieldNames.declaration.name]: [],
+    [fieldNames.declaration.position]: [],
+    [fieldNames.declaration.signature]: [],
+    [fieldNames.declaration.date]: [],
+  },
+
+  // cover page
+  [fieldNames.coverPage]: [],
+
+  // checklist
+  [fieldNames.checkList._]: {
+    [fieldNames.checkList.coverPage]: false,
+    [fieldNames.checkList.applicationForm]: false,
+    [fieldNames.checkList.certificateOfIncorporation]: false,
+    [fieldNames.checkList.certificateToCommenceBusiness]: false,
+    [fieldNames.checkList.companyRegulations]: false,
+    [fieldNames.checkList.signedHssePolicyAndObj]: false,
+    [fieldNames.checkList.currentAuditedFinReportsOrProjectedRevenue]: false,
+    [fieldNames.checkList.validTaxClearanceCertificate]: false,
+    [fieldNames.checkList.vatCertificate]: false,
+    [fieldNames.checkList.originalSsnitClearanceCertificate]: false,
+    [fieldNames.checkList.somethingImportantThatsMissing]: false,
+    [fieldNames.checkList.copiesOfOtherRegulatoryCerts]: false,
+    [fieldNames.checkList.copyOfApplicationPackReceipt]: false,
+  }
 };
 
 export const initialState = {
   // PAGE 1 - CORPORATE STRUCTURE AND SERVICES
-  [fieldNames.applicantName]: "",
-  [fieldNames.dateOfIncorporation]: "",
-  [fieldNames.placeOfIncorporation]: "",
-  [fieldNames.contactDetails._]: {
-    [fieldNames.contactDetails.officeAddress]: "",
-    [fieldNames.contactDetails.postalAddress]: "",
-    [fieldNames.contactDetails.city]: "",
-    [fieldNames.contactDetails.region]: "",
-    [fieldNames.contactDetails.country]: "",
-  },
-  [fieldNames.emailAddress]: "",
-  [fieldNames.website]: "",
-  [fieldNames.contactPerson._]: {
-    [fieldNames.contactPerson.name]: "",
-    [fieldNames.contactPerson.mobileNumber]: "",
-  },
+  [fieldNames.corporateStructureAndServices._]: {
 
-  [fieldNames.nameOfSubsidiaryOrAffiliate]: "",
-  [fieldNames.nationalityOfAffiliate]: "",
-  [fieldNames.permitCategory]: PERMIT_CATEGORIES.general,
-  [fieldNames.shareholders._]: [
-    {
-      [fieldNames.shareholders.name]: "",
-      [fieldNames.shareholders.address]: "",
-      [fieldNames.shareholders.nationality]: "",
-      [fieldNames.shareholders.percentage]: "",
-      [fieldNames.shareholders.isEditing]: true,
+    [fieldNames.corporateStructureAndServices.applicantName]: "",
+    [fieldNames.corporateStructureAndServices.dateOfIncorporation]: "",
+    [fieldNames.corporateStructureAndServices.placeOfIncorporation]: "",
+    [fieldNames.corporateStructureAndServices.contactDetails._]: {
+      [fieldNames.corporateStructureAndServices.contactDetails.officeAddress]: "",
+      [fieldNames.corporateStructureAndServices.contactDetails.postalAddress]: "",
+      [fieldNames.corporateStructureAndServices.contactDetails.city]: "",
+      [fieldNames.corporateStructureAndServices.contactDetails.region]: "",
+      [fieldNames.corporateStructureAndServices.contactDetails.country]: "",
     },
-  ],
-  [fieldNames.beneficial._]: [
-    {
-      [fieldNames.beneficial.name]: "",
-      [fieldNames.beneficial.address]: "",
-      [fieldNames.beneficial.nationality]: "",
-      [fieldNames.beneficial.percentage]: "",
-      [fieldNames.beneficial.isEditing]: true,
+    [fieldNames.corporateStructureAndServices.emailAddress]: "",
+    [fieldNames.corporateStructureAndServices.website]: "",
+    [fieldNames.corporateStructureAndServices.contactPerson._]: {
+      [fieldNames.corporateStructureAndServices.contactPerson.name]: "",
+      [fieldNames.corporateStructureAndServices.contactPerson.mobileNumber]: "",
     },
-  ],
-  [fieldNames.executiveDirectors]: "",
-  [fieldNames.activities]: [],
-  [fieldNames.corporateStructure]: "",
-  [fieldNames.description]: "",
+
+    [fieldNames.corporateStructureAndServices.nameOfSubsidiaryOrAffiliate]: "",
+    [fieldNames.corporateStructureAndServices.nationalityOfAffiliate]: "",
+    [fieldNames.corporateStructureAndServices.permitCategory]: PERMIT_CATEGORIES.general,
+    [fieldNames.corporateStructureAndServices.shareholders._]: [
+      {
+        [fieldNames.corporateStructureAndServices.shareholders.name]: "",
+        [fieldNames.corporateStructureAndServices.shareholders.address]: "",
+        [fieldNames.corporateStructureAndServices.shareholders.nationality]: "",
+        [fieldNames.corporateStructureAndServices.shareholders.percentage]: "",
+        [fieldNames.corporateStructureAndServices.shareholders.isEditing]: true,
+      },
+    ],
+    [fieldNames.corporateStructureAndServices.beneficial._]: [
+      {
+        [fieldNames.corporateStructureAndServices.beneficial.name]: "",
+        [fieldNames.corporateStructureAndServices.beneficial.address]: "",
+        [fieldNames.corporateStructureAndServices.beneficial.nationality]: "",
+        [fieldNames.corporateStructureAndServices.beneficial.percentage]: "",
+        [fieldNames.corporateStructureAndServices.beneficial.isEditing]: true,
+      },
+    ],
+    [fieldNames.corporateStructureAndServices.executiveDirectors]: "",
+    [fieldNames.corporateStructureAndServices.activities]: [],
+    [fieldNames.corporateStructureAndServices.corporateStructure]: "",
+    [fieldNames.corporateStructureAndServices.description]: "",
+  },
   // PART 2
 
   // financial capability

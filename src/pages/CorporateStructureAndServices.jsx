@@ -1,9 +1,69 @@
 import { Form } from "react-bootstrap";
 import DynamicTable from "../components/DynamicTable";
 import Section from "../components/Section";
-import { permitCategoryOptions, PERMIT_CATEGORIES } from "../constants";
+import {
+	fieldNames,
+	permitCategoryOptions,
+	PERMIT_CATEGORIES,
+} from "../constants";
 
-function CorporateStructureAndServices({ data, setData }) {
+const getValue = (data) => {
+	const fields = data[fieldNames.corporateStructureAndServices._];
+	const applicantName =
+		fields[fieldNames.corporateStructureAndServices.applicantName];
+	const dateOfIncorporation =
+		fields[fieldNames.corporateStructureAndServices.dateOfIncorporation];
+	const placeOfIncorporation =
+		fields[fieldNames.corporateStructureAndServices.placeOfIncorporation];
+	const contactDetails =
+		fields[fieldNames.corporateStructureAndServices.contactDetails._];
+	const emailAddress =
+		fields[fieldNames.corporateStructureAndServices.emailAddress];
+	const website = fields[fieldNames.corporateStructureAndServices.website];
+	const contactPerson =
+		fields[fieldNames.corporateStructureAndServices.contactPerson._];
+	const nameOfSubsidiaryOrAffiliate =
+		fields[
+			fieldNames.corporateStructureAndServices.nameOfSubsidiaryOrAffiliate
+		];
+	const nationalityOfAffiliate =
+		fields[fieldNames.corporateStructureAndServices.nationality];
+	const corporateStructure =
+		fields[fieldNames.corporateStructureAndServices.corporateStructure];
+	const description =
+		fields[fieldNames.corporateStructureAndServices.description];
+	const shareholders =
+		fields[fieldNames.corporateStructureAndServices.shareholders._];
+	const beneficial =
+		fields[fieldNames.corporateStructureAndServices.beneficial._];
+	const permitCategory =
+		fields[fieldNames.corporateStructureAndServices.permitCategory];
+	const executiveDirectors =
+		fields[fieldNames.corporateStructureAndServices.executiveDirectors];
+	const activities =
+		fields[fieldNames.corporateStructureAndServices.activities];
+
+	return {
+		applicantName,
+		dateOfIncorporation,
+		placeOfIncorporation,
+		contactDetails,
+		emailAddress,
+		website,
+		contactPerson,
+		nameOfSubsidiaryOrAffiliate,
+		nationalityOfAffiliate,
+		corporateStructure,
+		description,
+		shareholders,
+		beneficial,
+		permitCategory,
+		executiveDirectors,
+		activities,
+	};
+};
+
+function CorporateStructureAndServices({ data, setData, errors, setErrors }) {
 	const {
 		applicantName,
 		dateOfIncorporation,
@@ -21,7 +81,7 @@ function CorporateStructureAndServices({ data, setData }) {
 		permitCategory,
 		executiveDirectors,
 		activities,
-	} = data;
+	} = getValue(data);
 
 	const selectedPermitCategories =
 		permitCategory === PERMIT_CATEGORIES.specialised
@@ -52,6 +112,10 @@ function CorporateStructureAndServices({ data, setData }) {
 		}
 	};
 
+	const updateErrors = (field, value) => {
+		setErrors((prev) => ({ ...prev }));
+	};
+
 	return (
 		<div>
 			<Form>
@@ -76,6 +140,10 @@ function CorporateStructureAndServices({ data, setData }) {
 								applicantName: e.target.value,
 							}))
 						}
+            onBlur={e => {
+              console.log('value of onblur -> ', e);
+              console.log(e.target.value);
+            }}
 					/>
 				</Section>
 				<Section>
@@ -407,8 +475,8 @@ function CorporateStructureAndServices({ data, setData }) {
 						directors)
 					</Form.Label>{" "}
 					<br />
-          <Form.Control
-            as="textarea"
+					<Form.Control
+						as="textarea"
 						value={executiveDirectors}
 						onChange={(e) => {
 							setData((prev) => ({
