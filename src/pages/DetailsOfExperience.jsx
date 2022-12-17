@@ -45,7 +45,7 @@ function DetailsOfExperience({ data, setData }) {
 			fieldNames.detailsOfExperience.contractsExecuted._
 		];
 
-	const onChange = (field, value) => {
+	const onstage = (field, value) => {
 		setData((prev) => ({
 			...prev,
 			[fieldNames.detailsOfExperience._]: {
@@ -59,7 +59,6 @@ function DetailsOfExperience({ data, setData }) {
 		<Form>
 			<h1>C. Details of Experience</h1>
 			<hr />
-
 			<FormGroup>
 				5. Describe company's past petroleum industry experience,
 				including locations and dates of significant activities or
@@ -71,7 +70,7 @@ function DetailsOfExperience({ data, setData }) {
 					as="textarea"
 					value={companyExperience}
 					onChange={(e) =>
-						onChange(
+						onstage(
 							fieldNames.detailsOfExperience.companyExperience,
 							e.target.value
 						)
@@ -87,7 +86,7 @@ function DetailsOfExperience({ data, setData }) {
 					as="textarea"
 					value={countries}
 					onChange={(e) =>
-						onChange(
+						onstage(
 							fieldNames.detailsOfExperience.countries,
 							e.target.value
 						)
@@ -104,35 +103,35 @@ function DetailsOfExperience({ data, setData }) {
 					data={contractsExecuted}
 					addNewRow={() => {
 						contractsExecuted.push(newDetailsOfExperience);
-						onChange(
+						onstage(
 							fieldNames.detailsOfExperience.contractsExecuted._,
 							contractsExecuted
 						);
 					}}
 					updateRow={(index, key, value) => {
 						contractsExecuted[index][key] = value;
-						onChange(
+						onstage(
 							fieldNames.detailsOfExperience.contractsExecuted._,
 							contractsExecuted
 						);
 					}}
 					saveRow={(index) => {
 						contractsExecuted[index].isEditing = false;
-						onChange(
+						onstage(
 							fieldNames.detailsOfExperience.contractsExecuted._,
 							contractsExecuted
 						);
 					}}
 					editRow={(index) => {
 						contractsExecuted[index].isEditing = true;
-						onChange(
+						onstage(
 							fieldNames.detailsOfExperience.contractsExecuted._,
 							contractsExecuted
 						);
 					}}
 					deleteRow={(index) => {
 						contractsExecuted.splice(index, 1);
-						onChange(
+						onstage(
 							fieldNames.detailsOfExperience.contractsExecuted._,
 							contractsExecuted
 						);

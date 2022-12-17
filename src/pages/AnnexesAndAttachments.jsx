@@ -19,8 +19,8 @@ const getValues = (data) => {
 	const vatCertificate = fields[fieldNames.checkList.vatCertificate];
 	const originalSsnitClearanceCertificate =
 		fields[fieldNames.checkList.originalSsnitClearanceCertificate];
-	const somethingImportantThatsMissing =
-		fields[fieldNames.checkList.somethingImportantThatsMissing];
+	const companyProfileandBusinessPlans =
+		fields[fieldNames.checkList.companyProfileandBusinessPlans];
 	const copiesOfOtherRegulatoryCerts =
 		fields[fieldNames.checkList.copiesOfOtherRegulatoryCerts];
 	const copyOfApplicationPackReceipt =
@@ -37,7 +37,7 @@ const getValues = (data) => {
 		validTaxClearanceCertificate,
 		vatCertificate,
 		originalSsnitClearanceCertificate,
-		somethingImportantThatsMissing,
+		companyProfileandBusinessPlans,
 		copiesOfOtherRegulatoryCerts,
 		copyOfApplicationPackReceipt,
 	};
@@ -55,7 +55,7 @@ function AnnexesAndAttachments({ data, setData }) {
 		validTaxClearanceCertificate,
 		vatCertificate,
 		originalSsnitClearanceCertificate,
-		somethingImportantThatsMissing,
+		companyProfileandBusinessPlans,
 		copiesOfOtherRegulatoryCerts,
 		copyOfApplicationPackReceipt,
 	} = getValues(data);
@@ -246,17 +246,17 @@ function AnnexesAndAttachments({ data, setData }) {
 						</td>
 					</tr>
 					<tr>
-						<td style={{ color: "red" }}>
-							11. SOMETHING IMPORTANT NEEDS TO BE HERE. FIND IT
+						<td>
+							11. Company Profile and Business Plan
 						</td>
 						<td>
 							<FormCheck
-								checked={somethingImportantThatsMissing}
+								checked={companyProfileandBusinessPlans}
 								onChange={() => {
 									onChange(
 										fieldNames.checkList
-											.somethingImportantThatsMissing,
-										!somethingImportantThatsMissing
+											.companyProfileandBusinessPlans,
+										!companyProfileandBusinessPlans
 									);
 								}}
 							/>

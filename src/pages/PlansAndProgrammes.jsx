@@ -35,9 +35,9 @@ function PlansAndProgrammes({ data, setData }) {
 
 	return (
 		<Form>
-			<h1>Part 3. Plans and Programs</h1>
+			<h1>Part 3 - Plans and Programs</h1>
 			<hr />
-			<h3>Organizational Development Programme and Budget</h3>
+			<FormLabel>a. Organizational Development Programme and Budget</FormLabel>
 			<br />
 
 			<FormGroup>

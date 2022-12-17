@@ -9,7 +9,7 @@ const valueOfServiceProvidedColumns = [
 		key: fieldNames.localContent.valueOfServiceReceived.typeOfService,
 	},
 	{
-		name: "Contract SUm",
+		name: "Contract Sum",
 		key: fieldNames.localContent.valueOfServiceReceived.contractSum,
 	},
 	{
@@ -24,11 +24,11 @@ const valueOfServiceReceivedColumns = [
 		key: fieldNames.localContent.valueOfServiceReceived.typeOfService,
 	},
 	{
-		name: "Contract SUm",
+		name: "Contract Sum",
 		key: fieldNames.localContent.valueOfServiceReceived.contractSum,
 	},
 	{
-		name: "Name of Company (Client)",
+		name: "Name of Company (Customer)",
 		key: fieldNames.localContent.valueOfServiceProvided.nameOfClientCompany,
 	},
 ];
@@ -179,7 +179,7 @@ function LocalContent({ data, setData }) {
 
 	return (
 		<Form>
-			<h1>Local Content</h1>
+			<h1>Part 4 - Local Content</h1>
 			<hr />
 
 			<FormGroup>
@@ -305,7 +305,7 @@ function LocalContent({ data, setData }) {
 
 			<FormGroup>
 				<FormLabel>
-					3. The amount of money spent on infrastructure in Ghana *
+					3. Infrastructural Investments: The amount of money spent on infrastructure in Ghana *
 				</FormLabel>{" "}
 				<br />
 				<Form.Control

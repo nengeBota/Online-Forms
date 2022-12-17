@@ -21,11 +21,9 @@ import { initialErrorState, initialState } from "./constants";
 const pages = [
 	// PART 1
 	CorporateStructureAndServices,
-	FinancialCapability,
-
+	
 	// PART 2
-	ManagementAndTechnicalCompetencies,
-	DetailsOfExperience,
+	FinancialCapability,
 
 	// PART 3
 	PlansAndProgrammes,
@@ -34,16 +32,12 @@ const pages = [
 	LocalContent,
 
 	// Part 5
-	HealthSafetySecurityEnvironment,
+	//merged with part 6
 
 	// part 6
 	Miscellaneous,
 
 	// part 7
-	Declaration,
-
-	CoverPage,
-
 	AnnexesAndAttachments,
 ];
 

@@ -405,15 +405,57 @@ function CorporateStructureAndServices({ data, setData }) {
 						8. List Executive Directors and Senior Management Team
 						of the Company (Please do not list non-executive
 						directors)
-					</Form.Label>{" "}
+					</Form.Label>
 					<br />
-          <Form.Control
-            as="textarea"
-						value={executiveDirectors}
-						onChange={(e) => {
+					<DynamicTable
+						columns={[
+							{ name: "Name", key: "mgtname" },
+							{ name: "Occupation", key: "occupation" },
+							{ name: "Nationality", key: "nationality" },
+							{ name: "Company Positon", key: "position" },
+						]}
+						data={executiveDirectors}
+						addNewRow={() =>
 							setData((prev) => ({
 								...prev,
-								executiveDirectors: e.target.value,
+								executiveDirectors: [
+									...prev.executiveDirectors,
+									{
+										mgtname: "",
+										occupation: "",
+										nationality: "",
+										position: "",
+										isEditing: true,
+									},
+								],
+							}))
+						}
+						updateRow={(index, key, value) => {
+							data.executiveDirectors[index][key] = value;
+							setData((prev) => ({
+								...prev,
+								executiveDirectors: [...data.executiveDirectors],
+							}));
+						}}
+						saveRow={(index) => {
+							data.executiveDirectors[index]["isEditing"] = false;
+							setData((prev) => ({
+								...prev,
+								executiveDirectors: [...data.executiveDirectors],
+							}));
+						}}
+						editRow={(index) => {
+							data.executiveDirectors[index]["isEditing"] = true;
+							setData((prev) => ({
+								...prev,
+								executiveDirectors: [...data.executiveDirectors],
+							}));
+						}}
+						deleteRow={(index) => {
+							data.executiveDirectors.splice(index, 1);
+							setData((prev) => ({
+								...prev,
+								executiveDirectors: [...data.executiveDirectors],
 							}));
 						}}
 					/>
