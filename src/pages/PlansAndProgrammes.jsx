@@ -1,4 +1,5 @@
 import { Form, FormGroup, FormLabel } from "react-bootstrap";
+import Heading from "../components/Heading";
 import { fieldNames } from "../constants";
 
 function PlansAndProgrammes({ data, setData }) {
@@ -35,9 +36,11 @@ function PlansAndProgrammes({ data, setData }) {
 
 	return (
 		<Form>
-			<h1>Part 3 - Plans and Programs</h1>
+			<Heading>Part 3 - Plans and Programs</Heading>
 			<hr />
-			<FormLabel>a. Organizational Development Programme and Budget</FormLabel>
+			<FormLabel>
+				a. Organizational Development Programme and Budget
+			</FormLabel>
 			<br />
 
 			<FormGroup>

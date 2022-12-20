@@ -1,5 +1,6 @@
 import { Form } from "react-bootstrap";
 import DynamicTable from "../components/DynamicTable";
+import Heading from "../components/Heading";
 import Section from "../components/Section";
 import {
 	fieldNames,
@@ -132,12 +133,12 @@ function CorporateStructureAndServices({ data, setData, errors, setErrors }) {
 	return (
 		<div>
 			<Form>
-				<h1>
+				<Heading>
 					APPLICATION FOR REGISTRATION PERMIT TO OPERATE IN THE
 					UPSTREAM PETROLEUM INDUSTRY
-				</h1>
+				</Heading>
 				<hr />
-				<h2>PART ONE – CORPORATE STRUCTURE AND SERVICES</h2>
+				<Heading>PART ONE – CORPORATE STRUCTURE AND SERVICES</Heading>
 				<hr />
 				<Section>
 					<Form.Label>

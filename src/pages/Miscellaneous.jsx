@@ -1,5 +1,6 @@
 import { useCallback } from "react";
 import { Form, FormGroup, FormLabel, Button } from "react-bootstrap";
+import Heading from "../components/Heading";
 import { fieldNames } from "../constants";
 
 //Incomplete work done for part 5 and 6
@@ -17,7 +18,7 @@ const getFields = (data) => {
 };
 
 function Miscellaneous({ data, setData }) {
-	 const onStage = useCallback((fieldName, value) => {
+	const onStage = useCallback((fieldName, value) => {
 		setData(
 			(prev) => ({
 				...prev,
@@ -29,7 +30,6 @@ function Miscellaneous({ data, setData }) {
 			[]
 		);
 	});
-
 
 	//For Part 6 miscellaneous
 	const { miscFiles } = getFields(data);
@@ -43,7 +43,9 @@ function Miscellaneous({ data, setData }) {
 
 	return (
 		<Form>
-			<h1>Part Five - Health, Safety, Security And Environment</h1>
+			<Heading>
+				Part Five - Health, Safety, Security And Environment
+			</Heading>
 			<hr />
 			<FormGroup>
 				<FormLabel>
@@ -63,7 +65,8 @@ function Miscellaneous({ data, setData }) {
 				/>
 			</FormGroup>
 
-			<h1>Part Six - Miscellaneous</h1>
+      <br /><br />
+			<Heading>Part Six - Miscellaneous</Heading>
 			<hr />
 
 			<h6>
@@ -114,7 +117,8 @@ function Miscellaneous({ data, setData }) {
 				</p>
 			</h6>
 
-			<h1>Declaration Form</h1>
+      <br /><br />
+			<Heading>Declaration Form</Heading>
 			<hr />
 			<FormGroup>
 				<FormLabel>
@@ -139,7 +143,9 @@ function Miscellaneous({ data, setData }) {
 				/>
 			</FormGroup>
 
-			<h1>Cover Page</h1>
+			<br />
+			<br />
+			<Heading>Cover Page</Heading>
 			<hr />
 
 			<FormGroup>

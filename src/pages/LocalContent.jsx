@@ -2,18 +2,21 @@ import { Form, FormGroup, FormLabel, Table } from "react-bootstrap";
 import { fieldNames, NEW_VALUE_OF_SERVICE } from "../constants";
 import DynamicTable from "../components/DynamicTable";
 import { useEffect } from "react";
+import Heading from "../components/Heading";
 
+
+/** todo: need to check this out. there's probably an error here */
 const valueOfServiceProvidedColumns = [
 	{
 		name: "Type of Service",
-		key: fieldNames.localContent.valueOfServiceReceived.typeOfService,
+		key: fieldNames.localContent.valueOfServiceProvided.typeOfService,
 	},
 	{
 		name: "Contract Sum",
-		key: fieldNames.localContent.valueOfServiceReceived.contractSum,
+		key: fieldNames.localContent.valueOfServiceProvided.contractSum,
 	},
 	{
-		name: "Name of Company (Client)",
+		name: "Name of Company (Customer)",
 		key: fieldNames.localContent.valueOfServiceProvided.nameOfClientCompany,
 	},
 ];
@@ -28,8 +31,8 @@ const valueOfServiceReceivedColumns = [
 		key: fieldNames.localContent.valueOfServiceReceived.contractSum,
 	},
 	{
-		name: "Name of Company (Customer)",
-		key: fieldNames.localContent.valueOfServiceProvided.nameOfClientCompany,
+		name: "Name of Company (Client)",
+		key: fieldNames.localContent.valueOfServiceReceived.nameOfClientCompany,
 	},
 ];
 
@@ -179,7 +182,7 @@ function LocalContent({ data, setData }) {
 
 	return (
 		<Form>
-			<h1>Part 4 - Local Content</h1>
+			<Heading>Part 4 - Local Content</Heading>
 			<hr />
 
 			<FormGroup>

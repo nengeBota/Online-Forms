@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState} from "react";
 import styled from "styled-components";
 import CorporateStructureAndServices from "./pages/CorporateStructureAndServices";
 import Pagination from "./components/Pagination";
@@ -6,14 +6,9 @@ import Image from "react-bootstrap/Image";
 import { categoryfxn } from "./api";
 import FinancialCapability from "./pages/FinancialCapability";
 import { Button, ButtonGroup } from "react-bootstrap";
-import ManagementAndTechnicalCompetencies from "./pages/ManagementAndTEchnicalCompetencies";
-import DetailsOfExperience from "./pages/DetailsOfExperience";
 import PlansAndProgrammes from "./pages/PlansAndProgrammes";
 import LocalContent from "./pages/LocalContent";
-import HealthSafetySecurityEnvironment from "./pages/HealthSafetySecurityEnvironment";
 import Miscellaneous from "./pages/Miscellaneous";
-import Declaration from "./pages/Declaration";
-import CoverPage from "./pages/CoverPage";
 import AnnexesAndAttachments from "./pages/AnnexesAndAttachments";
 import { initialErrorState, initialState } from "./constants";
 
@@ -80,7 +75,7 @@ function App() {
 			<br />
 			<br />
 
-			<div style={{ display: "flex", alignItems: "space-between" }}>
+			<div style={{ display: "flex", width: '20%',justifyContent: 'space-between', margin: '0 auto' }}>
 				<Button
 					disabled={page === 1}
 					onClick={() => setPage((prev) => prev - 1)}
@@ -96,7 +91,8 @@ function App() {
 					{page < pages.length ? (
 						<Button
 							disabled={page === pages.length}
-							onClick={() => setPage((prev) => prev + 1)}
+              onClick={() => setPage((prev) => prev + 1)}
+              style={{marginLeft: 'auto',}}
 						>
 							Next
 						</Button>

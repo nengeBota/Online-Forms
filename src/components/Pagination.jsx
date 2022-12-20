@@ -23,7 +23,7 @@ function Pagination({ currentPage = 1, setPage = () => {} }) {
 export default Pagination;
 
 const Wrapper = styled.div`
-	margin: 20px 0;
+	margin: 20px auto;
 	display: flex;
 	gap: 10px;
 	flex-wrap: wrap;

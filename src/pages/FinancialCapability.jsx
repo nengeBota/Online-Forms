@@ -1,5 +1,6 @@
 import { Form, FormControl, FormGroup } from "react-bootstrap";
 import DynamicTable from "../components/DynamicTable";
+import Heading from "../components/Heading";
 import { fieldNames, financialCapabilityOptions } from "../constants";
 
 
@@ -91,7 +92,7 @@ function FinancialCapability({ data, setData }) {
 
 	return (
 		<div>
-			<h1>Part Two - Financial Capability and Technical Competency</h1>
+			<Heading>Part Two - Financial Capability and Technical Competency</Heading>
 			<h4>A. Financial Capability</h4>
 			<hr />
 

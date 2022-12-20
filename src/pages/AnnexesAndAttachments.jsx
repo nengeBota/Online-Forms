@@ -1,4 +1,5 @@
 import { Form, FormCheck, Table } from "react-bootstrap";
+import Heading from "../components/Heading";
 import { fieldNames } from "../constants";
 
 const getValues = (data) => {
@@ -72,7 +73,7 @@ function AnnexesAndAttachments({ data, setData }) {
 
 	return (
 		<Form>
-			<h1>Annexes / Attachments</h1>
+			<Heading>Annexes / Attachments</Heading>
 			<hr />
 
 			<p>
