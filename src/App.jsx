@@ -46,6 +46,7 @@ function App() {
 	const [page, setPage] = useState(1);
 
 	const [data, setData] = useState(initialState);
+	const [errors, setErrors] = useState(initialErrorState);
 
 	async function fetchcategories() {
 		const result = await categoryfxn();
@@ -69,7 +70,12 @@ function App() {
 				<Image src="/logo.png" />
 			</div>
 
-			<CurrentPage data={data} setData={setData} />
+			<CurrentPage
+				data={data}
+				setData={setData}
+				errors={errors}
+				setErrors={setErrors}
+			/>
 
 			<br />
 			<br />
@@ -85,8 +91,7 @@ function App() {
 				<ButtonGroup>
 					{page === pages.length ? (
 						<Button variant="secondary">Preview</Button>
-					) : null //<Button>Save</Button>
-					}
+					) : null}
 
 					{page < pages.length ? (
 						<Button

@@ -15,8 +15,6 @@ function DynamicTable({
 	editRow, // set the row to isEditing: true
 	deleteRow,
 }) {
-  console.log('value of data -> ', data);
-  
 	return (
 		<Table>
 			<thead>

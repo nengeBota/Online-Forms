@@ -1,9 +1,69 @@
 import { Form } from "react-bootstrap";
 import DynamicTable from "../components/DynamicTable";
 import Section from "../components/Section";
-import { permitCategoryOptions, PERMIT_CATEGORIES } from "../constants";
+import {
+	fieldNames,
+	permitCategoryOptions,
+	PERMIT_CATEGORIES,
+} from "../constants";
 
-function CorporateStructureAndServices({ data, setData }) {
+const getValue = (data) => {
+	const fields = data[fieldNames.corporateStructureAndServices._];
+	const applicantName =
+		fields[fieldNames.corporateStructureAndServices.applicantName];
+	const dateOfIncorporation =
+		fields[fieldNames.corporateStructureAndServices.dateOfIncorporation];
+	const placeOfIncorporation =
+		fields[fieldNames.corporateStructureAndServices.placeOfIncorporation];
+	const contactDetails =
+		fields[fieldNames.corporateStructureAndServices.contactDetails._];
+	const emailAddress =
+		fields[fieldNames.corporateStructureAndServices.emailAddress];
+	const website = fields[fieldNames.corporateStructureAndServices.website];
+	const contactPerson =
+		fields[fieldNames.corporateStructureAndServices.contactPerson._];
+	const nameOfSubsidiaryOrAffiliate =
+		fields[
+			fieldNames.corporateStructureAndServices.nameOfSubsidiaryOrAffiliate
+		];
+	const nationalityOfAffiliate =
+		fields[fieldNames.corporateStructureAndServices.nationality];
+	const corporateStructure =
+		fields[fieldNames.corporateStructureAndServices.corporateStructure];
+	const description =
+		fields[fieldNames.corporateStructureAndServices.description];
+	const shareholders =
+		fields[fieldNames.corporateStructureAndServices.shareholders._];
+	const beneficial =
+		fields[fieldNames.corporateStructureAndServices.beneficial._];
+	const permitCategory =
+		fields[fieldNames.corporateStructureAndServices.permitCategory];
+	const executiveDirectors =
+		fields[fieldNames.corporateStructureAndServices.executiveDirectors];
+	const activities =
+		fields[fieldNames.corporateStructureAndServices.activities];
+
+	return {
+		applicantName,
+		dateOfIncorporation,
+		placeOfIncorporation,
+		contactDetails,
+		emailAddress,
+		website,
+		contactPerson,
+		nameOfSubsidiaryOrAffiliate,
+		nationalityOfAffiliate,
+		corporateStructure,
+		description,
+		shareholders,
+		beneficial,
+		permitCategory,
+		executiveDirectors,
+		activities,
+	};
+};
+
+function CorporateStructureAndServices({ data, setData, errors, setErrors }) {
 	const {
 		applicantName,
 		dateOfIncorporation,
@@ -21,7 +81,17 @@ function CorporateStructureAndServices({ data, setData }) {
 		permitCategory,
 		executiveDirectors,
 		activities,
-	} = data;
+	} = getValue(data);
+
+	const onChange = (field, value) => {
+		setData((prev) => ({
+			...prev,
+			[fieldNames.corporateStructureAndServices._]: {
+				...prev[fieldNames.corporateStructureAndServices._],
+				[field]: value,
+			},
+		}));
+	};
 
 	const selectedPermitCategories =
 		permitCategory === PERMIT_CATEGORIES.specialised
@@ -40,16 +110,23 @@ function CorporateStructureAndServices({ data, setData }) {
 
 		if (checked) {
 			activities.push(name);
-			setData((prev) => ({
-				...prev,
-				activities,
-			}));
+			onChange(
+				fieldNames.corporateStructureAndServices.activities,
+				activities
+			);
 		} else {
 			const updatedActivities = activities.filter(
 				(each) => each !== name
 			);
-			setData((prev) => ({ ...prev, activities: updatedActivities }));
+			onChange(
+				fieldNames.corporateStructureAndServices.activities,
+				updatedActivities
+			);
 		}
+	};
+
+	const updateErrors = (field, value) => {
+		setErrors((prev) => ({ ...prev }));
 	};
 
 	return (
@@ -70,12 +147,18 @@ function CorporateStructureAndServices({ data, setData }) {
 					<Form.Control
 						placeholder="Applicant's name"
 						value={applicantName}
-						onChange={(e) =>
-							setData((prev) => ({
-								...prev,
-								applicantName: e.target.value,
-							}))
-						}
+						data-testid="applicant-name"
+						onChange={(e) => {
+							onChange(
+								fieldNames.corporateStructureAndServices
+									.applicantName,
+								e.target.value
+							);
+						}}
+						onBlur={(e) => {
+							console.log("value of onblur -> ", e);
+							console.log(e.target.value);
+						}}
 					/>
 				</Section>
 				<Section>
@@ -83,24 +166,26 @@ function CorporateStructureAndServices({ data, setData }) {
 					<Form.Control
 						type="date"
 						value={dateOfIncorporation}
-						onChange={(e) =>
-							setData((prev) => ({
-								...prev,
-								dateOfIncorporation: e.target.value,
-							}))
-						}
+						onChange={(e) => {
+							onChange(
+								fieldNames.corporateStructureAndServices
+									.dateOfIncorporation,
+								e.target.value
+							);
+						}}
 					/>
 				</Section>
 				<Section>
 					<Form.Label>Place of Incorporation.</Form.Label>
 					<Form.Control
 						value={placeOfIncorporation}
-						onChange={(e) =>
-							setData((prev) => ({
-								...prev,
-								placeOfIncorporation: e.target.value,
-							}))
-						}
+						onChange={(e) => {
+							onChange(
+								fieldNames.corporateStructureAndServices
+									.placeOfIncorporation,
+								e.target.value
+							);
+						}}
 					/>
 				</Section>
 				<Section>
@@ -108,67 +193,80 @@ function CorporateStructureAndServices({ data, setData }) {
 					<Form.Control
 						placeholder="Office Address"
 						value={contactDetails.officeAddress}
-						onChange={(e) =>
-							setData((prev) => ({
-								...prev,
-								contactDetails: {
-									...prev?.contactDetails,
-									officeAddress: e.target.value,
-								},
-							}))
-						}
+						onChange={(e) => {
+							onChange(
+								fieldNames.corporateStructureAndServices
+									.contactDetails._,
+								{
+									...contactDetails,
+									[fieldNames.corporateStructureAndServices
+										.contactDetails.officeAddress]:
+										e.target.value,
+								}
+							);
+						}}
 					/>
 					<Form.Control
 						placeholder="Postal Address"
 						value={contactDetails?.postalAddress}
-						onChange={(e) =>
-							setData((prev) => ({
-								...prev,
-								contactDetails: {
-									...prev?.contactDetails,
-									postalAddress: e.target.value,
-								},
-							}))
-						}
+						onChange={(e) => {
+							onChange(
+								fieldNames.corporateStructureAndServices
+									.contactDetails._,
+								{
+									...contactDetails,
+									[fieldNames.corporateStructureAndServices
+										.contactDetails.postalAddress]:
+										e.target.value,
+								}
+							);
+						}}
 					/>
 					<Form.Control
 						placeholder="City"
 						value={contactDetails?.city}
-						onChange={(e) =>
-							setData((prev) => ({
-								...prev,
-								contactDetails: {
-									...prev?.contactDetails,
-									city: e.target.value,
-								},
-							}))
-						}
+						onChange={(e) => {
+							onChange(
+								fieldNames.corporateStructureAndServices
+									.contactDetails._,
+								{
+									...contactDetails,
+									[fieldNames.corporateStructureAndServices
+										.contactDetails.city]: e.target.value,
+								}
+							);
+						}}
 					/>
 					<Form.Control
 						placeholder="Region"
 						value={contactDetails?.region}
-						onChange={(e) =>
-							setData((prev) => ({
-								...prev,
-								contactDetails: {
-									...prev?.contactDetails,
-									region: e.target.value,
-								},
-							}))
-						}
+						onChange={(e) => {
+							onChange(
+								fieldNames.corporateStructureAndServices
+									.contactDetails._,
+								{
+									...contactDetails,
+									[fieldNames.corporateStructureAndServices
+										.contactDetails.region]: e.target.value,
+								}
+							);
+						}}
 					/>
 					<Form.Control
 						placeholder="Country"
 						value={contactDetails?.country}
-						onChange={(e) =>
-							setData((prev) => ({
-								...prev,
-								contactDetails: {
-									...prev?.contactDetails,
-									country: e.target.value,
-								},
-							}))
-						}
+						onChange={(e) => {
+							onChange(
+								fieldNames.corporateStructureAndServices
+									.contactDetails._,
+								{
+									...contactDetails,
+									[fieldNames.corporateStructureAndServices
+										.contactDetails.country]:
+										e.target.value,
+								}
+							);
+						}}
 					/>
 				</Section>
 				<br />
@@ -177,12 +275,13 @@ function CorporateStructureAndServices({ data, setData }) {
 					<Form.Control
 						placeholder="Email"
 						value={emailAddress}
-						onChange={(e) =>
-							setData((prev) => ({
-								...prev,
-								emailAddress: e.target.value,
-							}))
-						}
+						onChange={(e) => {
+							onChange(
+								fieldNames.corporateStructureAndServices
+									.emailAddress,
+								e.target.value
+							);
+						}}
 					/>
 				</Section>
 				<Section>
@@ -190,12 +289,13 @@ function CorporateStructureAndServices({ data, setData }) {
 					<Form.Control
 						placeholder="www.example.com"
 						value={website}
-						onChange={(e) =>
-							setData((prev) => ({
-								...prev,
-								website: e.target.value,
-							}))
-						}
+						onChange={(e) => {
+							onChange(
+								fieldNames.corporateStructureAndServices
+									.website,
+								e.target.value
+							);
+						}}
 					/>
 				</Section>
 				<Section>
@@ -203,15 +303,17 @@ function CorporateStructureAndServices({ data, setData }) {
 					<Form.Control
 						placeholder="Contact Person"
 						value={contactPerson?.name}
-						onChange={(e) =>
-							setData((prev) => ({
-								...prev,
-								contactPerson: {
-									...prev?.contactPerson,
-									name: e.target.value,
-								},
-							}))
-						}
+						onChange={(e) => {
+							onChange(
+								fieldNames.corporateStructureAndServices
+									.contactPerson._,
+								{
+									...contactPerson,
+									[fieldNames.corporateStructureAndServices
+										.contactPerson.name]: e.target.value,
+								}
+							);
+						}}
 					/>
 				</Section>
 				<Section>
@@ -220,15 +322,18 @@ function CorporateStructureAndServices({ data, setData }) {
 						placeholder="23326262626"
 						value={contactPerson?.mobileNumber}
 						type="number"
-						onChange={(e) =>
-							setData((prev) => ({
-								...prev,
-								contactPerson: {
-									...prev?.contactPerson,
-									mobileNumber: e.target.value,
-								},
-							}))
-						}
+						onChange={(e) => {
+							onChange(
+								fieldNames.corporateStructureAndServices
+									.contactPerson._,
+								{
+									...contactPerson,
+									[fieldNames.corporateStructureAndServices
+										.contactPerson.mobileNumber]:
+										e.target.value,
+								}
+							);
+						}}
 					/>
 				</Section>
 				<Section>
@@ -238,12 +343,13 @@ function CorporateStructureAndServices({ data, setData }) {
 					<Form.Control
 						placeholder="NONE"
 						value={nameOfSubsidiaryOrAffiliate}
-						onChange={(e) =>
-							setData((prev) => ({
-								...prev,
-								nameOfSubsidiaryOrAffiliate: e.target.value,
-							}))
-						}
+						onChange={(e) => {
+							onChange(
+								fieldNames.corporateStructureAndServices
+									.nameOfSubsidiaryOrAffiliate,
+								e.target.value
+							);
+						}}
 					/>
 				</Section>
 
@@ -255,12 +361,13 @@ function CorporateStructureAndServices({ data, setData }) {
 					<Form.Control
 						placeholder="Nationality of Parent Company/ Affiliate"
 						value={nationalityOfAffiliate}
-						onChange={(e) =>
-							setData((prev) => ({
-								...prev,
-								nationalityOfAffiliate: e.target.value,
-							}))
-						}
+						onChange={(e) => {
+							onChange(
+								fieldNames.corporateStructureAndServices
+									.nationalityOfAffiliate,
+								e.target.value
+							);
+						}}
 					/>
 				</Section>
 				<Section>
@@ -273,10 +380,11 @@ function CorporateStructureAndServices({ data, setData }) {
 						type="file"
 						value={corporateStructure}
 						onChange={(e) => {
-							setData((prev) => ({
-								...prev,
-								corporateStructure: e.target.value,
-							}));
+							onChange(
+								fieldNames.corporateStructureAndServices
+									.corporateStructure,
+								e.target.value
+							);
 						}}
 					/>
 				</Section>
@@ -295,11 +403,12 @@ function CorporateStructureAndServices({ data, setData }) {
 							{ name: "Percentage", key: "percentage" },
 						]}
 						data={shareholders}
-						addNewRow={() =>
-							setData((prev) => ({
-								...prev,
-								shareholders: [
-									...prev.shareholders,
+						addNewRow={() => {
+							onChange(
+								fieldNames.corporateStructureAndServices
+									.shareholders._,
+								[
+									...shareholders,
 									{
 										name: "",
 										address: "",
@@ -307,36 +416,40 @@ function CorporateStructureAndServices({ data, setData }) {
 										percentage: "",
 										isEditing: true,
 									},
-								],
-							}))
-						}
+								]
+							);
+						}}
 						updateRow={(index, key, value) => {
-							data.shareholders[index][key] = value;
-							setData((prev) => ({
-								...prev,
-								shareholders: [...data.shareholders],
-							}));
+							shareholders[index][key] = value;
+							onChange(
+								fieldNames.corporateStructureAndServices
+									.shareholders._,
+								[...shareholders]
+							);
 						}}
 						saveRow={(index) => {
-							data.shareholders[index]["isEditing"] = false;
-							setData((prev) => ({
-								...prev,
-								shareholders: [...data.shareholders],
-							}));
+							shareholders[index]["isEditing"] = false;
+							onChange(
+								fieldNames.corporateStructureAndServices
+									.shareholders._,
+								[...shareholders]
+							);
 						}}
 						editRow={(index) => {
-							data.shareholders[index]["isEditing"] = true;
-							setData((prev) => ({
-								...prev,
-								shareholders: [...data.shareholders],
-							}));
+							shareholders[index]["isEditing"] = true;
+							onChange(
+								fieldNames.corporateStructureAndServices
+									.shareholders._,
+								[...shareholders]
+							);
 						}}
 						deleteRow={(index) => {
-							data.shareholders.splice(index, 1);
-							setData((prev) => ({
-								...prev,
-								shareholders: [...data.shareholders],
-							}));
+							shareholders.splice(index, 1);
+							onChange(
+								fieldNames.corporateStructureAndServices
+									.shareholders._,
+								[...shareholders]
+							);
 						}}
 					/>
 				</Section>
@@ -355,11 +468,12 @@ function CorporateStructureAndServices({ data, setData }) {
 							{ name: "Percentage", key: "percentage" },
 						]}
 						data={beneficial}
-						addNewRow={() =>
-							setData((prev) => ({
-								...prev,
-								beneficial: [
-									...prev.beneficial,
+						addNewRow={() => {
+							onChange(
+								fieldNames.corporateStructureAndServices
+									.beneficial._,
+								[
+									...beneficial,
 									{
 										name: "",
 										address: "",
@@ -367,36 +481,40 @@ function CorporateStructureAndServices({ data, setData }) {
 										percentage: "",
 										isEditing: true,
 									},
-								],
-							}))
-						}
+								]
+							);
+						}}
 						updateRow={(index, key, value) => {
-							data.beneficial[index][key] = value;
-							setData((prev) => ({
-								...prev,
-								beneficial: [...data.beneficial],
-							}));
+							beneficial[index][key] = value;
+							onChange(
+								fieldNames.corporateStructureAndServices
+									.beneficial._,
+								[...beneficial]
+							);
 						}}
 						saveRow={(index) => {
-							data.beneficial[index]["isEditing"] = false;
-							setData((prev) => ({
-								...prev,
-								beneficial: [...data.beneficial],
-							}));
+							beneficial[index]["isEditing"] = false;
+							onChange(
+								fieldNames.corporateStructureAndServices
+									.beneficial._,
+								[...beneficial]
+							);
 						}}
 						editRow={(index) => {
-							data.beneficial[index]["isEditing"] = true;
-							setData((prev) => ({
-								...prev,
-								beneficial: [...data.beneficial],
-							}));
+							beneficial[index]["isEditing"] = true;
+							onChange(
+								fieldNames.corporateStructureAndServices
+									.beneficial._,
+								[...beneficial]
+							);
 						}}
 						deleteRow={(index) => {
-							data.beneficial.splice(index, 1);
-							setData((prev) => ({
-								...prev,
-								beneficial: [...data.beneficial],
-							}));
+							beneficial.splice(index, 1);
+							onChange(
+								fieldNames.corporateStructureAndServices
+									.beneficial._,
+								[...beneficial]
+							);
 						}}
 					/>
 				</Section>
@@ -407,56 +525,15 @@ function CorporateStructureAndServices({ data, setData }) {
 						directors)
 					</Form.Label>
 					<br />
-					<DynamicTable
-						columns={[
-							{ name: "Name", key: "mgtname" },
-							{ name: "Occupation", key: "occupation" },
-							{ name: "Nationality", key: "nationality" },
-							{ name: "Company Positon", key: "position" },
-						]}
-						data={executiveDirectors}
-						addNewRow={() =>
-							setData((prev) => ({
-								...prev,
-								executiveDirectors: [
-									...prev.executiveDirectors,
-									{
-										mgtname: "",
-										occupation: "",
-										nationality: "",
-										position: "",
-										isEditing: true,
-									},
-								],
-							}))
-						}
-						updateRow={(index, key, value) => {
-							data.executiveDirectors[index][key] = value;
-							setData((prev) => ({
-								...prev,
-								executiveDirectors: [...data.executiveDirectors],
-							}));
-						}}
-						saveRow={(index) => {
-							data.executiveDirectors[index]["isEditing"] = false;
-							setData((prev) => ({
-								...prev,
-								executiveDirectors: [...data.executiveDirectors],
-							}));
-						}}
-						editRow={(index) => {
-							data.executiveDirectors[index]["isEditing"] = true;
-							setData((prev) => ({
-								...prev,
-								executiveDirectors: [...data.executiveDirectors],
-							}));
-						}}
-						deleteRow={(index) => {
-							data.executiveDirectors.splice(index, 1);
-							setData((prev) => ({
-								...prev,
-								executiveDirectors: [...data.executiveDirectors],
-							}));
+					<Form.Control
+						as="textarea"
+						value={executiveDirectors}
+						onChange={(e) => {
+							onChange(
+								fieldNames.corporateStructureAndServices
+									.executiveDirectors,
+								e.target.value
+							);
 						}}
 					/>
 				</Section>
@@ -471,26 +548,39 @@ function CorporateStructureAndServices({ data, setData }) {
 						checked={
 							permitCategory === PERMIT_CATEGORIES.specialised
 						}
-						onChange={() =>
+						onChange={() => {
 							setData((prev) => ({
 								...prev,
-								permitCategory: PERMIT_CATEGORIES.specialised,
-								activities: [],
-							}))
-						}
+								[fieldNames.corporateStructureAndServices._]: {
+									...prev[
+										fieldNames.corporateStructureAndServices
+											._
+									],
+									permitCategory:
+										PERMIT_CATEGORIES.specialised,
+									activities: [],
+								},
+							}));
+						}}
 					/>
 					<Form.Check
 						inline
 						label="General"
 						type={"radio"}
 						checked={permitCategory === PERMIT_CATEGORIES.general}
-						onChange={() =>
+						onChange={() => {
 							setData((prev) => ({
 								...prev,
-								permitCategory: PERMIT_CATEGORIES.general,
-								activities: [],
-							}))
-						}
+								[fieldNames.corporateStructureAndServices._]: {
+									...prev[
+										fieldNames.corporateStructureAndServices
+											._
+									],
+									permitCategory: PERMIT_CATEGORIES.general,
+									activities: [],
+								},
+							}));
+						}}
 					/>
 				</Section>
 
@@ -527,12 +617,13 @@ function CorporateStructureAndServices({ data, setData }) {
 						as="textarea"
 						rows={3}
 						value={description}
-						onChange={(e) =>
-							setData((prev) => ({
-								...prev,
-								description: e.target.value,
-							}))
-						}
+						onChange={(e) => {
+							onChange(
+								fieldNames.corporateStructureAndServices
+									.description,
+								e.target.value
+							);
+						}}
 					/>
 				</Section>
 			</Form>
