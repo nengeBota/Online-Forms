@@ -45,7 +45,7 @@ function PlansAndProgrammes({ data, setData }) {
 					i. Company's strategy for organizational development /
 					growth
 				</FormLabel>
-				<input
+				<Form.Control
 					type="file"
 					value={orgDevStrategy}
 					onChange={(e) =>
@@ -62,7 +62,7 @@ function PlansAndProgrammes({ data, setData }) {
 					ii. Company's employment plan indicating number of people to
 					be employed and budget
 				</FormLabel>
-				<input
+				<Form.Control
 					type="file"
 					value={employmentPlan}
 					onChange={(e) =>
@@ -80,7 +80,7 @@ function PlansAndProgrammes({ data, setData }) {
 					b. Technology Transfer Programme and Budget
 				</FormLabel>
 				<br />
-				<input
+				<Form.Control
 					type="file"
 					value={techTransferProgramAndBudget}
 					onChange={(e) =>
@@ -98,7 +98,7 @@ function PlansAndProgrammes({ data, setData }) {
 					c. Training Programe and Budget - (Company's training
 					programme should reflect its line of business)
 				</FormLabel>
-				<input
+				<Form.Control
 					type="file"
 					value={trainingProgramAndBudget}
 					onChange={(e) =>
@@ -116,7 +116,7 @@ function PlansAndProgrammes({ data, setData }) {
 					d. Corporate Social Responsibility & Social Development
 					Programme and Budget
 				</FormLabel>
-				<input
+				<Form.Control
 					type="file"
 					value={csrAndSocialDevProgramAndBudget}
 					onChange={(e) =>
