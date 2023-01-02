@@ -472,11 +472,26 @@ export const initialState = {
 	// part 3 - plans and programmes
 	// organisational development programme and budget
 	[fieldNames.orgDevProgramAndBudget._]: {
-		[fieldNames.orgDevProgramAndBudget.orgDevStrategy]: "",
-		[fieldNames.orgDevProgramAndBudget.employmentPlan]: "",
-		[fieldNames.orgDevProgramAndBudget.techTransferProgramAndBudget]: "",
-		[fieldNames.orgDevProgramAndBudget.trainingProgramAndBudget]: "",
-		[fieldNames.orgDevProgramAndBudget.csrAndSocialDevProgramAndBudget]: "",
+		[fieldNames.orgDevProgramAndBudget.orgDevStrategy]: {
+      fileName: '',
+      file: '',
+    },
+		[fieldNames.orgDevProgramAndBudget.employmentPlan]: {
+      fileName: '',
+      file: '',
+    },
+		[fieldNames.orgDevProgramAndBudget.techTransferProgramAndBudget]: {
+      fileName: '',
+      file: '',
+    },
+		[fieldNames.orgDevProgramAndBudget.trainingProgramAndBudget]: {
+      fileName: '',
+      file: '',
+    },
+		[fieldNames.orgDevProgramAndBudget.csrAndSocialDevProgramAndBudget]: {
+      fileName: '',
+      file: '',
+    },
 	},
 
 	// local content

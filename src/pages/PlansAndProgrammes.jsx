@@ -1,5 +1,6 @@
 import { Form, FormGroup, FormLabel } from "react-bootstrap";
 import Heading from "../components/Heading";
+import FileInput from "../components/FileInput";
 import { fieldNames } from "../constants";
 
 function PlansAndProgrammes({ data, setData }) {
@@ -48,13 +49,11 @@ function PlansAndProgrammes({ data, setData }) {
 					i. Company's strategy for organizational development /
 					growth
 				</FormLabel>
-				<Form.Control
-					type="file"
-					value={orgDevStrategy}
-					onChange={(e) =>
+				<FileInput
+					onChange={(file) =>
 						onChange(
 							fieldNames.orgDevProgramAndBudget.orgDevStrategy,
-							e.target.value
+							file
 						)
 					}
 				/>
@@ -65,13 +64,11 @@ function PlansAndProgrammes({ data, setData }) {
 					ii. Company's employment plan indicating number of people to
 					be employed and budget
 				</FormLabel>
-				<Form.Control
-					type="file"
-					value={employmentPlan}
-					onChange={(e) =>
+				<FileInput
+					onChange={(file) =>
 						onChange(
 							fieldNames.orgDevProgramAndBudget.employmentPlan,
-							e.target.value
+							file
 						)
 					}
 				/>
@@ -83,14 +80,12 @@ function PlansAndProgrammes({ data, setData }) {
 					b. Technology Transfer Programme and Budget
 				</FormLabel>
 				<br />
-				<Form.Control
-					type="file"
-					value={techTransferProgramAndBudget}
-					onChange={(e) =>
+				<FileInput
+					onChange={(file) =>
 						onChange(
 							fieldNames.orgDevProgramAndBudget
 								.techTransferProgramAndBudget,
-							e.target.value
+							file
 						)
 					}
 				/>
@@ -101,14 +96,12 @@ function PlansAndProgrammes({ data, setData }) {
 					c. Training Programe and Budget - (Company's training
 					programme should reflect its line of business)
 				</FormLabel>
-				<Form.Control
-					type="file"
-					value={trainingProgramAndBudget}
-					onChange={(e) =>
+				<FileInput
+					onChange={(file) =>
 						onChange(
 							fieldNames.orgDevProgramAndBudget
 								.trainingProgramAndBudget,
-							e.target.value
+							file
 						)
 					}
 				/>
@@ -119,14 +112,12 @@ function PlansAndProgrammes({ data, setData }) {
 					d. Corporate Social Responsibility & Social Development
 					Programme and Budget
 				</FormLabel>
-				<Form.Control
-					type="file"
-					value={csrAndSocialDevProgramAndBudget}
-					onChange={(e) =>
+				<FileInput
+					onChange={(file) =>
 						onChange(
 							fieldNames.orgDevProgramAndBudget
 								.csrAndSocialDevProgramAndBudget,
-							e.target.value
+							file
 						)
 					}
 				/>
