@@ -1,4 +1,4 @@
-import { useState} from "react";
+import { useState } from "react";
 import styled from "styled-components";
 import CorporateStructureAndServices from "./pages/CorporateStructureAndServices";
 import Pagination from "./components/Pagination";
@@ -16,7 +16,7 @@ import { initialErrorState, initialState } from "./constants";
 const pages = [
 	// PART 1
 	CorporateStructureAndServices,
-	
+
 	// PART 2
 	FinancialCapability,
 
@@ -35,6 +35,19 @@ const pages = [
 	// part 7
 	AnnexesAndAttachments,
 ];
+
+async function submit(values) {
+	const API_ENDPOINT = process.env.REACT_APP_API_ENDPOINT;
+	const response = await fetch(`${API_ENDPOINT}/submit`, {
+		method: "POST",
+		headers: {
+			"Content-Type": "application/json",
+		},
+		body: JSON.stringify(values),
+	});
+
+	console.log("value of response -> ", response);
+}
 
 function App() {
 	const [category, setcategory] = useState([]);
@@ -75,7 +88,13 @@ function App() {
 			<br />
 			<br />
 
-			<div style={{ display: "flex", width: '20%',justifyContent: 'space-between', margin: '0 auto' }}>
+			<ButtonGroup
+				style={{
+					display: "flex",
+					justifyContent: "space-between",
+					margin: "0 auto",
+				}}
+			>
 				<Button
 					disabled={page === 1}
 					onClick={() => setPage((prev) => prev - 1)}
@@ -83,24 +102,25 @@ function App() {
 					Back
 				</Button>
 
-				<ButtonGroup>
-					{page === pages.length ? (
-						<Button variant="secondary">Preview</Button>
-					) : null}
+				{page === pages.length ? (
+					<Button variant="secondary">Preview</Button>
+				) : null}
 
-					{page < pages.length ? (
-						<Button
-							disabled={page === pages.length}
-              onClick={() => setPage((prev) => prev + 1)}
-              style={{marginLeft: 'auto',}}
-						>
-							Next
-						</Button>
-					) : (
-						<Button variant="success"> Submit</Button>
-					)}
-				</ButtonGroup>
-			</div>
+				{page < pages.length ? (
+					<Button
+						disabled={page === pages.length}
+						onClick={() => setPage((prev) => prev + 1)}
+						style={{ marginLeft: "auto" }}
+					>
+						Next
+					</Button>
+				) : (
+					<Button variant="success" onClick={() => submit(data)}>
+						{" "}
+						Submit
+					</Button>
+				)}
+			</ButtonGroup>
 
 			<Pagination currentPage={page} setPage={onClickSetPage} />
 		</PageWrapper>
