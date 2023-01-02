@@ -1,5 +1,6 @@
 import { useCallback } from "react";
 import { Form, FormGroup, FormLabel, Button } from "react-bootstrap";
+import FileInput from "../components/FileInput";
 import Heading from "../components/Heading";
 import { fieldNames } from "../constants";
 
@@ -7,14 +8,13 @@ import { fieldNames } from "../constants";
 
 const getFields = (data) => {
 	const miscFiles = data[fieldNames.miscFiles];
-	return { miscFiles };
-
+	const coverPage = data[fieldNames.coverPage];
 	const hssePolicyAndObj =
 		data[fieldNames.healthSafetySecurityEnv._][
 			fieldNames.healthSafetySecurityEnv.hssePolicyAndObj
 		];
 
-	return { hssePolicyAndObj };
+	return { miscFiles, hssePolicyAndObj, coverPage };
 };
 
 function Miscellaneous({ data, setData }) {
@@ -32,14 +32,10 @@ function Miscellaneous({ data, setData }) {
 	});
 
 	//For Part 6 miscellaneous
-	const { miscFiles } = getFields(data);
+	const { miscFiles, hssePolicyAndObj, coverPage } = getFields(data);
 	const onChange = (value) => {
 		setData((prev) => ({ ...prev, [fieldNames.miscFiles]: value }));
 	};
-	const { hssePolicyAndObj } = getFields(data);
-
-	//Cover Page
-	const coverPage = data[fieldNames.coverPage];
 
 	return (
 		<Form>
@@ -53,19 +49,18 @@ function Miscellaneous({ data, setData }) {
 					Objectives *
 				</FormLabel>
 				<br />
-				<Form.Control
-					type="file"
-					value={hssePolicyAndObj}
-					onChange={(e) => {
+				<FileInput
+					onChange={(file) => {
 						onStage(
 							fieldNames.healthSafetySecurityEnv.hssePolicyAndObj,
-							e.target.value
+							file
 						);
 					}}
 				/>
 			</FormGroup>
 
-      <br /><br />
+			<br />
+			<br />
 			<Heading>Part Six - Miscellaneous</Heading>
 			<hr />
 
@@ -80,12 +75,10 @@ function Miscellaneous({ data, setData }) {
 					You may attach multiple relevant documents
 				</FormLabel>
 				<br />
-				<Form.Control
-					type="file"
-					multiple
-					value={miscFiles}
-					onChange={(e) => {
-						onChange(e.target.value);
+				<FileInput
+					multiple={true}
+					onChange={(files) => {
+						onChange(files);
 					}}
 				/>
 			</FormGroup>
@@ -117,27 +110,28 @@ function Miscellaneous({ data, setData }) {
 				</p>
 			</h6>
 
-      <br /><br />
+			<br />
+			<br />
 			<Heading>Declaration Form</Heading>
 			<hr />
 			<FormGroup>
 				<FormLabel>
-					Click to download the Declaration form to fill:
+					<a href="#" download>
+						Click to download
+					</a>{" "}
+					the declaration form to fill
 				</FormLabel>
-				<Button href="#" download>
-					Download
-				</Button>
 			</FormGroup>
 			<FormGroup>
-				<FormLabel>Please upload Declaration Form *</FormLabel>
+				<FormLabel>
+					Please upload the filled and signed declaration form *
+				</FormLabel>
 				<br />
-				<Form.Control
-					type="file"
-					value={coverPage}
-					onChange={(e) => {
+				<FileInput
+					onChange={(file) => {
 						setData((prev) => ({
 							...prev,
-							[fieldNames.coverPage]: e.target.value,
+							[fieldNames.declaration]: file,
 						}));
 					}}
 				/>
@@ -151,13 +145,11 @@ function Miscellaneous({ data, setData }) {
 			<FormGroup>
 				<FormLabel>Upload Cover Page *</FormLabel>
 				<br />
-				<Form.Control
-					type="file"
-					value={coverPage}
-					onChange={(e) => {
+				<FileInput
+					onChange={(file) => {
 						setData((prev) => ({
 							...prev,
-							[fieldNames.coverPage]: e.target.value,
+							[fieldNames.coverPage]: file,
 						}));
 					}}
 				/>

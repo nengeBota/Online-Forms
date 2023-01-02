@@ -134,13 +134,7 @@ export const fieldNames = {
 	miscFiles: "miscFiles",
 
 	// applicant declaration
-	declaration: {
-		_: "declaration",
-		name: "name",
-		position: "position",
-		signature: "signature",
-		date: "date",
-	},
+	declaration: "declaration",
 
 	// cover page
 	coverPage: "coverPage",
@@ -329,12 +323,7 @@ export const initialErrorState = {
 	[fieldNames.miscFiles]: [],
 
 	// applicant declaration
-	[fieldNames.declaration._]: {
-		[fieldNames.declaration.name]: [],
-		[fieldNames.declaration.position]: [],
-		[fieldNames.declaration.signature]: [],
-		[fieldNames.declaration.date]: [],
-	},
+	[fieldNames.declaration]: "",
 
 	// cover page
 	[fieldNames.coverPage]: [],
@@ -417,10 +406,12 @@ export const initialState = {
 		],
 		[fieldNames.corporateStructureAndServices.executiveDirectors]: "",
 		[fieldNames.corporateStructureAndServices.activities]: [],
-		[fieldNames.corporateStructureAndServices.corporateStructure]: {
-			fileName: "",
-			file: "",
-		},
+		[fieldNames.corporateStructureAndServices.corporateStructure]: [
+			{
+				fileName: "",
+				file: "",
+			},
+		],
 		[fieldNames.corporateStructureAndServices.description]: "",
 	},
 	// PART 2
@@ -428,23 +419,29 @@ export const initialState = {
 	// financial capability
 	[fieldNames.finCapability._]: {
 		[fieldNames.finCapability.whatApplies]: "",
-		[fieldNames.finCapability.whatAppliesUploadedDocument]: {
-			fileName: "",
-			file: "",
-		},
+		[fieldNames.finCapability.whatAppliesUploadedDocument]: [
+			{
+				fileName: "",
+				file: "",
+			},
+		],
 		[fieldNames.finCapability.sourceOfFunds]: "",
 	},
 
 	// management and technical competencies
 	[fieldNames.mgtAndTechnicalCompetencies._]: {
-		[fieldNames.mgtAndTechnicalCompetencies.orgChart]: {
-			fileName: "",
-			file: "",
-		},
-		[fieldNames.mgtAndTechnicalCompetencies.detailedStaffInfo]: {
-			fileName: "",
-			file: "",
-		},
+		[fieldNames.mgtAndTechnicalCompetencies.orgChart]: [
+			{
+				fileName: "",
+				file: "",
+			},
+		],
+		[fieldNames.mgtAndTechnicalCompetencies.detailedStaffInfo]: [
+			{
+				fileName: "",
+				file: "",
+			},
+		],
 		[fieldNames.mgtAndTechnicalCompetencies.requiredExpertise]: "",
 		[fieldNames.mgtAndTechnicalCompetencies.sourcesOfEquipment]: "",
 	},
@@ -472,26 +469,36 @@ export const initialState = {
 	// part 3 - plans and programmes
 	// organisational development programme and budget
 	[fieldNames.orgDevProgramAndBudget._]: {
-		[fieldNames.orgDevProgramAndBudget.orgDevStrategy]: {
-      fileName: '',
-      file: '',
-    },
-		[fieldNames.orgDevProgramAndBudget.employmentPlan]: {
-      fileName: '',
-      file: '',
-    },
-		[fieldNames.orgDevProgramAndBudget.techTransferProgramAndBudget]: {
-      fileName: '',
-      file: '',
-    },
-		[fieldNames.orgDevProgramAndBudget.trainingProgramAndBudget]: {
-      fileName: '',
-      file: '',
-    },
-		[fieldNames.orgDevProgramAndBudget.csrAndSocialDevProgramAndBudget]: {
-      fileName: '',
-      file: '',
-    },
+		[fieldNames.orgDevProgramAndBudget.orgDevStrategy]: [
+			{
+				fileName: "",
+				file: "",
+			},
+		],
+		[fieldNames.orgDevProgramAndBudget.employmentPlan]: [
+			{
+				fileName: "",
+				file: "",
+			},
+		],
+		[fieldNames.orgDevProgramAndBudget.techTransferProgramAndBudget]: [
+			{
+				fileName: "",
+				file: "",
+			},
+		],
+		[fieldNames.orgDevProgramAndBudget.trainingProgramAndBudget]: [
+			{
+				fileName: "",
+				file: "",
+			},
+		],
+		[fieldNames.orgDevProgramAndBudget.csrAndSocialDevProgramAndBudget]: [
+			{
+				fileName: "",
+				file: "",
+			},
+		],
 	},
 
 	// local content
@@ -533,21 +540,18 @@ export const initialState = {
 	},
 
 	[fieldNames.healthSafetySecurityEnv._]: {
-		[fieldNames.healthSafetySecurityEnv.hssePolicyAndObj]: "",
+		[fieldNames.healthSafetySecurityEnv.hssePolicyAndObj]: [
+			{ fileName: "", file: "" },
+		],
 	},
 
-	[fieldNames.miscFiles]: "",
+	[fieldNames.miscFiles]: [{ fileName: "", file: "" }],
 
 	// applicant declaration
-	[fieldNames.declaration._]: {
-		[fieldNames.declaration.name]: "",
-		[fieldNames.declaration.position]: "",
-		[fieldNames.declaration.signature]: "",
-		[fieldNames.declaration.date]: "",
-	},
+	[fieldNames.declaration]: [{ fileName: "", file: "" }],
 
 	// cover page
-	[fieldNames.coverPage]: "",
+	[fieldNames.coverPage]: [{ fileName: "", file: "" }],
 
 	// checklist
 	[fieldNames.checkList._]: {
