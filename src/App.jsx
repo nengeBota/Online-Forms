@@ -26,13 +26,10 @@ const pages = [
 	// PART 4
 	LocalContent,
 
-	// Part 5
-	//merged with part 6
-
-	// part 6
+	// part 5
 	Miscellaneous,
 
-	// part 7
+	// part 6
 	AnnexesAndAttachments,
 ];
 
