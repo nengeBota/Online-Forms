@@ -379,8 +379,7 @@ function CorporateStructureAndServices({ data, setData, errors, setErrors }) {
 						subsidiary and affiliate companies (if applicable).
 					</Form.Label>
 					<FileInput
-						value={corporateStructure?.fileName}
-						onChange={(files) => {
+            onChange={(files) => {
 							onChange(
 								fieldNames.corporateStructureAndServices
 									.corporateStructure,

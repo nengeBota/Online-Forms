@@ -135,7 +135,6 @@ function FinancialCapability({ data, setData }) {
 						Please upload documents as per your choice *
 						<br />
 						<FileInput
-							value={uploadedDocument?.fileName}
 							onChange={(file) =>
 								setData((prev) => {
 									return {
@@ -182,7 +181,6 @@ function FinancialCapability({ data, setData }) {
 					<div>
 						3.a. Provide Organizational Chart <br />
 						<FileInput
-							value={orgChart?.fileName}
 							onChange={(file) => {
 								onChange(
 									fieldNames.mgtAndTechnicalCompetencies
@@ -198,7 +196,6 @@ function FinancialCapability({ data, setData }) {
 						and their expertise. (Include Name, Gender, Position and
 						Nationality of Staff). * <br />
 						<FileInput
-							value={detailedStaffInfo?.fileName}
 							onChange={(file) => {
 								onChange(
 									fieldNames.mgtAndTechnicalCompetencies
