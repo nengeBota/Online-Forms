@@ -99,9 +99,10 @@ function App() {
 					Back
 				</Button>
 
-				{page === pages.length ? (
+        {/* todo: enable once preview feature is completed */}
+				{/* {page === pages.length ? (
 					<Button variant="secondary">Preview</Button>
-				) : null}
+				) : null} */}
 
 				{page < pages.length ? (
 					<Button
