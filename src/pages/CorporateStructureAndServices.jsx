@@ -1,5 +1,6 @@
 import { Form } from "react-bootstrap";
 import DynamicTable from "../components/DynamicTable";
+import FileInput from "../components/FileInput";
 import Heading from "../components/Heading";
 import Section from "../components/Section";
 import {
@@ -377,14 +378,13 @@ function CorporateStructureAndServices({ data, setData, errors, setErrors }) {
 						an explanatory diagram, if appropriate, showing parent,
 						subsidiary and affiliate companies (if applicable).
 					</Form.Label>
-					<Form.Control
-						type="file"
-						value={corporateStructure}
-						onChange={(e) => {
+					<FileInput
+						value={corporateStructure?.fileName}
+						onChange={(files) => {
 							onChange(
 								fieldNames.corporateStructureAndServices
 									.corporateStructure,
-								e.target.value
+								files
 							);
 						}}
 					/>

@@ -388,7 +388,10 @@ export const initialState = {
     ],
     [fieldNames.corporateStructureAndServices.executiveDirectors]: "",
     [fieldNames.corporateStructureAndServices.activities]: [],
-    [fieldNames.corporateStructureAndServices.corporateStructure]: "",
+    [fieldNames.corporateStructureAndServices.corporateStructure]: {
+      fileName: '',
+      file: '',
+    },
     [fieldNames.corporateStructureAndServices.description]: "",
   },
   // PART 2
