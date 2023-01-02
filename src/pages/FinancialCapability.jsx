@@ -1,8 +1,8 @@
 import { Form, FormControl, FormGroup } from "react-bootstrap";
 import DynamicTable from "../components/DynamicTable";
+import FileInput from "../components/FileInput";
 import Heading from "../components/Heading";
 import { fieldNames, financialCapabilityOptions } from "../constants";
-
 
 const columns = [
 	{
@@ -33,12 +33,11 @@ const newDetailsOfExperience = {
 	contractValue: "",
 };
 
-
 function FinancialCapability({ data, setData }) {
 	const { financialCapability } = data;
 	const { whatApplies, uploadedDocument, sourceOfFunds } =
 		financialCapability;
-		const mgtAndTechnicalCompetencies =
+	const mgtAndTechnicalCompetencies =
 		data[fieldNames.mgtAndTechnicalCompetencies._];
 	const orgChart =
 		mgtAndTechnicalCompetencies[
@@ -64,7 +63,7 @@ function FinancialCapability({ data, setData }) {
 				...prev[fieldNames.mgtAndTechnicalCompetencies._],
 				[field]: value,
 			},
-		}))
+		}));
 	};
 
 	const companyExperience =
@@ -92,7 +91,9 @@ function FinancialCapability({ data, setData }) {
 
 	return (
 		<div>
-			<Heading>Part Two - Financial Capability and Technical Competency</Heading>
+			<Heading>
+				Part Two - Financial Capability and Technical Competency
+			</Heading>
 			<h4>A. Financial Capability</h4>
 			<hr />
 
@@ -132,11 +133,10 @@ function FinancialCapability({ data, setData }) {
 						))}
 						<br />
 						Please upload documents as per your choice *
-						<br/>
-						<FormControl
-							type="file"
-							value={uploadedDocument}
-							onChange={(e) =>
+						<br />
+						<FileInput
+							value={uploadedDocument?.fileName}
+							onChange={(file) =>
 								setData((prev) => {
 									return {
 										...prev,
@@ -144,7 +144,7 @@ function FinancialCapability({ data, setData }) {
 											...prev[fieldNames.finCapability._],
 											[fieldNames.finCapability
 												.whatAppliesUploadedDocument]:
-												e.target.value,
+												file,
 										},
 									};
 								})
@@ -181,14 +181,13 @@ function FinancialCapability({ data, setData }) {
 				<FormGroup>
 					<div>
 						3.a. Provide Organizational Chart <br />
-						<Form.Control
-							type="file"
-							value={orgChart}
-							onChange={(e) => {
+						<FileInput
+							value={orgChart?.fileName}
+							onChange={(file) => {
 								onChange(
 									fieldNames.mgtAndTechnicalCompetencies
 										.orgChart,
-									e.target.value
+									file
 								);
 							}}
 						/>
@@ -198,14 +197,13 @@ function FinancialCapability({ data, setData }) {
 						b. Provide detailed information on the number of staff
 						and their expertise. (Include Name, Gender, Position and
 						Nationality of Staff). * <br />
-						<Form.Control
-							type="file"
-							value={detailedStaffInfo}
-							onChange={(e) => {
+						<FileInput
+							value={detailedStaffInfo?.fileName}
+							onChange={(file) => {
 								onChange(
 									fieldNames.mgtAndTechnicalCompetencies
 										.detailedStaffInfo,
-									e.target.value
+									file
 								);
 							}}
 						/>
@@ -246,7 +244,7 @@ function FinancialCapability({ data, setData }) {
 				</FormGroup>
 			</div>
 
-<br/>
+			<br />
 			<h4>C. Details of Experience</h4>
 			<hr />
 			<FormGroup>

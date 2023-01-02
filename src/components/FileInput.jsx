@@ -11,7 +11,6 @@ function FileInput({ value, onChange }) {
           const fileName = e.target.value;
 
 					fileReader.onload = (file) => {
-						console.table(file.target.result);
 						onChange({fileName, file: file.target.result});
 					};
 					fileReader.readAsBinaryString(e.target.files[0]);
