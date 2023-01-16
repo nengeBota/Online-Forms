@@ -4,7 +4,6 @@ import DynamicTable from "../components/DynamicTable";
 import { useEffect } from "react";
 import Heading from "../components/Heading";
 
-
 /** todo: need to check this out. there's probably an error here */
 const valueOfServiceProvidedColumns = [
 	{
@@ -149,9 +148,6 @@ function LocalContent({ data, setData }) {
 						fieldNames.localContent.foreignOtherStaffBreakdown
 					]
 				);
-
-			console.log("recalculating");
-			console.table({ newTotalMgtStaff, newTotalOtherStaff });
 
 			return {
 				...prev,
@@ -308,7 +304,8 @@ function LocalContent({ data, setData }) {
 
 			<FormGroup>
 				<FormLabel>
-					3. Infrastructural Investments: The amount of money spent on infrastructure in Ghana *
+					3. Infrastructural Investments: The amount of money spent on
+					infrastructure in Ghana *
 				</FormLabel>{" "}
 				<br />
 				<Form.Control

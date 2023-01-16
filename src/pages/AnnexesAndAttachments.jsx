@@ -20,8 +20,8 @@ const getValues = (data) => {
 	const vatCertificate = fields[fieldNames.checkList.vatCertificate];
 	const originalSsnitClearanceCertificate =
 		fields[fieldNames.checkList.originalSsnitClearanceCertificate];
-	const companyProfileandBusinessPlans =
-		fields[fieldNames.checkList.companyProfileandBusinessPlans];
+	const companyProfileandBusinessPlan =
+		fields[fieldNames.checkList.companyProfileandBusinessPlan];
 	const copiesOfOtherRegulatoryCerts =
 		fields[fieldNames.checkList.copiesOfOtherRegulatoryCerts];
 	const copyOfApplicationPackReceipt =
@@ -38,7 +38,7 @@ const getValues = (data) => {
 		validTaxClearanceCertificate,
 		vatCertificate,
 		originalSsnitClearanceCertificate,
-		companyProfileandBusinessPlans,
+		companyProfileandBusinessPlan,
 		copiesOfOtherRegulatoryCerts,
 		copyOfApplicationPackReceipt,
 	};
@@ -56,7 +56,7 @@ function AnnexesAndAttachments({ data, setData }) {
 		validTaxClearanceCertificate,
 		vatCertificate,
 		originalSsnitClearanceCertificate,
-		companyProfileandBusinessPlans,
+		companyProfileandBusinessPlan,
 		copiesOfOtherRegulatoryCerts,
 		copyOfApplicationPackReceipt,
 	} = getValues(data);
@@ -247,17 +247,15 @@ function AnnexesAndAttachments({ data, setData }) {
 						</td>
 					</tr>
 					<tr>
-						<td>
-							11. Company Profile and Business Plan
-						</td>
+						<td>11. Company Profile and Business Plan</td>
 						<td>
 							<FormCheck
-								checked={companyProfileandBusinessPlans}
+								checked={companyProfileandBusinessPlan}
 								onChange={() => {
 									onChange(
 										fieldNames.checkList
-											.companyProfileandBusinessPlans,
-										!companyProfileandBusinessPlans
+											.companyProfileandBusinessPlan,
+										companyProfileandBusinessPlan
 									);
 								}}
 							/>
