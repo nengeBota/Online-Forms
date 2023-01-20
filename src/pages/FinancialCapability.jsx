@@ -2,7 +2,7 @@ import { Form, FormControl, FormGroup } from "react-bootstrap";
 import DynamicTable from "../components/DynamicTable";
 import FileInput from "../components/FileInput";
 import Heading from "../components/Heading";
-import { fieldNames, financialCapabilityOptions } from "../constants";
+import { fieldNames, financialCapabilityOptions } from "../constants.mjs";
 
 const columns = [
 	{

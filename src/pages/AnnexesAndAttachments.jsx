@@ -1,6 +1,6 @@
 import { Form, FormCheck, Table } from "react-bootstrap";
 import Heading from "../components/Heading";
-import { fieldNames } from "../constants";
+import { fieldNames } from "../constants.mjs";
 
 const getValues = (data) => {
 	const fields = data[fieldNames.checkList._];

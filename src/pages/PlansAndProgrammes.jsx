@@ -1,7 +1,7 @@
 import { Form, FormGroup, FormLabel } from "react-bootstrap";
 import Heading from "../components/Heading";
 import FileInput from "../components/FileInput";
-import { fieldNames } from "../constants";
+import { fieldNames } from "../constants.mjs";
 
 function PlansAndProgrammes({ data, setData }) {
 	const orgDevStrategy =

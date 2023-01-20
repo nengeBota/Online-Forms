@@ -1,10 +1,16 @@
-import { validators } from "validate.js";
+// const { validators } = require("validate.js");
+// const { z } = require("zod");
+// const {
+// 	fieldNames,
+// 	FIN_CAPABILITY_WHAT_APPLIES_OPTIONS,
+// 	PERMIT_CATEGORIES,
+// } = require("./src/constants.js");
 import { z } from "zod";
 import {
 	fieldNames,
 	FIN_CAPABILITY_WHAT_APPLIES_OPTIONS,
 	PERMIT_CATEGORIES,
-} from "./src/constants";
+} from "./constants.mjs";
 
 const file = z.object({ fileName: z.string(), file: z.string() });
 const positiveNumber = z.number({ min: 0 });
@@ -37,9 +43,7 @@ const state = z.object({
 			[fieldNames.corporateStructureAndServices.contactPerson.name]:
 				z.string(),
 			[fieldNames.corporateStructureAndServices.contactPerson
-				.mobileNumber]: z
-				.string()
-				.refine((input) => validators.isMobilePhone(input)),
+				.mobileNumber]: z.string(),
 		}),
 		[fieldNames.corporateStructureAndServices.nameOfSubsidiaryOrAffiliate]:
 			z.string(),
@@ -85,6 +89,7 @@ const state = z.object({
 			z.array(file),
 		[fieldNames.corporateStructureAndServices.description]: z.string(),
 	}),
+
 	[fieldNames.finCapability._]: z.object({
 		[fieldNames.finCapability.whatApplies]: z.enum(
 			Object.values(FIN_CAPABILITY_WHAT_APPLIES_OPTIONS)
@@ -92,6 +97,7 @@ const state = z.object({
 		[fieldNames.finCapability.whatAppliesUploadedDocument]: file,
 		[fieldNames.finCapability.sourceOfFunds]: z.string(),
 	}),
+
 	[fieldNames.mgtAndTechnicalCompetencies._]: z.object({
 		[fieldNames.mgtAndTechnicalCompetencies.orgChart]: z.array(file),
 		[fieldNames.mgtAndTechnicalCompetencies.detailedStaffInfo]:

@@ -7,7 +7,7 @@ import {
 	fieldNames,
 	permitCategoryOptions,
 	PERMIT_CATEGORIES,
-} from "../constants";
+} from "../constants.mjs";
 
 const getValue = (data) => {
 	const fields = data[fieldNames.corporateStructureAndServices._];
@@ -379,7 +379,7 @@ function CorporateStructureAndServices({ data, setData, errors, setErrors }) {
 						subsidiary and affiliate companies (if applicable).
 					</Form.Label>
 					<FileInput
-            onChange={(files) => {
+						onChange={(files) => {
 							onChange(
 								fieldNames.corporateStructureAndServices
 									.corporateStructure,

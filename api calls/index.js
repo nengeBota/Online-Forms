@@ -1,12 +1,22 @@
-require("dotenv").config();
+import dotenv from "dotenv";
+import express from "express";
+import bodyparser from "body-parser";
+import cors from "cors";
+import state from "../src/stateDescription.mjs";
+import pg from "pg";
 
-const cors = require("cors");
-const app = require("express");
-const server = app();
-const bodyparser = require("body-parser");
+dotenv.config();
+// require("dotenv").config();
+
+// const cors = require("cors");
+// const app = require("express");
+const server = express();
+// const bodyparser = require("body-parser");
 server.use(bodyparser.json());
 server.use(cors());
-const { Client } = require("pg");
+const { Client } = pg;
+// const { Client } = require("pg");
+// const { default: state } = require("../stateDescription.js");
 const client = new Client({
 	host: process.env.DB_HOST || "127.0.0.1",
 	port: process.env.DB_PORT || 5432,
@@ -15,11 +25,22 @@ const client = new Client({
 	database: process.env.DB_DATABASE || "tester",
 });
 
-client.connect();
+// client.connect();
 
 server.get("/", (req, res) => {
 	console.log("this is what alvin says i should do");
 	return res.json({ message: "welcome" });
+});
+
+server.post("/submit", (req, res) => {
+	const values = req.body;
+	console.log("values -> ", values);
+
+	// if validation fails, we return a 40x with the description of what went wrong
+	const isValidInput = state.parse(values);
+	console.log("validated input -> ", isValidInput);
+
+	res.status(400).send({ message: "invalid input" });
 });
 
 server.post("/applicant_details", async (req, res) => {

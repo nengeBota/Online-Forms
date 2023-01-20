@@ -2,7 +2,7 @@ import { useCallback } from "react";
 import { Form, FormGroup, FormLabel, Button } from "react-bootstrap";
 import FileInput from "../components/FileInput";
 import Heading from "../components/Heading";
-import { fieldNames } from "../constants";
+import { fieldNames } from "../constants.mjs";
 
 //Incomplete work done for part 5 and 6
 
@@ -86,7 +86,7 @@ function Miscellaneous({ data, setData }) {
 			<br />
 			<h6>
 				<p>
-					According ot Regulation 46 (1) & (2) of the Petroleum (Local
+					According to Regulation 46 (1) & (2) of the Petroleum (Local
 					Content and Local Participation) Regulations,
 				</p>
 				<p>

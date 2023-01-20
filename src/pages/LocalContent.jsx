@@ -1,5 +1,5 @@
 import { Form, FormGroup, FormLabel, Table } from "react-bootstrap";
-import { fieldNames, NEW_VALUE_OF_SERVICE } from "../constants";
+import { fieldNames, NEW_VALUE_OF_SERVICE } from "../constants.mjs";
 import DynamicTable from "../components/DynamicTable";
 import { useEffect } from "react";
 import Heading from "../components/Heading";

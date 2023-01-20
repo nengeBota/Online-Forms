@@ -10,7 +10,9 @@ import PlansAndProgrammes from "./pages/PlansAndProgrammes";
 import LocalContent from "./pages/LocalContent";
 import Miscellaneous from "./pages/Miscellaneous";
 import AnnexesAndAttachments from "./pages/AnnexesAndAttachments";
-import { initialErrorState, initialState } from "./constants";
+import { initialErrorState, initialState } from "./constants.mjs";
+import prepareForSubmission from "./prepareForSubmission";
+import state from "./stateDescription.mjs";
 
 //info: the position of the page determines its page number. so CorporateStructureAndServices is page 1 because its first in this array, etc..
 const pages = [
@@ -35,15 +37,20 @@ const pages = [
 
 async function submit(values) {
 	const API_ENDPOINT = process.env.REACT_APP_API_ENDPOINT;
-	const response = await fetch(`${API_ENDPOINT}/submit`, {
-		method: "POST",
-		headers: {
-			"Content-Type": "application/json",
-		},
-		body: JSON.stringify(values),
-	});
 
-	console.log("value of response -> ", response);
+	try {
+		state.parse(values);
+		const response = await fetch(`${API_ENDPOINT}/submit`, {
+			method: "POST",
+			headers: {
+				"Content-Type": "application/json",
+			},
+			body: JSON.stringify(prepareForSubmission(values)),
+		});
+		console.log("value of response -> ", response);
+	} catch (error) {
+		console.log("failed to foetch -> ", error);
+	}
 }
 
 function App() {
@@ -99,7 +106,7 @@ function App() {
 					Back
 				</Button>
 
-        {/* todo: enable once preview feature is completed */}
+				{/* todo: enable once preview feature is completed */}
 				{/* {page === pages.length ? (
 					<Button variant="secondary">Preview</Button>
 				) : null} */}

@@ -418,7 +418,9 @@ export const initialState = {
 
 	// financial capability
 	[fieldNames.finCapability._]: {
-		[fieldNames.finCapability.whatApplies]: "",
+		//todo: the default value for this line below should be ""
+		[fieldNames.finCapability.whatApplies]:
+			FIN_CAPABILITY_WHAT_APPLIES_OPTIONS.newlyIncorporated,
 		[fieldNames.finCapability.whatAppliesUploadedDocument]: [
 			{
 				fileName: "",
