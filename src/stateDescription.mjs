@@ -1,10 +1,3 @@
-// const { validators } = require("validate.js");
-// const { z } = require("zod");
-// const {
-// 	fieldNames,
-// 	FIN_CAPABILITY_WHAT_APPLIES_OPTIONS,
-// 	PERMIT_CATEGORIES,
-// } = require("./src/constants.js");
 import { z } from "zod";
 import {
 	fieldNames,
@@ -12,182 +5,194 @@ import {
 	PERMIT_CATEGORIES,
 } from "./constants.mjs";
 
-const file = z.object({ fileName: z.string(), file: z.string() });
-const positiveNumber = z.number({ min: 0 });
+export const nonEmptyString = z.string().min(1);
+export const file = z.object({ fileName: nonEmptyString, file: z.string() });
+export const positiveNumber = z.number({ min: 0 });
+export const dateBeforeToday = z
+	.date()
+	.max(new Date(), { message: "Date cannot be later than today" });
+
+export const corporateStructureAndServicesDesc = z.object({
+	[fieldNames.corporateStructureAndServices.applicantName]: nonEmptyString,
+	[fieldNames.corporateStructureAndServices.dateOfIncorporation]: z
+		.date()
+		.max(new Date(), { message: "Date cannot be later than today" }),
+	[fieldNames.corporateStructureAndServices.placeOfIncorporation]:
+		nonEmptyString,
+	[fieldNames.corporateStructureAndServices.contactDetails._]: z.object({
+		[fieldNames.corporateStructureAndServices.contactDetails.officeAddress]:
+			nonEmptyString,
+		[fieldNames.corporateStructureAndServices.contactDetails.postalAddress]:
+			nonEmptyString,
+		[fieldNames.corporateStructureAndServices.contactDetails.city]:
+			nonEmptyString,
+		[fieldNames.corporateStructureAndServices.contactDetails.region]:
+			nonEmptyString,
+		[fieldNames.corporateStructureAndServices.contactDetails.country]:
+			nonEmptyString,
+	}),
+	[fieldNames.corporateStructureAndServices.emailAddress]: z.string().email(),
+	[fieldNames.corporateStructureAndServices.website]: z.string().url(),
+	[fieldNames.corporateStructureAndServices.contactPerson._]: z.object({
+		[fieldNames.corporateStructureAndServices.contactPerson.name]:
+			nonEmptyString,
+		[fieldNames.corporateStructureAndServices.contactPerson.mobileNumber]:
+			nonEmptyString,
+	}),
+	[fieldNames.corporateStructureAndServices.nameOfSubsidiaryOrAffiliate]:
+		nonEmptyString,
+	[fieldNames.corporateStructureAndServices.nationalityOfAffiliate]:
+		nonEmptyString,
+	[fieldNames.corporateStructureAndServices.permitCategory]: z.enum(
+		Object.values(PERMIT_CATEGORIES)
+	),
+	[fieldNames.corporateStructureAndServices.shareholders._]: z.array(
+		z.object({
+			[fieldNames.corporateStructureAndServices.shareholders.name]:
+				nonEmptyString,
+			[fieldNames.corporateStructureAndServices.shareholders.address]:
+				nonEmptyString,
+			[fieldNames.corporateStructureAndServices.shareholders.nationality]:
+				nonEmptyString,
+			[fieldNames.corporateStructureAndServices.shareholders.percentage]:
+				z.number({ max: 100 }),
+			[fieldNames.corporateStructureAndServices.beneficial.isEditing]:
+				z.boolean(),
+		})
+	),
+	[fieldNames.corporateStructureAndServices.beneficial._]: z.array(
+		z.object({
+			[fieldNames.corporateStructureAndServices.beneficial.name]:
+				nonEmptyString,
+			[fieldNames.corporateStructureAndServices.beneficial.nationality]:
+				nonEmptyString,
+			[fieldNames.corporateStructureAndServices.beneficial.percentage]:
+				z.number({ max: 100 }),
+			[fieldNames.corporateStructureAndServices.beneficial.address]:
+				nonEmptyString,
+			[fieldNames.corporateStructureAndServices.beneficial.isEditing]:
+				z.boolean(),
+		})
+	),
+	[fieldNames.corporateStructureAndServices.executiveDirectors]:
+		nonEmptyString,
+	[fieldNames.corporateStructureAndServices.activities]: z
+		.array(z.string())
+		.length(2),
+	[fieldNames.corporateStructureAndServices.corporateStructure]:
+		z.array(file),
+	[fieldNames.corporateStructureAndServices.description]: nonEmptyString,
+});
+export const financialCapabilityDesc = z.object({
+	[fieldNames.finCapability.whatApplies]: z.enum(
+		Object.values(FIN_CAPABILITY_WHAT_APPLIES_OPTIONS)
+	),
+	[fieldNames.finCapability.whatAppliesUploadedDocument]: file,
+	[fieldNames.finCapability.sourceOfFunds]: nonEmptyString,
+});
+export const mgtAndTechnicalCompetenciesDesc = z.object({
+	[fieldNames.mgtAndTechnicalCompetencies.orgChart]: z.array(file),
+	[fieldNames.mgtAndTechnicalCompetencies.detailedStaffInfo]: z.array(file),
+	[fieldNames.mgtAndTechnicalCompetencies.requiredExpertise]: nonEmptyString,
+	[fieldNames.mgtAndTechnicalCompetencies.sourcesOfEquipment]: nonEmptyString,
+});
+export const detailsOfExperienceDesc = z.object({
+	[fieldNames.detailsOfExperience.companyExperience]: nonEmptyString,
+	[fieldNames.detailsOfExperience.countries]: nonEmptyString,
+	[fieldNames.detailsOfExperience.contractsExecuted._]: z.array(
+		z.object({
+			[fieldNames.detailsOfExperience.contractsExecuted.isEditing]:
+				z.boolean(),
+			[fieldNames.detailsOfExperience.contractsExecuted
+				.descriptionOfContract]: nonEmptyString,
+			[fieldNames.detailsOfExperience.contractsExecuted
+				.nameOfCompanyWorkWasDoneFor]: nonEmptyString,
+			[fieldNames.detailsOfExperience.contractsExecuted.contractDuration]:
+				nonEmptyString,
+			[fieldNames.detailsOfExperience.contractsExecuted.contractValue]:
+				nonEmptyString,
+		})
+	),
+});
+export const orgDevProgramAndBudgetDesc = z.object({
+	[fieldNames.orgDevProgramAndBudget.orgDevStrategy]: z.array(file),
+	[fieldNames.orgDevProgramAndBudget.employmentPlan]: z.array(file),
+	[fieldNames.orgDevProgramAndBudget.techTransferProgramAndBudget]:
+		z.array(file),
+	[fieldNames.orgDevProgramAndBudget.trainingProgramAndBudget]: z.array(file),
+	[fieldNames.orgDevProgramAndBudget.csrAndSocialDevProgramAndBudget]:
+		z.array(file),
+});
+export const localContentDesc = z.object({
+	[fieldNames.localContent.percentageOfGhanaianParticipation]: positiveNumber,
+	[fieldNames.localContent.ghanaianMgtStaffBreakdown]: positiveNumber,
+	[fieldNames.localContent.foreignMgtStaffBreakdown]: positiveNumber,
+	[fieldNames.localContent.totalMgtStaffBreakdown]: positiveNumber,
+	[fieldNames.localContent.ghanaianOtherStaffBreakdown]: positiveNumber,
+	[fieldNames.localContent.foreignOtherStaffBreakdown]: positiveNumber,
+	[fieldNames.localContent.totalOtherStaffBreakdown]: positiveNumber,
+	[fieldNames.localContent.infraExpenditure]: positiveNumber,
+	[fieldNames.localContent.rawMaterials]: nonEmptyString,
+	[fieldNames.localContent.ghanaianFinishedGoods]: nonEmptyString,
+	[fieldNames.localContent.valueOfServiceProvided._]: z.array(
+		z.object({
+			[fieldNames.localContent.valueOfServiceProvided.isEditing]:
+				z.boolean(),
+			[fieldNames.localContent.valueOfServiceProvided.typeOfService]:
+				nonEmptyString,
+			[fieldNames.localContent.valueOfServiceProvided.contractSum]:
+				nonEmptyString,
+			[fieldNames.localContent.valueOfServiceProvided
+				.nameOfClientCompany]: nonEmptyString,
+		})
+	),
+});
+export const healthSafetySecurityEnvDesc = z.object({
+	[fieldNames.healthSafetySecurityEnv.hssePolicyAndObj]: z.array(file),
+});
+export const declarationDesc = z.array(file);
+export const miscFilesDesc = z.array(file);
+export const coverPageDesc = file;
+export const checkListDesc = z.object({
+	[fieldNames.checkList.coverPage]: z.boolean(),
+	[fieldNames.checkList.applicationForm]: z.boolean(),
+	[fieldNames.checkList.certificateOfIncorporation]: z.boolean(),
+	[fieldNames.checkList.certificateToCommenceBusiness]: z.boolean(),
+	[fieldNames.checkList.companyRegulations]: z.boolean(),
+	[fieldNames.checkList.signedHssePolicyAndObj]: z.boolean(),
+	[fieldNames.checkList.currentAuditedFinReportsOrProjectedRevenue]:
+		z.boolean(),
+	[fieldNames.checkList.validTaxClearanceCertificate]: z.boolean(),
+	[fieldNames.checkList.vatCertificate]: z.boolean(),
+	[fieldNames.checkList.originalSsnitClearanceCertificate]: z.boolean(),
+	[fieldNames.checkList.companyProfileAndBusinessPlan]: z.boolean(),
+	[fieldNames.checkList.copiesOfOtherRegulatoryCerts]: z.boolean(),
+	[fieldNames.checkList.copyOfApplicationPackReceipt]: z.boolean(),
+});
 
 const state = z.object({
-	[fieldNames.corporateStructureAndServices._]: z.object({
-		[fieldNames.corporateStructureAndServices.applicantName]: z.string(),
-		[fieldNames.corporateStructureAndServices.dateOfIncorporation]: z
-			.date()
-			.max(new Date(), { message: "Date cannot be later than today" }),
-		[fieldNames.corporateStructureAndServices.placeOfIncorporation]:
-			z.string(),
-		[fieldNames.corporateStructureAndServices.contactDetails._]: z.object({
-			[fieldNames.corporateStructureAndServices.contactDetails
-				.officeAddress]: z.string(),
-			[fieldNames.corporateStructureAndServices.contactDetails
-				.postalAddress]: z.string(),
-			[fieldNames.corporateStructureAndServices.contactDetails.city]:
-				z.string(),
-			[fieldNames.corporateStructureAndServices.contactDetails.region]:
-				z.string(),
-			[fieldNames.corporateStructureAndServices.contactDetails.country]:
-				z.string(),
-		}),
-		[fieldNames.corporateStructureAndServices.emailAddress]: z
-			.string()
-			.email(),
-		[fieldNames.corporateStructureAndServices.website]: z.string().url(),
-		[fieldNames.corporateStructureAndServices.contactPerson._]: z.object({
-			[fieldNames.corporateStructureAndServices.contactPerson.name]:
-				z.string(),
-			[fieldNames.corporateStructureAndServices.contactPerson
-				.mobileNumber]: z.string(),
-		}),
-		[fieldNames.corporateStructureAndServices.nameOfSubsidiaryOrAffiliate]:
-			z.string(),
-		[fieldNames.corporateStructureAndServices.nationalityOfAffiliate]:
-			z.string(),
-		[fieldNames.corporateStructureAndServices.permitCategory]: z.enum(
-			Object.values(PERMIT_CATEGORIES)
-		),
-		[fieldNames.corporateStructureAndServices.shareholders._]: z.array(
-			z.object({
-				[fieldNames.corporateStructureAndServices.shareholders.name]:
-					z.string(),
-				[fieldNames.corporateStructureAndServices.shareholders.address]:
-					z.string(),
-				[fieldNames.corporateStructureAndServices.shareholders
-					.nationality]: z.string(),
-				[fieldNames.corporateStructureAndServices.shareholders
-					.percentage]: z.number({ max: 100 }),
-				[fieldNames.corporateStructureAndServices.beneficial.isEditing]:
-					z.boolean(),
-			})
-		),
-		[fieldNames.corporateStructureAndServices.beneficial._]: z.array(
-			z.object({
-				[fieldNames.corporateStructureAndServices.beneficial.name]:
-					z.string(),
-				[fieldNames.corporateStructureAndServices.beneficial
-					.nationality]: z.string(),
-				[fieldNames.corporateStructureAndServices.beneficial
-					.percentage]: z.number({ max: 100 }),
-				[fieldNames.corporateStructureAndServices.beneficial.address]:
-					z.string(),
-				[fieldNames.corporateStructureAndServices.beneficial.isEditing]:
-					z.boolean(),
-			})
-		),
-		[fieldNames.corporateStructureAndServices.executiveDirectors]:
-			z.string(),
-		[fieldNames.corporateStructureAndServices.activities]: z
-			.array(z.string())
-			.length(2),
-		[fieldNames.corporateStructureAndServices.corporateStructure]:
-			z.array(file),
-		[fieldNames.corporateStructureAndServices.description]: z.string(),
-	}),
+	[fieldNames.corporateStructureAndServices._]:
+		corporateStructureAndServicesDesc,
 
-	[fieldNames.finCapability._]: z.object({
-		[fieldNames.finCapability.whatApplies]: z.enum(
-			Object.values(FIN_CAPABILITY_WHAT_APPLIES_OPTIONS)
-		),
-		[fieldNames.finCapability.whatAppliesUploadedDocument]: file,
-		[fieldNames.finCapability.sourceOfFunds]: z.string(),
-	}),
+	[fieldNames.finCapability._]: financialCapabilityDesc,
 
-	[fieldNames.mgtAndTechnicalCompetencies._]: z.object({
-		[fieldNames.mgtAndTechnicalCompetencies.orgChart]: z.array(file),
-		[fieldNames.mgtAndTechnicalCompetencies.detailedStaffInfo]:
-			z.array(file),
-		[fieldNames.mgtAndTechnicalCompetencies.requiredExpertise]: z.string(),
-		[fieldNames.mgtAndTechnicalCompetencies.sourcesOfEquipment]: z.string(),
-	}),
+	[fieldNames.mgtAndTechnicalCompetencies._]: mgtAndTechnicalCompetenciesDesc,
 
-	[fieldNames.detailsOfExperience._]: z.object({
-		[fieldNames.detailsOfExperience.companyExperience]: z.string(),
-		[fieldNames.detailsOfExperience.countries]: z.string(),
-		[fieldNames.detailsOfExperience.contractsExecuted._]: z.array(
-			z.object({
-				[fieldNames.detailsOfExperience.contractsExecuted.isEditing]:
-					z.boolean(),
-				[fieldNames.detailsOfExperience.contractsExecuted
-					.descriptionOfContract]: z.string(),
-				[fieldNames.detailsOfExperience.contractsExecuted
-					.nameOfCompanyWorkWasDoneFor]: z.string(),
-				[fieldNames.detailsOfExperience.contractsExecuted
-					.contractDuration]: z.string(),
-				[fieldNames.detailsOfExperience.contractsExecuted
-					.contractValue]: z.string(),
-			})
-		),
-	}),
+	[fieldNames.detailsOfExperience._]: detailsOfExperienceDesc,
 
-	[fieldNames.orgDevProgramAndBudget._]: z.object({
-		[fieldNames.orgDevProgramAndBudget.orgDevStrategy]: z.array(file),
-		[fieldNames.orgDevProgramAndBudget.employmentPlan]: z.array(file),
-		[fieldNames.orgDevProgramAndBudget.techTransferProgramAndBudget]:
-			z.array(file),
-		[fieldNames.orgDevProgramAndBudget.trainingProgramAndBudget]:
-			z.array(file),
-		[fieldNames.orgDevProgramAndBudget.csrAndSocialDevProgramAndBudget]:
-			z.array(file),
-	}),
+	[fieldNames.orgDevProgramAndBudget._]: orgDevProgramAndBudgetDesc,
 
-	[fieldNames.localContent._]: z.object({
-		[fieldNames.localContent.percentageOfGhanaianParticipation]:
-			positiveNumber,
-		[fieldNames.localContent.ghanaianMgtStaffBreakdown]: positiveNumber,
-		[fieldNames.localContent.foreignMgtStaffBreakdown]: positiveNumber,
-		[fieldNames.localContent.totalMgtStaffBreakdown]: positiveNumber,
-		[fieldNames.localContent.ghanaianOtherStaffBreakdown]: positiveNumber,
-		[fieldNames.localContent.foreignOtherStaffBreakdown]: positiveNumber,
-		[fieldNames.localContent.totalOtherStaffBreakdown]: positiveNumber,
-		[fieldNames.localContent.infraExpenditure]: positiveNumber,
-		[fieldNames.localContent.rawMaterials]: z.string(),
-		[fieldNames.localContent.ghanaianFinishedGoods]: z.string(),
-		[fieldNames.localContent.valueOfServiceProvided._]: z.array(
-			z.object({
-				[fieldNames.localContent.valueOfServiceProvided.isEditing]:
-					z.boolean(),
-				[fieldNames.localContent.valueOfServiceProvided.typeOfService]:
-					z.string(),
-				[fieldNames.localContent.valueOfServiceProvided.contractSum]:
-					z.string(),
-				[fieldNames.localContent.valueOfServiceProvided
-					.nameOfClientCompany]: z.string(),
-			})
-		),
-	}),
+	[fieldNames.localContent._]: localContentDesc,
 
-	[fieldNames.healthSafetySecurityEnv._]: z.object({
-		[fieldNames.healthSafetySecurityEnv.hssePolicyAndObj]: z.array(file),
-	}),
+	[fieldNames.healthSafetySecurityEnv._]: healthSafetySecurityEnvDesc,
 
-	[fieldNames.miscFiles]: z.array(file),
+	[fieldNames.miscFiles]: miscFilesDesc,
 
-	[fieldNames.declaration]: z.array(file),
+	[fieldNames.declaration]: declarationDesc,
 
-	[fieldNames.coverPage]: file,
+	[fieldNames.coverPage]: coverPageDesc,
 
-	[fieldNames.checkList._]: z.object({
-		[fieldNames.checkList.coverPage]: z.boolean(),
-		[fieldNames.checkList.applicationForm]: z.boolean(),
-		[fieldNames.checkList.certificateOfIncorporation]: z.boolean(),
-		[fieldNames.checkList.certificateToCommenceBusiness]: z.boolean(),
-		[fieldNames.checkList.companyRegulations]: z.boolean(),
-		[fieldNames.checkList.signedHssePolicyAndObj]: z.boolean(),
-		[fieldNames.checkList.currentAuditedFinReportsOrProjectedRevenue]:
-			z.boolean(),
-		[fieldNames.checkList.validTaxClearanceCertificate]: z.boolean(),
-		[fieldNames.checkList.vatCertificate]: z.boolean(),
-		[fieldNames.checkList.originalSsnitClearanceCertificate]: z.boolean(),
-		[fieldNames.checkList.companyProfileAndBusinessPlan]: z.boolean(),
-		[fieldNames.checkList.copiesOfOtherRegulatoryCerts]: z.boolean(),
-		[fieldNames.checkList.copyOfApplicationPackReceipt]: z.boolean(),
-	}),
+	[fieldNames.checkList._]: checkListDesc,
 });
 
 export default state;

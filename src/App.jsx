@@ -9,10 +9,37 @@ import { Button, ButtonGroup } from "react-bootstrap";
 import PlansAndProgrammes from "./pages/PlansAndProgrammes";
 import LocalContent from "./pages/LocalContent";
 import Miscellaneous from "./pages/Miscellaneous";
+import * as z from "zod";
 import AnnexesAndAttachments from "./pages/AnnexesAndAttachments";
-import { initialErrorState, initialState } from "./constants.mjs";
+import {
+	fieldNames,
+	initialErrorState,
+	initialState,
+	PERMIT_CATEGORIES,
+} from "./constants.mjs";
 import prepareForSubmission from "./prepareForSubmission";
-import state from "./stateDescription.mjs";
+import state, {
+	corporateStructureAndServicesDesc,
+} from "./stateDescription.mjs";
+
+const newPages = [
+	{
+		page: CorporateStructureAndServices,
+		onValidate: (values) => {
+			// return false if there's any errors
+			const { success: result } =
+				corporateStructureAndServicesDesc.safeParse(values);
+			console.log(
+				"validating corporate structure and services -> ",
+				result
+			);
+
+			return result;
+		},
+	},
+];
+
+const file = z.object({ fileName: z.string(), file: z.string() });
 
 //info: the position of the page determines its page number. so CorporateStructureAndServices is page 1 because its first in this array, etc..
 const pages = [
@@ -72,7 +99,20 @@ function App() {
 	const CurrentPage = pages[page - 1];
 
 	const onClickSetPage = (value) => {
-		if (value > pages.length) return;
+		console.log(
+			"data -> ",
+			data[fieldNames.corporateStructureAndServices._]
+		);
+		const result = corporateStructureAndServicesDesc.safeParse(
+			data[fieldNames.corporateStructureAndServices._]
+		);
+
+		console.log("is valid -> ", result.error.formErrors.fieldErrors);
+
+		if (value > pages.length || !result.success) {
+			alert("There are errors. Please fix them");
+			return;
+		}
 		setPage(value);
 	};
 

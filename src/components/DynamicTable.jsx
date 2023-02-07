@@ -13,14 +13,15 @@ function DynamicTable({
 	updateRow, // change the value of the row
 	saveRow,
 	editRow, // set the row to isEditing: true
-	deleteRow,
+  deleteRow,
+  onBlur
 }) {
 	return (
 		<Table>
 			<thead>
 				<tr>
 					{columns.map((each) => (
-						<th>{each.name}</th>
+						<th key={each.name}>{each.name}</th>
 					))}
 					<th>
 						<Button type="button" size="sm" onClick={addNewRow}>
@@ -31,7 +32,7 @@ function DynamicTable({
 			</thead>
 			<tbody>
 				{data.map((val, index) => (
-					<tr>
+					<tr key={index}>
 						{columns.map((col) =>
 							!val.isEditing ? (
 								<td>{val[col.key]}</td>

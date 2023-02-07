@@ -1,8 +1,8 @@
 describe("App", () => {
-	test(`given that the page is rendered,
+	test.todo(`given that the page is rendered,
   then the app should be on the first page`);
 
-	test(`given that the app is rendered
+	test.todo(`given that the app is rendered
   when the user clicks on the submit button
   then the submit action should be triggered`);
 
@@ -60,13 +60,20 @@ describe("App", () => {
 			},
 		];
 
-		test(`given that the page is rendered
+		test.todo(`given that the page is rendered
     when the user attempts to move to the next page with only the non-optional values unfilled
     then the page transition should be successful`);
 
-		test(`given that the page is rendered
+		test.todo(`given that the page is rendered
     when the user attempts to move to the next page with some required information unfilled
     then the page transition should not be successful
       and errors should show on the relevant fields`);
 	});
 });
+
+test.todo(`confirm that each of the fields is showing correctly
+  and onBlur is working correctly
+  and onChange is working correctly
+  and the placeholder is showing correctly`);
+
+test.todo(`confirm that each of the fields is showing correctly`);

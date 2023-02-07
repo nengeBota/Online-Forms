@@ -1,5 +1,7 @@
 import { Form } from "react-bootstrap";
+import { z } from "zod";
 import DynamicTable from "../components/DynamicTable";
+import Errors from "../components/Errors";
 import FileInput from "../components/FileInput";
 import Heading from "../components/Heading";
 import Section from "../components/Section";
@@ -8,6 +10,12 @@ import {
 	permitCategoryOptions,
 	PERMIT_CATEGORIES,
 } from "../constants.mjs";
+import fieldsConfig from "../constants/fieldsConfig";
+import {
+	corporateStructureAndServicesDesc,
+	dateBeforeToday,
+	nonEmptyString,
+} from "../stateDescription.mjs";
 
 const getValue = (data) => {
 	const fields = data[fieldNames.corporateStructureAndServices._];
@@ -64,6 +72,15 @@ const getValue = (data) => {
 		activities,
 	};
 };
+
+const getError = (field, errors) =>
+	errors[fieldNames.corporateStructureAndServices._][field];
+
+function formatError(error) {
+	return error?.format()?._errors;
+}
+
+const CORP = fieldNames.corporateStructureAndServices;
 
 function CorporateStructureAndServices({ data, setData, errors, setErrors }) {
 	const {
@@ -128,7 +145,13 @@ function CorporateStructureAndServices({ data, setData, errors, setErrors }) {
 	};
 
 	const updateErrors = (field, value) => {
-		setErrors((prev) => ({ ...prev }));
+		setErrors((prev) => ({
+			...prev,
+			[fieldNames.corporateStructureAndServices._]: {
+				...prev[fieldNames.corporateStructureAndServices._],
+				[field]: value,
+			},
+		}));
 	};
 
 	return (
@@ -146,6 +169,18 @@ function CorporateStructureAndServices({ data, setData, errors, setErrors }) {
 						1. Name of Applicant (as indicated on Certificate of
 						Incorporation).
 					</Form.Label>
+					<Errors
+						errors={getError(
+							fieldNames.corporateStructureAndServices
+								.applicantName,
+							errors
+						)}
+						testId={
+							fieldNames.corporateStructureAndServices
+								.applicantName
+						}
+					/>
+
 					<Form.Control
 						placeholder="Applicant's name"
 						value={applicantName}
@@ -158,13 +193,33 @@ function CorporateStructureAndServices({ data, setData, errors, setErrors }) {
 							);
 						}}
 						onBlur={(e) => {
-							console.log("value of onblur -> ", e);
-							console.log(e.target.value);
+							const { error } = nonEmptyString.safeParse(
+								e.target.value
+							);
+
+							const errors = error?.format();
+
+							updateErrors(
+								fieldNames.corporateStructureAndServices
+									.applicantName,
+								errors?._errors
+							);
 						}}
 					/>
 				</Section>
 				<Section>
 					<Form.Label>2. Date of Incorporation.</Form.Label>
+					<Errors
+						errors={getError(
+							fieldNames.corporateStructureAndServices
+								.dateOfIncorporation,
+							errors
+						)}
+						tesId={
+							fieldNames.corporateStructureAndServices
+								.dateOfIncorporation
+						}
+					/>
 					<Form.Control
 						type="date"
 						value={dateOfIncorporation}
@@ -175,10 +230,34 @@ function CorporateStructureAndServices({ data, setData, errors, setErrors }) {
 								e.target.value
 							);
 						}}
+						onBlur={(e) => {
+							const { error } = dateBeforeToday.safeParse(
+								new Date(e.target.value)
+							);
+
+							const errors = error?.format();
+
+							updateErrors(
+								fieldNames.corporateStructureAndServices
+									.dateOfIncorporation,
+								errors?._errors
+							);
+						}}
 					/>
 				</Section>
 				<Section>
 					<Form.Label>Place of Incorporation.</Form.Label>
+					<Errors
+						errors={getError(
+							fieldNames.corporateStructureAndServices
+								.placeOfIncorporation,
+							errors
+						)}
+						testId={
+							fieldNames.corporateStructureAndServices
+								.placeOfIncorporation
+						}
+					/>
 					<Form.Control
 						value={placeOfIncorporation}
 						onChange={(e) => {
@@ -188,10 +267,32 @@ function CorporateStructureAndServices({ data, setData, errors, setErrors }) {
 								e.target.value
 							);
 						}}
+						onBlur={(e) => {
+							const { error } = nonEmptyString.safeParse(
+								e.target.value
+							);
+
+							updateErrors(
+								fieldNames.corporateStructureAndServices
+									.placeOfIncorporation,
+								formatError(error)
+							);
+						}}
 					/>
 				</Section>
 				<Section>
 					<Form.Label>3. Contact Details</Form.Label>
+					<Errors
+						testId={
+							fieldNames.corporateStructureAndServices
+								.contactDetails.officeAddress
+						}
+						errors={getError(
+							fieldNames.corporateStructureAndServices
+								.contactDetails.officeAddress,
+							errors
+						)}
+					/>
 					<Form.Control
 						placeholder="Office Address"
 						value={contactDetails.officeAddress}
@@ -207,6 +308,25 @@ function CorporateStructureAndServices({ data, setData, errors, setErrors }) {
 								}
 							);
 						}}
+						onBlur={(e) => {
+							const { error } = nonEmptyString.safeParse(
+								contactDetails.officeAddress
+							);
+
+							updateErrors(
+								fieldNames.corporateStructureAndServices
+									.contactDetails.officeAddress,
+								formatError(error)
+							);
+						}}
+					/>
+
+					<Errors
+						testId={CORP.contactDetails.postalAddress}
+						errors={getError(
+							CORP.contactDetails.postalAddress,
+							errors
+						)}
 					/>
 					<Form.Control
 						placeholder="Postal Address"
@@ -223,6 +343,20 @@ function CorporateStructureAndServices({ data, setData, errors, setErrors }) {
 								}
 							);
 						}}
+						onBlur={(e) => {
+							const { error } = nonEmptyString.safeParse(
+								contactDetails?.postalAddress
+							);
+							updateErrors(
+								CORP.contactDetails.postalAddress,
+								formatError(error)
+							);
+						}}
+					/>
+
+					<Errors
+						testId={CORP.contactDetails?.city}
+						errors={getError(CORP.contactDetails.city, errors)}
 					/>
 					<Form.Control
 						placeholder="City"
@@ -238,6 +372,20 @@ function CorporateStructureAndServices({ data, setData, errors, setErrors }) {
 								}
 							);
 						}}
+						onBlur={() => {
+							const { error } = nonEmptyString.safeParse(
+								contactDetails?.city
+							);
+							updateErrors(
+								CORP.contactDetails.city,
+								formatError(error)
+							);
+						}}
+					/>
+
+					<Errors
+						testId={CORP.contactDetails?.region}
+						errors={getError(CORP.contactDetails?.region, errors)}
 					/>
 					<Form.Control
 						placeholder="Region"
@@ -253,6 +401,20 @@ function CorporateStructureAndServices({ data, setData, errors, setErrors }) {
 								}
 							);
 						}}
+						onBlur={() => {
+							const { error } = nonEmptyString.safeParse(
+								contactDetails?.region
+							);
+							updateErrors(
+								CORP.contactDetails.region,
+								formatError(error)
+							);
+						}}
+					/>
+
+					<Errors
+						testId={CORP.contactDetails?.country}
+						errors={getError(CORP.contactDetails?.country, errors)}
 					/>
 					<Form.Control
 						placeholder="Country"
@@ -269,11 +431,25 @@ function CorporateStructureAndServices({ data, setData, errors, setErrors }) {
 								}
 							);
 						}}
+						onBlur={() => {
+							const { error } = nonEmptyString.safeParse(
+								contactDetails?.country
+							);
+							updateErrors(
+								CORP.contactDetails.country,
+								formatError(error)
+							);
+						}}
 					/>
 				</Section>
 				<br />
 				<Section>
 					<Form.Label>Email address</Form.Label>
+
+					<Errors
+						testId={CORP.emailAddress}
+						errors={getError(CORP.emailAddress, errors)}
+					/>
 					<Form.Control
 						placeholder="Email"
 						value={emailAddress}
@@ -283,6 +459,14 @@ function CorporateStructureAndServices({ data, setData, errors, setErrors }) {
 									.emailAddress,
 								e.target.value
 							);
+						}}
+						onBlur={() => {
+							const { error } = z
+								.string()
+								.email()
+								.safeParse(emailAddress);
+
+							updateErrors(CORP.emailAddress, formatError(error));
 						}}
 					/>
 				</Section>
@@ -302,6 +486,10 @@ function CorporateStructureAndServices({ data, setData, errors, setErrors }) {
 				</Section>
 				<Section>
 					<Form.Label>Contact Person</Form.Label>
+					<Errors
+						testId={CORP.contactPerson?.name}
+						errors={getError(CORP.contactPerson.name, errors)}
+					/>
 					<Form.Control
 						placeholder="Contact Person"
 						value={contactPerson?.name}
@@ -316,10 +504,26 @@ function CorporateStructureAndServices({ data, setData, errors, setErrors }) {
 								}
 							);
 						}}
+						onBlur={() => {
+							const { error } = nonEmptyString.safeParse(
+								contactPerson?.name
+							);
+							updateErrors(
+								CORP.contactPerson.name,
+								formatError(error)
+							);
+						}}
 					/>
 				</Section>
 				<Section>
 					<Form.Label>Mobile Number of Contact Person</Form.Label>
+					<Errors
+						testId={CORP.contactPerson.mobileNumber}
+						errors={getError(
+							CORP.contactPerson.mobileNumber,
+							errors
+						)}
+					/>
 					<Form.Control
 						placeholder="23326262626"
 						value={contactPerson?.mobileNumber}
@@ -336,6 +540,17 @@ function CorporateStructureAndServices({ data, setData, errors, setErrors }) {
 								}
 							);
 						}}
+						onBlur={() => {
+							const { error } = z
+								.string()
+								.min(1, { message: "Phone number is required" })
+								.safeParse(contactPerson?.mobileNumber);
+
+							updateErrors(
+								CORP.contactPerson.mobileNumber,
+								formatError(error)
+							);
+						}}
 					/>
 				</Section>
 				<Section>
@@ -343,7 +558,6 @@ function CorporateStructureAndServices({ data, setData, errors, setErrors }) {
 						4. Name of Subsidiary or Affiliate (if applicable).{" "}
 					</Form.Label>
 					<Form.Control
-						placeholder="NONE"
 						value={nameOfSubsidiaryOrAffiliate}
 						onChange={(e) => {
 							onChange(
@@ -394,15 +608,28 @@ function CorporateStructureAndServices({ data, setData, errors, setErrors }) {
 						7a. List all Individuals/Companies with shares in the
 						applicant company.
 					</Form.Label>
-
+					<div style={{ color: "red", fontSize: "20px" }}>
+						need to fix validation for the tables
+					</div>
 					<DynamicTable
 						columns={[
-							{ name: "Shareholders", key: "name" },
+							{
+								name: "Shareholders",
+								key: "name",
+								validate: (row, col, val) => {
+									const { error } =
+										nonEmptyString.safeParse(val);
+									errors[CORP.shareholders._][row][col] =
+										formatError(error);
+									setErrors({ ...errors });
+								},
+							},
 							{ name: "Address", key: "address" },
 							{ name: "Nationality", key: "nationality" },
 							{ name: "Percentage", key: "percentage" },
 						]}
 						data={shareholders}
+						onBlur={() => {}}
 						addNewRow={() => {
 							onChange(
 								fieldNames.corporateStructureAndServices
@@ -458,7 +685,11 @@ function CorporateStructureAndServices({ data, setData, errors, setErrors }) {
 						7b. Beneficial Ownership - if shareholders in 7a. are
 						companies, please provide a list all individual
 						shareholders in the company stated in 7a.
-					</Form.Label>
+          </Form.Label>
+          
+          <div style={{ color: "red", fontSize: "20px" }}>
+						need to fix validation for the tables
+					</div>
 
 					<DynamicTable
 						columns={[
