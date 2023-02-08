@@ -128,19 +128,30 @@ function CorporateStructureAndServices({ data, setData, errors, setErrors }) {
 		const { name, checked } = e.target;
 
 		if (checked) {
+			if (activities.length >= 2) return;
 			activities.push(name);
-			onChange(
-				fieldNames.corporateStructureAndServices.activities,
-				activities
-			);
+			onChange(CORP.activities, activities);
+
+			if (activities.length !== 2) {
+				updateErrors(CORP.activities, [
+					"Please select exactly 2 of the options available",
+				]);
+			} else {
+				updateErrors(CORP.activities, []);
+			}
 		} else {
 			const updatedActivities = activities.filter(
 				(each) => each !== name
 			);
-			onChange(
-				fieldNames.corporateStructureAndServices.activities,
-				updatedActivities
-			);
+			onChange(CORP.activities, updatedActivities);
+
+			if (updatedActivities.length !== 2) {
+				updateErrors(CORP.activities, [
+					"Please select exactly 2 of the options available",
+				]);
+			} else {
+				updateErrors(CORP.activities, []);
+			}
 		}
 	};
 
@@ -685,9 +696,9 @@ function CorporateStructureAndServices({ data, setData, errors, setErrors }) {
 						7b. Beneficial Ownership - if shareholders in 7a. are
 						companies, please provide a list all individual
 						shareholders in the company stated in 7a.
-          </Form.Label>
-          
-          <div style={{ color: "red", fontSize: "20px" }}>
+					</Form.Label>
+
+					<div style={{ color: "red", fontSize: "20px" }}>
 						need to fix validation for the tables
 					</div>
 
@@ -755,6 +766,10 @@ function CorporateStructureAndServices({ data, setData, errors, setErrors }) {
 						of the Company (Please do not list non-executive
 						directors)
 					</Form.Label>
+					<Errors
+						testId={CORP.executiveDirectors}
+						errors={getError(CORP.executiveDirectors, errors)}
+					/>
 					<br />
 					<Form.Control
 						as="textarea"
@@ -764,6 +779,14 @@ function CorporateStructureAndServices({ data, setData, errors, setErrors }) {
 								fieldNames.corporateStructureAndServices
 									.executiveDirectors,
 								e.target.value
+							);
+						}}
+						onBlur={() => {
+							const { error } =
+								nonEmptyString.safeParse(executiveDirectors);
+							updateErrors(
+								CORP.executiveDirectors,
+								formatError(error)
 							);
 						}}
 					/>
@@ -829,8 +852,13 @@ function CorporateStructureAndServices({ data, setData, errors, setErrors }) {
 							Petroleum Industry Companies list provided
 							[General].`}
 					</Form.Label>
+					<Errors
+						textId={CORP.activities}
+						errors={getError(CORP.activities, errors)}
+					/>
 					{selectedPermitCategories.map((each) => (
 						<Form.Check
+							key={each.name}
 							label={each.label}
 							name={each.name}
 							onChange={onToggleActivity}
