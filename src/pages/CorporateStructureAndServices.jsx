@@ -133,10 +133,10 @@ function CorporateStructureAndServices({ data, setData, errors, setErrors }) {
 	return (
 		<div>
 			<Form>
-				<Heading>
+				<h1 style={{textAlign:'center', color:'#00427c' }}>
 					APPLICATION FOR REGISTRATION PERMIT TO OPERATE IN THE
 					UPSTREAM PETROLEUM INDUSTRY
-				</Heading>
+				</h1>
 				<hr />
 				<Heading>PART ONE – CORPORATE STRUCTURE AND SERVICES</Heading>
 				<hr />

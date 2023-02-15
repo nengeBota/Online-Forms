@@ -23,7 +23,7 @@ function DynamicTable({
 						<th>{each.name}</th>
 					))}
 					<th>
-						<Button type="button" size="sm" onClick={addNewRow}>
+						<Button type="button" size="sm" onClick={addNewRow} style={{backgroundColor:'#00427c', padding:"5px 20px" }}>
 							Add
 						</Button>
 					</th>
@@ -58,8 +58,8 @@ function DynamicTable({
 							{val.isEditing ? (
 								<Button
 									size="sm"
-									onClick={() => saveRow(index)}
-								>
+									onClick={() => saveRow(index) }
+									style={{backgroundColor:'#00427c', padding:"5px 20px" }}>
 									save
 								</Button>
 							) : (
@@ -68,14 +68,14 @@ function DynamicTable({
 										size="sm"
 										variant="warning"
 										onClick={() => editRow(index)}
-									>
+										style={{backgroundColor:'#00427c', padding:"5px 30px" }}>
 										edit
 									</Button>
 									<Button
 										size="sm"
 										variant="danger"
 										onClick={() => deleteRow(index)}
-									>
+										style={{backgroundColor:'#00427c', padding:"5px 20px" }}>
 										delete
 									</Button>
 								</ButtonGroup>

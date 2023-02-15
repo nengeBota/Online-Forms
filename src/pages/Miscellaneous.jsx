@@ -43,9 +43,7 @@ function Miscellaneous({ data, setData }) {
 
 	return (
 		<Form>
-			<Heading>
-				Part Five - Health, Safety, Security And Environment
-			</Heading>
+			<Heading>Part 5 - Health, Safety, Security And Environment</Heading>
 			<hr />
 			<FormGroup>
 				<FormLabel>
@@ -65,8 +63,9 @@ function Miscellaneous({ data, setData }) {
 				/>
 			</FormGroup>
 
-      <br /><br />
-			<Heading>Part Six - Miscellaneous</Heading>
+			<br />
+			<br />
+			<Heading>Part 6 - Miscellaneous</Heading>
 			<hr />
 
 			<h6>
@@ -96,7 +95,7 @@ function Miscellaneous({ data, setData }) {
 					According ot Regulation 46 (1) & (2) of the Petroleum (Local
 					Content and Local Participation) Regulations,
 				</p>
-				<p>
+				<i>
 					1. A person who submits a plan, returns, report or other
 					document and knowingly makes a false statement, commits an
 					offence and is liable on summary conviction to a fine of not
@@ -104,27 +103,34 @@ function Miscellaneous({ data, setData }) {
 					than two hundred and fifty thousand penalty units or to a
 					term of imprisonment of not less than two years and not more
 					than five years or to both.
-				</p>
-				<p>
-					deceive the Commission as representing an indigenous
-					Ghanaian company to achieve the local content requirement
-					under these Regulations, commits an offence and is liable on
-					summary conviction to a fine of not less than one hundred
-					thousand penalty units and not more than two hundred and
-					fifty thousand penalty units or to a term of imprisonment of
-					not less than one year and not more than two years or to
-					both
-				</p>
+				</i><br></br>
+				<br></br>
+				<i>
+					2. A citizen who acts as a front or connives with a foreign
+					citizen or company to deceive the Commission as representing
+					an indigenous Ghanaian company to achieve the local content
+					requirement under these Regulations, commits an offence and
+					is liable on summary conviction to a fine of not less than
+					one hundred thousand penalty units and not more than two
+					hundred and fifty thousand penalty units or to a term of
+					imprisonment of not less than one year and not more than two
+					years or to both
+				</i>
 			</h6>
 
-      <br /><br />
+			<br />
+			<br />
 			<Heading>Declaration Form</Heading>
 			<hr />
 			<FormGroup>
 				<FormLabel>
 					Click to download the Declaration form to fill:
 				</FormLabel>
-				<Button href="#" download>
+				<Button
+					href="#"
+					download
+					style={{ marginLeft: "1%", backgroundColor: "#00427c" }}
+				>
 					Download
 				</Button>
 			</FormGroup>

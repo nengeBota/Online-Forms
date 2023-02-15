@@ -75,11 +75,11 @@ function App() {
 			<br />
 			<br />
 
-			<div style={{ display: "flex", width: '20%',justifyContent: 'space-between', margin: '0 auto' }}>
+			<div style={{ display: "flex", width: '20%',justifyContent: 'space-between', margin: '0 auto'}}>
 				<Button
 					disabled={page === 1}
 					onClick={() => setPage((prev) => prev - 1)}
-				>
+				style={{backgroundColor:'#00427c'}}>
 					Back
 				</Button>
 
@@ -92,7 +92,7 @@ function App() {
 						<Button
 							disabled={page === pages.length}
               onClick={() => setPage((prev) => prev + 1)}
-              style={{marginLeft: 'auto',}}
+              style={{marginLeft: 'auto', backgroundColor:'#00427c'}}
 						>
 							Next
 						</Button>

@@ -92,7 +92,7 @@ function FinancialCapability({ data, setData }) {
 
 	return (
 		<div>
-			<Heading>Part Two - Financial Capability and Technical Competency</Heading>
+			<Heading>Part 2 - Financial Capability and Technical Competency</Heading>
 			<h4>A. Financial Capability</h4>
 			<hr />
 
