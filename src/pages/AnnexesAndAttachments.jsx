@@ -1,6 +1,9 @@
-import { Form, FormCheck, Table } from "react-bootstrap";
+import { ButtonGroup, Form, FormCheck, Table, Button } from "react-bootstrap";
 import Heading from "../components/Heading";
 import { fieldNames } from "../constants.mjs";
+import state from "../stateDescription.mjs";
+import { z } from "zod";
+import formatAllErrorsForState from "../helpers/formatAllErrorsForState";
 
 const getValues = (data) => {
 	const fields = data[fieldNames.checkList._];
@@ -44,7 +47,7 @@ const getValues = (data) => {
 	};
 };
 
-function AnnexesAndAttachments({ data, setData }) {
+function AnnexesAndAttachments({ data, setData, errors, setErrors }) {
 	const {
 		coverPage,
 		applicationForm,
@@ -72,234 +75,263 @@ function AnnexesAndAttachments({ data, setData }) {
 	};
 
 	return (
-		<Form>
-			<Heading>Annexes / Attachments</Heading>
-			<hr />
+		<>
+			<Form>
+				<Heading>Annexes / Attachments</Heading>
+				<hr />
 
-			<p>
-				Please complete the relevant checklist to ensure that you have
-				attached all required documents
-			</p>
+				<p>
+					Please complete the relevant checklist to ensure that you
+					have attached all required documents
+				</p>
 
-			<Table>
-				<thead>
-					<tr>
-						<th></th>
-						<th>Check</th>
-					</tr>
-				</thead>
-				<tbody>
-					<tr>
-						<td>1. Cover Page</td>
-						<td>
-							<FormCheck
-								checked={coverPage}
-								onChange={() =>
-									onChange(
-										fieldNames.checkList.coverPage,
-										!coverPage
-									)
-								}
-							/>
-						</td>
-					</tr>
-					<tr>
-						<td>2. Application Form</td>
-						<td>
-							<FormCheck
-								checked={applicationForm}
-								onChange={() => {
-									onChange(
-										fieldNames.checkList.applicationForm,
-										!applicationForm
-									);
-								}}
-							/>
-						</td>
-					</tr>
-					<tr>
-						<td>3. Certificate of Incorporation</td>
-						<td>
-							<FormCheck
-								checked={certificateOfIncorporation}
-								onChange={() => {
-									onChange(
-										fieldNames.checkList
-											.certificateOfIncorporation,
-										!certificateOfIncorporation
-									);
-								}}
-							/>
-						</td>
-					</tr>
-					<tr>
-						<td>4. Certificate to Commence Business</td>
-						<td>
-							<FormCheck
-								checked={certificateToCommenceBusiness}
-								onChange={() => {
-									onChange(
-										fieldNames.checkList
-											.certificateToCommenceBusiness,
-										!certificateToCommenceBusiness
-									);
-								}}
-							/>
-						</td>
-					</tr>
-					<tr>
-						<td>5. Company Regulations</td>
-						<td>
-							<FormCheck
-								checked={companyRegulations}
-								onChange={() => {
-									onChange(
-										fieldNames.checkList.companyRegulations,
-										!companyRegulations
-									);
-								}}
-							/>
-						</td>
-					</tr>
-					<tr>
-						<td>6. Signed HSSE Policy and Objectives</td>
-						<td>
-							<FormCheck
-								checked={signedHssePolicyAndObj}
-								onChange={() => {
-									onChange(
-										fieldNames.checkList
-											.signedHssePolicyAndObj,
-										!signedHssePolicyAndObj
-									);
-								}}
-							/>
-						</td>
-					</tr>
-					<tr>
-						<td>
-							7. Current Audited Financial Reports / Projected
-							Revenue for Upstream Petroleum Activities
-						</td>
-						<td>
-							<FormCheck
-								checked={
-									currentAuditedFinReportsOrProjectedRevenue
-								}
-								onChange={() => {
-									onChange(
-										fieldNames.checkList
-											.currentAuditedFinReportsOrProjectedRevenue,
-										!currentAuditedFinReportsOrProjectedRevenue
-									);
-								}}
-							/>
-						</td>
-					</tr>
-					<tr>
-						<td>
-							8. Valid Tax Clearance Certificate (Provide
-							Original)
-						</td>
-						<td>
-							<FormCheck
-								checked={validTaxClearanceCertificate}
-								onChange={() => {
-									onChange(
-										fieldNames.checkList
-											.validTaxClearanceCertificate,
-										!validTaxClearanceCertificate
-									);
-								}}
-							/>
-						</td>
-					</tr>
-					<tr>
-						<td>9. VAT Certificate</td>
-						<td>
-							<FormCheck
-								checked={vatCertificate}
-								onChange={() => {
-									onChange(
-										fieldNames.checkList.vatCertificate,
-										!vatCertificate
-									);
-								}}
-							/>
-						</td>
-					</tr>
-					<tr>
-						<td>
-							10. Valid SSNIT Clearance Certificate (Provide
-							Original)
-						</td>
-						<td>
-							<FormCheck
-								checked={originalSsnitClearanceCertificate}
-								onChange={() => {
-									onChange(
-										fieldNames.checkList
-											.originalSsnitClearanceCertificate,
-										!originalSsnitClearanceCertificate
-									);
-								}}
-							/>
-						</td>
-					</tr>
-					<tr>
-						<td>11. Company Profile and Business Plan</td>
-						<td>
-							<FormCheck
-								checked={companyProfileandBusinessPlan}
-								onChange={() => {
-									onChange(
-										fieldNames.checkList
-											.companyProfileandBusinessPlan,
-										companyProfileandBusinessPlan
-									);
-								}}
-							/>
-						</td>
-					</tr>
-					<tr>
-						<td>
-							12. Copies of other valid regulatory certificates,
-							licenses, and permits (eg. EPA permit, Air Operator
-							Certificate, Aviation License, FDA Hygiene
-							Certificate, etc)
-						</td>
-						<td>
-							<FormCheck
-								checked={copiesOfOtherRegulatoryCerts}
-								onChange={() => {
-									onChange(
-										fieldNames.checkList
-											.copiesOfOtherRegulatoryCerts,
-										!copiesOfOtherRegulatoryCerts
-									);
-								}}
-							/>
-						</td>
-					</tr>
-					<tr>
-						<td>13. Copy of Application Pack Receipt</td>
-						<td>
-							<FormCheck
-								checked={copyOfApplicationPackReceipt}
-								onChange={() => {
-									onChange(
-										fieldNames.checkList
-											.copyOfApplicationPackReceipt,
-										!copyOfApplicationPackReceipt
-									);
-								}}
-							/>
-						</td>
-					</tr>
-				</tbody>
-			</Table>
-		</Form>
+				<Table>
+					<thead>
+						<tr>
+							<th></th>
+							<th>Check</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>1. Cover Page</td>
+							<td>
+								<FormCheck
+									checked={coverPage}
+									onChange={() =>
+										onChange(
+											fieldNames.checkList.coverPage,
+											!coverPage
+										)
+									}
+								/>
+							</td>
+						</tr>
+						<tr>
+							<td>2. Application Form</td>
+							<td>
+								<FormCheck
+									checked={applicationForm}
+									onChange={() => {
+										onChange(
+											fieldNames.checkList
+												.applicationForm,
+											!applicationForm
+										);
+									}}
+								/>
+							</td>
+						</tr>
+						<tr>
+							<td>3. Certificate of Incorporation</td>
+							<td>
+								<FormCheck
+									checked={certificateOfIncorporation}
+									onChange={() => {
+										onChange(
+											fieldNames.checkList
+												.certificateOfIncorporation,
+											!certificateOfIncorporation
+										);
+									}}
+								/>
+							</td>
+						</tr>
+						<tr>
+							<td>4. Certificate to Commence Business</td>
+							<td>
+								<FormCheck
+									checked={certificateToCommenceBusiness}
+									onChange={() => {
+										onChange(
+											fieldNames.checkList
+												.certificateToCommenceBusiness,
+											!certificateToCommenceBusiness
+										);
+									}}
+								/>
+							</td>
+						</tr>
+						<tr>
+							<td>5. Company Regulations</td>
+							<td>
+								<FormCheck
+									checked={companyRegulations}
+									onChange={() => {
+										onChange(
+											fieldNames.checkList
+												.companyRegulations,
+											!companyRegulations
+										);
+									}}
+								/>
+							</td>
+						</tr>
+						<tr>
+							<td>6. Signed HSSE Policy and Objectives</td>
+							<td>
+								<FormCheck
+									checked={signedHssePolicyAndObj}
+									onChange={() => {
+										onChange(
+											fieldNames.checkList
+												.signedHssePolicyAndObj,
+											!signedHssePolicyAndObj
+										);
+									}}
+								/>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								7. Current Audited Financial Reports / Projected
+								Revenue for Upstream Petroleum Activities
+							</td>
+							<td>
+								<FormCheck
+									checked={
+										currentAuditedFinReportsOrProjectedRevenue
+									}
+									onChange={() => {
+										onChange(
+											fieldNames.checkList
+												.currentAuditedFinReportsOrProjectedRevenue,
+											!currentAuditedFinReportsOrProjectedRevenue
+										);
+									}}
+								/>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								8. Valid Tax Clearance Certificate (Provide
+								Original)
+							</td>
+							<td>
+								<FormCheck
+									checked={validTaxClearanceCertificate}
+									onChange={() => {
+										onChange(
+											fieldNames.checkList
+												.validTaxClearanceCertificate,
+											!validTaxClearanceCertificate
+										);
+									}}
+								/>
+							</td>
+						</tr>
+						<tr>
+							<td>9. VAT Certificate</td>
+							<td>
+								<FormCheck
+									checked={vatCertificate}
+									onChange={() => {
+										onChange(
+											fieldNames.checkList.vatCertificate,
+											!vatCertificate
+										);
+									}}
+								/>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								10. Valid SSNIT Clearance Certificate (Provide
+								Original)
+							</td>
+							<td>
+								<FormCheck
+									checked={originalSsnitClearanceCertificate}
+									onChange={() => {
+										onChange(
+											fieldNames.checkList
+												.originalSsnitClearanceCertificate,
+											!originalSsnitClearanceCertificate
+										);
+									}}
+								/>
+							</td>
+						</tr>
+						<tr>
+							<td>11. Company Profile and Business Plan</td>
+							<td>
+								<FormCheck
+									checked={companyProfileandBusinessPlan}
+									onChange={() => {
+										onChange(
+											fieldNames.checkList
+												.companyProfileandBusinessPlan,
+											companyProfileandBusinessPlan
+										);
+									}}
+								/>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								12. Copies of other valid regulatory
+								certificates, licenses, and permits (eg. EPA
+								permit, Air Operator Certificate, Aviation
+								License, FDA Hygiene Certificate, etc)
+							</td>
+							<td>
+								<FormCheck
+									checked={copiesOfOtherRegulatoryCerts}
+									onChange={() => {
+										onChange(
+											fieldNames.checkList
+												.copiesOfOtherRegulatoryCerts,
+											!copiesOfOtherRegulatoryCerts
+										);
+									}}
+								/>
+							</td>
+						</tr>
+						<tr>
+							<td>13. Copy of Application Pack Receipt</td>
+							<td>
+								<FormCheck
+									checked={copyOfApplicationPackReceipt}
+									onChange={() => {
+										onChange(
+											fieldNames.checkList
+												.copyOfApplicationPackReceipt,
+											!copyOfApplicationPackReceipt
+										);
+									}}
+								/>
+							</td>
+						</tr>
+					</tbody>
+				</Table>
+			</Form>
+			<br />
+			<br />
+
+			<ButtonGroup>
+				<Button>Back</Button>
+				{/* <Button variant="secondary">Preview</Button> */}
+				<Button
+					variant="success"
+					type="button"
+					onClick={() => validate(data, setErrors)}
+				>
+					Submit
+				</Button>
+			</ButtonGroup>
+		</>
 	);
 }
 
 export default AnnexesAndAttachments;
+
+function validate(data, setErrors) {
+	const { error } = state.safeParse(data);
+
+	console.log("errors -> ", error?.format());
+
+	if (!error) return true;
+
+	setErrors(formatAllErrorsForState(error?.format()));
+	return false;
+}

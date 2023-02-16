@@ -770,7 +770,6 @@ function CorporateStructureAndServices({ data, setData, errors, setErrors }) {
 						testId={CORP.executiveDirectors}
 						errors={getError(CORP.executiveDirectors, errors)}
 					/>
-					<br />
 					<Form.Control
 						as="textarea"
 						value={executiveDirectors}
@@ -872,6 +871,10 @@ function CorporateStructureAndServices({ data, setData, errors, setErrors }) {
 						10. b. Provide a description of the range of activities
 						applicant proposes to undertake in relation to 10. a.
 					</Form.Label>
+					<Errors
+						testId={CORP.description}
+						errors={getError(CORP.description, errors)}
+					/>
 					<Form.Control
 						as="textarea"
 						rows={3}
@@ -882,6 +885,11 @@ function CorporateStructureAndServices({ data, setData, errors, setErrors }) {
 									.description,
 								e.target.value
 							);
+						}}
+						onBlur={() => {
+							const { error } =
+								nonEmptyString.safeParse(description);
+							updateErrors(CORP.description, formatError(error));
 						}}
 					/>
 				</Section>

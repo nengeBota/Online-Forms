@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useReducer, useState } from "react";
 import styled from "styled-components";
 import CorporateStructureAndServices from "./pages/CorporateStructureAndServices";
 import Pagination from "./components/Pagination";
@@ -99,18 +99,7 @@ function App() {
 	const CurrentPage = pages[page - 1];
 
 	const onClickSetPage = (value) => {
-		console.log(
-			"data -> ",
-			data[fieldNames.corporateStructureAndServices._]
-		);
-		const result = corporateStructureAndServicesDesc.safeParse(
-			data[fieldNames.corporateStructureAndServices._]
-		);
-
-		console.log("is valid -> ", result.error.formErrors.fieldErrors);
-
-		if (value > pages.length || !result.success) {
-			alert("There are errors. Please fix them");
+		if (value > pages.length) {
 			return;
 		}
 		setPage(value);
