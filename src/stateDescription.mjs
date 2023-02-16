@@ -16,93 +16,52 @@ export const dateBeforeToday = z
 const corporateStructureValidations =
 	validations[fieldNames.corporateStructureAndServices._];
 
+const corporateStructureFields = fieldNames.corporateStructureAndServices;
+
 const { corporateStructureAndServices } = fieldNames;
 
 export const corporateStructureAndServicesDesc = z.object({
 	...corporateStructureValidations,
 
 	[corporateStructureAndServices.contactDetails._]: z.object({
-		...corporateStructureValidations[
-			corporateStructureValidations.contactDetails._
-		],
+		[corporateStructureAndServices.contactDetails.officeAddress]:
+			corporateStructureValidations[
+				corporateStructureFields.contactDetails._
+			][corporateStructureFields.contactDetails.officeAddress],
+
+		[corporateStructureAndServices.contactDetails.postalAddress]:
+			corporateStructureValidations[
+				corporateStructureFields.contactDetails._
+			][corporateStructureFields.contactDetails.postalAddress],
+
+		[corporateStructureAndServices.contactDetails.city]:
+			corporateStructureValidations[
+				corporateStructureFields.contactDetails._
+			][corporateStructureFields.contactDetails.city],
+
+		[corporateStructureAndServices.contactDetails.region]:
+			corporateStructureValidations[
+				corporateStructureFields.contactDetails._
+			][corporateStructureFields.contactDetails.region],
+
+		[corporateStructureAndServices.contactDetails.country]:
+			corporateStructureValidations[
+				corporateStructureFields.contactDetails._
+			][corporateStructureFields.contactDetails.country],
 	}),
 
 	[corporateStructureAndServices.contactPerson._]: z.object({
-		...corporateStructureValidations[
-			corporateStructureValidations.contactPerson._
-		],
+		[corporateStructureAndServices.contactPerson.name]:
+			corporateStructureValidations[
+				corporateStructureFields.contactPerson._
+			][corporateStructureFields.contactPerson.name],
+		[corporateStructureAndServices.contactPerson.mobileNumber]:
+			corporateStructureValidations[
+				corporateStructureFields.contactPerson._
+			][corporateStructureFields.contactPerson.mobileNumber],
 	}),
-
-	// [fieldNames.corporateStructureAndServices.applicantName]: nonEmptyString,
-	// [fieldNames.corporateStructureAndServices.dateOfIncorporation]: z
-	// 	.date()
-	// 	.max(new Date(), { message: "Date cannot be later than today" }),
-	// [fieldNames.corporateStructureAndServices.placeOfIncorporation]:
-	// 	nonEmptyString,
-	// [fieldNames.corporateStructureAndServices.contactDetails._]: z.object({
-	// 	[fieldNames.corporateStructureAndServices.contactDetails.officeAddress]:
-	// 		nonEmptyString,
-	// 	[fieldNames.corporateStructureAndServices.contactDetails.postalAddress]:
-	// 		nonEmptyString,
-	// 	[fieldNames.corporateStructureAndServices.contactDetails.city]:
-	// 		nonEmptyString,
-	// 	[fieldNames.corporateStructureAndServices.contactDetails.region]:
-	// 		nonEmptyString,
-	// 	[fieldNames.corporateStructureAndServices.contactDetails.country]:
-	// 		nonEmptyString,
-	// }),
-	// [fieldNames.corporateStructureAndServices.emailAddress]: z.string().email(),
-	// [fieldNames.corporateStructureAndServices.website]: z.string().url(),
-	// [fieldNames.corporateStructureAndServices.contactPerson._]: z.object({
-	// 	[fieldNames.corporateStructureAndServices.contactPerson.name]:
-	// 		nonEmptyString,
-	// 	[fieldNames.corporateStructureAndServices.contactPerson.mobileNumber]:
-	// 		nonEmptyString,
-	// }),
-	// [fieldNames.corporateStructureAndServices.nameOfSubsidiaryOrAffiliate]:
-	// 	nonEmptyString,
-	// [fieldNames.corporateStructureAndServices.nationalityOfAffiliate]:
-	// 	nonEmptyString,
-	// [fieldNames.corporateStructureAndServices.permitCategory]: z.enum(
-	// 	Object.values(PERMIT_CATEGORIES)
-	// ),
-	// [fieldNames.corporateStructureAndServices.shareholders._]: z.array(
-	// 	z.object({
-	// 		[fieldNames.corporateStructureAndServices.shareholders.name]:
-	// 			nonEmptyString,
-	// 		[fieldNames.corporateStructureAndServices.shareholders.address]:
-	// 			nonEmptyString,
-	// 		[fieldNames.corporateStructureAndServices.shareholders.nationality]:
-	// 			nonEmptyString,
-	// 		[fieldNames.corporateStructureAndServices.shareholders.percentage]:
-	// 			z.number({ max: 100 }),
-	// 		[fieldNames.corporateStructureAndServices.beneficial.isEditing]:
-	// 			z.boolean(),
-	// 	})
-	// ),
-	// [fieldNames.corporateStructureAndServices.beneficial._]: z.array(
-	// 	z.object({
-	// 		[fieldNames.corporateStructureAndServices.beneficial.name]:
-	// 			nonEmptyString,
-	// 		[fieldNames.corporateStructureAndServices.beneficial.nationality]:
-	// 			nonEmptyString,
-	// 		[fieldNames.corporateStructureAndServices.beneficial.percentage]:
-	// 			z.number({ max: 100 }),
-	// 		[fieldNames.corporateStructureAndServices.beneficial.address]:
-	// 			nonEmptyString,
-	// 		[fieldNames.corporateStructureAndServices.beneficial.isEditing]:
-	// 			z.boolean(),
-	// 	})
-	// ),
-	// [fieldNames.corporateStructureAndServices.executiveDirectors]:
-	// 	nonEmptyString,
-	// [fieldNames.corporateStructureAndServices.activities]: z
-	// 	.array(z.string())
-	// 	.length(2),
-	// [fieldNames.corporateStructureAndServices.corporateStructure]:
-	// 	z.array(file),
-	// [fieldNames.corporateStructureAndServices.description]: nonEmptyString,
 });
+
 export const financialCapabilityDesc = z.object({
 	[fieldNames.finCapability.whatApplies]: z.enum(
 		Object.values(FIN_CAPABILITY_WHAT_APPLIES_OPTIONS)

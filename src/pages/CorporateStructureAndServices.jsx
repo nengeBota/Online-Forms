@@ -298,11 +298,13 @@ function CorporateStructureAndServices({ data, setData, errors, setErrors }) {
 							fieldNames.corporateStructureAndServices
 								.contactDetails.officeAddress
 						}
-						errors={getError(
-							fieldNames.corporateStructureAndServices
-								.contactDetails.officeAddress,
-							errors
-						)}
+						errors={
+							getError(
+								fieldNames.corporateStructureAndServices
+									.contactDetails._,
+								errors
+							)?.officeAddress
+						}
 					/>
 					<Form.Control
 						placeholder="Office Address"
@@ -334,10 +336,10 @@ function CorporateStructureAndServices({ data, setData, errors, setErrors }) {
 
 					<Errors
 						testId={CORP.contactDetails.postalAddress}
-						errors={getError(
-							CORP.contactDetails.postalAddress,
-							errors
-						)}
+						errors={
+							getError(CORP.contactDetails._, errors)
+								?.postalAddress
+						}
 					/>
 					<Form.Control
 						placeholder="Postal Address"
@@ -367,7 +369,7 @@ function CorporateStructureAndServices({ data, setData, errors, setErrors }) {
 
 					<Errors
 						testId={CORP.contactDetails?.city}
-						errors={getError(CORP.contactDetails.city, errors)}
+						errors={getError(CORP.contactDetails._, errors)?.city}
 					/>
 					<Form.Control
 						placeholder="City"
@@ -396,7 +398,9 @@ function CorporateStructureAndServices({ data, setData, errors, setErrors }) {
 
 					<Errors
 						testId={CORP.contactDetails?.region}
-						errors={getError(CORP.contactDetails?.region, errors)}
+						errors={
+							getError(CORP.contactDetails?._, errors)?.region
+						}
 					/>
 					<Form.Control
 						placeholder="Region"
@@ -425,7 +429,9 @@ function CorporateStructureAndServices({ data, setData, errors, setErrors }) {
 
 					<Errors
 						testId={CORP.contactDetails?.country}
-						errors={getError(CORP.contactDetails?.country, errors)}
+						errors={
+							getError(CORP.contactDetails?._, errors)?.country
+						}
 					/>
 					<Form.Control
 						placeholder="Country"
@@ -499,7 +505,7 @@ function CorporateStructureAndServices({ data, setData, errors, setErrors }) {
 					<Form.Label>Contact Person</Form.Label>
 					<Errors
 						testId={CORP.contactPerson?.name}
-						errors={getError(CORP.contactPerson.name, errors)}
+						errors={getError(CORP.contactPerson._, errors)?.name}
 					/>
 					<Form.Control
 						placeholder="Contact Person"
@@ -530,10 +536,9 @@ function CorporateStructureAndServices({ data, setData, errors, setErrors }) {
 					<Form.Label>Mobile Number of Contact Person</Form.Label>
 					<Errors
 						testId={CORP.contactPerson.mobileNumber}
-						errors={getError(
-							CORP.contactPerson.mobileNumber,
-							errors
-						)}
+						errors={
+							getError(CORP.contactPerson._, errors)?.mobileNumber
+						}
 					/>
 					<Form.Control
 						placeholder="23326262626"
