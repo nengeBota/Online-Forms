@@ -1,4 +1,5 @@
 import { Button, ButtonGroup, Form, Table } from "react-bootstrap";
+import Errors from "./Errors";
 
 /**
  *
@@ -13,8 +14,9 @@ function DynamicTable({
 	updateRow, // change the value of the row
 	saveRow,
 	editRow, // set the row to isEditing: true
-  deleteRow,
-  onBlur
+	deleteRow,
+	onBlur,
+	errors,
 }) {
 	return (
 		<Table>
@@ -38,6 +40,9 @@ function DynamicTable({
 								<td>{val[col.key]}</td>
 							) : (
 								<td>
+									<Errors
+										errors={errors?.[index]?.[col.key]}
+									/>
 									<Form.Control
 										style={{
 											width: "100px",

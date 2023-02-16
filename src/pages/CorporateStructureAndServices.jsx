@@ -689,6 +689,14 @@ function CorporateStructureAndServices({ data, setData, errors, setErrors }) {
 								[...shareholders]
 							);
 						}}
+						errors={
+							errors?.[
+								fieldNames.corporateStructureAndServices._
+							]?.[
+								fieldNames.corporateStructureAndServices
+									.shareholders._
+							]
+						}
 					/>
 				</Section>
 				<Section>
