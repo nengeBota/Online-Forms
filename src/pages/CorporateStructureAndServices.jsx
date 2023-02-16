@@ -619,9 +619,6 @@ function CorporateStructureAndServices({ data, setData, errors, setErrors }) {
 						7a. List all Individuals/Companies with shares in the
 						applicant company.
 					</Form.Label>
-					<div style={{ color: "red", fontSize: "20px" }}>
-						need to fix validation for the tables
-					</div>
 					<DynamicTable
 						columns={[
 							{
@@ -706,10 +703,6 @@ function CorporateStructureAndServices({ data, setData, errors, setErrors }) {
 						shareholders in the company stated in 7a.
 					</Form.Label>
 
-					<div style={{ color: "red", fontSize: "20px" }}>
-						need to fix validation for the tables
-					</div>
-
 					<DynamicTable
 						columns={[
 							{ name: "Beneficial", key: "name" },
@@ -717,6 +710,14 @@ function CorporateStructureAndServices({ data, setData, errors, setErrors }) {
 							{ name: "Nationality", key: "nationality" },
 							{ name: "Percentage", key: "percentage" },
 						]}
+						errors={
+							errors?.[
+								fieldNames.corporateStructureAndServices._
+							]?.[
+								fieldNames.corporateStructureAndServices
+									.beneficial._
+							]
+						}
 						data={beneficial}
 						addNewRow={() => {
 							onChange(

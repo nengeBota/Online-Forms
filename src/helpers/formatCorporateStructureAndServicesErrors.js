@@ -103,7 +103,9 @@ export default function formatCorporateStructureAndServicesErrors(
 			errors?.[corporateStructure.beneficial._]
 		)
 			?.filter((key) => key !== "_errors")
-			?.map((each) => {
+			?.map((key) => {
+				const each = errors?.[corporateStructure.beneficial._][key];
+
 				return {
 					[corporateStructure.beneficial.name]:
 						each?.[corporateStructure.beneficial.name]?._errors,
