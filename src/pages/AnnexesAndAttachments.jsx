@@ -307,31 +307,8 @@ function AnnexesAndAttachments({ data, setData, errors, setErrors }) {
 			</Form>
 			<br />
 			<br />
-
-			<ButtonGroup>
-				<Button>Back</Button>
-				{/* <Button variant="secondary">Preview</Button> */}
-				<Button
-					variant="success"
-					type="button"
-					onClick={() => validate(data, setErrors)}
-				>
-					Submit
-				</Button>
-			</ButtonGroup>
 		</>
 	);
 }
 
 export default AnnexesAndAttachments;
-
-function validate(data, setErrors) {
-	const { error } = state.safeParse(data);
-
-	console.log("errors -> ", error?.format());
-
-	if (!error) return true;
-
-	setErrors(formatAllErrorsForState(error?.format()));
-	return false;
-}

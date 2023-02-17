@@ -5,7 +5,14 @@ import Pagination from "./components/Pagination";
 import Image from "react-bootstrap/Image";
 import { categoryfxn } from "./api";
 import FinancialCapability from "./pages/FinancialCapability";
-import { Button, ButtonGroup } from "react-bootstrap";
+import {
+	Button,
+	ButtonGroup,
+	ModalBody,
+	ModalFooter,
+	ModalHeader,
+	Modal,
+} from "react-bootstrap";
 import PlansAndProgrammes from "./pages/PlansAndProgrammes";
 import LocalContent from "./pages/LocalContent";
 import Miscellaneous from "./pages/Miscellaneous";
@@ -21,6 +28,7 @@ import prepareForSubmission from "./prepareForSubmission";
 import state, {
 	corporateStructureAndServicesDesc,
 } from "./stateDescription.mjs";
+import formatAllErrorsForState from "./helpers/formatAllErrorsForState";
 
 const newPages = [
 	{
@@ -86,6 +94,7 @@ function App() {
 
 	const [data, setData] = useState(initialState);
 	const [errors, setErrors] = useState(initialErrorState);
+	const [showErrorModal, setShowErrorModal] = useState(false);
 
 	async function fetchcategories() {
 		const result = await categoryfxn();
@@ -118,16 +127,29 @@ function App() {
 				setErrors={setErrors}
 			/>
 
+			<Modal show={showErrorModal} centered>
+				<ModalHeader>
+					<h4 style={{ color: "red" }}>Unresolved Errors</h4>
+				</ModalHeader>
+				<ModalBody>
+					Some fields have errors. Please fix them and try again.
+				</ModalBody>
+				<ModalFooter>
+					<Button
+						onClick={() => {
+							setShowErrorModal(false);
+						}}
+						variant="danger"
+					>
+						OK
+					</Button>
+				</ModalFooter>
+			</Modal>
+
 			<br />
 			<br />
 
-			<ButtonGroup
-				style={{
-					display: "flex",
-					justifyContent: "space-between",
-					margin: "0 auto",
-				}}
-			>
+			<ButtonGroup>
 				<Button
 					disabled={page === 1}
 					onClick={() => setPage((prev) => prev - 1)}
@@ -149,19 +171,72 @@ function App() {
 						Next
 					</Button>
 				) : (
-					<Button variant="success" onClick={() => submit(data)}>
+					<Button
+						variant="success"
+						onClick={() => {
+							if (!validate(data, setErrors, setPage)) {
+								setShowErrorModal(true);
+								return;
+							}
+
+							// once we find an error, we should show a modal asking the user to fix the errors, and then take the user to the first page which has errors
+
+							submit(data);
+						}}
+					>
 						{" "}
 						Submit
 					</Button>
 				)}
 			</ButtonGroup>
 
-			<Pagination currentPage={page} setPage={onClickSetPage} />
+			<Pagination
+				validationSummary={errors?.summary}
+				currentPage={page}
+				setPage={onClickSetPage}
+			/>
 		</PageWrapper>
 	);
 }
 
 export default App;
+
+function validate(data, setErrors, setPage) {
+	const { error } = state.safeParse(data);
+
+	console.log("errors -> ", error?.format());
+
+	const { error: page1HasErrors } =
+		corporateStructureAndServicesDesc.safeParse(
+			data[corporateStructureAndServicesDesc]
+		);
+
+	if (!error) return true;
+
+	const summary = {
+		page1: page1HasErrors,
+		page2: true,
+		page3: true,
+		page4: true,
+		page5: true,
+		page6: true,
+	};
+
+	// transition to the correct page
+	setPage(determineFirstPageWithErrors(summary));
+
+	setErrors({
+		summary,
+		...formatAllErrorsForState(error?.format()),
+	});
+	return false;
+}
+
+function determineFirstPageWithErrors(pagesErrorStatus) {
+	const pages = Object.keys(pagesErrorStatus);
+
+	return pages.findIndex((each) => !!each) + 1;
+}
 
 const PageWrapper = styled.div`
 	max-width: 750px;

@@ -1,5 +1,6 @@
 import { getElementError } from "@testing-library/react";
 import { fieldNames } from "../constants.mjs";
+import { corporateStructureAndServicesDesc } from "../stateDescription.mjs";
 
 const corporateStructure = fieldNames.corporateStructureAndServices;
 
@@ -12,7 +13,8 @@ export default function formatCorporateStructureAndServicesErrors(
 ) {
 	const errors = corporateStructureAndServicesErrors;
 
-	return {
+  return {
+
 		[fieldNames.corporateStructureAndServices.applicantName]: getErrorValue(
 			corporateStructure.applicantName,
 			errors

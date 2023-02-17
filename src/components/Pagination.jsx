@@ -2,15 +2,20 @@ import styled from "styled-components";
 
 const pageNumbers = [1, 2, 3, 4, 5, 6];
 
-function Pagination({ currentPage = 1, setPage = () => {} }) {
+function Pagination({
+	validationSummary = {},
+	currentPage = 1,
+	setPage = () => {},
+}) {
 	return (
 		<Wrapper>
-			{pageNumbers.map((each) => {
+			{pageNumbers.map((each, index) => {
 				return (
 					<PaginationButton
 						isCurrentPage={each === currentPage}
 						onClick={() => setPage(each)}
 						type="button"
+						hasErrors={validationSummary[`page${index+1}`]}
 					>
 						{each}
 					</PaginationButton>
@@ -30,10 +35,16 @@ const Wrapper = styled.div`
 `;
 
 const PaginationButton = styled.button`
-	background: ${({ isCurrentPage }) => (isCurrentPage ? "black" : "white")};
-	color: ${({ isCurrentPage }) => (isCurrentPage ? "white" : "black")};
+	background: ${({ isCurrentPage, hasErrors }) =>
+		hasErrors && !isCurrentPage
+			? "red"
+			: isCurrentPage
+			? "black"
+			: "white"};
+	color: ${({ isCurrentPage, hasErrors }) =>
+		isCurrentPage || hasErrors ? "white" : "black"};
 	padding: 10px 20px;
 	border-radius: 5px;
-	border: ${({ isCurrentPage }) =>
-		isCurrentPage ? "none" : "1px black solid"};
+	border: ${({ isCurrentPage, hasErrors }) =>
+		isCurrentPage || hasErrors ? "none" : "1px black solid"};
 `;
