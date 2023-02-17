@@ -8,11 +8,10 @@ const fields = fieldNames.detailsOfExperience;
 
 const getTableErrors = (field, errors) => {
 	const f = fields.contractsExecuted;
-	return Object.keys(errors?.[field])
+	return Object.keys(errors?.[field] || {})
 		?.filter((field) => field !== "_errors")
         ?.map((key) => {
             const row = errors?.[field]?.[key];
-            console.log('row -> ', row);
 			return {
 				[f.isEditing]: row?.[f.isEditing]?._errors || [],
 				[f.descriptionOfContract]:

@@ -2,8 +2,15 @@ import { Form, FormGroup, FormLabel } from "react-bootstrap";
 import Heading from "../components/Heading";
 import FileInput from "../components/FileInput";
 import { fieldNames } from "../constants.mjs";
+import Errors from "../components/Errors";
 
-function PlansAndProgrammes({ data, setData }) {
+const fields = fieldNames.orgDevProgramAndBudget;
+
+const getErrors = (field, errors) => {
+	return errors?.[fields._]?.[field];
+};
+
+function PlansAndProgrammes({ data, setData, errors, setErrors }) {
 	const orgDevStrategy =
 		data[fieldNames.orgDevProgramAndBudget._][
 			fieldNames.orgDevProgramAndBudget.orgDevStrategy
@@ -49,6 +56,7 @@ function PlansAndProgrammes({ data, setData }) {
 					i. Company's strategy for organizational development /
 					growth
 				</FormLabel>
+				<Errors errors={getErrors(fields.orgDevStrategy, errors)} />
 				<FileInput
 					onChange={(file) =>
 						onChange(
@@ -64,6 +72,7 @@ function PlansAndProgrammes({ data, setData }) {
 					ii. Company's employment plan indicating number of people to
 					be employed and budget
 				</FormLabel>
+				<Errors errors={getErrors(fields.employmentPlan, errors)} />
 				<FileInput
 					onChange={(file) =>
 						onChange(
@@ -79,7 +88,12 @@ function PlansAndProgrammes({ data, setData }) {
 				<FormLabel>
 					b. Technology Transfer Programme and Budget
 				</FormLabel>
-				<br />
+				<Errors
+					errors={getErrors(
+						fields.techTransferProgramAndBudget,
+						errors
+					)}
+				/>
 				<FileInput
 					onChange={(file) =>
 						onChange(
@@ -96,6 +110,9 @@ function PlansAndProgrammes({ data, setData }) {
 					c. Training Programe and Budget - (Company's training
 					programme should reflect its line of business)
 				</FormLabel>
+				<Errors
+					errors={getErrors(fields.trainingProgramAndBudget, errors)}
+				/>
 				<FileInput
 					onChange={(file) =>
 						onChange(
@@ -112,6 +129,12 @@ function PlansAndProgrammes({ data, setData }) {
 					d. Corporate Social Responsibility & Social Development
 					Programme and Budget
 				</FormLabel>
+				<Errors
+					errors={getErrors(
+						fields.csrAndSocialDevProgramAndBudget,
+						errors
+					)}
+				/>
 				<FileInput
 					onChange={(file) =>
 						onChange(

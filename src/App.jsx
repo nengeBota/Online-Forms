@@ -281,7 +281,7 @@ function validate(data, setErrors, setPage) {
 }
 
 function determineFirstPageWithErrors(pagesErrorStatus) {
-	const pages = Object.keys(pagesErrorStatus);
+	const pages = Object.keys(pagesErrorStatus || {});
 
 	return pages.findIndex((each) => !!each) + 1;
 }

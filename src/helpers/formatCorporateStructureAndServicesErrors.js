@@ -77,7 +77,7 @@ export default function formatCorporateStructureAndServicesErrors(
 		[fieldNames.corporateStructureAndServices.permitCategory]:
 			getErrorValue(corporateStructure.permitCategory, errors),
 		[fieldNames.corporateStructureAndServices.shareholders._]: Object.keys(
-			errors?.[corporateStructure.shareholders._]
+			errors?.[corporateStructure.shareholders._] || {}
 		)
 			?.filter((key) => key !== "_errors")
 			?.map((key) => {
@@ -102,7 +102,7 @@ export default function formatCorporateStructureAndServicesErrors(
 			}),
 
 		[corporateStructure.beneficial._]: Object.keys(
-			errors?.[corporateStructure.beneficial._]
+			errors?.[corporateStructure.beneficial._] || {}
 		)
 			?.filter((key) => key !== "_errors")
 			?.map((key) => {
@@ -132,7 +132,7 @@ export default function formatCorporateStructureAndServicesErrors(
 			errors
 		),
 		[fieldNames.corporateStructureAndServices.corporateStructure]:
-			Object.keys(errors?.[corporateStructure.corporateStructure])
+			Object.keys(errors?.[corporateStructure.corporateStructure] || {})
 				?.filter((key) => key !== "_errors")
 				?.map((each) => {
 					return {
