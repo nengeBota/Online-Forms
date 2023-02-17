@@ -119,7 +119,15 @@ function AnnexesAndAttachments({ data, setData, errors, setErrors }) {
 							</td>
 						</tr>
 						<tr>
-							<td>2. Application Form</td>
+							<td>
+								<div>2. Application Form</div>
+								<Errors
+									errors={getErrors(
+										fieldNames.checkList.applicationForm,
+										errors
+									)}
+								/>
+							</td>
 							<td>
 								<FormCheck
 									checked={applicationForm}
@@ -134,7 +142,16 @@ function AnnexesAndAttachments({ data, setData, errors, setErrors }) {
 							</td>
 						</tr>
 						<tr>
-							<td>3. Certificate of Incorporation</td>
+							<td>
+								<div>3. Certificate of Incorporation</div>
+								<Errors
+									errors={getErrors(
+										fieldNames.checkList
+											.certificateOfIncorporation,
+										errors
+									)}
+								/>
+							</td>
 							<td>
 								<FormCheck
 									checked={certificateOfIncorporation}
@@ -149,7 +166,16 @@ function AnnexesAndAttachments({ data, setData, errors, setErrors }) {
 							</td>
 						</tr>
 						<tr>
-							<td>4. Certificate to Commence Business</td>
+							<td>
+								<div>4. Certificate to Commence Business</div>
+								<Errors
+									errors={getErrors(
+										fieldNames.checkList
+											.certificateToCommenceBusiness,
+										errors
+									)}
+								/>
+							</td>
 							<td>
 								<FormCheck
 									checked={certificateToCommenceBusiness}
@@ -164,7 +190,15 @@ function AnnexesAndAttachments({ data, setData, errors, setErrors }) {
 							</td>
 						</tr>
 						<tr>
-							<td>5. Company Regulations</td>
+							<td>
+								<div>5. Company Regulations</div>
+								<Errors
+									errors={getErrors(
+										fieldNames.checkList.companyRegulations,
+										errors
+									)}
+								/>
+							</td>
 							<td>
 								<FormCheck
 									checked={companyRegulations}
@@ -179,7 +213,16 @@ function AnnexesAndAttachments({ data, setData, errors, setErrors }) {
 							</td>
 						</tr>
 						<tr>
-							<td>6. Signed HSSE Policy and Objectives</td>
+							<td>
+								<div>6. Signed HSSE Policy and Objectives</div>
+								<Errors
+									errors={getErrors(
+										fieldNames.checkList
+											.signedHssePolicyAndObj,
+										errors
+									)}
+								/>
+							</td>
 							<td>
 								<FormCheck
 									checked={signedHssePolicyAndObj}
@@ -195,8 +238,18 @@ function AnnexesAndAttachments({ data, setData, errors, setErrors }) {
 						</tr>
 						<tr>
 							<td>
-								7. Current Audited Financial Reports / Projected
-								Revenue for Upstream Petroleum Activities
+								<div>
+									7. Current Audited Financial Reports /
+									Projected Revenue for Upstream Petroleum
+									Activities
+								</div>
+								<Errors
+									errors={getErrors(
+										fieldNames.checkList
+											.currentAuditedFinReportsOrProjectedRevenue,
+										errors
+									)}
+								/>
 							</td>
 							<td>
 								<FormCheck
@@ -215,8 +268,17 @@ function AnnexesAndAttachments({ data, setData, errors, setErrors }) {
 						</tr>
 						<tr>
 							<td>
-								8. Valid Tax Clearance Certificate (Provide
-								Original)
+								<div>
+									8. Valid Tax Clearance Certificate (Provide
+									Original)
+								</div>
+								<Errors
+									errors={getErrors(
+										fieldNames.checkList
+											.validTaxClearanceCertificate,
+										errors
+									)}
+								/>
 							</td>
 							<td>
 								<FormCheck
@@ -232,7 +294,15 @@ function AnnexesAndAttachments({ data, setData, errors, setErrors }) {
 							</td>
 						</tr>
 						<tr>
-							<td>9. VAT Certificate</td>
+							<td>
+								<div>9. VAT Certificate</div>
+								<Errors
+									errors={getErrors(
+										fieldNames.checkList.vatCertificate,
+										errors
+									)}
+								/>
+							</td>
 							<td>
 								<FormCheck
 									checked={vatCertificate}
@@ -247,8 +317,17 @@ function AnnexesAndAttachments({ data, setData, errors, setErrors }) {
 						</tr>
 						<tr>
 							<td>
-								10. Valid SSNIT Clearance Certificate (Provide
-								Original)
+								<div>
+									10. Valid SSNIT Clearance Certificate
+									(Provide Original)
+								</div>
+								<Errors
+									errors={getErrors(
+										fieldNames.checkList
+											.originalSsnitClearanceCertificate,
+										errors
+									)}
+								/>
 							</td>
 							<td>
 								<FormCheck
@@ -264,7 +343,16 @@ function AnnexesAndAttachments({ data, setData, errors, setErrors }) {
 							</td>
 						</tr>
 						<tr>
-							<td>11. Company Profile and Business Plan</td>
+							<td>
+								<div>11. Company Profile and Business Plan</div>
+								<Errors
+									errors={getErrors(
+										fieldNames.checkList
+											.companyProfileAndBusinessPlan,
+										errors
+									)}
+								/>
+							</td>
 							<td>
 								<FormCheck
 									checked={companyProfileandBusinessPlan}
@@ -280,10 +368,19 @@ function AnnexesAndAttachments({ data, setData, errors, setErrors }) {
 						</tr>
 						<tr>
 							<td>
-								12. Copies of other valid regulatory
-								certificates, licenses, and permits (eg. EPA
-								permit, Air Operator Certificate, Aviation
-								License, FDA Hygiene Certificate, etc)
+								<div>
+									12. Copies of other valid regulatory
+									certificates, licenses, and permits (eg. EPA
+									permit, Air Operator Certificate, Aviation
+									License, FDA Hygiene Certificate, etc)
+								</div>
+								<Errors
+									errors={getErrors(
+										fieldNames.checkList
+											.copiesOfOtherRegulatoryCerts,
+										errors
+									)}
+								/>
 							</td>
 							<td>
 								<FormCheck
@@ -299,7 +396,16 @@ function AnnexesAndAttachments({ data, setData, errors, setErrors }) {
 							</td>
 						</tr>
 						<tr>
-							<td>13. Copy of Application Pack Receipt</td>
+							<td>
+								<div>13. Copy of Application Pack Receipt</div>
+								<Errors
+									errors={getErrors(
+										fieldNames.checkList
+											.copyOfApplicationPackReceipt,
+										errors
+									)}
+								/>
+							</td>
 							<td>
 								<FormCheck
 									checked={copyOfApplicationPackReceipt}
