@@ -34,8 +34,11 @@ const newDetailsOfExperience = {
 	contractValue: "",
 };
 
-const getErrors = (field, errors) =>
+const getFinCapabilityErrors = (field, errors) =>
 	errors?.[fieldNames.finCapability._]?.[field] || [];
+
+const getMgtErrors = (field, errors) =>
+	errors?.[fieldNames.mgtAndTechnicalCompetencies._]?.[field] || [];
 
 function FinancialCapability({ data, setData, errors, setErrors }) {
 	const { financialCapability } = data;
@@ -106,7 +109,7 @@ function FinancialCapability({ data, setData, errors, setErrors }) {
 					<li>
 						<div>Please provide what applies to your company *</div>
 						<Errors
-							errors={getErrors(
+							errors={getFinCapabilityErrors(
 								fieldNames.finCapability.whatApplies,
 								errors
 							)}
@@ -144,7 +147,7 @@ function FinancialCapability({ data, setData, errors, setErrors }) {
 						<br />
 						<div>Please upload documents as per your choice *</div>
 						<Errors
-							errors={getErrors(
+							errors={getFinCapabilityErrors(
 								fieldNames.finCapability
 									.whatAppliesUploadedDocument,
 								errors
@@ -174,7 +177,7 @@ function FinancialCapability({ data, setData, errors, setErrors }) {
 						</div>
 
 						<Errors
-							errors={getErrors(
+							errors={getFinCapabilityErrors(
 								fieldNames.finCapability.sourceOfFunds,
 								errors
 							)}
@@ -204,7 +207,13 @@ function FinancialCapability({ data, setData, errors, setErrors }) {
 				<hr />
 				<FormGroup>
 					<div>
-						3.a. Provide Organizational Chart <br />
+						<div>3.a. Provide Organizational Chart</div>
+						<Errors
+							errors={getMgtErrors(
+								fieldNames.mgtAndTechnicalCompetencies.orgChart,
+								errors
+							)}
+						/>
 						<FileInput
 							onChange={(file) => {
 								onChange(
@@ -214,12 +223,24 @@ function FinancialCapability({ data, setData, errors, setErrors }) {
 								);
 							}}
 						/>
-					</div>
+                    </div>
+                    
+                    <br />
 
 					<div>
-						b. Provide detailed information on the number of staff
-						and their expertise. (Include Name, Gender, Position and
-						Nationality of Staff). * <br />
+						<div>
+							b. Provide detailed information on the number of
+							staff and their expertise. (Include Name, Gender,
+							Position and Nationality of Staff). *
+						</div>
+
+						<Errors
+							errors={getMgtErrors(
+								fieldNames.mgtAndTechnicalCompetencies
+									.detailedStaffInfo,
+								errors
+							)}
+						/>
 						<FileInput
 							onChange={(file) => {
 								onChange(
@@ -230,10 +251,20 @@ function FinancialCapability({ data, setData, errors, setErrors }) {
 							}}
 						/>
 					</div>
-
+					<br />
 					<div>
-						c. Indicate expertise to be sourced locally and
-						internationally. * <br />
+						<div>
+							c. Indicate expertise to be sourced locally and
+							internationally. *
+						</div>
+
+						<Errors
+							errors={getMgtErrors(
+								fieldNames.mgtAndTechnicalCompetencies
+									.requiredExpertise,
+								errors
+							)}
+						/>
 						<Form.Control
 							as="textarea"
 							value={requiredExpertise}
@@ -247,10 +278,22 @@ function FinancialCapability({ data, setData, errors, setErrors }) {
 						/>
 					</div>
 
+					<br />
+					<br />
 					<div>
-						4. Indicate sources from which applicant proposes to
-						obtain equipment and other facilities to support
-						petroleum activities. * <br />
+						<div>
+							4. Indicate sources from which applicant proposes to
+							obtain equipment and other facilities to support
+							petroleum activities. *
+						</div>
+
+						<Errors
+							errors={getMgtErrors(
+								fieldNames.mgtAndTechnicalCompetencies
+									.sourcesOfEquipment,
+								errors
+							)}
+						/>
 						<Form.Control
 							as="textarea"
 							value={sourcesOfEquipment}

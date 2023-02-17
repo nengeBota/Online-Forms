@@ -72,8 +72,8 @@ export const financialCapabilityDesc = z.object({
 	[fieldNames.finCapability.sourceOfFunds]: nonEmptyString,
 });
 export const mgtAndTechnicalCompetenciesDesc = z.object({
-	[fieldNames.mgtAndTechnicalCompetencies.orgChart]: z.array(file),
-	[fieldNames.mgtAndTechnicalCompetencies.detailedStaffInfo]: z.array(file),
+	[fieldNames.mgtAndTechnicalCompetencies.orgChart]: file,
+	[fieldNames.mgtAndTechnicalCompetencies.detailedStaffInfo]: file,
 	[fieldNames.mgtAndTechnicalCompetencies.requiredExpertise]: nonEmptyString,
 	[fieldNames.mgtAndTechnicalCompetencies.sourcesOfEquipment]: nonEmptyString,
 });
@@ -96,13 +96,11 @@ export const detailsOfExperienceDesc = z.object({
 	),
 });
 export const orgDevProgramAndBudgetDesc = z.object({
-	[fieldNames.orgDevProgramAndBudget.orgDevStrategy]: z.array(file),
-	[fieldNames.orgDevProgramAndBudget.employmentPlan]: z.array(file),
-	[fieldNames.orgDevProgramAndBudget.techTransferProgramAndBudget]:
-		z.array(file),
-	[fieldNames.orgDevProgramAndBudget.trainingProgramAndBudget]: z.array(file),
-	[fieldNames.orgDevProgramAndBudget.csrAndSocialDevProgramAndBudget]:
-		z.array(file),
+	[fieldNames.orgDevProgramAndBudget.orgDevStrategy]: file,
+	[fieldNames.orgDevProgramAndBudget.employmentPlan]: file,
+	[fieldNames.orgDevProgramAndBudget.techTransferProgramAndBudget]: file,
+	[fieldNames.orgDevProgramAndBudget.trainingProgramAndBudget]: file,
+	[fieldNames.orgDevProgramAndBudget.csrAndSocialDevProgramAndBudget]: file,
 });
 export const localContentDesc = z.object({
 	[fieldNames.localContent.percentageOfGhanaianParticipation]: positiveNumber,
@@ -129,10 +127,10 @@ export const localContentDesc = z.object({
 	),
 });
 export const healthSafetySecurityEnvDesc = z.object({
-	[fieldNames.healthSafetySecurityEnv.hssePolicyAndObj]: z.array(file),
+	[fieldNames.healthSafetySecurityEnv.hssePolicyAndObj]: file,
 });
-export const declarationDesc = z.array(file);
-export const miscFilesDesc = z.array(file);
+export const declarationDesc = file;
+export const miscFilesDesc = file;
 export const coverPageDesc = file;
 export const checkListDesc = z.object({
 	[fieldNames.checkList.coverPage]: z.literal(true),
