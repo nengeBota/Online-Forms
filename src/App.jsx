@@ -26,7 +26,17 @@ import {
 } from "./constants.mjs";
 import prepareForSubmission from "./prepareForSubmission";
 import state, {
+	checkListDesc,
 	corporateStructureAndServicesDesc,
+	coverPageDesc,
+	declarationDesc,
+	detailsOfExperienceDesc,
+	financialCapabilityDesc,
+	healthSafetySecurityEnvDesc,
+	localContentDesc,
+	mgtAndTechnicalCompetenciesDesc,
+	miscFilesDesc,
+	orgDevProgramAndBudgetDesc,
 } from "./stateDescription.mjs";
 import formatAllErrorsForState from "./helpers/formatAllErrorsForState";
 
@@ -178,9 +188,6 @@ function App() {
 								setShowErrorModal(true);
 								return;
 							}
-
-							// once we find an error, we should show a modal asking the user to fix the errors, and then take the user to the first page which has errors
-
 							submit(data);
 						}}
 					>
@@ -206,20 +213,60 @@ function validate(data, setErrors, setPage) {
 
 	console.log("errors -> ", error?.format());
 
-	const { error: page1HasErrors } =
-		corporateStructureAndServicesDesc.safeParse(
-			data[corporateStructureAndServicesDesc]
-		);
+	const { error: page1Errors } = corporateStructureAndServicesDesc.safeParse(
+		data[fieldNames.corporateStructureAndServices._]
+	);
+
+	const { error: page2Errors1 } = financialCapabilityDesc.safeParse(
+		data[fieldNames.finCapability._]
+	);
+
+	const { error: page2Errors2 } = mgtAndTechnicalCompetenciesDesc.safeParse(
+		data[fieldNames.mgtAndTechnicalCompetencies._]
+	);
+	const { error: page2Errors3 } = detailsOfExperienceDesc.safeParse(
+		data[fieldNames.detailsOfExperience._]
+	);
+	const { error: page3Errors } = orgDevProgramAndBudgetDesc.safeParse(
+		data[fieldNames.orgDevProgramAndBudget._]
+	);
+	const { error: page4Errors } = localContentDesc.safeParse(
+		data[fieldNames.localContent._]
+	);
+	const { error: page5Errors1 } = healthSafetySecurityEnvDesc.safeParse(
+		data[fieldNames.healthSafetySecurityEnv._]
+	);
+	const { error: page5Errors2 } = declarationDesc.safeParse(
+		data[fieldNames.declaration]
+	);
+
+	const { error: page5Errors3 } = miscFilesDesc.safeParse(
+		data[fieldNames.miscFiles]
+	);
+
+	const { error: page5Errors4 } = coverPageDesc.safeParse(
+		data[fieldNames.coverPage]
+	);
+	const { error: page6Errors } = checkListDesc.safeParse(
+		data[fieldNames.checkList._]
+	);
 
 	if (!error) return true;
 
 	const summary = {
-		page1: page1HasErrors,
-		page2: true,
-		page3: true,
-		page4: true,
-		page5: true,
-		page6: true,
+		page1: Boolean(page1Errors),
+		page2:
+			Boolean(page2Errors1) ||
+			Boolean(page2Errors2) ||
+			Boolean(page2Errors3),
+		page3: Boolean(page3Errors),
+		page4: Boolean(page4Errors),
+		page5:
+			Boolean(page5Errors1) ||
+			Boolean(page5Errors2) ||
+			Boolean(page5Errors3) ||
+			Boolean(page5Errors4),
+		page6: Boolean(page6Errors),
 	};
 
 	// transition to the correct page

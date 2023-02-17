@@ -133,20 +133,20 @@ export const declarationDesc = z.array(file);
 export const miscFilesDesc = z.array(file);
 export const coverPageDesc = file;
 export const checkListDesc = z.object({
-	[fieldNames.checkList.coverPage]: z.boolean(),
-	[fieldNames.checkList.applicationForm]: z.boolean(),
-	[fieldNames.checkList.certificateOfIncorporation]: z.boolean(),
-	[fieldNames.checkList.certificateToCommenceBusiness]: z.boolean(),
-	[fieldNames.checkList.companyRegulations]: z.boolean(),
-	[fieldNames.checkList.signedHssePolicyAndObj]: z.boolean(),
+	[fieldNames.checkList.coverPage]: z.literal(true),
+	[fieldNames.checkList.applicationForm]: z.literal(true),
+	[fieldNames.checkList.certificateOfIncorporation]: z.literal(true),
+	[fieldNames.checkList.certificateToCommenceBusiness]: z.literal(true),
+	[fieldNames.checkList.companyRegulations]: z.literal(true),
+	[fieldNames.checkList.signedHssePolicyAndObj]: z.literal(true),
 	[fieldNames.checkList.currentAuditedFinReportsOrProjectedRevenue]:
-		z.boolean(),
-	[fieldNames.checkList.validTaxClearanceCertificate]: z.boolean(),
-	[fieldNames.checkList.vatCertificate]: z.boolean(),
-	[fieldNames.checkList.originalSsnitClearanceCertificate]: z.boolean(),
-	[fieldNames.checkList.companyProfileAndBusinessPlan]: z.boolean(),
-	[fieldNames.checkList.copiesOfOtherRegulatoryCerts]: z.boolean(),
-	[fieldNames.checkList.copyOfApplicationPackReceipt]: z.boolean(),
+		z.literal(true),
+	[fieldNames.checkList.validTaxClearanceCertificate]: z.literal(true),
+	[fieldNames.checkList.vatCertificate]: z.literal(true),
+	[fieldNames.checkList.originalSsnitClearanceCertificate]: z.literal(true),
+	[fieldNames.checkList.companyProfileAndBusinessPlan]: z.literal(true),
+	[fieldNames.checkList.copiesOfOtherRegulatoryCerts]: z.literal(true),
+	[fieldNames.checkList.copyOfApplicationPackReceipt]: z.literal(true),
 });
 
 const state = z.object({

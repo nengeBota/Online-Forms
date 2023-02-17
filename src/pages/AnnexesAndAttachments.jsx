@@ -4,6 +4,7 @@ import { fieldNames } from "../constants.mjs";
 import state from "../stateDescription.mjs";
 import { z } from "zod";
 import formatAllErrorsForState from "../helpers/formatAllErrorsForState";
+import Errors from "../components/Errors";
 
 const getValues = (data) => {
 	const fields = data[fieldNames.checkList._];
@@ -46,6 +47,8 @@ const getValues = (data) => {
 		copyOfApplicationPackReceipt,
 	};
 };
+
+const getErrors = (field, errors) => errors[fieldNames.checkList._][field];
 
 function AnnexesAndAttachments({ data, setData, errors, setErrors }) {
 	const {
@@ -94,7 +97,15 @@ function AnnexesAndAttachments({ data, setData, errors, setErrors }) {
 					</thead>
 					<tbody>
 						<tr>
-							<td>1. Cover Page</td>
+							<td>
+								<div>1. Cover Page</div>
+								<Errors
+									errors={getErrors(
+										fieldNames.checkList.coverPage,
+										errors
+									)}
+								/>
+							</td>
 							<td>
 								<FormCheck
 									checked={coverPage}
