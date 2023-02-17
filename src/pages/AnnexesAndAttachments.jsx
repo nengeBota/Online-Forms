@@ -48,7 +48,8 @@ const getValues = (data) => {
 	};
 };
 
-const getErrors = (field, errors) => errors[fieldNames.checkList._][field];
+const getErrors = (field, errors) =>
+	errors?.[fieldNames.checkList._]?.[field] || [];
 
 function AnnexesAndAttachments({ data, setData, errors, setErrors }) {
 	const {

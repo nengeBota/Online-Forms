@@ -7,7 +7,9 @@ import {
 import validations from "./constants/fieldValidations.js";
 
 export const nonEmptyString = z.string().min(1, { message: "Required" });
-export const file = z.object({ fileName: nonEmptyString, file: z.string() });
+export const file = z.array(
+	z.object({ fileName: nonEmptyString, file: z.string() })
+);
 export const positiveNumber = z.number({ min: 0 });
 export const dateBeforeToday = z
 	.date()

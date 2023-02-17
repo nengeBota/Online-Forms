@@ -1,5 +1,6 @@
 import { Form, FormControl, FormGroup } from "react-bootstrap";
 import DynamicTable from "../components/DynamicTable";
+import Errors from "../components/Errors";
 import FileInput from "../components/FileInput";
 import Heading from "../components/Heading";
 import { fieldNames, financialCapabilityOptions } from "../constants.mjs";
@@ -33,7 +34,10 @@ const newDetailsOfExperience = {
 	contractValue: "",
 };
 
-function FinancialCapability({ data, setData }) {
+const getErrors = (field, errors) =>
+	errors?.[fieldNames.finCapability._]?.[field] || [];
+
+function FinancialCapability({ data, setData, errors, setErrors }) {
 	const { financialCapability } = data;
 	const { whatApplies, uploadedDocument, sourceOfFunds } =
 		financialCapability;
@@ -100,7 +104,13 @@ function FinancialCapability({ data, setData }) {
 			<FormGroup>
 				<ol>
 					<li>
-						Please provide what applies to your company *
+						<div>Please provide what applies to your company *</div>
+						<Errors
+							errors={getErrors(
+								fieldNames.finCapability.whatApplies,
+								errors
+							)}
+						/>
 						{financialCapabilityOptions.map((each, i) => (
 							<p key={i}>
 								<input
@@ -132,8 +142,14 @@ function FinancialCapability({ data, setData }) {
 							</p>
 						))}
 						<br />
-						Please upload documents as per your choice *
-						<br />
+						<div>Please upload documents as per your choice *</div>
+						<Errors
+							errors={getErrors(
+								fieldNames.finCapability
+									.whatAppliesUploadedDocument,
+								errors
+							)}
+						/>
 						<FileInput
 							onChange={(file) =>
 								setData((prev) => {
@@ -152,8 +168,17 @@ function FinancialCapability({ data, setData }) {
 					</li>
 
 					<li>
-						Indicate sources where applicant intends raising funds
-						for its operations in Ghana *
+						<div>
+							Indicate sources where applicant intends raising
+							funds for its operations in Ghana *
+						</div>
+
+						<Errors
+							errors={getErrors(
+								fieldNames.finCapability.sourceOfFunds,
+								errors
+							)}
+						/>
 						<FormGroup>
 							<Form.Control
 								as="textarea"

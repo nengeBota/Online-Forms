@@ -163,6 +163,7 @@ function App() {
 				<Button
 					disabled={page === 1}
 					onClick={() => setPage((prev) => prev - 1)}
+					variant="secondary"
 				>
 					Back
 				</Button>
@@ -176,7 +177,7 @@ function App() {
 					<Button
 						disabled={page === pages.length}
 						onClick={() => setPage((prev) => prev + 1)}
-						style={{ marginLeft: "auto" }}
+						variant="primary"
 					>
 						Next
 					</Button>
