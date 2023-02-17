@@ -40,6 +40,9 @@ const getFinCapabilityErrors = (field, errors) =>
 const getMgtErrors = (field, errors) =>
 	errors?.[fieldNames.mgtAndTechnicalCompetencies._]?.[field] || [];
 
+const getDetailsOfExperienceErrors = (field, errors) =>
+	errors?.[fieldNames.detailsOfExperience._]?.[field] || [];
+
 function FinancialCapability({ data, setData, errors, setErrors }) {
 	const { financialCapability } = data;
 	const { whatApplies, uploadedDocument, sourceOfFunds } =
@@ -223,9 +226,9 @@ function FinancialCapability({ data, setData, errors, setErrors }) {
 								);
 							}}
 						/>
-                    </div>
-                    
-                    <br />
+					</div>
+
+					<br />
 
 					<div>
 						<div>
@@ -313,12 +316,20 @@ function FinancialCapability({ data, setData, errors, setErrors }) {
 			<h4>C. Details of Experience</h4>
 			<hr />
 			<FormGroup>
-				5. Describe company's past petroleum industry experience,
-				including locations and dates of significant activities or
-				contracts. (this should be the past petroleum industry
-				experience of the applicant and not the Affiliate/Parent
-				Company) *
-				<br />
+				<div>
+					5. Describe company's past petroleum industry experience,
+					including locations and dates of significant activities or
+					contracts. (this should be the past petroleum industry
+					experience of the applicant and not the Affiliate/Parent
+					Company) *
+				</div>
+				<Errors
+					errors={getDetailsOfExperienceErrors(
+						fieldNames.detailsOfExperience.companyExperience,
+						errors
+					)}
+				/>
+
 				<Form.Control
 					as="textarea"
 					value={companyExperience}
@@ -330,11 +341,20 @@ function FinancialCapability({ data, setData, errors, setErrors }) {
 					}
 				/>
 			</FormGroup>
-
+			<br />
+			<br />
 			<FormGroup>
-				6. In which countries do applicant, parent company and
-				affiliates currently have Petroleum industry activities or
-				contracts? List all current operations globally. * <br />
+				<div>
+					6. In which countries do applicant, parent company and
+					affiliates currently have Petroleum industry activities or
+					contracts? List all current operations globally. *{" "}
+				</div>
+				<Errors
+					errors={getDetailsOfExperienceErrors(
+						fieldNames.detailsOfExperience.countries,
+						errors
+					)}
+				/>
 				<Form.Control
 					as="textarea"
 					value={countries}
@@ -346,14 +366,21 @@ function FinancialCapability({ data, setData, errors, setErrors }) {
 					}
 				/>
 			</FormGroup>
-
+			<br />
+			<br />
 			<FormGroup>
-				7. Indicate contracts executed in respect of upstream petroleum
-				support services over the past year. *
-				<br />
+				<div>
+					7. Indicate contracts executed in respect of upstream
+					petroleum support services over the past year. *
+				</div>
+
 				<DynamicTable
 					columns={columns}
 					data={contractsExecuted}
+					errors={getDetailsOfExperienceErrors(
+						fieldNames.detailsOfExperience.contractsExecuted._,
+						errors
+					)}
 					addNewRow={() => {
 						contractsExecuted.push(newDetailsOfExperience);
 						onstage(

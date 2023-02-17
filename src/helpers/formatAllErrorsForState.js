@@ -1,5 +1,6 @@
 import { fieldNames } from "../constants.mjs";
 import formatCorporateStructureAndServicesErrors from "./formatCorporateStructureAndServicesErrors.js";
+import formatDetailsOfExperienceErrors from "./formatDetailsOfExperienceErrors.js";
 import formatFinCapabilityErrors from "./formatFinCapabilityErrors.js";
 import formatMgtAndTechnicalCompetenciesErrors from "./formatMgtAndTechnicalCompetenciesErrors.js";
 
@@ -10,6 +11,8 @@ function formatAllErrorsForState(zodFormattedErrors) {
 	const finCapabilityErrors = zodFormattedErrors[fieldNames.finCapability._];
 	const mgtAndTechnicalCompetenciesErrors =
 		zodFormattedErrors[fieldNames.mgtAndTechnicalCompetencies._];
+	const detailsOfExperienceErrors =
+		zodFormattedErrors[fieldNames.detailsOfExperience._];
 
 	return {
 		// page 1
@@ -25,7 +28,9 @@ function formatAllErrorsForState(zodFormattedErrors) {
 			formatMgtAndTechnicalCompetenciesErrors(
 				mgtAndTechnicalCompetenciesErrors
 			),
-		[fieldNames.detailsOfExperience._]: {},
+		[fieldNames.detailsOfExperience._]: formatDetailsOfExperienceErrors(
+			detailsOfExperienceErrors
+		),
 
 		// page 3
 		[fieldNames.orgDevProgramAndBudget._]: {},

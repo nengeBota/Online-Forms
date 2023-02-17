@@ -37,7 +37,12 @@ function DynamicTable({
 					<tr key={index}>
 						{columns.map((col) =>
 							!val.isEditing ? (
-								<td>{val[col.key]}</td>
+								<td>
+									<Errors
+										errors={errors?.[index]?.[col.key]}
+									/>
+									<div>{val[col.key]}</div>
+								</td>
 							) : (
 								<td>
 									<Errors
