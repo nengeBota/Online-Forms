@@ -1,5 +1,6 @@
 import { useCallback } from "react";
 import { Form, FormGroup, FormLabel, Button } from "react-bootstrap";
+import Errors from "../components/Errors";
 import FileInput from "../components/FileInput";
 import Heading from "../components/Heading";
 import { fieldNames } from "../constants.mjs";
@@ -17,7 +18,13 @@ const getFields = (data) => {
 	return { miscFiles, hssePolicyAndObj, coverPage };
 };
 
-function Miscellaneous({ data, setData }) {
+const getHsseErrors = (errors) => {
+	return errors?.[fieldNames.healthSafetySecurityEnv._]?.[
+		fieldNames.healthSafetySecurityEnv.hssePolicyAndObj
+	];
+};
+
+function Miscellaneous({ data, setData, errors, setErrors }) {
 	const onStage = useCallback((fieldName, value) => {
 		setData(
 			(prev) => ({
@@ -48,7 +55,7 @@ function Miscellaneous({ data, setData }) {
 					Provide a signed copy of the Company's HSSE Policy and
 					Objectives *
 				</FormLabel>
-				<br />
+				<Errors errors={getHsseErrors(errors)} />
 				<FileInput
 					onChange={(file) => {
 						onStage(
