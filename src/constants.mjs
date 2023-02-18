@@ -172,6 +172,14 @@ export const NEW_VALUE_OF_SERVICE = {
 };
 
 export const initialErrorState = {
+    summary: {
+        page1: false,
+        page2: false,
+        page3: false,
+        page4: false,
+        page5: false,
+        page6: false,
+    },
 	// PAGE 1 - CORPORATE STRUCTURE AND SERVICES
 	[fieldNames.corporateStructureAndServices._]: {
 		[fieldNames.corporateStructureAndServices.applicantName]: [],

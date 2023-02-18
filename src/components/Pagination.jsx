@@ -1,23 +1,23 @@
 import styled from "styled-components";
 
-const pageNumbers = [1, 2, 3, 4, 5, 6];
-
 function Pagination({
 	validationSummary = {},
 	currentPage = 1,
-	setPage = () => {},
+	onClick = () => {},
+	pages = [],
 }) {
 	return (
 		<Wrapper>
-			{pageNumbers.map((each, index) => {
+			{pages.map((_, index) => {
+				const pageValue = index + 1;
 				return (
 					<PaginationButton
-						isCurrentPage={each === currentPage}
-						onClick={() => setPage(each)}
+						isCurrentPage={pageValue === currentPage}
+						onClick={() => onClick(pageValue)}
 						type="button"
-						hasErrors={validationSummary[`page${index+1}`]}
+						hasErrors={validationSummary[`page${pageValue}`]}
 					>
-						{each}
+						{pageValue}
 					</PaginationButton>
 				);
 			})}

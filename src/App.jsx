@@ -39,45 +39,105 @@ import state, {
 	orgDevProgramAndBudgetDesc,
 } from "./stateDescription.mjs";
 import formatAllErrorsForState from "./helpers/formatAllErrorsForState";
-
-const newPages = [
-	{
-		page: CorporateStructureAndServices,
-		onValidate: (values) => {
-			// return false if there's any errors
-			const { success: result } =
-				corporateStructureAndServicesDesc.safeParse(values);
-			console.log(
-				"validating corporate structure and services -> ",
-				result
-			);
-
-			return result;
-		},
-	},
-];
-
-const file = z.object({ fileName: z.string(), file: z.string() });
+import formatCorporateStructureAndServicesErrors from "./helpers/formatCorporateStructureAndServicesErrors";
+import formatFinCapabilityErrors from "./helpers/formatFinCapabilityErrors";
 
 //info: the position of the page determines its page number. so CorporateStructureAndServices is page 1 because its first in this array, etc..
 const pages = [
 	// PART 1
-	CorporateStructureAndServices,
+	{
+		page: CorporateStructureAndServices,
+		validate: (data, setErrors, showModal) => {
+			// use the safeParse to validate,
+			const { error } = corporateStructureAndServicesDesc.safeParse(
+				data?.[fieldNames.corporateStructureAndServices._]
+			);
+
+			if (!error) {
+				setErrors((prev) => ({
+					...prev,
+					summary: {
+						...prev.summary,
+						page1: false,
+					},
+					[fieldNames.corporateStructureAndServices._]: {
+						...initialErrorState[
+							fieldNames.corporateStructureAndServices._
+						],
+					},
+				}));
+
+				return true;
+			} else {
+				setErrors((prev) => ({
+					...prev,
+					summary: {
+						...prev.summary,
+						page1: true,
+					},
+					[fieldNames.corporateStructureAndServices._]:
+						formatCorporateStructureAndServicesErrors(
+							error?.format()
+						),
+				}));
+
+				showModal(true);
+				return false;
+			}
+		},
+	},
 
 	// PART 2
-	FinancialCapability,
+	{
+		page: FinancialCapability,
+		validate: (data, setErrors, showModal) => {
+			// use the safeParse to validate,
+			const { error } = financialCapabilityDesc.safeParse(
+				data?.[fieldNames.finCapability._]
+			);
+
+			if (!error) {
+				setErrors((prev) => ({
+					...prev,
+					summary: {
+						...prev.summary,
+						page2: false,
+					},
+					[fieldNames.finCapability._]: {
+						...initialErrorState[fieldNames.finCapability._],
+					},
+				}));
+
+				return true;
+			} else {
+				setErrors((prev) => ({
+					...prev,
+					summary: {
+						...prev.summary,
+						page2: true,
+					},
+					[fieldNames.finCapability._]: formatFinCapabilityErrors(
+						error?.format()
+					),
+				}));
+
+				showModal(true);
+				return false;
+			}
+		},
+	},
 
 	// PART 3
-	PlansAndProgrammes,
+	{ page: PlansAndProgrammes },
 
 	// PART 4
-	LocalContent,
+	{ page: LocalContent },
 
 	// part 5
-	Miscellaneous,
+	{ page: Miscellaneous },
 
 	// part 6
-	AnnexesAndAttachments,
+	{ page: AnnexesAndAttachments },
 ];
 
 async function submit(values) {
@@ -115,9 +175,12 @@ function App() {
 	// 	fetchcategories();
 	// }, []);
 
-	const CurrentPage = pages[page - 1];
+	const CurrentPage = pages[page - 1]?.page;
+	const currentValidationFn = pages[page - 1]?.validate;
 
-	const onClickSetPage = (value) => {
+	const onClickSetPage = (value, validationFn) => {
+		if (!validationFn()) return;
+
 		if (value > pages.length) {
 			return;
 		}
@@ -176,7 +239,15 @@ function App() {
 				{page < pages.length ? (
 					<Button
 						disabled={page === pages.length}
-						onClick={() => setPage((prev) => prev + 1)}
+						onClick={() => {
+							const validationFn = () =>
+								currentValidationFn(
+									data,
+									setErrors,
+									setShowErrorModal
+								);
+							onClickSetPage(page + 1, validationFn);
+						}}
 						variant="primary"
 					>
 						Next
@@ -201,7 +272,12 @@ function App() {
 			<Pagination
 				validationSummary={errors?.summary}
 				currentPage={page}
-				setPage={onClickSetPage}
+				pages={pages}
+				onClick={(pageNumber) => {
+					const validationFn = () =>
+						currentValidationFn(data, setErrors, setShowErrorModal);
+					onClickSetPage(pageNumber, validationFn);
+				}}
 			/>
 		</PageWrapper>
 	);
