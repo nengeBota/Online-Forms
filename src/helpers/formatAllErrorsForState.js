@@ -1,6 +1,8 @@
 import { fieldNames } from "../constants.mjs";
 import formatChecklistErrors from "./formatChecklistErrors.js";
 import formatCorporateStructureAndServicesErrors from "./formatCorporateStructureAndServicesErrors.js";
+import formatCoverpageErrors from "./formatCoverpageErrors.js";
+import formatDeclarationErrors from "./formatDeclarationErrors.js";
 import formatDetailsOfExperienceErrors from "./formatDetailsOfExperienceErrors.js";
 import formatFinCapabilityErrors from "./formatFinCapabilityErrors.js";
 import formatHealthSafetySecurityEnvErrors from "./formatHealthSafetySecurityEnvErrors.js";
@@ -54,12 +56,12 @@ function formatAllErrorsForState(zodFormattedErrors) {
 		[fieldNames.healthSafetySecurityEnv._]:
 			formatHealthSafetySecurityEnvErrors(healthSafetySecurityEnvErrors),
 		[fieldNames.miscFiles]: [],
-		[fieldNames.declaration]:
-			zodFormattedErrors?.[fieldNames.declaration]?.[0]?.fileName
-				?._errors,
-		[fieldNames.coverPage]:
-			zodFormattedErrors?.[fieldNames.coverPage]?.[0]?.fileName?._errors,
-
+		[fieldNames.declaration]: formatDeclarationErrors(
+			zodFormattedErrors?.[fieldNames.declaration]
+		),
+		[fieldNames.coverPage]: formatCoverpageErrors(
+			zodFormattedErrors?.[fieldNames.coverPage]
+		),
 		// page 6
 		[fieldNames.checkList._]: formatChecklistErrors(checklistErrors),
 	};

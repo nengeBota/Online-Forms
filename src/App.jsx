@@ -45,6 +45,9 @@ import formatMgtAndTechnicalCompetenciesErrors from "./helpers/formatMgtAndTechn
 import formatDetailsOfExperienceErrors from "./helpers/formatDetailsOfExperienceErrors";
 import formatOrgDevProgramAndBudgetErrors from "./helpers/formatOrgDevProgramAndBudgetErrors";
 import formatLocalContentErrors from "./helpers/formatLocalContentErrors";
+import formatHealthSafetySecurityEnvErrors from "./helpers/formatHealthSafetySecurityEnvErrors";
+import formatDeclarationErrors from "./helpers/formatDeclarationErrors";
+import formatCoverpageErrors from "./helpers/formatCoverpageErrors";
 
 //info: the position of the page determines its page number. so CorporateStructureAndServices is page 1 because its first in this array, etc..
 const pages = [
@@ -242,7 +245,71 @@ const pages = [
 	},
 
 	// part 5
-	{ page: Miscellaneous },
+	{
+		page: Miscellaneous,
+		validate: (data, setErrors, showModal) => {
+			// use the safeParse to validate,
+			const { error: healthSafetySecurityEnvErrors } =
+				healthSafetySecurityEnvDesc.safeParse(
+					data?.[fieldNames.healthSafetySecurityEnv._]
+				);
+			const { error: declarationErrors } = declarationDesc.safeParse(
+				data?.[fieldNames.declaration]
+			);
+			const { error: coverPageErrors } = coverPageDesc.safeParse(
+				data?.[fieldNames.coverPage]
+			);
+
+			if (
+				!healthSafetySecurityEnvErrors &&
+				!declarationErrors &&
+				!coverPageErrors
+			) {
+				setErrors((prev) => ({
+					...prev,
+					summary: {
+						...prev.summary,
+						page2: false,
+					},
+					[fieldNames.healthSafetySecurityEnv._]: {
+						...initialErrorState[
+							fieldNames.healthSafetySecurityEnv._
+						],
+					},
+					[fieldNames.declaration]:
+						initialErrorState[fieldNames.declaration._],
+
+					[fieldNames.coverPage]:
+						initialErrorState[fieldNames.coverPage],
+				}));
+
+				return true;
+			} else {
+				setErrors((prev) => ({
+					...prev,
+					summary: {
+						...prev.summary,
+						page5: true,
+					},
+					[fieldNames.healthSafetySecurityEnv._]:
+						formatHealthSafetySecurityEnvErrors(
+							healthSafetySecurityEnvErrors?.format()
+						),
+					[fieldNames.declaration]:
+						formatDeclarationErrors(
+							declarationErrors?.format()
+						),
+					[fieldNames.coverPage]:
+						formatCoverpageErrors(
+							coverPageErrors?.format()
+						),
+				}));
+
+				showModal(true);
+				return false;
+			}
+		},
+	},
 
 	// part 6
 	{ page: AnnexesAndAttachments },
@@ -268,7 +335,7 @@ async function submit(values) {
 
 function App() {
 	const [category, setcategory] = useState([]);
-	const [page, setPage] = useState(4);
+	const [page, setPage] = useState(5);
 
 	const [data, setData] = useState(initialState);
 	const [errors, setErrors] = useState(initialErrorState);
