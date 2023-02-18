@@ -41,6 +41,8 @@ import state, {
 import formatAllErrorsForState from "./helpers/formatAllErrorsForState";
 import formatCorporateStructureAndServicesErrors from "./helpers/formatCorporateStructureAndServicesErrors";
 import formatFinCapabilityErrors from "./helpers/formatFinCapabilityErrors";
+import formatMgtAndTechnicalCompetenciesErrors from "./helpers/formatMgtAndTechnicalCompetenciesErrors";
+import formatDetailsOfExperienceErrors from "./helpers/formatDetailsOfExperienceErrors";
 
 //info: the position of the page determines its page number. so CorporateStructureAndServices is page 1 because its first in this array, etc..
 const pages = [
@@ -92,11 +94,24 @@ const pages = [
 		page: FinancialCapability,
 		validate: (data, setErrors, showModal) => {
 			// use the safeParse to validate,
-			const { error } = financialCapabilityDesc.safeParse(
-				data?.[fieldNames.finCapability._]
-			);
+			const { error: finCapabilityErrors } =
+				financialCapabilityDesc.safeParse(
+					data?.[fieldNames.finCapability._]
+				);
+			const { error: mgtAndTechnicalErrors } =
+				mgtAndTechnicalCompetenciesDesc.safeParse(
+					data?.[fieldNames.mgtAndTechnicalCompetencies._]
+				);
+			const { error: detailsOfExperienceErrors } =
+				detailsOfExperienceDesc.safeParse(
+					data?.[fieldNames.detailsOfExperience._]
+				);
 
-			if (!error) {
+			if (
+				!finCapabilityErrors &&
+				!mgtAndTechnicalErrors &&
+				!detailsOfExperienceErrors
+			) {
 				setErrors((prev) => ({
 					...prev,
 					summary: {
@@ -105,6 +120,14 @@ const pages = [
 					},
 					[fieldNames.finCapability._]: {
 						...initialErrorState[fieldNames.finCapability._],
+					},
+					[fieldNames.mgtAndTechnicalCompetencies._]: {
+						...initialErrorState[
+							fieldNames.mgtAndTechnicalCompetencies._
+						],
+					},
+					[fieldNames.detailsOfExperience._]: {
+						...initialErrorState[fieldNames.detailsOfExperience._],
 					},
 				}));
 
@@ -117,8 +140,16 @@ const pages = [
 						page2: true,
 					},
 					[fieldNames.finCapability._]: formatFinCapabilityErrors(
-						error?.format()
+						finCapabilityErrors?.format()
 					),
+					[fieldNames.mgtAndTechnicalCompetencies._]:
+						formatMgtAndTechnicalCompetenciesErrors(
+							mgtAndTechnicalErrors?.format()
+						),
+					[fieldNames.detailsOfExperience._]:
+						formatDetailsOfExperienceErrors(
+							detailsOfExperienceErrors?.format()
+						),
 				}));
 
 				showModal(true);
