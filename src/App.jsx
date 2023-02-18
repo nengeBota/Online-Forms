@@ -44,6 +44,7 @@ import formatFinCapabilityErrors from "./helpers/formatFinCapabilityErrors";
 import formatMgtAndTechnicalCompetenciesErrors from "./helpers/formatMgtAndTechnicalCompetenciesErrors";
 import formatDetailsOfExperienceErrors from "./helpers/formatDetailsOfExperienceErrors";
 import formatOrgDevProgramAndBudgetErrors from "./helpers/formatOrgDevProgramAndBudgetErrors";
+import formatLocalContentErrors from "./helpers/formatLocalContentErrors";
 
 //info: the position of the page determines its page number. so CorporateStructureAndServices is page 1 because its first in this array, etc..
 const pages = [
@@ -201,7 +202,44 @@ const pages = [
 	},
 
 	// PART 4
-	{ page: LocalContent },
+	{
+		page: LocalContent,
+		validate: (data, setErrors, showModal) => {
+			// use the safeParse to validate,
+			const { error } = localContentDesc.safeParse(
+				data?.[fieldNames.localContent._]
+			);
+
+			if (!error) {
+				setErrors((prev) => ({
+					...prev,
+					summary: {
+						...prev.summary,
+						page4: false,
+					},
+					[fieldNames.localContent._]: {
+						...initialErrorState[fieldNames.localContent._],
+					},
+				}));
+
+				return true;
+			} else {
+				setErrors((prev) => ({
+					...prev,
+					summary: {
+						...prev.summary,
+						page4: true,
+					},
+					[fieldNames.localContent._]: formatLocalContentErrors(
+						error?.format()
+					),
+				}));
+
+				showModal(true);
+				return false;
+			}
+		},
+	},
 
 	// part 5
 	{ page: Miscellaneous },
@@ -230,7 +268,7 @@ async function submit(values) {
 
 function App() {
 	const [category, setcategory] = useState([]);
-	const [page, setPage] = useState(3);
+	const [page, setPage] = useState(4);
 
 	const [data, setData] = useState(initialState);
 	const [errors, setErrors] = useState(initialErrorState);
