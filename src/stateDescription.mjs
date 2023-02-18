@@ -14,6 +14,7 @@ export const positiveNumber = z.number({ min: 0 });
 export const dateBeforeToday = z
 	.date()
 	.max(new Date(), { message: "Date cannot be later than today" });
+const mustBeTrue = z.literal(true);
 
 const corporateStructureValidations =
 	validations[fieldNames.corporateStructureAndServices._];
@@ -145,20 +146,20 @@ export const declarationDesc = file;
 export const miscFilesDesc = file;
 export const coverPageDesc = file;
 export const checkListDesc = z.object({
-	[fieldNames.checkList.coverPage]: z.literal(true),
-	[fieldNames.checkList.applicationForm]: z.literal(true),
-	[fieldNames.checkList.certificateOfIncorporation]: z.literal(true),
-	[fieldNames.checkList.certificateToCommenceBusiness]: z.literal(true),
-	[fieldNames.checkList.companyRegulations]: z.literal(true),
-	[fieldNames.checkList.signedHssePolicyAndObj]: z.literal(true),
+	[fieldNames.checkList.coverPage]: mustBeTrue,
+	[fieldNames.checkList.applicationForm]: mustBeTrue,
+	[fieldNames.checkList.certificateOfIncorporation]: mustBeTrue,
+	[fieldNames.checkList.certificateToCommenceBusiness]: mustBeTrue,
+	[fieldNames.checkList.companyRegulations]: mustBeTrue,
+	[fieldNames.checkList.signedHssePolicyAndObj]: mustBeTrue,
 	[fieldNames.checkList.currentAuditedFinReportsOrProjectedRevenue]:
-		z.literal(true),
-	[fieldNames.checkList.validTaxClearanceCertificate]: z.literal(true),
-	[fieldNames.checkList.vatCertificate]: z.literal(true),
-	[fieldNames.checkList.originalSsnitClearanceCertificate]: z.literal(true),
-	[fieldNames.checkList.companyProfileAndBusinessPlan]: z.literal(true),
-	[fieldNames.checkList.copiesOfOtherRegulatoryCerts]: z.literal(true),
-	[fieldNames.checkList.copyOfApplicationPackReceipt]: z.literal(true),
+		mustBeTrue,
+	[fieldNames.checkList.validTaxClearanceCertificate]: mustBeTrue,
+	[fieldNames.checkList.vatCertificate]: mustBeTrue,
+	[fieldNames.checkList.originalSsnitClearanceCertificate]: mustBeTrue,
+	[fieldNames.checkList.companyProfileAndBusinessPlan]: mustBeTrue,
+	[fieldNames.checkList.copiesOfOtherRegulatoryCerts]: mustBeTrue,
+	[fieldNames.checkList.copyOfApplicationPackReceipt]: mustBeTrue,
 });
 
 const state = z.object({

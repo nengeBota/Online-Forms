@@ -1,4 +1,5 @@
 import { fieldNames } from "../constants.mjs";
+import formatChecklistErrors from "./formatChecklistErrors.js";
 import formatCorporateStructureAndServicesErrors from "./formatCorporateStructureAndServicesErrors.js";
 import formatDetailsOfExperienceErrors from "./formatDetailsOfExperienceErrors.js";
 import formatFinCapabilityErrors from "./formatFinCapabilityErrors.js";
@@ -21,6 +22,7 @@ function formatAllErrorsForState(zodFormattedErrors) {
 	const localContentErrors = zodFormattedErrors[fieldNames.localContent._];
 	const healthSafetySecurityEnvErrors =
 		zodFormattedErrors[fieldNames.healthSafetySecurityEnv._];
+	const checklistErrors = zodFormattedErrors[fieldNames.checkList._];
 
 	return {
 		// page 1
@@ -55,11 +57,11 @@ function formatAllErrorsForState(zodFormattedErrors) {
 		[fieldNames.declaration]:
 			zodFormattedErrors?.[fieldNames.declaration]?.[0]?.fileName
 				?._errors,
-		[fieldNames.coverPage]: zodFormattedErrors?.[fieldNames.coverPage]?.[0]?.fileName
-        ?._errors,
+		[fieldNames.coverPage]:
+			zodFormattedErrors?.[fieldNames.coverPage]?.[0]?.fileName?._errors,
 
 		// page 6
-		[fieldNames.checkList._]: {},
+		[fieldNames.checkList._]: formatChecklistErrors(checklistErrors),
 	};
 }
 
