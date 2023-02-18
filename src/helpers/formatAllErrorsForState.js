@@ -51,9 +51,12 @@ function formatAllErrorsForState(zodFormattedErrors) {
 		// page 5
 		[fieldNames.healthSafetySecurityEnv._]:
 			formatHealthSafetySecurityEnvErrors(healthSafetySecurityEnvErrors),
-		[fieldNames.miscFiles]: {},
-		[fieldNames.declaration]: {},
-		[fieldNames.coverPage]: {},
+		[fieldNames.miscFiles]: [],
+		[fieldNames.declaration]:
+			zodFormattedErrors?.[fieldNames.declaration]?.[0]?.fileName
+				?._errors,
+		[fieldNames.coverPage]: zodFormattedErrors?.[fieldNames.coverPage]?.[0]?.fileName
+        ?._errors,
 
 		// page 6
 		[fieldNames.checkList._]: {},

@@ -323,7 +323,7 @@ export const initialErrorState = {
 	[fieldNames.miscFiles]: [],
 
 	// applicant declaration
-	[fieldNames.declaration]: "",
+	[fieldNames.declaration]: [],
 
 	// cover page
 	[fieldNames.coverPage]: [],

@@ -126,14 +126,10 @@ function Miscellaneous({ data, setData, errors, setErrors }) {
 					<a href="#" download>
 						Click to download
 					</a>{" "}
-					the declaration form to fill
-				</FormLabel>
-			</FormGroup>
-			<FormGroup>
-				<FormLabel>
+					the declaration form to fill <br />
 					Please upload the filled and signed declaration form *
 				</FormLabel>
-				<br />
+				<Errors errors={errors?.[fieldNames.declaration]} />
 				<FileInput
 					onChange={(file) => {
 						setData((prev) => ({
@@ -151,7 +147,7 @@ function Miscellaneous({ data, setData, errors, setErrors }) {
 
 			<FormGroup>
 				<FormLabel>Upload Cover Page *</FormLabel>
-				<br />
+				<Errors errors={errors?.[fieldNames.coverPage]} />
 				<FileInput
 					onChange={(file) => {
 						setData((prev) => ({

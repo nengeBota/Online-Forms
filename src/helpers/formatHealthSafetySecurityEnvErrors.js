@@ -7,8 +7,6 @@ export default function formatHealthSafetySecurityEnvErrors(
 ) {
     const errors = healthSafetySecurityEnvErrors;
     
-    debugger;
-
 	return {
 		[fields.hssePolicyAndObj]: Object.keys(
 			errors?.[fields.hssePolicyAndObj] || {}
