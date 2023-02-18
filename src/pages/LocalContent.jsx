@@ -3,6 +3,7 @@ import { fieldNames, NEW_VALUE_OF_SERVICE } from "../constants.mjs";
 import DynamicTable from "../components/DynamicTable";
 import { useEffect } from "react";
 import Heading from "../components/Heading";
+import Errors from "../components/Errors.jsx";
 
 /** todo: need to check this out. there's probably an error here */
 const valueOfServiceProvidedColumns = [
@@ -48,7 +49,7 @@ const getFieldValues = (data) => {
 			fieldNames.localContent.ghanaianMgtStaffBreakdown
 		];
 	const foreignMgtStaffBreakdown = getLocalContentField(
-		fieldNames.localContent.foreignStaffMgtBreakdown
+		fieldNames.localContent.foreignMgtStaffBreakdown
 	);
 	const totalMgtStaffBreakdown = getLocalContentField(
 		fieldNames.localContent.totalMgtStaffBreakdown
@@ -98,7 +99,13 @@ const getFieldValues = (data) => {
 	};
 };
 
-function LocalContent({ data, setData }) {
+const fields = fieldNames.localContent;
+
+const getError = (field, errors) => {
+	return errors?.[fields._]?.[field];
+};
+
+function LocalContent({ data, setData, errors, setErrors }) {
 	const {
 		percentageOfGhanaianParticipation,
 		ghanaianMgtStaffBreakdown,
@@ -127,36 +134,19 @@ function LocalContent({ data, setData }) {
 	useEffect(() => {
 		setData((prev) => {
 			const newTotalMgtStaff =
-				parseInt(
-					prev[fieldNames.localContent._][
-						fieldNames.localContent.ghanaianMgtStaffBreakdown
-					]
-				) +
-				parseInt(
-					prev[fieldNames.localContent._][
-						fieldNames.localContent.foreignMgtStaffBreakdown
-					]
-				);
+				parseInt(ghanaianMgtStaffBreakdown) +
+				parseInt(foreignMgtStaffBreakdown);
+
 			const newTotalOtherStaff =
-				parseInt(
-					prev[fieldNames.localContent._][
-						fieldNames.localContent.ghanaianOtherStaffBreakdown
-					]
-				) +
-				parseInt(
-					prev[fieldNames.localContent._][
-						fieldNames.localContent.foreignOtherStaffBreakdown
-					]
-				);
+				parseInt(ghanaianOtherStaffBreakdown) +
+				parseInt(foreignOtherStaffBreakdown);
 
 			return {
 				...prev,
-				[fieldNames.localContent._]: {
-					...prev[fieldNames.localContent._],
-					[fieldNames.localContent.totalMgtStaffBreakdown]:
-						newTotalMgtStaff,
-					[fieldNames.localContent.totalOtherStaffBreakdown]:
-						newTotalOtherStaff,
+				[fields._]: {
+					...prev[fields._],
+					[fields.totalMgtStaffBreakdown]: newTotalMgtStaff,
+					[fields.totalOtherStaffBreakdown]: newTotalOtherStaff,
 				},
 			};
 		});
@@ -165,6 +155,7 @@ function LocalContent({ data, setData }) {
 		foreignMgtStaffBreakdown,
 		ghanaianMgtStaffBreakdown,
 		ghanaianOtherStaffBreakdown,
+		setData,
 	]);
 
 	// console.table("values -> ", {
@@ -186,6 +177,12 @@ function LocalContent({ data, setData }) {
 					1. Provide the percentage of Ghanaian participation in
 					respect of ownership *
 				</FormLabel>
+				<Errors
+					errors={getError(
+						fields.percentageOfGhanaianParticipation,
+						errors
+					)}
+				/>
 				<Form.Control
 					type="number"
 					value={percentageOfGhanaianParticipation}
@@ -217,6 +214,12 @@ function LocalContent({ data, setData }) {
 						<tr>
 							<td>Management</td>
 							<td>
+								<Errors
+									errors={getError(
+										fields.ghanaianMgtStaffBreakdown,
+										errors
+									)}
+								/>
 								<Form.Control
 									type="number"
 									value={ghanaianMgtStaffBreakdown}
@@ -230,6 +233,12 @@ function LocalContent({ data, setData }) {
 								/>
 							</td>
 							<td>
+								<Errors
+									errors={getError(
+										fields.foreignMgtStaffBreakdown,
+										errors
+									)}
+								/>
 								<Form.Control
 									type="number"
 									value={foreignMgtStaffBreakdown}
@@ -243,6 +252,12 @@ function LocalContent({ data, setData }) {
 								/>
 							</td>
 							<td>
+								<Errors
+									errors={getError(
+										fields.totalMgtStaffBreakdown,
+										errors
+									)}
+								/>
 								<Form.Control
 									type="number"
 									value={totalMgtStaffBreakdown}
@@ -259,6 +274,12 @@ function LocalContent({ data, setData }) {
 						<tr>
 							<td>Other Positions</td>
 							<td>
+								<Errors
+									errors={getError(
+										fields.ghanaianOtherStaffBreakdown,
+										errors
+									)}
+								/>
 								<Form.Control
 									type="number"
 									value={ghanaianOtherStaffBreakdown}
@@ -272,6 +293,12 @@ function LocalContent({ data, setData }) {
 								/>
 							</td>
 							<td>
+								<Errors
+									errors={getError(
+										fields.foreignOtherStaffBreakdown,
+										errors
+									)}
+								/>
 								<Form.Control
 									type="number"
 									value={foreignOtherStaffBreakdown}
@@ -285,6 +312,12 @@ function LocalContent({ data, setData }) {
 								/>
 							</td>
 							<td>
+								<Errors
+									errors={getError(
+										fields.totalOtherStaffBreakdown,
+										errors
+									)}
+								/>
 								<Form.Control
 									type="number"
 									value={totalOtherStaffBreakdown}
@@ -307,7 +340,7 @@ function LocalContent({ data, setData }) {
 					3. Infrastructural Investments: The amount of money spent on
 					infrastructure in Ghana *
 				</FormLabel>{" "}
-				<br />
+				<Errors errors={getError(fields.infraExpenditure, errors)} />
 				<Form.Control
 					type="number"
 					value={infraExpenditure}
@@ -329,6 +362,7 @@ function LocalContent({ data, setData }) {
 					operate. (ie. Catering, logistics, etc)
 				</FormLabel>
 				<DynamicTable
+					errors={getError(fields.valueOfServiceReceived._, errors)}
 					data={valueOfServiceReceived}
 					columns={valueOfServiceReceivedColumns}
 					addNewRow={() => {
@@ -379,6 +413,7 @@ function LocalContent({ data, setData }) {
 				<DynamicTable
 					columns={valueOfServiceProvidedColumns}
 					data={valueOfServiceProvided}
+					errors={getError(fields.valueOfServiceProvided._, errors)}
 					addNewRow={() => {
 						valueOfServiceProvided.push({
 							...NEW_VALUE_OF_SERVICE,
@@ -424,6 +459,7 @@ function LocalContent({ data, setData }) {
 					5. List raw materials to be utilized (This applies to
 					companies which use raw materials in their activities) *
 				</FormLabel>
+				<Errors errors={getError(fields.rawMaterials, errors)} />
 				<Form.Control
 					as="textarea"
 					value={rawMaterials}
@@ -440,7 +476,9 @@ function LocalContent({ data, setData }) {
 				<FormLabel>
 					6. List Ghanaian finished goods to be utilised *
 				</FormLabel>
-				<br />
+				<Errors
+					errors={getError(fields.ghanaianFinishedGoods, errors)}
+				/>
 				<Form.Control
 					as="textarea"
 					value={ghanaianFinishedGoods}

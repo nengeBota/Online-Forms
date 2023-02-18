@@ -113,6 +113,18 @@ export const localContentDesc = z.object({
 	[fieldNames.localContent.infraExpenditure]: positiveNumber,
 	[fieldNames.localContent.rawMaterials]: nonEmptyString,
 	[fieldNames.localContent.ghanaianFinishedGoods]: nonEmptyString,
+	[fieldNames.localContent.valueOfServiceReceived._]: z.array(
+		z.object({
+			[fieldNames.localContent.valueOfServiceReceived.isEditing]:
+				z.boolean(),
+			[fieldNames.localContent.valueOfServiceReceived.typeOfService]:
+				nonEmptyString,
+			[fieldNames.localContent.valueOfServiceReceived.contractSum]:
+				nonEmptyString,
+			[fieldNames.localContent.valueOfServiceReceived
+				.nameOfClientCompany]: nonEmptyString,
+		})
+	),
 	[fieldNames.localContent.valueOfServiceProvided._]: z.array(
 		z.object({
 			[fieldNames.localContent.valueOfServiceProvided.isEditing]:

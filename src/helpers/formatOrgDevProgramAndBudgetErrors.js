@@ -7,7 +7,6 @@ const getErrors = (field, errors) => {
 		?.filter((key) => key !== "_errors")
 		?.reduce((acc, key) => {
             const recordError = errors?.[field]?.[key]?.fileName?._errors || [];
-            console.log('error -> ', recordError)
 			return [...acc, ...recordError];
 		}, []);
 };

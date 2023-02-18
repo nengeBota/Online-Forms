@@ -2,6 +2,7 @@ import { fieldNames } from "../constants.mjs";
 import formatCorporateStructureAndServicesErrors from "./formatCorporateStructureAndServicesErrors.js";
 import formatDetailsOfExperienceErrors from "./formatDetailsOfExperienceErrors.js";
 import formatFinCapabilityErrors from "./formatFinCapabilityErrors.js";
+import formatLocalContentErrors from "./formatLocalContentErrors.js";
 import formatMgtAndTechnicalCompetenciesErrors from "./formatMgtAndTechnicalCompetenciesErrors.js";
 import formatOrgDevProgramAndBudgetErrors from "./formatOrgDevProgramAndBudgetErrors.js";
 
@@ -16,6 +17,7 @@ function formatAllErrorsForState(zodFormattedErrors) {
 		zodFormattedErrors[fieldNames.detailsOfExperience._];
 	const orgDevProgramAndBudgetErrors =
 		zodFormattedErrors[fieldNames.orgDevProgramAndBudget._];
+	const localContentErrors = zodFormattedErrors[fieldNames.localContent._];
 
 	return {
 		// page 1
@@ -40,7 +42,8 @@ function formatAllErrorsForState(zodFormattedErrors) {
 			formatOrgDevProgramAndBudgetErrors(orgDevProgramAndBudgetErrors),
 
 		// page 4
-		[fieldNames.localContent._]: {},
+		[fieldNames.localContent._]:
+			formatLocalContentErrors(localContentErrors),
 
 		// page 5
 		[fieldNames.healthSafetySecurityEnv._]: {},
