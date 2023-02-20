@@ -19,6 +19,8 @@ const mustBeTrue = z.literal(true);
 const corporateStructureValidations =
 	validations[fieldNames.corporateStructureAndServices._];
 const finCapabilityValidations = validations[fieldNames.finCapability._];
+const getLocalContentFieldValidation = (field) =>
+	validations[fieldNames.localContent._][field];
 
 const corporateStructureFields = fieldNames.corporateStructureAndServices;
 
@@ -116,40 +118,52 @@ export const orgDevProgramAndBudgetDesc = z.object({
 	[fieldNames.orgDevProgramAndBudget.csrAndSocialDevProgramAndBudget]: file,
 });
 export const localContentDesc = z.object({
-	[fieldNames.localContent.percentageOfGhanaianParticipation]: positiveNumber,
-	[fieldNames.localContent.ghanaianMgtStaffBreakdown]: positiveNumber,
-	[fieldNames.localContent.foreignMgtStaffBreakdown]: positiveNumber,
-	[fieldNames.localContent.totalMgtStaffBreakdown]: positiveNumber,
-	[fieldNames.localContent.ghanaianOtherStaffBreakdown]: positiveNumber,
-	[fieldNames.localContent.foreignOtherStaffBreakdown]: positiveNumber,
-	[fieldNames.localContent.totalOtherStaffBreakdown]: positiveNumber,
-	[fieldNames.localContent.infraExpenditure]: positiveNumber,
-	[fieldNames.localContent.rawMaterials]: nonEmptyString,
-	[fieldNames.localContent.ghanaianFinishedGoods]: nonEmptyString,
-	[fieldNames.localContent.valueOfServiceReceived._]: z.array(
-		z.object({
-			[fieldNames.localContent.valueOfServiceReceived.isEditing]:
-				z.boolean(),
-			[fieldNames.localContent.valueOfServiceReceived.typeOfService]:
-				nonEmptyString,
-			[fieldNames.localContent.valueOfServiceReceived.contractSum]:
-				nonEmptyString,
-			[fieldNames.localContent.valueOfServiceReceived
-				.nameOfClientCompany]: nonEmptyString,
-		})
+	[fieldNames.localContent.percentageOfGhanaianParticipation]:
+		getLocalContentFieldValidation(
+			fieldNames.localContent.percentageOfGhanaianParticipation
+		),
+	[fieldNames.localContent.ghanaianMgtStaffBreakdown]:
+		getLocalContentFieldValidation(
+			fieldNames.localContent.ghanaianMgtStaffBreakdown
+		),
+	[fieldNames.localContent.foreignMgtStaffBreakdown]:
+		getLocalContentFieldValidation(
+			fieldNames.localContent.foreignMgtStaffBreakdown
+		),
+	[fieldNames.localContent.totalMgtStaffBreakdown]:
+		getLocalContentFieldValidation(
+			fieldNames.localContent.totalMgtStaffBreakdown
+		),
+	[fieldNames.localContent.ghanaianOtherStaffBreakdown]:
+		getLocalContentFieldValidation(
+			fieldNames.localContent.ghanaianOtherStaffBreakdown
+		),
+	[fieldNames.localContent.foreignOtherStaffBreakdown]:
+		getLocalContentFieldValidation(
+			fieldNames.localContent.foreignOtherStaffBreakdown
+		),
+	[fieldNames.localContent.totalOtherStaffBreakdown]:
+		getLocalContentFieldValidation(
+			fieldNames.localContent.totalOtherStaffBreakdown
+		),
+	[fieldNames.localContent.infraExpenditure]: getLocalContentFieldValidation(
+		fieldNames.localContent.infraExpenditure
 	),
-	[fieldNames.localContent.valueOfServiceProvided._]: z.array(
-		z.object({
-			[fieldNames.localContent.valueOfServiceProvided.isEditing]:
-				z.boolean(),
-			[fieldNames.localContent.valueOfServiceProvided.typeOfService]:
-				nonEmptyString,
-			[fieldNames.localContent.valueOfServiceProvided.contractSum]:
-				nonEmptyString,
-			[fieldNames.localContent.valueOfServiceProvided
-				.nameOfClientCompany]: nonEmptyString,
-		})
+	[fieldNames.localContent.rawMaterials]: getLocalContentFieldValidation(
+		fieldNames.localContent.rawMaterials
 	),
+	[fieldNames.localContent.ghanaianFinishedGoods]:
+		getLocalContentFieldValidation(
+			fieldNames.localContent.ghanaianFinishedGoods
+		),
+	[fieldNames.localContent.valueOfServiceReceived._]:
+		getLocalContentFieldValidation(
+			fieldNames.localContent.valueOfServiceReceived._
+		),
+	[fieldNames.localContent.valueOfServiceProvided._]:
+		getLocalContentFieldValidation(
+			fieldNames.localContent.valueOfServiceProvided._
+		),
 });
 export const healthSafetySecurityEnvDesc = z.object({
 	[fieldNames.healthSafetySecurityEnv.hssePolicyAndObj]: file,

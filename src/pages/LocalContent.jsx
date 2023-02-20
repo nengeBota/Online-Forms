@@ -4,6 +4,11 @@ import DynamicTable from "../components/DynamicTable";
 import { useEffect } from "react";
 import Heading from "../components/Heading";
 import Errors from "../components/Errors.jsx";
+import validations from "../constants/fieldValidations.js";
+import {
+	formatValueOfServiceProvidedErrors,
+	formatValueOfServiceReceivedErrors,
+} from "../helpers/formatLocalContentErrors.js";
 
 /** todo: need to check this out. there's probably an error here */
 const valueOfServiceProvidedColumns = [
@@ -105,6 +110,20 @@ const getError = (field, errors) => {
 	return errors?.[fields._]?.[field];
 };
 
+const updateErrors = (field, errors, setErrors) => {
+	setErrors((prev) => ({
+		...prev,
+		[fields._]: {
+			...prev[fields._],
+			[field]: errors,
+		},
+	}));
+};
+
+const getValidation = (field) => {
+	return validations[fields._][field];
+};
+
 function LocalContent({ data, setData, errors, setErrors }) {
 	const {
 		percentageOfGhanaianParticipation,
@@ -193,6 +212,20 @@ function LocalContent({ data, setData, errors, setErrors }) {
 							e.target.value
 						)
 					}
+					onBlur={() => {
+						const { error } = getValidation(
+							fields.percentageOfGhanaianParticipation
+						)?.safeParse(
+							data[fields._][
+								fields.percentageOfGhanaianParticipation
+							]
+						);
+						updateErrors(
+							fields.percentageOfGhanaianParticipation,
+							error?.format()?._errors,
+							setErrors
+						);
+					}}
 				/>
 			</FormGroup>
 
@@ -230,6 +263,20 @@ function LocalContent({ data, setData, errors, setErrors }) {
 											e.target.value
 										);
 									}}
+									onBlur={() => {
+										const { error } = getValidation(
+											fields.ghanaianMgtStaffBreakdown
+										)?.safeParse(
+											data[fields._][
+												fields.ghanaianMgtStaffBreakdown
+											]
+										);
+										updateErrors(
+											fields.ghanaianMgtStaffBreakdown,
+											error?.format()?._errors,
+											setErrors
+										);
+									}}
 								/>
 							</td>
 							<td>
@@ -249,6 +296,20 @@ function LocalContent({ data, setData, errors, setErrors }) {
 											e.target.value
 										);
 									}}
+									onBlur={() => {
+										const { error } = getValidation(
+											fields.foreignMgtStaffBreakdown
+										)?.safeParse(
+											data[fields._][
+												fields.foreignMgtStaffBreakdown
+											]
+										);
+										updateErrors(
+											fields.foreignMgtStaffBreakdown,
+											error?.format()?._errors,
+											setErrors
+										);
+									}}
 								/>
 							</td>
 							<td>
@@ -266,6 +327,20 @@ function LocalContent({ data, setData, errors, setErrors }) {
 											fieldNames.localContent
 												.totalMgtStaffBreakdown,
 											e.target.value
+										);
+									}}
+									onBlur={() => {
+										const { error } = getValidation(
+											fields.totalMgtStaffBreakdown
+										)?.safeParse(
+											data[fields._][
+												fields.totalMgtStaffBreakdown
+											]
+										);
+										updateErrors(
+											fields.totalMgtStaffBreakdown,
+											error?.format()?._errors,
+											setErrors
 										);
 									}}
 								/>
@@ -290,6 +365,21 @@ function LocalContent({ data, setData, errors, setErrors }) {
 											e.target.value
 										);
 									}}
+									onBlur={() => {
+										const { error } = getValidation(
+											fields.ghanaianOtherStaffBreakdown
+										)?.safeParse(
+											data[fields._][
+												fields
+													.ghanaianOtherStaffBreakdown
+											]
+										);
+										updateErrors(
+											fields.ghanaianOtherStaffBreakdown,
+											error?.format()?._errors,
+											setErrors
+										);
+									}}
 								/>
 							</td>
 							<td>
@@ -309,6 +399,21 @@ function LocalContent({ data, setData, errors, setErrors }) {
 											e.target.value
 										);
 									}}
+									onBlur={() => {
+										const { error } = getValidation(
+											fields.foreignOtherStaffBreakdown
+										)?.safeParse(
+											data[fields._][
+												fields
+													.foreignOtherStaffBreakdown
+											]
+										);
+										updateErrors(
+											fields.foreignOtherStaffBreakdown,
+											error?.format()?._errors,
+											setErrors
+										);
+									}}
 								/>
 							</td>
 							<td>
@@ -326,6 +431,20 @@ function LocalContent({ data, setData, errors, setErrors }) {
 											fieldNames.localContent
 												.totalOtherStaffBreakdown,
 											e.target.value
+										);
+									}}
+									onBlur={() => {
+										const { error } = getValidation(
+											fields.totalOtherStaffBreakdown
+										)?.safeParse(
+											data[fields._][
+												fields.totalOtherStaffBreakdown
+											]
+										);
+										updateErrors(
+											fields.totalOtherStaffBreakdown,
+											error?.format()?._errors,
+											setErrors
 										);
 									}}
 								/>
@@ -350,6 +469,16 @@ function LocalContent({ data, setData, errors, setErrors }) {
 							e.target.value
 						);
 					}}
+					onBlur={() => {
+						const { error } = getValidation(
+							fields.infraExpenditure
+						)?.safeParse(data[fields._][fields.infraExpenditure]);
+						updateErrors(
+							fields.infraExpenditure,
+							error?.format()?._errors,
+							setErrors
+						);
+					}}
 				/>
 			</FormGroup>
 
@@ -365,6 +494,19 @@ function LocalContent({ data, setData, errors, setErrors }) {
 					errors={getError(fields.valueOfServiceReceived._, errors)}
 					data={valueOfServiceReceived}
 					columns={valueOfServiceReceivedColumns}
+					onBlur={() => {
+						const { error } = getValidation(
+							fields.valueOfServiceReceived._
+						)?.safeParse(
+							data[fields._][fields.valueOfServiceReceived._]
+						);
+
+						updateErrors(
+							fields.valueOfServiceReceived._,
+							formatValueOfServiceReceivedErrors(error?.format()),
+							setErrors
+						);
+					}}
 					addNewRow={() => {
 						valueOfServiceReceived.push({
 							...NEW_VALUE_OF_SERVICE,
@@ -413,6 +555,19 @@ function LocalContent({ data, setData, errors, setErrors }) {
 				<DynamicTable
 					columns={valueOfServiceProvidedColumns}
 					data={valueOfServiceProvided}
+					onBlur={() => {
+						const { error } = getValidation(
+							fields.valueOfServiceProvided._
+						)?.safeParse(
+							data[fields._][fields.valueOfServiceProvided._]
+						);
+
+						updateErrors(
+							fields.valueOfServiceProvided._,
+							formatValueOfServiceProvidedErrors(error?.format()),
+							setErrors
+						);
+					}}
 					errors={getError(fields.valueOfServiceProvided._, errors)}
 					addNewRow={() => {
 						valueOfServiceProvided.push({

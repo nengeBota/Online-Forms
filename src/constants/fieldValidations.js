@@ -115,7 +115,43 @@ const validations = {
 					.contractValue]: nonEmptyString,
 			})
 		),
-	},
+    },
+    [fieldNames.localContent._]: {
+        [fieldNames.localContent.percentageOfGhanaianParticipation]: positiveNumber,
+        [fieldNames.localContent.ghanaianMgtStaffBreakdown]: positiveNumber,
+        [fieldNames.localContent.foreignMgtStaffBreakdown]: positiveNumber,
+        [fieldNames.localContent.totalMgtStaffBreakdown]: positiveNumber,
+        [fieldNames.localContent.ghanaianOtherStaffBreakdown]: positiveNumber,
+        [fieldNames.localContent.foreignOtherStaffBreakdown]: positiveNumber,
+        [fieldNames.localContent.totalOtherStaffBreakdown]: positiveNumber,
+        [fieldNames.localContent.infraExpenditure]: positiveNumber,
+        [fieldNames.localContent.rawMaterials]: nonEmptyString,
+        [fieldNames.localContent.ghanaianFinishedGoods]: nonEmptyString,
+        [fieldNames.localContent.valueOfServiceReceived._]: z.array(
+            z.object({
+                [fieldNames.localContent.valueOfServiceReceived.isEditing]:
+                    z.boolean(),
+                [fieldNames.localContent.valueOfServiceReceived.typeOfService]:
+                    nonEmptyString,
+                [fieldNames.localContent.valueOfServiceReceived.contractSum]:
+                    nonEmptyString,
+                [fieldNames.localContent.valueOfServiceReceived
+                    .nameOfClientCompany]: nonEmptyString,
+            })
+        ),
+        [fieldNames.localContent.valueOfServiceProvided._]: z.array(
+            z.object({
+                [fieldNames.localContent.valueOfServiceProvided.isEditing]:
+                    z.boolean(),
+                [fieldNames.localContent.valueOfServiceProvided.typeOfService]:
+                    nonEmptyString,
+                [fieldNames.localContent.valueOfServiceProvided.contractSum]:
+                    nonEmptyString,
+                [fieldNames.localContent.valueOfServiceProvided
+                    .nameOfClientCompany]: nonEmptyString,
+            })
+        ),
+    }
 };
 
 export default validations;

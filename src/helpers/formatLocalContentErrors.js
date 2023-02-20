@@ -6,11 +6,11 @@ const getErrors = (field, errors) => {
 	return errors?.[field]?._errors || [];
 };
 
-const getValueOfServiceProvidedErrors = (errors) => {
-	return Object.keys(errors?.valueOfServiceProvided || {})
+export const formatValueOfServiceProvidedErrors = (errors) => {
+	return Object.keys(errors || {})
 		?.filter((key) => key !== "_errors")
 		?.map((key) => {
-			const row = errors?.valueOfServiceProvided?.[key];
+			const row = errors?.[key];
 			return {
 				[fields?.valueOfServiceProvided?.[
 					fields.valueOfServiceProvided.isEditing
@@ -37,11 +37,11 @@ const getValueOfServiceProvidedErrors = (errors) => {
 		});
 };
 
-const getValueOfServiceReceivedErrors = (errors) => {
-	return Object.keys(errors?.valueOfServiceReceived || {})
+export const formatValueOfServiceReceivedErrors = (errors) => {
+	return Object.keys(errors|| {})
 		?.filter((key) => key !== "_errors")
 		?.map((key) => {
-			const row = errors?.valueOfServiceReceived?.[key];
+			const row = errors?.[key];
 			return {
 				[fields?.valueOfServiceReceived?.[
 					fields.valueOfServiceProvided.isEditing
@@ -105,9 +105,11 @@ export default function formatLocalContentErrors(localContentErrors) {
 			fields.ghanaianFinishedGoods,
 			errors
 		),
-		[fields.valueOfServiceProvided._]:
-			getValueOfServiceProvidedErrors(errors),
-		[fields.valueOfServiceReceived._]:
-			getValueOfServiceReceivedErrors(errors),
+		[fields.valueOfServiceProvided._]: formatValueOfServiceProvidedErrors(
+			errors?.[fields.valueOfServiceProvided._]
+		),
+		[fields.valueOfServiceReceived._]: formatValueOfServiceReceivedErrors(
+			errors?.[fields.valueOfServiceReceived._]
+		),
 	};
 }
