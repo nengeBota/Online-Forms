@@ -89,7 +89,13 @@ const validations = {
 		),
 		[fieldNames.finCapability.whatAppliesUploadedDocument]: file,
 		[fieldNames.finCapability.sourceOfFunds]: nonEmptyString,
-	},
+    },
+    [fieldNames.mgtAndTechnicalCompetencies._]: {
+        [fieldNames.mgtAndTechnicalCompetencies.orgChart]: file,
+	[fieldNames.mgtAndTechnicalCompetencies.detailedStaffInfo]: file,
+	[fieldNames.mgtAndTechnicalCompetencies.requiredExpertise]: nonEmptyString,
+	[fieldNames.mgtAndTechnicalCompetencies.sourcesOfEquipment]: nonEmptyString,
+    }
 };
 
 export default validations;

@@ -77,10 +77,22 @@ export const financialCapabilityDesc = z.object({
 		finCapabilityValidations[fieldNames.finCapability.sourceOfFunds],
 });
 export const mgtAndTechnicalCompetenciesDesc = z.object({
-	[fieldNames.mgtAndTechnicalCompetencies.orgChart]: file,
-	[fieldNames.mgtAndTechnicalCompetencies.detailedStaffInfo]: file,
-	[fieldNames.mgtAndTechnicalCompetencies.requiredExpertise]: nonEmptyString,
-	[fieldNames.mgtAndTechnicalCompetencies.sourcesOfEquipment]: nonEmptyString,
+	[fieldNames.mgtAndTechnicalCompetencies.orgChart]:
+		validations[fieldNames.mgtAndTechnicalCompetencies._][
+			fieldNames.mgtAndTechnicalCompetencies.orgChart
+		],
+	[fieldNames.mgtAndTechnicalCompetencies.detailedStaffInfo]:
+		validations[fieldNames.mgtAndTechnicalCompetencies._][
+			fieldNames.mgtAndTechnicalCompetencies.detailedStaffInfo
+		],
+	[fieldNames.mgtAndTechnicalCompetencies.requiredExpertise]:
+		validations[fieldNames.mgtAndTechnicalCompetencies._][
+			fieldNames.mgtAndTechnicalCompetencies.requiredExpertise
+		],
+	[fieldNames.mgtAndTechnicalCompetencies.sourcesOfEquipment]:
+		validations[fieldNames.mgtAndTechnicalCompetencies._][
+			fieldNames.mgtAndTechnicalCompetencies.sourcesOfEquipment
+		],
 });
 export const detailsOfExperienceDesc = z.object({
 	[fieldNames.detailsOfExperience.companyExperience]: nonEmptyString,

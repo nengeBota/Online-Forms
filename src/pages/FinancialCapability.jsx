@@ -300,6 +300,36 @@ function FinancialCapability({ data, setData, errors, setErrors }) {
 									e.target.value
 								);
 							}}
+							onBlur={() => {
+								const { error } = validations[
+									fieldNames.mgtAndTechnicalCompetencies._
+								][
+									fieldNames.mgtAndTechnicalCompetencies
+										.requiredExpertise
+								]?.safeParse(
+									data[
+										fieldNames.mgtAndTechnicalCompetencies._
+									][
+										fieldNames.mgtAndTechnicalCompetencies
+											.requiredExpertise
+									]
+								);
+								setErrors((prev) => ({
+									...prev,
+									[fieldNames.mgtAndTechnicalCompetencies._]:
+										{
+											...prev[
+												fieldNames
+													.mgtAndTechnicalCompetencies
+													._
+											],
+											[fieldNames
+												.mgtAndTechnicalCompetencies
+												.requiredExpertise]:
+												error?.format()?._errors,
+										},
+								}));
+							}}
 						/>
 					</div>
 
@@ -328,6 +358,36 @@ function FinancialCapability({ data, setData, errors, setErrors }) {
 										.sourcesOfEquipment,
 									e.target.value
 								);
+							}}
+							onBlur={() => {
+								const { error } = validations[
+									fieldNames.mgtAndTechnicalCompetencies._
+								][
+									fieldNames.mgtAndTechnicalCompetencies
+										.sourcesOfEquipment
+								]?.safeParse(
+									data[
+										fieldNames.mgtAndTechnicalCompetencies._
+									][
+										fieldNames.mgtAndTechnicalCompetencies
+											.sourcesOfEquipment
+									]
+								);
+								setErrors((prev) => ({
+									...prev,
+									[fieldNames.mgtAndTechnicalCompetencies._]:
+										{
+											...prev[
+												fieldNames
+													.mgtAndTechnicalCompetencies
+													._
+											],
+											[fieldNames
+												.mgtAndTechnicalCompetencies
+												.sourcesOfEquipment]:
+												error?.format()?._errors,
+										},
+								}));
 							}}
 						/>
 					</div>
