@@ -1,6 +1,4 @@
-import { getElementError } from "@testing-library/react";
 import { fieldNames } from "../constants.mjs";
-import { corporateStructureAndServicesDesc } from "../stateDescription.mjs";
 
 const corporateStructure = fieldNames.corporateStructureAndServices;
 
@@ -8,13 +6,59 @@ function getErrorValue(field, errors) {
 	return errors[field]?._errors || [];
 }
 
+export function formatShareholdersErrors(shareholdersErrors) {
+	const errors = shareholdersErrors;
+
+	return Object.keys(errors || {})
+		?.filter((key) => key !== "_errors")
+		?.map((key) => {
+			const each = errors[key];
+
+			return {
+				[corporateStructure.shareholders.address]:
+					each?.[corporateStructure.shareholders.address]?._errors,
+				[corporateStructure.shareholders.name]:
+					each?.[corporateStructure.shareholders.name]?._errors,
+				[corporateStructure.shareholders.nationality]:
+					each?.[corporateStructure.shareholders.nationality]
+						?._errors,
+				[corporateStructure.shareholders.percentage]:
+					each?.[corporateStructure.shareholders.percentage]?._errors,
+				[corporateStructure.shareholders.isEditing]:
+					each?.[corporateStructure.shareholders.isEditing]?._errors,
+			};
+		});
+}
+
+export function formatBeneficialFieldErrors(beneficialFieldErrors) {
+	const errors = beneficialFieldErrors;
+
+	return Object.keys(errors || {})
+		?.filter((key) => key !== "_errors")
+		?.map((key) => {
+			const each = errors?.[key];
+
+			return {
+				[corporateStructure.beneficial.name]:
+					each?.[corporateStructure.beneficial.name]?._errors,
+				[corporateStructure.beneficial.nationality]:
+					each?.[corporateStructure.beneficial.nationality]?._errors,
+				[corporateStructure.beneficial.percentage]:
+					each?.[corporateStructure.beneficial.percentage]?._errors,
+				[corporateStructure.beneficial.address]:
+					each?.[corporateStructure.beneficial.address]?._errors,
+				[corporateStructure.beneficial.isEditing]:
+					each?.[corporateStructure.beneficial.isEditing]?._errors,
+			};
+		});
+}
+
 export default function formatCorporateStructureAndServicesErrors(
 	corporateStructureAndServicesErrors
 ) {
 	const errors = corporateStructureAndServicesErrors;
 
-  return {
-
+	return {
 		[fieldNames.corporateStructureAndServices.applicantName]: getErrorValue(
 			corporateStructure.applicantName,
 			errors
@@ -76,54 +120,12 @@ export default function formatCorporateStructureAndServicesErrors(
 			getErrorValue(corporateStructure.nationalityOfAffiliate, errors),
 		[fieldNames.corporateStructureAndServices.permitCategory]:
 			getErrorValue(corporateStructure.permitCategory, errors),
-		[fieldNames.corporateStructureAndServices.shareholders._]: Object.keys(
-			errors?.[corporateStructure.shareholders._] || {}
-		)
-			?.filter((key) => key !== "_errors")
-			?.map((key) => {
-				const each = errors?.[corporateStructure.shareholders._][key];
+		[fieldNames.corporateStructureAndServices.shareholders._]:
+			formatShareholdersErrors(errors[corporateStructure.shareholders._]),
 
-				return {
-					[corporateStructure.shareholders.address]:
-						each?.[corporateStructure.shareholders.address]
-							?._errors,
-					[corporateStructure.shareholders.name]:
-						each?.[corporateStructure.shareholders.name]?._errors,
-					[corporateStructure.shareholders.nationality]:
-						each?.[corporateStructure.shareholders.nationality]
-							?._errors,
-					[corporateStructure.shareholders.percentage]:
-						each?.[corporateStructure.shareholders.percentage]
-							?._errors,
-					[corporateStructure.shareholders.isEditing]:
-						each?.[corporateStructure.shareholders.isEditing]
-							?._errors,
-				};
-			}),
-
-		[corporateStructure.beneficial._]: Object.keys(
-			errors?.[corporateStructure.beneficial._] || {}
-		)
-			?.filter((key) => key !== "_errors")
-			?.map((key) => {
-				const each = errors?.[corporateStructure.beneficial._][key];
-
-				return {
-					[corporateStructure.beneficial.name]:
-						each?.[corporateStructure.beneficial.name]?._errors,
-					[corporateStructure.beneficial.nationality]:
-						each?.[corporateStructure.beneficial.nationality]
-							?._errors,
-					[corporateStructure.beneficial.percentage]:
-						each?.[corporateStructure.beneficial.percentage]
-							?._errors,
-					[corporateStructure.beneficial.address]:
-						each?.[corporateStructure.beneficial.address]?._errors,
-					[corporateStructure.beneficial.isEditing]:
-						each?.[corporateStructure.beneficial.isEditing]
-							?._errors,
-				};
-			}),
+		[corporateStructure.beneficial._]: formatBeneficialFieldErrors(
+			errors?.[corporateStructure.beneficial._]
+		),
 
 		[fieldNames.corporateStructureAndServices.executiveDirectors]:
 			getErrorValue(corporateStructure.executiveDirectors, errors),

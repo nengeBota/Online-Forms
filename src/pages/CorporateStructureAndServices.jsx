@@ -11,6 +11,11 @@ import {
 	PERMIT_CATEGORIES,
 } from "../constants.mjs";
 import fieldsConfig from "../constants/fieldsConfig";
+import validations from "../constants/fieldValidations";
+import {
+	formatBeneficialFieldErrors,
+	formatShareholdersErrors,
+} from "../helpers/formatCorporateStructureAndServicesErrors";
 import {
 	corporateStructureAndServicesDesc,
 	dateBeforeToday,
@@ -82,6 +87,11 @@ function formatError(error) {
 
 const CORP = fieldNames.corporateStructureAndServices;
 
+const f = fieldNames.corporateStructureAndServices;
+const v = validations[f._];
+
+const getValidation = (field) => v[field];
+
 function CorporateStructureAndServices({ data, setData, errors, setErrors }) {
 	const {
 		applicantName,
@@ -93,7 +103,6 @@ function CorporateStructureAndServices({ data, setData, errors, setErrors }) {
 		contactPerson,
 		nameOfSubsidiaryOrAffiliate,
 		nationalityOfAffiliate,
-		corporateStructure,
 		description,
 		shareholders,
 		beneficial,
@@ -127,31 +136,29 @@ function CorporateStructureAndServices({ data, setData, errors, setErrors }) {
 	const onToggleActivity = (e) => {
 		const { name, checked } = e.target;
 
+		const validate = (activities) => {
+			const { error } = getValidation(f.activities).safeParse(activities);
+
+			if (error) {
+				updateErrors(CORP.activities, formatError(error));
+			} else {
+				updateErrors(CORP.activities, []);
+			}
+		};
+
 		if (checked) {
 			if (activities.length >= 2) return;
 			activities.push(name);
 			onChange(CORP.activities, activities);
 
-			if (activities.length !== 2) {
-				updateErrors(CORP.activities, [
-					"Please select exactly 2 of the options available",
-				]);
-			} else {
-				updateErrors(CORP.activities, []);
-			}
+			validate(activities);
 		} else {
 			const updatedActivities = activities.filter(
 				(each) => each !== name
 			);
 			onChange(CORP.activities, updatedActivities);
 
-			if (updatedActivities.length !== 2) {
-				updateErrors(CORP.activities, [
-					"Please select exactly 2 of the options available",
-				]);
-			} else {
-				updateErrors(CORP.activities, []);
-			}
+			validate();
 		}
 	};
 
@@ -161,6 +168,32 @@ function CorporateStructureAndServices({ data, setData, errors, setErrors }) {
 			[fieldNames.corporateStructureAndServices._]: {
 				...prev[fieldNames.corporateStructureAndServices._],
 				[field]: value,
+			},
+		}));
+	};
+
+	const updateContactDetailsErrors = (field, value) => {
+		setErrors((prev) => ({
+			...prev,
+			[f._]: {
+				...prev[f._],
+				[f.contactDetails._]: {
+					...prev[f._][f.contactDetails._],
+					[field]: value,
+				},
+			},
+		}));
+	};
+
+	const updateContactPersonErrors = (field, value) => {
+		setErrors((prev) => ({
+			...prev,
+			[f._]: {
+				...prev[f._],
+				[f.contactPerson._]: {
+					...prev[f._][f.contactPerson._],
+					[field]: value,
+				},
 			},
 		}));
 	};
@@ -204,9 +237,9 @@ function CorporateStructureAndServices({ data, setData, errors, setErrors }) {
 							);
 						}}
 						onBlur={(e) => {
-							const { error } = nonEmptyString.safeParse(
-								e.target.value
-							);
+							const { error } = getValidation(
+								f.applicantName
+							).safeParse(e.target.value);
 
 							const errors = error?.format();
 
@@ -242,9 +275,9 @@ function CorporateStructureAndServices({ data, setData, errors, setErrors }) {
 							);
 						}}
 						onBlur={(e) => {
-							const { error } = dateBeforeToday.safeParse(
-								new Date(e.target.value)
-							);
+							const { error } = getValidation(
+								f.dateOfIncorporation
+							).safeParse(new Date(e.target.value));
 
 							const errors = error?.format();
 
@@ -279,9 +312,9 @@ function CorporateStructureAndServices({ data, setData, errors, setErrors }) {
 							);
 						}}
 						onBlur={(e) => {
-							const { error } = nonEmptyString.safeParse(
-								e.target.value
-							);
+							const { error } = getValidation(
+								f.placeOfIncorporation
+							).safeParse(e.target.value);
 
 							updateErrors(
 								fieldNames.corporateStructureAndServices
@@ -321,15 +354,16 @@ function CorporateStructureAndServices({ data, setData, errors, setErrors }) {
 								}
 							);
 						}}
-						onBlur={(e) => {
-							const { error } = nonEmptyString.safeParse(
-								contactDetails.officeAddress
-							);
+						onBlur={() => {
+							const { error } = v[f.contactDetails._][
+								f.contactDetails.officeAddress
+							].safeParse(contactDetails.officeAddress);
 
-							updateErrors(
-								fieldNames.corporateStructureAndServices
-									.contactDetails.officeAddress,
-								formatError(error)
+							console.log("errors -> ", error);
+
+							updateContactDetailsErrors(
+								f.contactDetails.officeAddress,
+								error?.format()?._errors
 							);
 						}}
 					/>
@@ -357,10 +391,13 @@ function CorporateStructureAndServices({ data, setData, errors, setErrors }) {
 							);
 						}}
 						onBlur={(e) => {
-							const { error } = nonEmptyString.safeParse(
-								contactDetails?.postalAddress
+							const { error } = getValidation(
+								f.contactDetails._
+							)?.postalAddress?.safeParse(
+								contactDetails.postalAddress
 							);
-							updateErrors(
+							console.log("error -> ", error);
+							updateContactDetailsErrors(
 								CORP.contactDetails.postalAddress,
 								formatError(error)
 							);
@@ -386,10 +423,12 @@ function CorporateStructureAndServices({ data, setData, errors, setErrors }) {
 							);
 						}}
 						onBlur={() => {
-							const { error } = nonEmptyString.safeParse(
+							const { error } = getValidation(
+								f.contactDetails._
+							)?.[f.contactDetails.city].safeParse(
 								contactDetails?.city
 							);
-							updateErrors(
+							updateContactDetailsErrors(
 								CORP.contactDetails.city,
 								formatError(error)
 							);
@@ -417,10 +456,12 @@ function CorporateStructureAndServices({ data, setData, errors, setErrors }) {
 							);
 						}}
 						onBlur={() => {
-							const { error } = nonEmptyString.safeParse(
+							const { error } = getValidation(
+								f.contactDetails._
+							)?.[f.contactDetails.region].safeParse(
 								contactDetails?.region
 							);
-							updateErrors(
+							updateContactDetailsErrors(
 								CORP.contactDetails.region,
 								formatError(error)
 							);
@@ -449,10 +490,10 @@ function CorporateStructureAndServices({ data, setData, errors, setErrors }) {
 							);
 						}}
 						onBlur={() => {
-							const { error } = nonEmptyString.safeParse(
-								contactDetails?.country
-							);
-							updateErrors(
+							const { error } = getValidation(
+								f.contactDetails._
+							)?.country.safeParse(contactDetails?.country);
+							updateContactDetailsErrors(
 								CORP.contactDetails.country,
 								formatError(error)
 							);
@@ -478,10 +519,9 @@ function CorporateStructureAndServices({ data, setData, errors, setErrors }) {
 							);
 						}}
 						onBlur={() => {
-							const { error } = z
-								.string()
-								.email()
-								.safeParse(emailAddress);
+							const { error } = getValidation(
+								f.emailAddress
+							).safeParse(emailAddress);
 
 							updateErrors(CORP.emailAddress, formatError(error));
 						}}
@@ -522,10 +562,12 @@ function CorporateStructureAndServices({ data, setData, errors, setErrors }) {
 							);
 						}}
 						onBlur={() => {
-							const { error } = nonEmptyString.safeParse(
+							const { error } = getValidation(
+								f.contactPerson._
+							)?.[f.contactPerson.name].safeParse(
 								contactPerson?.name
 							);
-							updateErrors(
+							updateContactPersonErrors(
 								CORP.contactPerson.name,
 								formatError(error)
 							);
@@ -557,12 +599,13 @@ function CorporateStructureAndServices({ data, setData, errors, setErrors }) {
 							);
 						}}
 						onBlur={() => {
-							const { error } = z
-								.string()
-								.min(1, { message: "Phone number is required" })
-								.safeParse(contactPerson?.mobileNumber);
+							const { error } = getValidation(
+								f.contactPerson._
+							)?.[f.contactPerson.mobileNumber].safeParse(
+								contactPerson?.mobileNumber
+							);
 
-							updateErrors(
+							updateContactPersonErrors(
 								CORP.contactPerson.mobileNumber,
 								formatError(error)
 							);
@@ -628,21 +671,33 @@ function CorporateStructureAndServices({ data, setData, errors, setErrors }) {
 						columns={[
 							{
 								name: "Shareholders",
-								key: "name",
-								validate: (row, col, val) => {
-									const { error } =
-										nonEmptyString.safeParse(val);
-									errors[CORP.shareholders._][row][col] =
-										formatError(error);
-									setErrors({ ...errors });
-								},
+								key: f.shareholders.name,
 							},
-							{ name: "Address", key: "address" },
-							{ name: "Nationality", key: "nationality" },
-							{ name: "Percentage", key: "percentage" },
+							{ name: "Address", key: f.shareholders.address },
+							{
+								name: "Nationality",
+								key: f.shareholders.nationality,
+							},
+							{
+								name: "Percentage",
+								key: f.shareholders.percentage,
+							},
 						]}
 						data={shareholders}
-						onBlur={() => {}}
+						onBlur={() => {
+							const { error } = getValidation(
+								f.shareholders._
+							).safeParse(
+								data[
+									fieldNames.corporateStructureAndServices._
+								][f.shareholders._]
+							);
+
+							updateErrors(
+								f.shareholders._,
+								formatShareholdersErrors(error?.format())
+							);
+						}}
 						addNewRow={() => {
 							onChange(
 								fieldNames.corporateStructureAndServices
@@ -691,14 +746,7 @@ function CorporateStructureAndServices({ data, setData, errors, setErrors }) {
 								[...shareholders]
 							);
 						}}
-						errors={
-							errors?.[
-								fieldNames.corporateStructureAndServices._
-							]?.[
-								fieldNames.corporateStructureAndServices
-									.shareholders._
-							]
-						}
+						errors={errors?.[f._]?.[f.shareholders._]}
 					/>
 				</Section>
 				<Section>
@@ -724,6 +772,20 @@ function CorporateStructureAndServices({ data, setData, errors, setErrors }) {
 							]
 						}
 						data={beneficial}
+						onBlur={() => {
+							const { error } = getValidation(
+								f.beneficial._
+							)?.safeParse(
+								data[
+									fieldNames.corporateStructureAndServices._
+								][f.beneficial._]
+							);
+
+							updateErrors(
+								f.beneficial._,
+								formatBeneficialFieldErrors(error?.format())
+							);
+						}}
 						addNewRow={() => {
 							onChange(
 								fieldNames.corporateStructureAndServices
@@ -795,10 +857,11 @@ function CorporateStructureAndServices({ data, setData, errors, setErrors }) {
 							);
 						}}
 						onBlur={() => {
-							const { error } =
-								nonEmptyString.safeParse(executiveDirectors);
+							const { error } = getValidation(
+								f.executiveDirectors
+							).safeParse(executiveDirectors);
 							updateErrors(
-								CORP.executiveDirectors,
+								f.executiveDirectors,
 								formatError(error)
 							);
 						}}
@@ -901,8 +964,9 @@ function CorporateStructureAndServices({ data, setData, errors, setErrors }) {
 							);
 						}}
 						onBlur={() => {
-							const { error } =
-								nonEmptyString.safeParse(description);
+							const { error } = getValidation(
+								f.description
+							).safeParse(description);
 							updateErrors(CORP.description, formatError(error));
 						}}
 					/>

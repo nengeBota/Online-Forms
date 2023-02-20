@@ -61,6 +61,7 @@ function DynamicTable({
 												e.target.value
 											)
 										}
+										onBlur={onBlur}
 									/>
 								</td>
 							)

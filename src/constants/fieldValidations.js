@@ -1,9 +1,10 @@
 import { z } from "zod";
 import { fieldNames, PERMIT_CATEGORIES } from "../constants.mjs";
+// import { file } from "../stateDescription.mjs";
 // import { dateBeforeToday, file, nonEmptyString } from "../stateDescription.mjs";
 
 export const nonEmptyString = z.string().min(1, { message: "Required" });
-export const file = z.object({ fileName: nonEmptyString, file: z.string() });
+export const file = z.array(z.object({ fileName: nonEmptyString, file: z.string() }));
 export const positiveNumber = z.number({ min: 0 });
 export const dateBeforeToday = z
 	.date()
@@ -49,7 +50,7 @@ const validations = {
 				[corporateStructureAndServices.shareholders.nationality]:
 					nonEmptyString,
 				[corporateStructureAndServices.shareholders.percentage]:
-					z.number({ max: 100 }),
+					z.number({ max: 100, min: 0 }),
 				[corporateStructureAndServices.beneficial.isEditing]:
 					z.boolean(),
 			})
@@ -71,9 +72,9 @@ const validations = {
 
 		[corporateStructureAndServices.executiveDirectors]: nonEmptyString,
 		[corporateStructureAndServices.activities]: z
-			.array(z.string())
+			.array(nonEmptyString)
 			.length(2, { message: "Must select exactly two items" }),
-		[corporateStructureAndServices.corporateStructure]: z.array(file),
+		[corporateStructureAndServices.corporateStructure]: file,
 		[corporateStructureAndServices.description]: nonEmptyString,
 	},
 };

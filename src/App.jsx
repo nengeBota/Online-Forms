@@ -1,10 +1,8 @@
-import { useReducer, useState } from "react";
+import { useState } from "react";
 import styled from "styled-components";
-import CorporateStructureAndServices from "./pages/CorporateStructureAndServices";
 import Pagination from "./components/Pagination";
 import Image from "react-bootstrap/Image";
 import { categoryfxn } from "./api";
-import FinancialCapability from "./pages/FinancialCapability";
 import {
 	Button,
 	ButtonGroup,
@@ -13,16 +11,10 @@ import {
 	ModalHeader,
 	Modal,
 } from "react-bootstrap";
-import PlansAndProgrammes from "./pages/PlansAndProgrammes";
-import LocalContent from "./pages/LocalContent";
-import Miscellaneous from "./pages/Miscellaneous";
-import * as z from "zod";
-import AnnexesAndAttachments from "./pages/AnnexesAndAttachments";
 import {
 	fieldNames,
 	initialErrorState,
 	initialState,
-	PERMIT_CATEGORIES,
 } from "./constants.mjs";
 import prepareForSubmission from "./prepareForSubmission";
 import state, {
@@ -113,7 +105,8 @@ function App() {
 					Some fields have errors. Please fix them and try again.
 				</ModalBody>
 				<ModalFooter>
-					<Button
+                    <Button
+                        size='sm'
 						onClick={() => {
 							setShowErrorModal(false);
 						}}
