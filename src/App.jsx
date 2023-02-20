@@ -57,7 +57,7 @@ async function submit(values) {
 
 function App() {
 	const [category, setcategory] = useState([]);
-	const [page, setPage] = useState(4);
+	const [page, setPage] = useState(1);
 
 	const [data, setData] = useState(initialState);
 	const [errors, setErrors] = useState(initialErrorState);
