@@ -15,6 +15,10 @@ export const positiveNumber = z.number({ min: 0 });
 export const dateBeforeToday = z
 	.date()
 	.max(new Date(), { message: "Date cannot be later than today" });
+const percentage = z.coerce
+	.number()
+	.gt(0, { message: "Can't be less than 1%" })
+	.lt(101, { message: "Can't be greater than 100%" });
 
 const corporateStructureAndServices = fieldNames.corporateStructureAndServices;
 
@@ -56,7 +60,7 @@ const validations = {
 				[corporateStructureAndServices.shareholders.nationality]:
 					nonEmptyString,
 				[corporateStructureAndServices.shareholders.percentage]:
-					z.number({ max: 100, min: 0 }),
+					percentage,
 				[corporateStructureAndServices.beneficial.isEditing]:
 					z.boolean(),
 			})
@@ -66,9 +70,8 @@ const validations = {
 				[corporateStructureAndServices.beneficial.name]: nonEmptyString,
 				[corporateStructureAndServices.beneficial.nationality]:
 					nonEmptyString,
-				[corporateStructureAndServices.beneficial.percentage]: z.number(
-					{ max: 100 }
-				),
+				[corporateStructureAndServices.beneficial.percentage]:
+					percentage,
 				[corporateStructureAndServices.beneficial.address]:
 					nonEmptyString,
 				[corporateStructureAndServices.beneficial.isEditing]:
@@ -115,43 +118,44 @@ const validations = {
 					.contractValue]: nonEmptyString,
 			})
 		),
-    },
-    [fieldNames.localContent._]: {
-        [fieldNames.localContent.percentageOfGhanaianParticipation]: positiveNumber,
-        [fieldNames.localContent.ghanaianMgtStaffBreakdown]: positiveNumber,
-        [fieldNames.localContent.foreignMgtStaffBreakdown]: positiveNumber,
-        [fieldNames.localContent.totalMgtStaffBreakdown]: positiveNumber,
-        [fieldNames.localContent.ghanaianOtherStaffBreakdown]: positiveNumber,
-        [fieldNames.localContent.foreignOtherStaffBreakdown]: positiveNumber,
-        [fieldNames.localContent.totalOtherStaffBreakdown]: positiveNumber,
-        [fieldNames.localContent.infraExpenditure]: positiveNumber,
-        [fieldNames.localContent.rawMaterials]: nonEmptyString,
-        [fieldNames.localContent.ghanaianFinishedGoods]: nonEmptyString,
-        [fieldNames.localContent.valueOfServiceReceived._]: z.array(
-            z.object({
-                [fieldNames.localContent.valueOfServiceReceived.isEditing]:
-                    z.boolean(),
-                [fieldNames.localContent.valueOfServiceReceived.typeOfService]:
-                    nonEmptyString,
-                [fieldNames.localContent.valueOfServiceReceived.contractSum]:
-                    nonEmptyString,
-                [fieldNames.localContent.valueOfServiceReceived
-                    .nameOfClientCompany]: nonEmptyString,
-            })
-        ),
-        [fieldNames.localContent.valueOfServiceProvided._]: z.array(
-            z.object({
-                [fieldNames.localContent.valueOfServiceProvided.isEditing]:
-                    z.boolean(),
-                [fieldNames.localContent.valueOfServiceProvided.typeOfService]:
-                    nonEmptyString,
-                [fieldNames.localContent.valueOfServiceProvided.contractSum]:
-                    nonEmptyString,
-                [fieldNames.localContent.valueOfServiceProvided
-                    .nameOfClientCompany]: nonEmptyString,
-            })
-        ),
-    }
+	},
+	[fieldNames.localContent._]: {
+		[fieldNames.localContent.percentageOfGhanaianParticipation]:
+			positiveNumber,
+		[fieldNames.localContent.ghanaianMgtStaffBreakdown]: positiveNumber,
+		[fieldNames.localContent.foreignMgtStaffBreakdown]: positiveNumber,
+		[fieldNames.localContent.totalMgtStaffBreakdown]: positiveNumber,
+		[fieldNames.localContent.ghanaianOtherStaffBreakdown]: positiveNumber,
+		[fieldNames.localContent.foreignOtherStaffBreakdown]: positiveNumber,
+		[fieldNames.localContent.totalOtherStaffBreakdown]: positiveNumber,
+		[fieldNames.localContent.infraExpenditure]: positiveNumber,
+		[fieldNames.localContent.rawMaterials]: nonEmptyString,
+		[fieldNames.localContent.ghanaianFinishedGoods]: nonEmptyString,
+		[fieldNames.localContent.valueOfServiceReceived._]: z.array(
+			z.object({
+				[fieldNames.localContent.valueOfServiceReceived.isEditing]:
+					z.boolean(),
+				[fieldNames.localContent.valueOfServiceReceived.typeOfService]:
+					nonEmptyString,
+				[fieldNames.localContent.valueOfServiceReceived.contractSum]:
+					nonEmptyString,
+				[fieldNames.localContent.valueOfServiceReceived
+					.nameOfClientCompany]: nonEmptyString,
+			})
+		),
+		[fieldNames.localContent.valueOfServiceProvided._]: z.array(
+			z.object({
+				[fieldNames.localContent.valueOfServiceProvided.isEditing]:
+					z.boolean(),
+				[fieldNames.localContent.valueOfServiceProvided.typeOfService]:
+					nonEmptyString,
+				[fieldNames.localContent.valueOfServiceProvided.contractSum]:
+					nonEmptyString,
+				[fieldNames.localContent.valueOfServiceProvided
+					.nameOfClientCompany]: nonEmptyString,
+			})
+		),
+	},
 };
 
 export default validations;

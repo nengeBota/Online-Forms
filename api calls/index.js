@@ -2,8 +2,9 @@ import dotenv from "dotenv";
 import express from "express";
 import bodyparser from "body-parser";
 import cors from "cors";
-import state from "../src/stateDescription.mjs";
+import { default as schema } from "../src/stateDescription.mjs";
 import pg from "pg";
+import formatAllErrorsForState from "../src/helpers/formatAllErrorsForState.js";
 
 dotenv.config();
 // require("dotenv").config();
@@ -33,14 +34,23 @@ server.get("/", (req, res) => {
 });
 
 server.post("/submit", (req, res) => {
-	const values = req.body;
-	console.log("values -> ", values);
+	try {
+		const values = req.body;
+		console.log("values -> ", values);
 
-	// if validation fails, we return a 40x with the description of what went wrong
-	const isValidInput = state.parse(values);
-	console.log("validated input -> ", isValidInput);
+		// if validation fails, we return a 40x with the description of what went wrong
+		const { error } = schema.safeParse(values);
 
-	res.status(400).send({ message: "invalid input" });
+        if (Boolean(error)) {
+			const errorState = formatAllErrorsForState(error?.format());
+			res.status(400).send({ message: "Invalid input", errorState });
+        }
+        
+        // extract the values, store in database @Bota
+
+	} catch (error) {
+		res.status(400).send({ message: "invalid input" });
+	}
 });
 
 server.post("/applicant_details", async (req, res) => {
