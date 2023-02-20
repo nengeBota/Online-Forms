@@ -18,6 +18,7 @@ const mustBeTrue = z.literal(true);
 
 const corporateStructureValidations =
 	validations[fieldNames.corporateStructureAndServices._];
+const finCapabilityValidations = validations[fieldNames.finCapability._];
 
 const corporateStructureFields = fieldNames.corporateStructureAndServices;
 
@@ -66,11 +67,14 @@ export const corporateStructureAndServicesDesc = z.object({
 });
 
 export const financialCapabilityDesc = z.object({
-	[fieldNames.finCapability.whatApplies]: z.enum(
-		Object.values(FIN_CAPABILITY_WHAT_APPLIES_OPTIONS)
-	),
-	[fieldNames.finCapability.whatAppliesUploadedDocument]: file,
-	[fieldNames.finCapability.sourceOfFunds]: nonEmptyString,
+	[fieldNames.finCapability.whatApplies]:
+		finCapabilityValidations[fieldNames.finCapability.whatApplies],
+	[fieldNames.finCapability.whatAppliesUploadedDocument]:
+		finCapabilityValidations[
+			fieldNames.finCapability.whatAppliesUploadedDocument
+		],
+	[fieldNames.finCapability.sourceOfFunds]:
+		finCapabilityValidations[fieldNames.finCapability.sourceOfFunds],
 });
 export const mgtAndTechnicalCompetenciesDesc = z.object({
 	[fieldNames.mgtAndTechnicalCompetencies.orgChart]: file,

@@ -4,6 +4,7 @@ import Errors from "../components/Errors";
 import FileInput from "../components/FileInput";
 import Heading from "../components/Heading";
 import { fieldNames, financialCapabilityOptions } from "../constants.mjs";
+import validations from "../constants/fieldValidations";
 
 const columns = [
 	{
@@ -120,7 +121,7 @@ function FinancialCapability({ data, setData, errors, setErrors }) {
 						{financialCapabilityOptions.map((each, i) => (
 							<p key={i}>
 								<input
-									key={i}
+									key={"whatapplies"}
 									type="radio"
 									name="whatApplies"
 									value={each.value}
@@ -196,6 +197,27 @@ function FinancialCapability({ data, setData, errors, setErrors }) {
 											...prev[fieldNames.finCapability._],
 											[fieldNames.finCapability
 												.sourceOfFunds]: e.target.value,
+										},
+									}));
+								}}
+								onBlur={() => {
+									const { error } = validations[
+										fieldNames.finCapability._
+									][
+										fieldNames.finCapability.sourceOfFunds
+									]?.safeParse(
+										data[fieldNames.finCapability._][
+											fieldNames.finCapability
+												.sourceOfFunds
+										]
+									);
+									setErrors((prev) => ({
+										...prev,
+										[fieldNames.finCapability._]: {
+											...prev[fieldNames.finCapability._],
+											[fieldNames.finCapability
+												.sourceOfFunds]:
+												error?.format()?._errors,
 										},
 									}));
 								}}

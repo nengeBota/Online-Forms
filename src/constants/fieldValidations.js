@@ -1,10 +1,16 @@
 import { z } from "zod";
-import { fieldNames, PERMIT_CATEGORIES } from "../constants.mjs";
+import {
+	fieldNames,
+	FIN_CAPABILITY_WHAT_APPLIES_OPTIONS,
+	PERMIT_CATEGORIES,
+} from "../constants.mjs";
 // import { file } from "../stateDescription.mjs";
 // import { dateBeforeToday, file, nonEmptyString } from "../stateDescription.mjs";
 
 export const nonEmptyString = z.string().min(1, { message: "Required" });
-export const file = z.array(z.object({ fileName: nonEmptyString, file: z.string() }));
+export const file = z.array(
+	z.object({ fileName: nonEmptyString, file: z.string() })
+);
 export const positiveNumber = z.number({ min: 0 });
 export const dateBeforeToday = z
 	.date()
@@ -76,6 +82,13 @@ const validations = {
 			.length(2, { message: "Must select exactly two items" }),
 		[corporateStructureAndServices.corporateStructure]: file,
 		[corporateStructureAndServices.description]: nonEmptyString,
+	},
+	[fieldNames.finCapability._]: {
+		[fieldNames.finCapability.whatApplies]: z.enum(
+			Object.values(FIN_CAPABILITY_WHAT_APPLIES_OPTIONS)
+		),
+		[fieldNames.finCapability.whatAppliesUploadedDocument]: file,
+		[fieldNames.finCapability.sourceOfFunds]: nonEmptyString,
 	},
 };
 
