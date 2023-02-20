@@ -6,12 +6,12 @@ const getErrors = (field, errors) => {
 
 const fields = fieldNames.detailsOfExperience;
 
-const getTableErrors = (field, errors) => {
+export const formatContractsExecutedErrors = (errors) => {
 	const f = fields.contractsExecuted;
-	return Object.keys(errors?.[field] || {})
+	return Object.keys(errors || {})
 		?.filter((field) => field !== "_errors")
-        ?.map((key) => {
-            const row = errors?.[field]?.[key];
+		?.map((key) => {
+            const row = errors[key];
 			return {
 				[f.isEditing]: row?.[f.isEditing]?._errors || [],
 				[f.descriptionOfContract]:
@@ -32,9 +32,8 @@ export default function formatDetailsOfExperienceErrors(
 	return {
 		[fields.companyExperience]: getErrors(fields.companyExperience, errors),
 		[fields.countries]: getErrors(fields.countries, errors),
-		[fields.contractsExecuted._]: getTableErrors(
-			fields.contractsExecuted._,
-			errors
+		[fields.contractsExecuted._]: formatContractsExecutedErrors(
+			errors?.[fields.contractsExecuted._]
 		),
 	};
 }

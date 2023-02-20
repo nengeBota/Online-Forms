@@ -89,13 +89,33 @@ const validations = {
 		),
 		[fieldNames.finCapability.whatAppliesUploadedDocument]: file,
 		[fieldNames.finCapability.sourceOfFunds]: nonEmptyString,
-    },
-    [fieldNames.mgtAndTechnicalCompetencies._]: {
-        [fieldNames.mgtAndTechnicalCompetencies.orgChart]: file,
-	[fieldNames.mgtAndTechnicalCompetencies.detailedStaffInfo]: file,
-	[fieldNames.mgtAndTechnicalCompetencies.requiredExpertise]: nonEmptyString,
-	[fieldNames.mgtAndTechnicalCompetencies.sourcesOfEquipment]: nonEmptyString,
-    }
+	},
+	[fieldNames.mgtAndTechnicalCompetencies._]: {
+		[fieldNames.mgtAndTechnicalCompetencies.orgChart]: file,
+		[fieldNames.mgtAndTechnicalCompetencies.detailedStaffInfo]: file,
+		[fieldNames.mgtAndTechnicalCompetencies.requiredExpertise]:
+			nonEmptyString,
+		[fieldNames.mgtAndTechnicalCompetencies.sourcesOfEquipment]:
+			nonEmptyString,
+	},
+	[fieldNames.detailsOfExperience._]: {
+		[fieldNames.detailsOfExperience.companyExperience]: nonEmptyString,
+		[fieldNames.detailsOfExperience.countries]: nonEmptyString,
+		[fieldNames.detailsOfExperience.contractsExecuted._]: z.array(
+			z.object({
+				[fieldNames.detailsOfExperience.contractsExecuted.isEditing]:
+					z.boolean(),
+				[fieldNames.detailsOfExperience.contractsExecuted
+					.descriptionOfContract]: nonEmptyString,
+				[fieldNames.detailsOfExperience.contractsExecuted
+					.nameOfCompanyWorkWasDoneFor]: nonEmptyString,
+				[fieldNames.detailsOfExperience.contractsExecuted
+					.contractDuration]: nonEmptyString,
+				[fieldNames.detailsOfExperience.contractsExecuted
+					.contractValue]: nonEmptyString,
+			})
+		),
+	},
 };
 
 export default validations;

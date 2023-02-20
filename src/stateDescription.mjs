@@ -95,22 +95,18 @@ export const mgtAndTechnicalCompetenciesDesc = z.object({
 		],
 });
 export const detailsOfExperienceDesc = z.object({
-	[fieldNames.detailsOfExperience.companyExperience]: nonEmptyString,
-	[fieldNames.detailsOfExperience.countries]: nonEmptyString,
-	[fieldNames.detailsOfExperience.contractsExecuted._]: z.array(
-		z.object({
-			[fieldNames.detailsOfExperience.contractsExecuted.isEditing]:
-				z.boolean(),
-			[fieldNames.detailsOfExperience.contractsExecuted
-				.descriptionOfContract]: nonEmptyString,
-			[fieldNames.detailsOfExperience.contractsExecuted
-				.nameOfCompanyWorkWasDoneFor]: nonEmptyString,
-			[fieldNames.detailsOfExperience.contractsExecuted.contractDuration]:
-				nonEmptyString,
-			[fieldNames.detailsOfExperience.contractsExecuted.contractValue]:
-				nonEmptyString,
-		})
-	),
+	[fieldNames.detailsOfExperience.companyExperience]:
+		validations[fieldNames.detailsOfExperience._][
+			fieldNames.detailsOfExperience.companyExperience
+		],
+	[fieldNames.detailsOfExperience.countries]:
+		validations[fieldNames.detailsOfExperience._][
+			fieldNames.detailsOfExperience.countries
+		],
+	[fieldNames.detailsOfExperience.contractsExecuted._]:
+		validations[fieldNames.detailsOfExperience._][
+			fieldNames.detailsOfExperience.contractsExecuted._
+		],
 });
 export const orgDevProgramAndBudgetDesc = z.object({
 	[fieldNames.orgDevProgramAndBudget.orgDevStrategy]: file,

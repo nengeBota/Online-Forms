@@ -5,6 +5,7 @@ import FileInput from "../components/FileInput";
 import Heading from "../components/Heading";
 import { fieldNames, financialCapabilityOptions } from "../constants.mjs";
 import validations from "../constants/fieldValidations";
+import { formatContractsExecutedErrors } from "../helpers/formatDetailsOfExperienceErrors";
 
 const columns = [
 	{
@@ -421,6 +422,27 @@ function FinancialCapability({ data, setData, errors, setErrors }) {
 							e.target.value
 						)
 					}
+					onBlur={() => {
+						const { error } = validations[
+							fieldNames.detailsOfExperience._
+						][
+							fieldNames.detailsOfExperience.companyExperience
+						]?.safeParse(
+							data[fieldNames.detailsOfExperience._][
+								fieldNames.detailsOfExperience.companyExperience
+							]
+						);
+
+						setErrors((prev) => ({
+							...prev,
+							[fieldNames.detailsOfExperience._]: {
+								...prev[fieldNames.detailsOfExperience._],
+								[fieldNames.detailsOfExperience
+									.companyExperience]:
+									error?.format()?._errors,
+							},
+						}));
+					}}
 				/>
 			</FormGroup>
 			<br />
@@ -446,6 +468,24 @@ function FinancialCapability({ data, setData, errors, setErrors }) {
 							e.target.value
 						)
 					}
+					onBlur={() => {
+						const { error } = validations[
+							fieldNames.detailsOfExperience._
+						][fieldNames.detailsOfExperience.countries]?.safeParse(
+							data[fieldNames.detailsOfExperience._][
+								fieldNames.detailsOfExperience.countries
+							]
+						);
+
+						setErrors((prev) => ({
+							...prev,
+							[fieldNames.detailsOfExperience._]: {
+								...prev[fieldNames.detailsOfExperience._],
+								[fieldNames.detailsOfExperience.countries]:
+									error?.format()?._errors,
+							},
+						}));
+					}}
 				/>
 			</FormGroup>
 			<br />
@@ -459,10 +499,35 @@ function FinancialCapability({ data, setData, errors, setErrors }) {
 				<DynamicTable
 					columns={columns}
 					data={contractsExecuted}
-					errors={getDetailsOfExperienceErrors(
-						fieldNames.detailsOfExperience.contractsExecuted._,
-						errors
-					)}
+					errors={
+						errors[fieldNames.detailsOfExperience._][
+							fieldNames.detailsOfExperience.contractsExecuted._
+						]
+					}
+					onBlur={() => {
+						const { error } = validations[
+							fieldNames.detailsOfExperience._
+						][
+							fieldNames.detailsOfExperience.contractsExecuted._
+						]?.safeParse(
+							data[fieldNames.detailsOfExperience._][
+								fieldNames.detailsOfExperience.contractsExecuted
+									._
+							]
+						);
+
+						setErrors((prev) => ({
+							...prev,
+							[fieldNames.detailsOfExperience._]: {
+								...prev[fieldNames.detailsOfExperience._],
+								[fieldNames.detailsOfExperience
+									.contractsExecuted._]:
+									formatContractsExecutedErrors(
+										error?.format()
+									),
+							},
+						}));
+					}}
 					addNewRow={() => {
 						contractsExecuted.push(newDetailsOfExperience);
 						onstage(
