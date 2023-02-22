@@ -526,6 +526,7 @@ function CorporateStructureAndServices({ data, setData, errors, setErrors }) {
 				</Section>
 				<Section>
 					<Form.Label>Website (if any)</Form.Label>
+					<Errors errors={getError(f.website, errors)} />
 					<Form.Control
 						placeholder="https://www.example.com"
 						value={website}
@@ -535,6 +536,12 @@ function CorporateStructureAndServices({ data, setData, errors, setErrors }) {
 									.website,
 								e.target.value
 							);
+						}}
+						onBlur={() => {
+							const { error } = getValidation(
+								f.website
+							).safeParse(website);
+							updateErrors(f.website, formatError(error));
 						}}
 					/>
 				</Section>
@@ -616,6 +623,9 @@ function CorporateStructureAndServices({ data, setData, errors, setErrors }) {
 					<Form.Label>
 						4. Name of Subsidiary or Affiliate (if applicable).{" "}
 					</Form.Label>
+					<Errors
+						errors={getError(f.nameOfSubsidiaryOrAffiliate, errors)}
+					/>
 					<Form.Control
 						value={nameOfSubsidiaryOrAffiliate}
 						onChange={(e) => {
@@ -623,6 +633,15 @@ function CorporateStructureAndServices({ data, setData, errors, setErrors }) {
 								fieldNames.corporateStructureAndServices
 									.nameOfSubsidiaryOrAffiliate,
 								e.target.value
+							);
+						}}
+						onBlur={() => {
+							const { error } = getValidation(
+								f.nameOfSubsidiaryOrAffiliate
+							).safeParse(nameOfSubsidiaryOrAffiliate);
+							updateErrors(
+								f.nameOfSubsidiaryOrAffiliate,
+								error?.format()
 							);
 						}}
 					/>
@@ -633,6 +652,9 @@ function CorporateStructureAndServices({ data, setData, errors, setErrors }) {
 						5. Nationality of Parent Company or Affiliate (if
 						applicable)
 					</Form.Label>
+					<Errors
+						errors={getError(f.nationalityOfAffiliate, errors)}
+					/>
 					<Form.Control
 						placeholder="Nationality of Parent Company/ Affiliate"
 						value={nationalityOfAffiliate}
@@ -643,6 +665,12 @@ function CorporateStructureAndServices({ data, setData, errors, setErrors }) {
 								e.target.value
 							);
 						}}
+						onBlur={() => {
+							const { error } = getValidation(
+								f.nationalityOfAffiliate
+							).safeParse(nationalityOfAffiliate);
+							updateErrors(error?.format());
+						}}
 					/>
 				</Section>
 				<Section>
@@ -651,6 +679,7 @@ function CorporateStructureAndServices({ data, setData, errors, setErrors }) {
 						an explanatory diagram, if appropriate, showing parent,
 						subsidiary and affiliate companies (if applicable).
 					</Form.Label>
+					<Errors errors={getError(f.corporateStructure, errors)} />
 					<FileInput
 						onChange={(files) => {
 							onChange(
@@ -658,6 +687,17 @@ function CorporateStructureAndServices({ data, setData, errors, setErrors }) {
 									.corporateStructure,
 								files
 							);
+						}}
+						onBlur={() => {
+							const { error } = getValidation(
+								f.corporateStructure
+							).safeParse(
+								data[
+									fieldNames.corporateStructureAndServices._
+								][f.corporateStructure]
+							);
+
+							updateErrors(f.corporateStructure, error?.format());
 						}}
 					/>
 				</Section>

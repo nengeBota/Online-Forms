@@ -43,7 +43,11 @@ const validations = {
 				nonEmptyString,
 		},
 		[corporateStructureAndServices.emailAddress]: z.string().email(),
-		[corporateStructureAndServices.website]: optional(z.string().url()),
+		[corporateStructureAndServices.website]: optional(
+			z.string().url({
+				message: "Invalid URL. Please ensure it includes http/https",
+			})
+		),
 		[corporateStructureAndServices.contactPerson._]: {
 			[corporateStructureAndServices.contactPerson.name]: nonEmptyString,
 			[corporateStructureAndServices.contactPerson.mobileNumber]:
