@@ -3,6 +3,8 @@ import { fieldNames } from "../constants.mjs";
 const fields = fieldNames.orgDevProgramAndBudget;
 
 const getErrors = (field, errors) => {
+    if (!errors) return [];
+    
 	return Object.keys(errors?.[field] || {})
 		?.filter((key) => key !== "_errors")
 		?.reduce((acc, key) => {

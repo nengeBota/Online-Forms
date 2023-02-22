@@ -3,6 +3,7 @@ import { fieldNames } from "../constants.mjs";
 const fields = fieldNames.localContent;
 
 const getErrors = (field, errors) => {
+    if (!errors) return [];
 	return errors?.[field]?._errors || [];
 };
 

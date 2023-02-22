@@ -1,6 +1,7 @@
 import { fieldNames } from "../constants.mjs";
 
 function getErrorByField(field, errors) {
+    if (!errors) return [];
 	return errors?.[field]?._errors || [];
 }
 
@@ -12,7 +13,7 @@ export default function formatFinCapabilityErrors(finCapabilityErrors) {
 	return {
 		[fields.whatApplies]: getErrorByField(fields.whatApplies, errors),
 		[fields.whatAppliesUploadedDocument]:
-			errors[fields.whatAppliesUploadedDocument]?.[0]?.fileName
+			errors?.[fields.whatAppliesUploadedDocument]?.[0]?.fileName
 				?._errors || [],
 		[fields.sourceOfFunds]: getErrorByField(fields.sourceOfFunds, errors),
 	};

@@ -1,6 +1,7 @@
 import { fieldNames } from "../constants.mjs";
 
 const getErrors = (field, errors) => {
+    if (!errors) return [];
 	return errors?.[field]?._errors || [];
 };
 

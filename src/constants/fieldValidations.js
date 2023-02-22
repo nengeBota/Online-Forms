@@ -11,8 +11,12 @@ export const nonEmptyString = z.string().min(1, { message: "Required" });
 export const file = z.array(
 	z.object({ fileName: nonEmptyString, file: z.string() })
 );
-export const positiveNumber = z.number({ min: 0 });
-export const dateBeforeToday = z
+const optional = (schema) => z.union([schema, z.literal("")]);
+const optionalFile = z.array(
+	z.object({ fileName: optional(nonEmptyString), file: optional(z.string()) })
+);
+export const positiveNumber = z.coerce.number({ min: 0 });
+export const dateBeforeToday = z.coerce
 	.date()
 	.max(new Date(), { message: "Date cannot be later than today" });
 const percentage = z.coerce
@@ -39,15 +43,16 @@ const validations = {
 				nonEmptyString,
 		},
 		[corporateStructureAndServices.emailAddress]: z.string().email(),
-		[corporateStructureAndServices.website]: z.string().url(),
+		[corporateStructureAndServices.website]: optional(z.string().url()),
 		[corporateStructureAndServices.contactPerson._]: {
 			[corporateStructureAndServices.contactPerson.name]: nonEmptyString,
 			[corporateStructureAndServices.contactPerson.mobileNumber]:
 				nonEmptyString,
 		},
 		[corporateStructureAndServices.nameOfSubsidiaryOrAffiliate]:
-			nonEmptyString,
-		[corporateStructureAndServices.nationalityOfAffiliate]: nonEmptyString,
+			optional(nonEmptyString),
+		[corporateStructureAndServices.nationalityOfAffiliate]:
+			optional(nonEmptyString),
 		[corporateStructureAndServices.permitCategory]: z.enum(
 			Object.values(PERMIT_CATEGORIES)
 		),
@@ -83,7 +88,7 @@ const validations = {
 		[corporateStructureAndServices.activities]: z
 			.array(nonEmptyString)
 			.length(2, { message: "Must select exactly two items" }),
-		[corporateStructureAndServices.corporateStructure]: file,
+		[corporateStructureAndServices.corporateStructure]: optionalFile,
 		[corporateStructureAndServices.description]: nonEmptyString,
 	},
 	[fieldNames.finCapability._]: {
@@ -115,7 +120,7 @@ const validations = {
 				[fieldNames.detailsOfExperience.contractsExecuted
 					.contractDuration]: nonEmptyString,
 				[fieldNames.detailsOfExperience.contractsExecuted
-					.contractValue]: nonEmptyString,
+					.contractValue]: positiveNumber,
 			})
 		),
 	},
@@ -138,7 +143,7 @@ const validations = {
 				[fieldNames.localContent.valueOfServiceReceived.typeOfService]:
 					nonEmptyString,
 				[fieldNames.localContent.valueOfServiceReceived.contractSum]:
-					nonEmptyString,
+					positiveNumber,
 				[fieldNames.localContent.valueOfServiceReceived
 					.nameOfClientCompany]: nonEmptyString,
 			})
@@ -150,7 +155,7 @@ const validations = {
 				[fieldNames.localContent.valueOfServiceProvided.typeOfService]:
 					nonEmptyString,
 				[fieldNames.localContent.valueOfServiceProvided.contractSum]:
-					nonEmptyString,
+					positiveNumber,
 				[fieldNames.localContent.valueOfServiceProvided
 					.nameOfClientCompany]: nonEmptyString,
 			})

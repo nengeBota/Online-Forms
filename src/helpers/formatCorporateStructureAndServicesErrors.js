@@ -3,11 +3,13 @@ import { fieldNames } from "../constants.mjs";
 const corporateStructure = fieldNames.corporateStructureAndServices;
 
 function getErrorValue(field, errors) {
+    if (!errors) return [];
 	return errors[field]?._errors || [];
 }
 
 export function formatShareholdersErrors(shareholdersErrors) {
-	const errors = shareholdersErrors;
+    const errors = shareholdersErrors;
+    if (!errors) return [];
 
 	return Object.keys(errors || {})
 		?.filter((key) => key !== "_errors")
@@ -31,7 +33,8 @@ export function formatShareholdersErrors(shareholdersErrors) {
 }
 
 export function formatBeneficialFieldErrors(beneficialFieldErrors) {
-	const errors = beneficialFieldErrors;
+    const errors = beneficialFieldErrors;
+    if (!errors) return [];
 
 	return Object.keys(errors || {})
 		?.filter((key) => key !== "_errors")
@@ -70,7 +73,7 @@ export default function formatCorporateStructureAndServicesErrors(
 		[fieldNames.corporateStructureAndServices.contactDetails._]: {
 			[fieldNames.corporateStructureAndServices.contactDetails
 				.officeAddress]:
-				errors[corporateStructure.contactDetails._]?.[
+				errors?.[corporateStructure.contactDetails._]?.[
 					corporateStructure?.contactDetails?.officeAddress
 				]?._errors,
 			[fieldNames.corporateStructureAndServices.contactDetails
@@ -121,7 +124,7 @@ export default function formatCorporateStructureAndServicesErrors(
 		[fieldNames.corporateStructureAndServices.permitCategory]:
 			getErrorValue(corporateStructure.permitCategory, errors),
 		[fieldNames.corporateStructureAndServices.shareholders._]:
-			formatShareholdersErrors(errors[corporateStructure.shareholders._]),
+			formatShareholdersErrors(errors?.[corporateStructure.shareholders._]),
 
 		[corporateStructure.beneficial._]: formatBeneficialFieldErrors(
 			errors?.[corporateStructure.beneficial._]
