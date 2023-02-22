@@ -64,7 +64,8 @@ const pages = [
 					},
 					[fieldNames.corporateStructureAndServices._]:
 						formatCorporateStructureAndServicesErrors(
-							error?.format()
+							error?.format(),
+							data
 						),
 				}));
 
@@ -125,15 +126,18 @@ const pages = [
 						page2: true,
 					},
 					[fieldNames.finCapability._]: formatFinCapabilityErrors(
-						finCapabilityErrors?.format()
+						finCapabilityErrors?.format(),
+						data
 					),
 					[fieldNames.mgtAndTechnicalCompetencies._]:
 						formatMgtAndTechnicalCompetenciesErrors(
-							mgtAndTechnicalErrors?.format()
+							mgtAndTechnicalErrors?.format(),
+							data
 						),
 					[fieldNames.detailsOfExperience._]:
 						formatDetailsOfExperienceErrors(
-							detailsOfExperienceErrors?.format()
+							detailsOfExperienceErrors?.format(),
+							data
 						),
 				}));
 
@@ -175,7 +179,10 @@ const pages = [
 						page3: true,
 					},
 					[fieldNames.orgDevProgramAndBudget._]:
-						formatOrgDevProgramAndBudgetErrors(error?.format()),
+						formatOrgDevProgramAndBudgetErrors(
+							error?.format(),
+							data
+						),
 				}));
 
 				showModal(true);
@@ -214,7 +221,8 @@ const pages = [
 						page4: true,
 					},
 					[fieldNames.localContent._]: formatLocalContentErrors(
-						error?.format()
+						error?.format(),
+						data
 					),
 				}));
 
@@ -273,13 +281,16 @@ const pages = [
 					},
 					[fieldNames.healthSafetySecurityEnv._]:
 						formatHealthSafetySecurityEnvErrors(
-							healthSafetySecurityEnvErrors?.format()
+							healthSafetySecurityEnvErrors?.format(),
+							data
 						),
 					[fieldNames.declaration]: formatDeclarationErrors(
-						declarationErrors?.format()
+						declarationErrors?.format(),
+						data
 					),
 					[fieldNames.coverPage]: formatCoverpageErrors(
-						coverPageErrors?.format()
+						coverPageErrors?.format(),
+						data
 					),
 				}));
 
@@ -319,7 +330,8 @@ const pages = [
 						page6: true,
 					},
 					[fieldNames.checkList._]: formatChecklistErrors(
-						error?.format()
+						error?.format(),
+						data
 					),
 				}));
 

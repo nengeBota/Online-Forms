@@ -3,63 +3,73 @@ import { fieldNames } from "../constants.mjs";
 const corporateStructure = fieldNames.corporateStructureAndServices;
 
 function getErrorValue(field, errors) {
-    if (!errors) return [];
+	if (!errors) return [];
 	return errors[field]?._errors || [];
 }
 
-export function formatShareholdersErrors(shareholdersErrors) {
-    const errors = shareholdersErrors;
-    if (!errors) return [];
+export function formatSingleShareholderErrors(singleShareholderErrors) {
+	const each = singleShareholderErrors;
 
-	return Object.keys(errors || {})
-		?.filter((key) => key !== "_errors")
-		?.map((key) => {
-			const each = errors[key];
-
-			return {
-				[corporateStructure.shareholders.address]:
-					each?.[corporateStructure.shareholders.address]?._errors,
-				[corporateStructure.shareholders.name]:
-					each?.[corporateStructure.shareholders.name]?._errors,
-				[corporateStructure.shareholders.nationality]:
-					each?.[corporateStructure.shareholders.nationality]
-						?._errors,
-				[corporateStructure.shareholders.percentage]:
-					each?.[corporateStructure.shareholders.percentage]?._errors,
-				[corporateStructure.shareholders.isEditing]:
-					each?.[corporateStructure.shareholders.isEditing]?._errors,
-			};
-		});
+	return {
+		[corporateStructure.shareholders.address]:
+			each?.[corporateStructure.shareholders.address]?._errors,
+		[corporateStructure.shareholders.name]:
+			each?.[corporateStructure.shareholders.name]?._errors,
+		[corporateStructure.shareholders.nationality]:
+			each?.[corporateStructure.shareholders.nationality]?._errors,
+		[corporateStructure.shareholders.percentage]:
+			each?.[corporateStructure.shareholders.percentage]?._errors,
+		[corporateStructure.shareholders.isEditing]:
+			each?.[corporateStructure.shareholders.isEditing]?._errors,
+	};
 }
 
-export function formatBeneficialFieldErrors(beneficialFieldErrors) {
-    const errors = beneficialFieldErrors;
-    if (!errors) return [];
+export function formatSingleBeneficiaryErrors(singleBeneficiaryErrors) {
+	const errors = singleBeneficiaryErrors;
 
-	return Object.keys(errors || {})
-		?.filter((key) => key !== "_errors")
-		?.map((key) => {
-			const each = errors?.[key];
+	return {
+		[corporateStructure.beneficial.name]:
+			errors?.[corporateStructure.beneficial.name]?._errors,
+		[corporateStructure.beneficial.nationality]:
+			errors?.[corporateStructure.beneficial.nationality]?._errors,
+		[corporateStructure.beneficial.percentage]:
+			errors?.[corporateStructure.beneficial.percentage]?._errors,
+		[corporateStructure.beneficial.address]:
+			errors?.[corporateStructure.beneficial.address]?._errors,
+		[corporateStructure.beneficial.isEditing]:
+			errors?.[corporateStructure.beneficial.isEditing]?._errors,
+	};
+}
 
-			return {
-				[corporateStructure.beneficial.name]:
-					each?.[corporateStructure.beneficial.name]?._errors,
-				[corporateStructure.beneficial.nationality]:
-					each?.[corporateStructure.beneficial.nationality]?._errors,
-				[corporateStructure.beneficial.percentage]:
-					each?.[corporateStructure.beneficial.percentage]?._errors,
-				[corporateStructure.beneficial.address]:
-					each?.[corporateStructure.beneficial.address]?._errors,
-				[corporateStructure.beneficial.isEditing]:
-					each?.[corporateStructure.beneficial.isEditing]?._errors,
-			};
-		});
+export function formatShareholdersErrors(shareholdersErrors, state) {
+	const errors = shareholdersErrors;
+	const shareholdersState =
+		state[fieldNames.corporateStructureAndServices.shareholders._];
+	if (!errors) return [];
+
+	return shareholdersState.map((_, index) =>
+		formatSingleShareholderErrors(errors[index])
+	);
+}
+
+export function formatBeneficialFieldErrors(beneficialFieldErrors, state) {
+	const errors = beneficialFieldErrors;
+	const beneficiaries =
+		state[fieldNames.corporateStructureAndServices.beneficial._];
+
+	if (!errors) return [];
+
+	return beneficiaries.map((_, i) =>
+		formatSingleBeneficiaryErrors(errors[i])
+	);
 }
 
 export default function formatCorporateStructureAndServicesErrors(
-	corporateStructureAndServicesErrors
+	corporateStructureAndServicesErrors,
+	currentState
 ) {
 	const errors = corporateStructureAndServicesErrors;
+	const state = currentState[fieldNames.corporateStructureAndServices._];
 
 	return {
 		[fieldNames.corporateStructureAndServices.applicantName]: getErrorValue(
@@ -124,10 +134,14 @@ export default function formatCorporateStructureAndServicesErrors(
 		[fieldNames.corporateStructureAndServices.permitCategory]:
 			getErrorValue(corporateStructure.permitCategory, errors),
 		[fieldNames.corporateStructureAndServices.shareholders._]:
-			formatShareholdersErrors(errors?.[corporateStructure.shareholders._]),
+			formatShareholdersErrors(
+				errors?.[corporateStructure.shareholders._],
+				state
+			),
 
 		[corporateStructure.beneficial._]: formatBeneficialFieldErrors(
-			errors?.[corporateStructure.beneficial._]
+			errors?.[corporateStructure.beneficial._],
+			state
 		),
 
 		[fieldNames.corporateStructureAndServices.executiveDirectors]:

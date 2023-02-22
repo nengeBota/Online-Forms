@@ -38,16 +38,13 @@ function DynamicTable({
 						{columns.map((col) =>
 							!val.isEditing ? (
 								<td>
+									<div>{val[col.key]}</div>
 									<Errors
 										errors={errors?.[index]?.[col.key]}
 									/>
-									<div>{val[col.key]}</div>
 								</td>
 							) : (
 								<td>
-									<Errors
-										errors={errors?.[index]?.[col.key]}
-									/>
 									<Form.Control
 										style={{
 											width: "100px",
@@ -61,7 +58,10 @@ function DynamicTable({
 												e.target.value
 											)
 										}
-										onBlur={onBlur}
+										onBlur={() => onBlur(index)}
+									/>
+									<Errors
+										errors={errors?.[index]?.[col.key]}
 									/>
 								</td>
 							)

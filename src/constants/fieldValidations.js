@@ -74,6 +74,15 @@ const validations = {
 					z.boolean(),
 			})
 		),
+		singleShareholder: z.object({
+			[corporateStructureAndServices.shareholders.name]: nonEmptyString,
+			[corporateStructureAndServices.shareholders.address]:
+				nonEmptyString,
+			[corporateStructureAndServices.shareholders.nationality]:
+				nonEmptyString,
+			[corporateStructureAndServices.shareholders.percentage]: percentage,
+			[corporateStructureAndServices.beneficial.isEditing]: z.boolean(),
+		}),
 		[corporateStructureAndServices.beneficial._]: z.array(
 			z.object({
 				[corporateStructureAndServices.beneficial.name]: nonEmptyString,

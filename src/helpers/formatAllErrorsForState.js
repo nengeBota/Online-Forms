@@ -10,7 +10,7 @@ import formatLocalContentErrors from "./formatLocalContentErrors.js";
 import formatMgtAndTechnicalCompetenciesErrors from "./formatMgtAndTechnicalCompetenciesErrors.js";
 import formatOrgDevProgramAndBudgetErrors from "./formatOrgDevProgramAndBudgetErrors.js";
 
-function formatAllErrorsForState(zodFormattedErrors) {
+function formatAllErrorsForState(zodFormattedErrors, currentState) {
 	const corporateStructureAndServicesErrors =
 		zodFormattedErrors[fieldNames.corporateStructureAndServices._];
 
@@ -30,40 +30,58 @@ function formatAllErrorsForState(zodFormattedErrors) {
 		// page 1
 		[fieldNames.corporateStructureAndServices._]:
 			formatCorporateStructureAndServicesErrors(
-				corporateStructureAndServicesErrors
+				corporateStructureAndServicesErrors,
+				currentState
 			),
 
 		// page 2
-		[fieldNames.finCapability._]:
-			formatFinCapabilityErrors(finCapabilityErrors),
+		[fieldNames.finCapability._]: formatFinCapabilityErrors(
+			finCapabilityErrors,
+			currentState
+		),
 		[fieldNames.mgtAndTechnicalCompetencies._]:
 			formatMgtAndTechnicalCompetenciesErrors(
-				mgtAndTechnicalCompetenciesErrors
+				mgtAndTechnicalCompetenciesErrors,
+				currentState
 			),
 		[fieldNames.detailsOfExperience._]: formatDetailsOfExperienceErrors(
-			detailsOfExperienceErrors
+			detailsOfExperienceErrors,
+			currentState
 		),
 
 		// page 3
 		[fieldNames.orgDevProgramAndBudget._]:
-			formatOrgDevProgramAndBudgetErrors(orgDevProgramAndBudgetErrors),
+			formatOrgDevProgramAndBudgetErrors(
+				orgDevProgramAndBudgetErrors,
+				currentState
+			),
 
 		// page 4
-		[fieldNames.localContent._]:
-			formatLocalContentErrors(localContentErrors),
+		[fieldNames.localContent._]: formatLocalContentErrors(
+			localContentErrors,
+			currentState
+		),
 
 		// page 5
 		[fieldNames.healthSafetySecurityEnv._]:
-			formatHealthSafetySecurityEnvErrors(healthSafetySecurityEnvErrors),
+			formatHealthSafetySecurityEnvErrors(
+				healthSafetySecurityEnvErrors,
+				currentState
+			),
 		[fieldNames.miscFiles]: [],
 		[fieldNames.declaration]: formatDeclarationErrors(
-			zodFormattedErrors?.[fieldNames.declaration]
+			zodFormattedErrors?.[fieldNames.declaration],
+			currentState
 		),
 		[fieldNames.coverPage]: formatCoverpageErrors(
-			zodFormattedErrors?.[fieldNames.coverPage]
+			zodFormattedErrors?.[fieldNames.coverPage],
+			currentState
 		),
 		// page 6
-		[fieldNames.checkList._]: formatChecklistErrors(checklistErrors),
+		[fieldNames.checkList._]: formatChecklistErrors(
+			checklistErrors,
+			currentState
+		),
 	};
 }
 

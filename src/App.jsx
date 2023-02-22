@@ -250,7 +250,7 @@ function validate(data, setErrors, setPage) {
 
 	setErrors({
 		summary,
-		...formatAllErrorsForState(error?.format()),
+		...formatAllErrorsForState(error?.format(), data),
 	});
 	return false;
 }

@@ -15,6 +15,7 @@ import validations from "../constants/fieldValidations";
 import {
 	formatBeneficialFieldErrors,
 	formatShareholdersErrors,
+	formatSingleShareholderErrors,
 } from "../helpers/formatCorporateStructureAndServicesErrors";
 import {
 	corporateStructureAndServicesDesc,
@@ -724,19 +725,22 @@ function CorporateStructureAndServices({ data, setData, errors, setErrors }) {
 							},
 						]}
 						data={shareholders}
-						onBlur={() => {
+						onBlur={(index = 0) => {
 							const { error } = getValidation(
-								f.shareholders._
+								"singleShareholder"
 							).safeParse(
 								data[
 									fieldNames.corporateStructureAndServices._
-								][f.shareholders._]
+								][f.shareholders._][index]
 							);
 
-							updateErrors(
-								f.shareholders._,
-								formatShareholdersErrors(error?.format())
+							errors[fieldNames.corporateStructureAndServices._][
+								f.shareholders._
+							][index] = formatSingleShareholderErrors(
+								error?.format()
 							);
+
+							setErrors({ ...errors });
 						}}
 						addNewRow={() => {
 							onChange(
@@ -815,15 +819,14 @@ function CorporateStructureAndServices({ data, setData, errors, setErrors }) {
 						onBlur={() => {
 							const { error } = getValidation(
 								f.beneficial._
-							)?.safeParse(
-								data[
-									fieldNames.corporateStructureAndServices._
-								][f.beneficial._]
-							);
+							)?.safeParse(data[f._][f.beneficial._]);
 
 							updateErrors(
 								f.beneficial._,
-								formatBeneficialFieldErrors(error?.format())
+								formatBeneficialFieldErrors(
+									error?.format(),
+									data[f._]
+								)
 							);
 						}}
 						addNewRow={() => {
