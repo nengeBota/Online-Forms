@@ -25,7 +25,7 @@ const getValues = (data) => {
 	const originalSsnitClearanceCertificate =
 		fields[fieldNames.checkList.originalSsnitClearanceCertificate];
 	const companyProfileandBusinessPlan =
-		fields[fieldNames.checkList.companyProfileandBusinessPlan];
+		fields[fieldNames.checkList.companyProfileAndBusinessPlan];
 	const copiesOfOtherRegulatoryCerts =
 		fields[fieldNames.checkList.copiesOfOtherRegulatoryCerts];
 	const copyOfApplicationPackReceipt =
@@ -360,8 +360,8 @@ function AnnexesAndAttachments({ data, setData, errors, setErrors }) {
 									onChange={() => {
 										onChange(
 											fieldNames.checkList
-												.companyProfileandBusinessPlan,
-											companyProfileandBusinessPlan
+												.companyProfileAndBusinessPlan,
+											!companyProfileandBusinessPlan
 										);
 									}}
 								/>

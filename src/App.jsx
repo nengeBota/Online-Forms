@@ -11,11 +11,7 @@ import {
 	ModalHeader,
 	Modal,
 } from "react-bootstrap";
-import {
-	fieldNames,
-	initialErrorState,
-	initialState,
-} from "./constants.mjs";
+import { fieldNames, initialErrorState, initialState } from "./constants.mjs";
 import prepareForSubmission from "./prepareForSubmission";
 import state, {
 	checkListDesc,
@@ -34,13 +30,11 @@ import formatAllErrorsForState from "./helpers/formatAllErrorsForState";
 
 import pages from "./constants/pages";
 
-
-
-
-async function submit(values) {
+async function submit(values, setShowSubmittingModal) {
 	const API_ENDPOINT = process.env.REACT_APP_API_ENDPOINT;
 
 	try {
+		setShowSubmittingModal(true);
 		state.parse(values);
 		const response = await fetch(`${API_ENDPOINT}/submit`, {
 			method: "POST",
@@ -52,6 +46,8 @@ async function submit(values) {
 		console.log("value of response -> ", response);
 	} catch (error) {
 		console.log("failed to foetch -> ", error);
+	} finally {
+		setShowSubmittingModal(false);
 	}
 }
 
@@ -62,6 +58,7 @@ function App() {
 	const [data, setData] = useState(initialState);
 	const [errors, setErrors] = useState(initialErrorState);
 	const [showErrorModal, setShowErrorModal] = useState(false);
+	const [showSubmittingModal, setShowSubmittingModal] = useState(false);
 
 	async function fetchcategories() {
 		const result = await categoryfxn();
@@ -105,8 +102,8 @@ function App() {
 					Some fields have errors. Please fix them and try again.
 				</ModalBody>
 				<ModalFooter>
-                    <Button
-                        size='sm'
+					<Button
+						size="sm"
 						onClick={() => {
 							setShowErrorModal(false);
 						}}
@@ -115,6 +112,10 @@ function App() {
 						OK
 					</Button>
 				</ModalFooter>
+			</Modal>
+
+			<Modal show={showSubmittingModal} centered>
+				<ModalBody>Submitting...</ModalBody>
 			</Modal>
 
 			<br />
@@ -158,7 +159,7 @@ function App() {
 								setShowErrorModal(true);
 								return;
 							}
-							submit(data);
+							submit(data, setShowSubmittingModal);
 						}}
 					>
 						{" "}
@@ -257,7 +258,7 @@ function validate(data, setErrors, setPage) {
 function determineFirstPageWithErrors(pagesErrorStatus) {
 	const pages = Object.keys(pagesErrorStatus || {});
 
-	return pages.findIndex((each) => !!each) + 1;
+	return pages.findIndex((each) => Boolean(pagesErrorStatus[each])) + 1;
 }
 
 const PageWrapper = styled.div`

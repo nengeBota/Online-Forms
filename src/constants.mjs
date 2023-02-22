@@ -172,14 +172,14 @@ export const NEW_VALUE_OF_SERVICE = {
 };
 
 export const initialErrorState = {
-    summary: {
-        page1: false,
-        page2: false,
-        page3: false,
-        page4: false,
-        page5: false,
-        page6: false,
-    },
+	summary: {
+		page1: false,
+		page2: false,
+		page3: false,
+		page4: false,
+		page5: false,
+		page6: false,
+	},
 	// PAGE 1 - CORPORATE STRUCTURE AND SERVICES
 	[fieldNames.corporateStructureAndServices._]: {
 		[fieldNames.corporateStructureAndServices.applicantName]: [],
@@ -687,6 +687,12 @@ export const permitCategoryOptions = {
 
 export const financialCapabilityOptions = [
 	{
+		value: FIN_CAPABILITY_WHAT_APPLIES_OPTIONS.newlyIncorporated,
+		text: `For newly incorporated companies, provide a three
+  year projected revenue for intended upstream oil and
+  gas activities.`,
+	},
+	{
 		value: FIN_CAPABILITY_WHAT_APPLIES_OPTIONS.upstreamPetroleumIndustryOnly,
 		text: `For existing companies which undertake services
   solely for the upstream petroleum industry, provide
@@ -709,11 +715,5 @@ export const financialCapabilityOptions = [
   Report for the past year and a three year projected
   revenue for intended upstream oil and gas
   activities.`,
-	},
-	{
-		value: FIN_CAPABILITY_WHAT_APPLIES_OPTIONS.newlyIncorporated,
-		text: `For newly incorporated companies, provide a three
-  year projected revenue for intended upstream oil and
-  gas activities.`,
 	},
 ];

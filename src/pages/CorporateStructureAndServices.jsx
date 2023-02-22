@@ -359,8 +359,6 @@ function CorporateStructureAndServices({ data, setData, errors, setErrors }) {
 								f.contactDetails.officeAddress
 							].safeParse(contactDetails.officeAddress);
 
-							console.log("errors -> ", error);
-
 							updateContactDetailsErrors(
 								f.contactDetails.officeAddress,
 								error?.format()?._errors
@@ -396,7 +394,6 @@ function CorporateStructureAndServices({ data, setData, errors, setErrors }) {
 							)?.postalAddress?.safeParse(
 								contactDetails.postalAddress
 							);
-							console.log("error -> ", error);
 							updateContactDetailsErrors(
 								CORP.contactDetails.postalAddress,
 								formatError(error)
@@ -530,7 +527,7 @@ function CorporateStructureAndServices({ data, setData, errors, setErrors }) {
 				<Section>
 					<Form.Label>Website (if any)</Form.Label>
 					<Form.Control
-						placeholder="www.example.com"
+						placeholder="https://www.example.com"
 						value={website}
 						onChange={(e) => {
 							onChange(
@@ -574,6 +571,9 @@ function CorporateStructureAndServices({ data, setData, errors, setErrors }) {
 						}}
 					/>
 				</Section>
+				<h4 style={{ color: "blue" }}>
+					include the email of the contact person
+				</h4>
 				<Section>
 					<Form.Label>Mobile Number of Contact Person</Form.Label>
 					<Errors
