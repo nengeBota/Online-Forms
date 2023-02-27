@@ -711,7 +711,7 @@ export const financialCapabilityOptions = [
 		text: `For existing companies which are new to the upstream
   petroleum industry (ie. Companies which have never
   received a contract for service in the upstream
-  petroleum industry), provide AUdited Financial
+  petroleum industry), provide Audited Financial
   Report for the past year and a three year projected
   revenue for intended upstream oil and gas
   activities.`,

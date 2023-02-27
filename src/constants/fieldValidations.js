@@ -15,7 +15,7 @@ const optional = (schema) => z.union([schema, z.literal("")]);
 const optionalFile = z.array(
 	z.object({ fileName: optional(nonEmptyString), file: optional(z.string()) })
 );
-export const positiveNumber = z.coerce.number({ min: 0 });
+export const positiveNumber = z.coerce.number({ min: 1 });
 export const dateBeforeToday = z.coerce
 	.date()
 	.max(new Date(), { message: "Date cannot be later than today" });
@@ -74,15 +74,6 @@ const validations = {
 					z.boolean(),
 			})
 		),
-		singleShareholder: z.object({
-			[corporateStructureAndServices.shareholders.name]: nonEmptyString,
-			[corporateStructureAndServices.shareholders.address]:
-				nonEmptyString,
-			[corporateStructureAndServices.shareholders.nationality]:
-				nonEmptyString,
-			[corporateStructureAndServices.shareholders.percentage]: percentage,
-			[corporateStructureAndServices.beneficial.isEditing]: z.boolean(),
-		}),
 		[corporateStructureAndServices.beneficial._]: z.array(
 			z.object({
 				[corporateStructureAndServices.beneficial.name]: nonEmptyString,
@@ -177,3 +168,30 @@ const validations = {
 };
 
 export default validations;
+
+export const singleShareholder = z.object({
+	[corporateStructureAndServices.shareholders.name]: nonEmptyString,
+	[corporateStructureAndServices.shareholders.address]: nonEmptyString,
+	[corporateStructureAndServices.shareholders.nationality]: nonEmptyString,
+	[corporateStructureAndServices.shareholders.percentage]: percentage,
+});
+
+export const singleServiceProvided = z.object({
+	[fieldNames.localContent.valueOfServiceProvided.isEditing]: z.boolean(),
+	[fieldNames.localContent.valueOfServiceProvided.typeOfService]:
+		nonEmptyString,
+	[fieldNames.localContent.valueOfServiceProvided.contractSum]:
+		positiveNumber,
+	[fieldNames.localContent.valueOfServiceProvided.nameOfClientCompany]:
+		nonEmptyString,
+});
+
+export const singleServiceReceived = z.object({
+	[fieldNames.localContent.valueOfServiceReceived.isEditing]: z.boolean(),
+	[fieldNames.localContent.valueOfServiceReceived.typeOfService]:
+		nonEmptyString,
+	[fieldNames.localContent.valueOfServiceReceived.contractSum]:
+		positiveNumber,
+	[fieldNames.localContent.valueOfServiceReceived.nameOfClientCompany]:
+		nonEmptyString,
+});

@@ -3,73 +3,84 @@ import { fieldNames } from "../constants.mjs";
 const fields = fieldNames.localContent;
 
 const getErrors = (field, errors) => {
-    if (!errors) return [];
+	if (!errors) return [];
 	return errors?.[field]?._errors || [];
 };
 
-export const formatValueOfServiceProvidedErrors = (errors) => {
-	return Object.keys(errors || {})
-		?.filter((key) => key !== "_errors")
-		?.map((key) => {
-			const row = errors?.[key];
-			return {
-				[fields?.valueOfServiceProvided?.[
-					fields.valueOfServiceProvided.isEditing
-				]]: [],
+export function formatSingleServiceProvidedError(singleServiceProvidedError) {
+	return {
+		[fields?.valueOfServiceProvided?.[
+			fields.valueOfServiceProvided.isEditing
+		]]: [],
 
-				[fields?.valueOfServiceProvided?.[
-					fields.valueOfServiceProvided.typeOfService
-				]]:
-					row?.[fields.valueOfServiceProvided.typeOfService]
-						?._errors || [],
+		[fields?.valueOfServiceProvided?.[
+			fields.valueOfServiceProvided.typeOfService
+		]]:
+			singleServiceProvidedError?.[
+				fields.valueOfServiceProvided.typeOfService
+			]?._errors || [],
 
-				[fields?.valueOfServiceProvided?.[
-					fields.valueOfServiceProvided.contractSum
-				]]:
-					row?.[fields.valueOfServiceProvided.contractSum]?._errors ||
-					[],
+		[fields?.valueOfServiceProvided?.[
+			fields.valueOfServiceProvided.contractSum
+		]]:
+			singleServiceProvidedError?.[
+				fields.valueOfServiceProvided.contractSum
+			]?._errors || [],
 
-				[fields?.valueOfServiceProvided?.[
-					fields.valueOfServiceProvided.nameOfClientCompany
-				]]:
-					row?.[fields.valueOfServiceProvided.nameOfClientCompany]
-						?._errors || [],
-			};
-		});
+		[fields?.valueOfServiceProvided?.[
+			fields.valueOfServiceProvided.nameOfClientCompany
+		]]:
+			singleServiceProvidedError?.[
+				fields.valueOfServiceProvided.nameOfClientCompany
+			]?._errors || [],
+	};
+}
+
+export function formatSingleServiceReceivedError(singleServiceReceivedError) {
+	const row = singleServiceReceivedError;
+	return {
+		[fields?.valueOfServiceReceived?.[
+			fields.valueOfServiceProvided.isEditing
+		]]: [],
+
+		[fields?.valueOfServiceReceived?.[
+			fields.valueOfServiceProvided.typeOfService
+		]]: row?.[fields.valueOfServiceProvided.typeOfService]?._errors || [],
+
+		[fields?.valueOfServiceReceived?.[
+			fields.valueOfServiceProvided.contractSum
+		]]: row?.[fields.valueOfServiceProvided.contractSum]?._errors || [],
+
+		[fields?.valueOfServiceReceived?.[
+			fields.valueOfServiceProvided.nameOfClientCompany
+		]]:
+			row?.[fields.valueOfServiceProvided.nameOfClientCompany]?._errors ||
+			[],
+	};
+}
+
+export const formatValueOfServiceProvidedErrors = (
+	serviceProvidedErrors,
+	serviceProvidedData
+) => {
+	return serviceProvidedData?.map((_, i) => {
+		return formatSingleServiceProvidedError(serviceProvidedErrors[i]);
+	});
 };
 
-export const formatValueOfServiceReceivedErrors = (errors) => {
-	return Object.keys(errors|| {})
-		?.filter((key) => key !== "_errors")
-		?.map((key) => {
-			const row = errors?.[key];
-			return {
-				[fields?.valueOfServiceReceived?.[
-					fields.valueOfServiceProvided.isEditing
-				]]: [],
+export const formatValueOfServiceReceivedErrors = (
+	serviceReceivedErrors,
+	serviceReceivedData
+) => {
+	const errors = serviceReceivedErrors;
+	debugger;
 
-				[fields?.valueOfServiceReceived?.[
-					fields.valueOfServiceProvided.typeOfService
-				]]:
-					row?.[fields.valueOfServiceProvided.typeOfService]
-						?._errors || [],
-
-				[fields?.valueOfServiceReceived?.[
-					fields.valueOfServiceProvided.contractSum
-				]]:
-					row?.[fields.valueOfServiceProvided.contractSum]?._errors ||
-					[],
-
-				[fields?.valueOfServiceReceived?.[
-					fields.valueOfServiceProvided.nameOfClientCompany
-				]]:
-					row?.[fields.valueOfServiceProvided.nameOfClientCompany]
-						?._errors || [],
-			};
-		});
+	return serviceReceivedData?.map((_, i) => {
+		return formatSingleServiceReceivedError(errors[i]);
+	});
 };
 
-export default function formatLocalContentErrors(localContentErrors) {
+export default function formatLocalContentErrors(localContentErrors, data) {
 	const errors = localContentErrors;
 
 	return {
@@ -107,10 +118,12 @@ export default function formatLocalContentErrors(localContentErrors) {
 			errors
 		),
 		[fields.valueOfServiceProvided._]: formatValueOfServiceProvidedErrors(
-			errors?.[fields.valueOfServiceProvided._]
+			errors?.[fields.valueOfServiceProvided._],
+			data[fields._][fields.valueOfServiceProvided._]
 		),
 		[fields.valueOfServiceReceived._]: formatValueOfServiceReceivedErrors(
-			errors?.[fields.valueOfServiceReceived._]
+			errors?.[fields.valueOfServiceReceived._],
+			data[fields._][fields.valueOfServiceReceived._]
 		),
 	};
 }

@@ -50,7 +50,6 @@ function PlansAndProgrammes({ data, setData, errors, setErrors }) {
 				a. Organizational Development Programme and Budget
 			</FormLabel>
 			<br />
-
 			<FormGroup>
 				<FormLabel>
 					i. Company's strategy for organizational development /
@@ -58,12 +57,19 @@ function PlansAndProgrammes({ data, setData, errors, setErrors }) {
 				</FormLabel>
 				<Errors errors={getErrors(fields.orgDevStrategy, errors)} />
 				<FileInput
-					onChange={(file) =>
+					onChange={(file) => {
+						setErrors((prev) => ({
+							...prev,
+							[fields._]: {
+								...prev[fields._],
+								[fields.orgDevStrategy]: [],
+							},
+						}));
 						onChange(
 							fieldNames.orgDevProgramAndBudget.orgDevStrategy,
 							file
-						)
-					}
+						);
+					}}
 				/>
 			</FormGroup>
 
@@ -74,12 +80,16 @@ function PlansAndProgrammes({ data, setData, errors, setErrors }) {
 				</FormLabel>
 				<Errors errors={getErrors(fields.employmentPlan, errors)} />
 				<FileInput
-					onChange={(file) =>
-						onChange(
-							fieldNames.orgDevProgramAndBudget.employmentPlan,
-							file
-						)
-					}
+					onChange={(file) => {
+						setErrors((prev) => ({
+							...prev,
+							[fields._]: {
+								...prev[fields._],
+								[fields.employmentPlan]: [],
+							},
+						}));
+						onChange(fields.employmentPlan, file);
+					}}
 				/>
 			</FormGroup>
 			<br />
@@ -95,13 +105,20 @@ function PlansAndProgrammes({ data, setData, errors, setErrors }) {
 					)}
 				/>
 				<FileInput
-					onChange={(file) =>
+					onChange={(file) => {
+						setErrors((prev) => ({
+							...prev,
+							[fields._]: {
+								...prev[fields._],
+								[fields.techTransferProgramAndBudget]: [],
+							},
+						}));
 						onChange(
 							fieldNames.orgDevProgramAndBudget
 								.techTransferProgramAndBudget,
 							file
-						)
-					}
+						);
+					}}
 				/>
 			</FormGroup>
 
@@ -114,13 +131,20 @@ function PlansAndProgrammes({ data, setData, errors, setErrors }) {
 					errors={getErrors(fields.trainingProgramAndBudget, errors)}
 				/>
 				<FileInput
-					onChange={(file) =>
+					onChange={(file) => {
+						setErrors((prev) => ({
+							...prev,
+							[fields._]: {
+								...prev[fields._],
+								[fields.trainingProgramAndBudget]: [],
+							},
+						}));
 						onChange(
 							fieldNames.orgDevProgramAndBudget
 								.trainingProgramAndBudget,
 							file
-						)
-					}
+						);
+					}}
 				/>
 			</FormGroup>
 
@@ -136,13 +160,20 @@ function PlansAndProgrammes({ data, setData, errors, setErrors }) {
 					)}
 				/>
 				<FileInput
-					onChange={(file) =>
+					onChange={(file) => {
+						setErrors((prev) => ({
+							...prev,
+							[fields._]: {
+								...prev[fields._],
+								[fields.csrAndSocialDevProgramAndBudget]: [],
+							},
+						}));
 						onChange(
 							fieldNames.orgDevProgramAndBudget
 								.csrAndSocialDevProgramAndBudget,
 							file
-						)
-					}
+						);
+					}}
 				/>
 			</FormGroup>
 		</Form>

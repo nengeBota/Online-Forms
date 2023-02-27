@@ -11,7 +11,7 @@ import {
 	PERMIT_CATEGORIES,
 } from "../constants.mjs";
 import fieldsConfig from "../constants/fieldsConfig";
-import validations from "../constants/fieldValidations";
+import validations, { singleShareholder } from "../constants/fieldValidations";
 import {
 	formatBeneficialFieldErrors,
 	formatShareholdersErrors,
@@ -726,9 +726,7 @@ function CorporateStructureAndServices({ data, setData, errors, setErrors }) {
 						]}
 						data={shareholders}
 						onBlur={(index = 0) => {
-							const { error } = getValidation(
-								"singleShareholder"
-							).safeParse(
+							const { error } = singleShareholder.safeParse(
 								data[
 									fieldNames.corporateStructureAndServices._
 								][f.shareholders._][index]

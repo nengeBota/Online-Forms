@@ -4,8 +4,13 @@ import DynamicTable from "../components/DynamicTable";
 import { useEffect } from "react";
 import Heading from "../components/Heading";
 import Errors from "../components/Errors.jsx";
-import validations from "../constants/fieldValidations.js";
+import validations, {
+	singleServiceProvided,
+	singleServiceReceived,
+} from "../constants/fieldValidations.js";
 import {
+	formatSingleServiceProvidedError,
+	formatSingleServiceReceivedError,
 	formatValueOfServiceProvidedErrors,
 	formatValueOfServiceReceivedErrors,
 } from "../helpers/formatLocalContentErrors.js";
@@ -494,18 +499,20 @@ function LocalContent({ data, setData, errors, setErrors }) {
 					errors={getError(fields.valueOfServiceReceived._, errors)}
 					data={valueOfServiceReceived}
 					columns={valueOfServiceReceivedColumns}
-					onBlur={() => {
-						const { error } = getValidation(
-							fields.valueOfServiceReceived._
-						)?.safeParse(
-							data[fields._][fields.valueOfServiceReceived._]
+					onBlur={(i) => {
+						const { error } = singleServiceReceived.safeParse(
+							data[fields._][fields.valueOfServiceReceived._][i]
 						);
 
-						updateErrors(
-							fields.valueOfServiceReceived._,
-							formatValueOfServiceReceivedErrors(error?.format()),
-							setErrors
-						);
+						errors[fields._][fields.valueOfServiceReceived._][i] =
+							formatSingleServiceReceivedError(
+								error?.format(),
+								data[fields._][fields.valueOfServiceReceived._][
+									i
+								]
+							);
+
+						setErrors({ ...errors });
 					}}
 					addNewRow={() => {
 						valueOfServiceReceived.push({
@@ -555,18 +562,20 @@ function LocalContent({ data, setData, errors, setErrors }) {
 				<DynamicTable
 					columns={valueOfServiceProvidedColumns}
 					data={valueOfServiceProvided}
-					onBlur={() => {
-						const { error } = getValidation(
-							fields.valueOfServiceProvided._
-						)?.safeParse(
-							data[fields._][fields.valueOfServiceProvided._]
+					onBlur={(i) => {
+						const { error } = singleServiceProvided.safeParse(
+							data[fields._][fields.valueOfServiceProvided._][i]
 						);
 
-						updateErrors(
-							fields.valueOfServiceProvided._,
-							formatValueOfServiceProvidedErrors(error?.format()),
-							setErrors
-						);
+						errors[fields._][fields.valueOfServiceProvided._][i] =
+							formatSingleServiceProvidedError(
+								error?.format(),
+								data[fields._][fields.valueOfServiceProvided._][
+									i
+								]
+							);
+
+						setErrors({ ...errors });
 					}}
 					errors={getError(fields.valueOfServiceProvided._, errors)}
 					addNewRow={() => {

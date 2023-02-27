@@ -159,7 +159,16 @@ function FinancialCapability({ data, setData, errors, setErrors }) {
 							)}
 						/>
 						<FileInput
-							onChange={(file) =>
+							onChange={(file) => {
+								setErrors((prev) => ({
+									...prev,
+									[fieldNames.finCapability._]: {
+										...prev[fieldNames.finCapability._],
+										[fieldNames.finCapability
+											.whatAppliesUploadedDocument]: [],
+									},
+								}));
+
 								setData((prev) => {
 									return {
 										...prev,
@@ -170,8 +179,8 @@ function FinancialCapability({ data, setData, errors, setErrors }) {
 												file,
 										},
 									};
-								})
-							}
+								});
+							}}
 						/>
 					</li>
 
@@ -242,6 +251,21 @@ function FinancialCapability({ data, setData, errors, setErrors }) {
 						/>
 						<FileInput
 							onChange={(file) => {
+								setErrors((prev) => ({
+									...prev,
+									[fieldNames.mgtAndTechnicalCompetencies._]:
+										{
+											...prev[
+												fieldNames
+													.mgtAndTechnicalCompetencies
+													._
+											],
+											[fieldNames
+												.mgtAndTechnicalCompetencies
+												.orgChart]: [],
+										},
+								}));
+
 								onChange(
 									fieldNames.mgtAndTechnicalCompetencies
 										.orgChart,
@@ -269,6 +293,21 @@ function FinancialCapability({ data, setData, errors, setErrors }) {
 						/>
 						<FileInput
 							onChange={(file) => {
+								setErrors((prev) => ({
+									...prev,
+									[fieldNames.mgtAndTechnicalCompetencies._]:
+										{
+											...prev[
+												fieldNames
+													.mgtAndTechnicalCompetencies
+													._
+											],
+											[fieldNames
+												.mgtAndTechnicalCompetencies
+												.detailedStaffInfo]: [],
+										},
+								}));
+
 								onChange(
 									fieldNames.mgtAndTechnicalCompetencies
 										.detailedStaffInfo,
@@ -523,13 +562,14 @@ function FinancialCapability({ data, setData, errors, setErrors }) {
 								[fieldNames.detailsOfExperience
 									.contractsExecuted._]:
 									formatContractsExecutedErrors(
-										error?.format()
+										error?.format(),
+										contractsExecuted
 									),
 							},
 						}));
 					}}
 					addNewRow={() => {
-						contractsExecuted.push(newDetailsOfExperience);
+						contractsExecuted.push({ ...newDetailsOfExperience });
 						onstage(
 							fieldNames.detailsOfExperience.contractsExecuted._,
 							contractsExecuted
