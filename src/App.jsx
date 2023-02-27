@@ -53,7 +53,7 @@ async function submit(values, setShowSubmittingModal) {
 
 function App() {
 	const [category, setcategory] = useState([]);
-	const [page, setPage] = useState(6);
+	const [page, setPage] = useState(1);
 
 	const [data, setData] = useState(initialState);
 	const [errors, setErrors] = useState(initialErrorState);

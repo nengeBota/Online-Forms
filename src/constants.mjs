@@ -28,6 +28,7 @@ export const fieldNames = {
 			_: "contactPerson",
 			name: "name",
 			mobileNumber: "mobileNumber",
+			email: "email",
 		},
 		nameOfSubsidiaryOrAffiliate: "nameOfSubsidiaryOrAffiliate",
 		nationalityOfAffiliate: "nationalityOfAffiliate",
@@ -202,6 +203,7 @@ export const initialErrorState = {
 			[fieldNames.corporateStructureAndServices.contactPerson.name]: [],
 			[fieldNames.corporateStructureAndServices.contactPerson
 				.mobileNumber]: [],
+			[fieldNames.corporateStructureAndServices.contactPerson.email]: [],
 		},
 
 		[fieldNames.corporateStructureAndServices.nameOfSubsidiaryOrAffiliate]:
@@ -378,6 +380,7 @@ export const initialState = {
 			[fieldNames.corporateStructureAndServices.contactPerson.name]: "",
 			[fieldNames.corporateStructureAndServices.contactPerson
 				.mobileNumber]: "",
+			[fieldNames.corporateStructureAndServices.contactPerson.email]: "",
 		},
 
 		[fieldNames.corporateStructureAndServices.nameOfSubsidiaryOrAffiliate]:

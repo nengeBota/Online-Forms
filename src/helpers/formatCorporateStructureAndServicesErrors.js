@@ -122,6 +122,10 @@ export default function formatCorporateStructureAndServicesErrors(
 				errors?.[corporateStructure.contactPerson._]?.[
 					corporateStructure.contactPerson.mobileNumber
 				]?._errors,
+			[fieldNames.corporateStructureAndServices.contactPerson.email]:
+				errors?.[corporateStructure.contactPerson._]?.[
+					corporateStructure.contactPerson.email
+				]?._errors,
 		},
 
 		[fieldNames.corporateStructureAndServices.nameOfSubsidiaryOrAffiliate]:

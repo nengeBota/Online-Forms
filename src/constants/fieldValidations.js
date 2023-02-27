@@ -52,6 +52,7 @@ const validations = {
 			[corporateStructureAndServices.contactPerson.name]: nonEmptyString,
 			[corporateStructureAndServices.contactPerson.mobileNumber]:
 				nonEmptyString,
+			[corporateStructureAndServices.contactPerson.email]: nonEmptyString,
 		},
 		[corporateStructureAndServices.nameOfSubsidiaryOrAffiliate]:
 			optional(nonEmptyString),

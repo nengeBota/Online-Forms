@@ -578,10 +578,43 @@ function CorporateStructureAndServices({ data, setData, errors, setErrors }) {
 							);
 						}}
 					/>
+                </Section>
+                
+				<Section>
+					<Form.Label>Email of Contact Person</Form.Label>
+					<Errors
+						testId={CORP.contactPerson.email}
+						errors={getError(CORP.contactPerson._, errors)?.email}
+					/>
+					<Form.Control
+						required
+						placeholder="person@mail.com"
+						value={contactPerson?.email}
+						onChange={(e) => {
+							onChange(
+								fieldNames.corporateStructureAndServices
+									.contactPerson._,
+								{
+									...contactPerson,
+									[fieldNames.corporateStructureAndServices
+										.contactPerson.email]: e.target.value,
+								}
+							);
+						}}
+						onBlur={() => {
+							const { error } = getValidation(
+								f.contactPerson._
+							)?.[f.contactPerson.email].safeParse(
+								contactPerson?.email
+							);
+
+							updateContactPersonErrors(
+								CORP.contactPerson.email,
+								formatError(error)
+							);
+						}}
+					/>
 				</Section>
-				<h4 style={{ color: "blue" }}>
-					include the email of the contact person
-				</h4>
 				<Section>
 					<Form.Label>Mobile Number of Contact Person</Form.Label>
 					<Errors
