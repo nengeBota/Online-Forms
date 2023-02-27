@@ -58,6 +58,15 @@ function Miscellaneous({ data, setData, errors, setErrors }) {
 				<Errors errors={getHsseErrors(errors)} />
 				<FileInput
 					onChange={(file) => {
+						setErrors((prev) => ({
+							...prev,
+							[fieldNames.healthSafetySecurityEnv._]: {
+								...prev[fieldNames.healthSafetySecurityEnv._],
+								[fieldNames.healthSafetySecurityEnv
+									.hssePolicyAndObj]: [],
+							},
+						}));
+
 						onStage(
 							fieldNames.healthSafetySecurityEnv.hssePolicyAndObj,
 							file
@@ -81,10 +90,14 @@ function Miscellaneous({ data, setData, errors, setErrors }) {
 				<FormLabel>
 					You may attach multiple relevant documents
 				</FormLabel>
-				<br />
+				<Errors errors={errors[fieldNames.miscFiles]} />
 				<FileInput
 					multiple={true}
 					onChange={(files) => {
+						setErrors((prev) => ({
+							...prev,
+							[fieldNames.miscFiles]: [],
+						}));
 						onChange(files);
 					}}
 				/>
@@ -132,6 +145,10 @@ function Miscellaneous({ data, setData, errors, setErrors }) {
 				<Errors errors={errors?.[fieldNames.declaration]} />
 				<FileInput
 					onChange={(file) => {
+						setErrors((prev) => ({
+							...prev,
+							[fieldNames.declaration]: [],
+						}));
 						setData((prev) => ({
 							...prev,
 							[fieldNames.declaration]: file,
@@ -150,6 +167,10 @@ function Miscellaneous({ data, setData, errors, setErrors }) {
 				<Errors errors={errors?.[fieldNames.coverPage]} />
 				<FileInput
 					onChange={(file) => {
+						setErrors((prev) => ({
+							...prev,
+							[fieldNames.coverPage]: [],
+						}));
 						setData((prev) => ({
 							...prev,
 							[fieldNames.coverPage]: file,

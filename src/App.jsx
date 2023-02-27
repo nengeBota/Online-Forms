@@ -73,10 +73,12 @@ function App() {
 	const currentValidationFn = pages[page - 1]?.validate;
 
 	const onClickSetPage = (value, validationFn) => {
-		if (!validationFn()) return;
+		if (page < value) {
+			if (!validationFn()) return;
 
-		if (value > pages.length) {
-			return;
+			if (value > pages.length && value < 0) {
+				return;
+			}
 		}
 		setPage(value);
 	};

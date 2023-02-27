@@ -182,15 +182,6 @@ function LocalContent({ data, setData, errors, setErrors }) {
 		setData,
 	]);
 
-	// console.table("values -> ", {
-	// 	percentageOfGhanaianParticipation,
-	// 	infraExpenditure,
-	// 	valueOfServiceProvided,
-	//   valueOfServiceReceived,
-	//   totalMgtStaffBreakdown,
-	//   totalOtherStaffBreakdown,
-	// });
-
 	return (
 		<Form>
 			<Heading>Part 4 - Local Content</Heading>
