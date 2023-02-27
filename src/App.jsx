@@ -53,7 +53,7 @@ async function submit(values, setShowSubmittingModal) {
 
 function App() {
 	const [category, setcategory] = useState([]);
-	const [page, setPage] = useState(1);
+	const [page, setPage] = useState(6);
 
 	const [data, setData] = useState(initialState);
 	const [errors, setErrors] = useState(initialErrorState);
@@ -139,7 +139,6 @@ function App() {
 
 				{page < pages.length ? (
 					<Button
-						disabled={page === pages.length}
 						onClick={() => {
 							const validationFn = () =>
 								currentValidationFn(

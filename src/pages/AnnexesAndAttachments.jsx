@@ -110,12 +110,21 @@ function AnnexesAndAttachments({ data, setData, errors, setErrors }) {
 							<td>
 								<FormCheck
 									checked={coverPage}
-									onChange={() =>
+									onChange={() => {
+										setErrors((prev) => ({
+											...prev,
+											[fieldNames.checkList._]: {
+												...prev[fieldNames.checkList._],
+												[fieldNames.checkList
+													.coverPage]: [],
+											},
+										}));
+
 										onChange(
 											fieldNames.checkList.coverPage,
 											!coverPage
-										)
-									}
+										);
+									}}
 								/>
 							</td>
 						</tr>
@@ -133,6 +142,14 @@ function AnnexesAndAttachments({ data, setData, errors, setErrors }) {
 								<FormCheck
 									checked={applicationForm}
 									onChange={() => {
+										setErrors((prev) => ({
+											...prev,
+											[fieldNames.checkList._]: {
+												...prev[fieldNames.checkList._],
+												[fieldNames.checkList
+													.applicationForm]: [],
+											},
+										}));
 										onChange(
 											fieldNames.checkList
 												.applicationForm,
@@ -157,6 +174,15 @@ function AnnexesAndAttachments({ data, setData, errors, setErrors }) {
 								<FormCheck
 									checked={certificateOfIncorporation}
 									onChange={() => {
+										setErrors((prev) => ({
+											...prev,
+											[fieldNames.checkList._]: {
+												...prev[fieldNames.checkList._],
+												[fieldNames.checkList
+													.certificateOfIncorporation]:
+													[],
+											},
+										}));
 										onChange(
 											fieldNames.checkList
 												.certificateOfIncorporation,
@@ -181,6 +207,15 @@ function AnnexesAndAttachments({ data, setData, errors, setErrors }) {
 								<FormCheck
 									checked={certificateToCommenceBusiness}
 									onChange={() => {
+										setErrors((prev) => ({
+											...prev,
+											[fieldNames.checkList._]: {
+												...prev[fieldNames.checkList._],
+												[fieldNames.checkList
+													.certificateToCommenceBusiness]:
+													[],
+											},
+										}));
 										onChange(
 											fieldNames.checkList
 												.certificateToCommenceBusiness,
@@ -204,6 +239,14 @@ function AnnexesAndAttachments({ data, setData, errors, setErrors }) {
 								<FormCheck
 									checked={companyRegulations}
 									onChange={() => {
+										setErrors((prev) => ({
+											...prev,
+											[fieldNames.checkList._]: {
+												...prev[fieldNames.checkList._],
+												[fieldNames.checkList
+													.companyRegulations]: [],
+											},
+										}));
 										onChange(
 											fieldNames.checkList
 												.companyRegulations,
@@ -228,6 +271,15 @@ function AnnexesAndAttachments({ data, setData, errors, setErrors }) {
 								<FormCheck
 									checked={signedHssePolicyAndObj}
 									onChange={() => {
+										setErrors((prev) => ({
+											...prev,
+											[fieldNames.checkList._]: {
+												...prev[fieldNames.checkList._],
+												[fieldNames.checkList
+													.signedHssePolicyAndObj]:
+													[],
+											},
+										}));
 										onChange(
 											fieldNames.checkList
 												.signedHssePolicyAndObj,
@@ -258,6 +310,15 @@ function AnnexesAndAttachments({ data, setData, errors, setErrors }) {
 										currentAuditedFinReportsOrProjectedRevenue
 									}
 									onChange={() => {
+										setErrors((prev) => ({
+											...prev,
+											[fieldNames.checkList._]: {
+												...prev[fieldNames.checkList._],
+												[fieldNames.checkList
+													.currentAuditedFinReportsOrProjectedRevenue]:
+													[],
+											},
+										}));
 										onChange(
 											fieldNames.checkList
 												.currentAuditedFinReportsOrProjectedRevenue,
@@ -285,6 +346,15 @@ function AnnexesAndAttachments({ data, setData, errors, setErrors }) {
 								<FormCheck
 									checked={validTaxClearanceCertificate}
 									onChange={() => {
+										setErrors((prev) => ({
+											...prev,
+											[fieldNames.checkList._]: {
+												...prev[fieldNames.checkList._],
+												[fieldNames.checkList
+													.validTaxClearanceCertificate]:
+													[],
+											},
+										}));
 										onChange(
 											fieldNames.checkList
 												.validTaxClearanceCertificate,
@@ -308,6 +378,14 @@ function AnnexesAndAttachments({ data, setData, errors, setErrors }) {
 								<FormCheck
 									checked={vatCertificate}
 									onChange={() => {
+										setErrors((prev) => ({
+											...prev,
+											[fieldNames.checkList._]: {
+												...prev[fieldNames.checkList._],
+												[fieldNames.checkList
+													.vatCertificate]: [],
+											},
+										}));
 										onChange(
 											fieldNames.checkList.vatCertificate,
 											!vatCertificate
@@ -334,6 +412,15 @@ function AnnexesAndAttachments({ data, setData, errors, setErrors }) {
 								<FormCheck
 									checked={originalSsnitClearanceCertificate}
 									onChange={() => {
+										setErrors((prev) => ({
+											...prev,
+											[fieldNames.checkList._]: {
+												...prev[fieldNames.checkList._],
+												[fieldNames.checkList
+													.originalSsnitClearanceCertificate]:
+													[],
+											},
+										}));
 										onChange(
 											fieldNames.checkList
 												.originalSsnitClearanceCertificate,
@@ -358,6 +445,15 @@ function AnnexesAndAttachments({ data, setData, errors, setErrors }) {
 								<FormCheck
 									checked={companyProfileandBusinessPlan}
 									onChange={() => {
+										setErrors((prev) => ({
+											...prev,
+											[fieldNames.checkList._]: {
+												...prev[fieldNames.checkList._],
+												[fieldNames.checkList
+													.companyProfileAndBusinessPlan]:
+													[],
+											},
+										}));
 										onChange(
 											fieldNames.checkList
 												.companyProfileAndBusinessPlan,
@@ -387,6 +483,15 @@ function AnnexesAndAttachments({ data, setData, errors, setErrors }) {
 								<FormCheck
 									checked={copiesOfOtherRegulatoryCerts}
 									onChange={() => {
+										setErrors((prev) => ({
+											...prev,
+											[fieldNames.checkList._]: {
+												...prev[fieldNames.checkList._],
+												[fieldNames.checkList
+													.copiesOfOtherRegulatoryCerts]:
+													[],
+											},
+										}));
 										onChange(
 											fieldNames.checkList
 												.copiesOfOtherRegulatoryCerts,
@@ -411,6 +516,15 @@ function AnnexesAndAttachments({ data, setData, errors, setErrors }) {
 								<FormCheck
 									checked={copyOfApplicationPackReceipt}
 									onChange={() => {
+										setErrors((prev) => ({
+											...prev,
+											[fieldNames.checkList._]: {
+												...prev[fieldNames.checkList._],
+												[fieldNames.checkList
+													.copyOfApplicationPackReceipt]:
+													[],
+											},
+										}));
 										onChange(
 											fieldNames.checkList
 												.copyOfApplicationPackReceipt,

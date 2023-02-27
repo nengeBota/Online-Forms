@@ -73,7 +73,6 @@ export const formatValueOfServiceReceivedErrors = (
 	serviceReceivedData
 ) => {
 	const errors = serviceReceivedErrors;
-	debugger;
 
 	return serviceReceivedData?.map((_, i) => {
 		return formatSingleServiceReceivedError(errors[i]);
