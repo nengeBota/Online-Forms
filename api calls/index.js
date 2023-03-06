@@ -40,12 +40,13 @@ server.post("/submit", (req, res) => {
         }
         
         // extract the values, store in database @Bota
-        
+
 
 
 
 	} catch (error) {
-		res.status(400).send({ message: "invalid input" });
+        res.status(500).send({ message: "Something went wrong. Please try again" });
+        // record the error in a log file
 	}
 });
 
