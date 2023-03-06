@@ -7,17 +7,10 @@ import pg from "pg";
 import formatAllErrorsForState from "../src/helpers/formatAllErrorsForState.js";
 
 dotenv.config();
-// require("dotenv").config();
-
-// const cors = require("cors");
-// const app = require("express");
 const server = express();
-// const bodyparser = require("body-parser");
 server.use(bodyparser.json());
 server.use(cors());
 const { Client } = pg;
-// const { Client } = require("pg");
-// const { default: state } = require("../stateDescription.js");
 const client = new Client({
 	host: process.env.DB_HOST || "127.0.0.1",
 	port: process.env.DB_PORT || 5432,
@@ -47,11 +40,15 @@ server.post("/submit", (req, res) => {
         }
         
         // extract the values, store in database @Bota
+        
+
+
 
 	} catch (error) {
 		res.status(400).send({ message: "invalid input" });
 	}
 });
+
 
 server.post("/applicant_details", async (req, res) => {
 	try {
