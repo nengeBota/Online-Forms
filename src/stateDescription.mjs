@@ -248,7 +248,7 @@ const state = z.object({
 
 	[fieldNames.healthSafetySecurityEnv._]: healthSafetySecurityEnvDesc,
 
-	[fieldNames.miscFiles]: miscFilesDesc,
+	[fieldNames.miscFiles._]: miscFilesDesc,
 
 	[fieldNames.declaration]: declarationDesc,
 

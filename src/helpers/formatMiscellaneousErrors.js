@@ -20,10 +20,12 @@ function formatMiscellaneousErrors(miscellaneousErrors, data) {
 			errors
 		),
 		[fieldNames.miscFiles.certificateToCommenceBusiness]: getErrors(
-			fieldNames.miscFiles.certificateToCommenceBusiness
+			fieldNames.miscFiles.certificateToCommenceBusiness,
+			errors
 		),
 		[fieldNames.miscFiles.companyRegulationsDocument]: getErrors(
-			fieldNames.miscFiles.companyRegulationsDocument
+			fieldNames.miscFiles.companyRegulationsDocument,
+			errors
 		),
 		[fieldNames.miscFiles.signedHSSEPolicyAndObj]: getErrors(
 			fieldNames.miscFiles.signedHSSEPolicyAndObj

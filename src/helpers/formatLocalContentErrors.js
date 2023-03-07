@@ -64,7 +64,7 @@ export const formatValueOfServiceProvidedErrors = (
 	serviceProvidedData
 ) => {
 	return serviceProvidedData?.map((_, i) => {
-		return formatSingleServiceProvidedError(serviceProvidedErrors[i]);
+		return formatSingleServiceProvidedError(serviceProvidedErrors?.[i]);
 	});
 };
 
@@ -75,7 +75,7 @@ export const formatValueOfServiceReceivedErrors = (
 	const errors = serviceReceivedErrors;
 
 	return serviceReceivedData?.map((_, i) => {
-		return formatSingleServiceReceivedError(errors[i]);
+		return formatSingleServiceReceivedError(errors?.[i]);
 	});
 };
 

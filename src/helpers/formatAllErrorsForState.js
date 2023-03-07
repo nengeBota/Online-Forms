@@ -69,7 +69,7 @@ function formatAllErrorsForState(zodFormattedErrors, currentState) {
 				healthSafetySecurityEnvErrors,
 				currentState
 			),
-		[fieldNames.miscFiles]: formatMiscellaneousErrors(
+		[fieldNames.miscFiles._]: formatMiscellaneousErrors(
 			zodFormattedErrors?.[fieldNames.miscFiles._],
 			currentState
 		),
