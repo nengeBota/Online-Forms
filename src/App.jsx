@@ -221,7 +221,35 @@ const InitialModal = ({ showModal, setShowModal }) => {
 						</span>
 					</li>
 					<li>Copy of Application Pack Receipt</li>
-				</ol>
+                </ol>
+
+                <hr />
+
+				<h5>Terms and Conditions</h5>
+				<p>
+					According to Regulation 46 (1) & (2) of the Petroleum (Local
+					Content and Local Participation) Regulations,
+				</p>
+				<p>
+					1. A person who submits a plan, returns, report or other
+					document and knowingly makes a false statement, commits an
+					offence and is liable on summary conviction to a fine of not
+					less than one hundred thousand penalty units and not more
+					than two hundred and fifty thousand penalty units or to a
+					term of imprisonment of not less than two years and not more
+					than five years or to both.
+				</p>
+                <p>
+                    <span style={{ color: 'red' }}>there's some missing text here</span>
+					deceive the Commission as representing an indigenous
+					Ghanaian company to achieve the local content requirement
+					under these Regulations, commits an offence and is liable on
+					summary conviction to a fine of not less than one hundred
+					thousand penalty units and not more than two hundred and
+					fifty thousand penalty units or to a term of imprisonment of
+					not less than one year and not more than two years or to
+					both
+				</p>
 			</ModalBody>
 			<ModalFooter>
 				<Button
