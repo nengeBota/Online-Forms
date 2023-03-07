@@ -8,6 +8,7 @@ import formatFinCapabilityErrors from "./formatFinCapabilityErrors.js";
 import formatHealthSafetySecurityEnvErrors from "./formatHealthSafetySecurityEnvErrors.js";
 import formatLocalContentErrors from "./formatLocalContentErrors.js";
 import formatMgtAndTechnicalCompetenciesErrors from "./formatMgtAndTechnicalCompetenciesErrors.js";
+import formatMiscellaneousErrors from "./formatMiscellaneousErrors.js";
 import formatOrgDevProgramAndBudgetErrors from "./formatOrgDevProgramAndBudgetErrors.js";
 
 function formatAllErrorsForState(zodFormattedErrors, currentState) {
@@ -68,7 +69,10 @@ function formatAllErrorsForState(zodFormattedErrors, currentState) {
 				healthSafetySecurityEnvErrors,
 				currentState
 			),
-		[fieldNames.miscFiles]: [],
+		[fieldNames.miscFiles]: formatMiscellaneousErrors(
+			zodFormattedErrors?.[fieldNames.miscFiles._],
+			currentState
+		),
 		[fieldNames.declaration]: formatDeclarationErrors(
 			zodFormattedErrors?.[fieldNames.declaration],
 			currentState

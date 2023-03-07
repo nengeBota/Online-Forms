@@ -54,7 +54,6 @@ async function submit(values, setShowSubmittingModal) {
 function App() {
 	const [category, setcategory] = useState([]);
 	const [page, setPage] = useState(1);
-	const [showInitialModal, setShowInitialModal] = useState(true);
 
 	const [data, setData] = useState(initialState);
 	const [errors, setErrors] = useState(initialErrorState);
@@ -120,11 +119,6 @@ function App() {
 			<Modal show={showSubmittingModal} centered>
 				<ModalBody>Submitting...</ModalBody>
 			</Modal>
-
-			<InitialModal
-				showModal={showInitialModal}
-				setShowModal={setShowInitialModal}
-			/>
 			<br />
 			<br />
 
@@ -189,83 +183,6 @@ function App() {
 }
 
 export default App;
-
-const InitialModal = ({ showModal, setShowModal }) => {
-	return (
-		<Modal show={showModal}>
-			<ModalHeader>
-				<h4>Required documentation to proceed</h4>
-			</ModalHeader>
-			<ModalBody style={{ padding: "50px" }}>
-				<h5>
-					Please ensure you have the following information available
-					in soft copy, in order to successfully complete the form:
-				</h5>
-				<ol>
-					<li>Cover page</li>
-					<li>Certificate of Incorporation</li>
-					<li>Certificate to commence business</li>
-					<li>Company regulations document</li>
-					<li>Signed HSSE Policy and Objectives</li>
-					<li>Current Audited Financial Reports</li>
-					<li>Valid tax clearance certificate (original)</li>
-					<li>VAT certificate</li>
-					<li>Valid SSNIT Clearance certificate (original)</li>
-					<li>Company Profile and business plans</li>
-					<li>
-						Copies of other valid regulatory certificates and
-						permits (eg. EPA permit, Air Operator Certificate,
-						Aviation License, FDA Hygiene Certificate)
-						<span style={{ color: "red", marginLeft: "10px" }}>
-							confirm from Bota if these are all required
-						</span>
-					</li>
-					<li>Copy of Application Pack Receipt</li>
-				</ol>
-
-				<hr />
-
-				<h5>Terms and Conditions</h5>
-				<p>
-					According to Regulation 46 (1) & (2) of the Petroleum (Local
-					Content and Local Participation) Regulations,
-				</p>
-				<p>
-					1. A person who submits a plan, returns, report or other
-					document and knowingly makes a false statement, commits an
-					offence and is liable on summary conviction to a fine of not
-					less than one hundred thousand penalty units and not more
-					than two hundred and fifty thousand penalty units or to a
-					term of imprisonment of not less than two years and not more
-					than five years or to both.
-				</p>
-				<p>
-					<span style={{ color: "red" }}>
-						there's some missing text here
-					</span>
-					deceive the Commission as representing an indigenous
-					Ghanaian company to achieve the local content requirement
-					under these Regulations, commits an offence and is liable on
-					summary conviction to a fine of not less than one hundred
-					thousand penalty units and not more than two hundred and
-					fifty thousand penalty units or to a term of imprisonment of
-					not less than one year and not more than two years or to
-					both
-				</p>
-			</ModalBody>
-
-			<ModalFooter>
-				<Button
-					onClick={() => {
-						setShowModal(false);
-					}}
-				>
-					Proceed
-				</Button>
-			</ModalFooter>
-		</Modal>
-	);
-};
 
 function validate(data, setErrors, setPage) {
 	const { error } = state.safeParse(data);

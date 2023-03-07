@@ -24,9 +24,11 @@ import {
 	healthSafetySecurityEnvDesc,
 	localContentDesc,
 	mgtAndTechnicalCompetenciesDesc,
+	miscFilesDesc,
 	orgDevProgramAndBudgetDesc,
 } from "../stateDescription.mjs";
 import { fieldNames, initialErrorState } from "../constants.mjs";
+import formatMiscellaneousErrors from "../helpers/formatMiscellaneousErrors.js";
 
 //info: the position of the page determines its page number. so CorporateStructureAndServices is page 1 because its first in this array, etc..
 
@@ -248,10 +250,15 @@ const pages = [
 				data?.[fieldNames.coverPage]
 			);
 
+            const { error: miscErrors } = miscFilesDesc.safeParse(
+                data?.[fieldNames.miscFiles._]
+            );
+            
 			if (
 				!healthSafetySecurityEnvErrors &&
 				!declarationErrors &&
-				!coverPageErrors
+				!coverPageErrors &&
+				!miscErrors
 			) {
 				setErrors((prev) => ({
 					...prev,
@@ -269,6 +276,9 @@ const pages = [
 
 					[fieldNames.coverPage]:
 						initialErrorState[fieldNames.coverPage],
+
+					[fieldNames.miscFiles._]:
+						initialErrorState[fieldNames.miscFiles._],
 				}));
 
 				return true;
@@ -292,6 +302,10 @@ const pages = [
 						coverPageErrors?.format(),
 						data
 					),
+					[fieldNames.miscFiles._]: formatMiscellaneousErrors(
+						miscErrors?.format(),
+						data
+					), 
 				}));
 
 				showModal(true);

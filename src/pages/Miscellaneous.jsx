@@ -8,7 +8,7 @@ import { fieldNames } from "../constants.mjs";
 //Incomplete work done for part 5 and 6
 
 const getFields = (data) => {
-	const miscFiles = data[fieldNames.miscFiles];
+	const miscFiles = data[fieldNames.miscFiles._];
 	const coverPage = data[fieldNames.coverPage];
 	const hssePolicyAndObj =
 		data[fieldNames.healthSafetySecurityEnv._][
@@ -22,6 +22,20 @@ const getHsseErrors = (errors) => {
 	return errors?.[fieldNames.healthSafetySecurityEnv._]?.[
 		fieldNames.healthSafetySecurityEnv.hssePolicyAndObj
 	];
+};
+
+const updateMiscFilesErrors = (field, value, setErrors) => {
+	setErrors((prev) => ({
+		...prev,
+		[fieldNames.miscFiles._]: {
+			...prev[fieldNames.miscFiles._],
+			[field]: value,
+		},
+	}));
+};
+
+const getMiscFilesErrors = (field, errors) => {
+	return errors?.[fieldNames.miscFiles._]?.[field];
 };
 
 function Miscellaneous({ data, setData, errors, setErrors }) {
@@ -40,8 +54,14 @@ function Miscellaneous({ data, setData, errors, setErrors }) {
 
 	//For Part 6 miscellaneous
 	const { miscFiles, hssePolicyAndObj, coverPage } = getFields(data);
-	const onChange = (value) => {
-		setData((prev) => ({ ...prev, [fieldNames.miscFiles]: value }));
+	const onChange = (field, value) => {
+		setData((prev) => ({
+			...prev,
+			[fieldNames.miscFiles._]: {
+				...prev[fieldNames.miscFiles._],
+				[field]: value,
+			},
+		}));
 	};
 
 	return (
@@ -57,6 +77,11 @@ function Miscellaneous({ data, setData, errors, setErrors }) {
 				</FormLabel>
 				<Errors errors={getHsseErrors(errors)} />
 				<FileInput
+					value={
+						data[
+							fieldNames.healthSafetySecurityEnv.hssePolicyAndObj
+						]
+					}
 					onChange={(file) => {
 						setErrors((prev) => ({
 							...prev,
@@ -86,19 +111,284 @@ function Miscellaneous({ data, setData, errors, setErrors }) {
 				this application
 			</h6>
 
+
+			{/* certificate of incorporation */}
 			<FormGroup>
-				<FormLabel>
-					You may attach multiple relevant documents
-				</FormLabel>
-				<Errors errors={errors[fieldNames.miscFiles]} />
+				<FormLabel>Certificate of Incorporation</FormLabel>
+				<Errors
+					errors={getMiscFilesErrors(
+						fieldNames.miscFiles.certificateOfIncorporation,
+						errors
+					)}
+				/>
+				<FileInput
+					value={
+						data[fieldNames.miscFiles.certificateOfIncorporation]
+					}
+					multiple={true}
+					onChange={(files) => {
+						const field =
+							fieldNames.miscFiles.certificateOfIncorporation;
+						const value = [];
+						updateMiscFilesErrors(field, value, setErrors);
+
+						onChange(
+							fieldNames.miscFiles.certificateOfIncorporation,
+							files
+						);
+					}}
+				/>
+			</FormGroup>
+			{/* certificate to commence business */}
+			<FormGroup>
+				<FormLabel>Certificate to Commence Business</FormLabel>
+				<Errors
+					errors={getMiscFilesErrors(
+						fieldNames.miscFiles.certificateToCommenceBusiness,
+						errors
+					)}
+				/>
 				<FileInput
 					multiple={true}
 					onChange={(files) => {
 						setErrors((prev) => ({
 							...prev,
-							[fieldNames.miscFiles]: [],
+							[fieldNames.miscFiles
+								.certificateToCommenceBusiness]: [],
 						}));
-						onChange(files);
+						onChange(
+							fieldNames.miscFiles.certificateToCommenceBusiness,
+							files
+						);
+					}}
+				/>
+			</FormGroup>
+			{/* company regulations document */}
+			<FormGroup>
+				<FormLabel>Company Regulations Document</FormLabel>
+				<Errors
+					errors={getMiscFilesErrors(
+						fieldNames.miscFiles.companyRegulationsDocument,
+						errors
+					)}
+				/>
+				<FileInput
+					multiple={true}
+					onChange={(files) => {
+						setErrors((prev) => ({
+							...prev,
+							[fieldNames.miscFiles.companyRegulationsDocument]:
+								[],
+						}));
+						onChange(
+							fieldNames.miscFiles.companyRegulationsDocument,
+							files
+						);
+					}}
+				/>
+			</FormGroup>
+			{/* current audited financial reports */}
+			<FormGroup>
+				<FormLabel>Current audited financial reports</FormLabel>
+				<Errors
+					errors={getMiscFilesErrors(
+						fieldNames.miscFiles
+							.currentAuditedFinReportsOrProjectedRevenue,
+						errors
+					)}
+				/>
+				<FileInput
+					multiple={true}
+					onChange={(files) => {
+						setErrors((prev) => ({
+							...prev,
+							[fieldNames.miscFiles
+								.currentAuditedFinReportsOrProjectedRevenue]:
+								[],
+						}));
+						onChange(
+							fieldNames.miscFiles
+								.currentAuditedFinReportsOrProjectedRevenue,
+							files
+						);
+					}}
+				/>
+			</FormGroup>
+			{/* vat certificate */}
+			<FormGroup>
+				<FormLabel>VAT Certificate</FormLabel>
+				<Errors
+					errors={getMiscFilesErrors(
+						fieldNames.miscFiles.vatCertificate,
+						errors
+					)}
+				/>
+				<FileInput
+					multiple={true}
+					onChange={(files) => {
+						setErrors((prev) => ({
+							...prev,
+							[fieldNames.miscFiles.vatCertificate]: [],
+						}));
+						onChange(fieldNames.miscFiles.vatCertificate, files);
+					}}
+				/>
+			</FormGroup>
+			{/* valid ssnit clearance certificate */}
+			<FormGroup>
+				<FormLabel>Valid SSNIT clearance certificate</FormLabel>
+				<Errors
+					errors={getMiscFilesErrors(
+						fieldNames.miscFiles.validSSNITClearanceCertificate,
+						errors
+					)}
+				/>
+				<FileInput
+					multiple={true}
+					onChange={(files) => {
+						setErrors((prev) => ({
+							...prev,
+							[fieldNames.miscFiles
+								.validSSNITClearanceCertificate]: [],
+						}));
+						onChange(
+							fieldNames.miscFiles.validSSNITClearanceCertificate,
+							files
+						);
+					}}
+				/>
+			</FormGroup>
+			{/* company profile and business plans */}
+			<FormGroup>
+				<FormLabel>Company profile and business plans</FormLabel>
+				<Errors
+					errors={getMiscFilesErrors(
+						fieldNames.miscFiles.companyProfileAndBusinessPlan,
+						errors
+					)}
+				/>
+				<FileInput
+					multiple={true}
+					onChange={(files) => {
+						setErrors((prev) => ({
+							...prev,
+							[fieldNames.miscFiles
+								.companyProfileAndBusinessPlan]: [],
+						}));
+						onChange(
+							fieldNames.miscFiles.companyProfileAndBusinessPlan,
+							files
+						);
+					}}
+				/>
+			</FormGroup>
+			{/* EPA permit */}
+			<FormGroup>
+				<FormLabel>EPA permit</FormLabel>
+				<Errors
+					errors={getMiscFilesErrors(
+						fieldNames.miscFiles.EPAPermit,
+						errors
+					)}
+				/>
+				<FileInput
+					multiple={true}
+					onChange={(files) => {
+						setErrors((prev) => ({
+							...prev,
+							[fieldNames.miscFiles.EPAPermit]: [],
+						}));
+						onChange(fieldNames.miscFiles.EPAPermit, files);
+					}}
+				/>
+			</FormGroup>
+			{/* air operator certificate */}
+			<FormGroup>
+				<FormLabel>Air Operator Certificate</FormLabel>
+				<Errors
+					errors={getMiscFilesErrors(
+						fieldNames.miscFiles.airOperatorCertificate,
+						errors
+					)}
+				/>
+				<FileInput
+					multiple={true}
+					onChange={(files) => {
+						setErrors((prev) => ({
+							...prev,
+							[fieldNames.miscFiles.airOperatorCertificate]: [],
+						}));
+						onChange(
+							fieldNames.miscFiles.airOperatorCertificate,
+							files
+						);
+					}}
+				/>
+			</FormGroup>
+			{/* aviation license */}
+			<FormGroup>
+				<FormLabel>Aviation License</FormLabel>
+				<Errors
+					errors={getMiscFilesErrors(
+						fieldNames.miscFiles.aviationLicense,
+						errors
+					)}
+				/>
+				<FileInput
+					multiple={true}
+					onChange={(files) => {
+						setErrors((prev) => ({
+							...prev,
+							[fieldNames.miscFiles.aviationLicense]: [],
+						}));
+						onChange(fieldNames.miscFiles.aviationLicense, files);
+					}}
+				/>
+			</FormGroup>
+			{/* FDA hygiene certificate */}
+			<FormGroup>
+				<FormLabel>FDA hygiene certificate</FormLabel>
+				<Errors
+					errors={getMiscFilesErrors(
+						fieldNames.miscFiles.fdaHygieneCertificate,
+						errors
+					)}
+				/>
+				<FileInput
+					multiple={true}
+					onChange={(files) => {
+						setErrors((prev) => ({
+							...prev,
+							[fieldNames.miscFiles.fdaHygieneCertificate]: [],
+						}));
+						onChange(
+							fieldNames.miscFiles.fdaHygieneCertificate,
+							files
+						);
+					}}
+				/>
+			</FormGroup>
+			{/* copy of application pack receipt */}
+			<FormGroup>
+				<FormLabel>Copy of application pack receipt</FormLabel>
+				<Errors
+					errors={getMiscFilesErrors(
+						fieldNames.miscFiles.copyOfApplicationPackReceipt,
+						errors
+					)}
+				/>
+				<FileInput
+					multiple={true}
+					onChange={(files) => {
+						setErrors((prev) => ({
+							...prev,
+							[fieldNames.miscFiles.copyOfApplicationPackReceipt]:
+								[],
+						}));
+						onChange(
+							fieldNames.miscFiles.copyOfApplicationPackReceipt,
+							files
+						);
 					}}
 				/>
 			</FormGroup>

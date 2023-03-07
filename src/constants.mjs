@@ -132,8 +132,24 @@ export const fieldNames = {
 	},
 
 	// misc files
-	miscFiles: "miscFiles",
-
+	miscFiles: {
+		_: "miscFiles",
+		certificateOfIncorporation: "certificateOfIncorporation",
+		certificateToCommenceBusiness: "certificateToCommenceBusiness",
+		companyRegulationsDocument: "companyRegulationsDocument",
+		signedHSSEPolicyAndObj: "signedHSSEPolicyAndObj",
+		currentAuditedFinReportsOrProjectedRevenue:
+			"currentAuditedFinReportsOrProjectedRevenue",
+		validTaxClearanceCertificate: "validTaxClearanceCertificate",
+		vatCertificate: "vatCertificate",
+		validSSNITClearanceCertificate: "validSSNITClearanceCertificate",
+		companyProfileAndBusinessPlan: "companyProfileAndBusinessPlan",
+		EPAPermit: "EPAPermit",
+		airOperatorCertificate: "airOperatorCertificate",
+		aviationLicense: "aviationLicense",
+		fdaHygieneCertificate: "fdaHygieneCertificate",
+		copyOfApplicationPackReceipt: "copyOfApplicationPackReceipt",
+	},
 	// applicant declaration
 	declaration: "declaration",
 
@@ -330,7 +346,22 @@ export const initialErrorState = {
 		[fieldNames.healthSafetySecurityEnv.hssePolicyAndObj]: [],
 	},
 
-	[fieldNames.miscFiles]: [],
+	[fieldNames.miscFiles._]: {
+		[fieldNames.miscFiles.certificateOfIncorporation]: [],
+		[fieldNames.miscFiles.certificateToCommenceBusiness]: [],
+		[fieldNames.miscFiles.companyRegulationsDocument]: [],
+		[fieldNames.miscFiles.signedHSSEPolicyAndObj]: [],
+		[fieldNames.miscFiles.currentAuditedFinReportsOrProjectedRevenue]: [],
+		[fieldNames.miscFiles.validTaxClearanceCertificate]: [],
+		[fieldNames.miscFiles.vatCertificate]: [],
+		[fieldNames.miscFiles.validSSNITClearanceCertificate]: [],
+		[fieldNames.miscFiles.companyProfileAndBusinessPlan]: [],
+		[fieldNames.miscFiles.EPAPermit]: [],
+		[fieldNames.miscFiles.airOperatorCertificate]: [],
+		[fieldNames.miscFiles.aviationLicense]: [],
+		[fieldNames.miscFiles.fdaHygieneCertificate]: [],
+		[fieldNames.miscFiles.copyOfApplicationPackReceipt]: [],
+	},
 
 	// applicant declaration
 	[fieldNames.declaration]: [],
@@ -558,7 +589,44 @@ export const initialState = {
 		],
 	},
 
-	[fieldNames.miscFiles]: [{ fileName: "", file: "" }],
+	[fieldNames.miscFiles._]: {
+		[fieldNames.miscFiles.certificateOfIncorporation]: [
+			{ fileName: "", file: "" },
+		],
+		[fieldNames.miscFiles.certificateToCommenceBusiness]: [
+			{ fileName: "", file: "" },
+		],
+		[fieldNames.miscFiles.companyRegulationsDocument]: [
+			{ fileName: "", file: "" },
+		],
+		[fieldNames.miscFiles.signedHSSEPolicyAndObj]: [
+			{ fileName: "", file: "" },
+		],
+		[fieldNames.miscFiles.currentAuditedFinReportsOrProjectedRevenue]: [
+			{ fileName: "", file: "" },
+		],
+		[fieldNames.miscFiles.validTaxClearanceCertificate]: [
+			{ fileName: "", file: "" },
+		],
+		[fieldNames.miscFiles.vatCertificate]: [{ fileName: "", file: "" }],
+		[fieldNames.miscFiles.validSSNITClearanceCertificate]: [
+			{ fileName: "", file: "" },
+		],
+		[fieldNames.miscFiles.companyProfileAndBusinessPlan]: [
+			{ fileName: "", file: "" },
+		],
+		[fieldNames.miscFiles.EPAPermit]: [{ fileName: "", file: "" }],
+		[fieldNames.miscFiles.airOperatorCertificate]: [
+			{ fileName: "", file: "" },
+		],
+		[fieldNames.miscFiles.aviationLicense]: [{ fileName: "", file: "" }],
+		[fieldNames.miscFiles.fdaHygieneCertificate]: [
+			{ fileName: "", file: "" },
+		],
+		[fieldNames.miscFiles.copyOfApplicationPackReceipt]: [
+			{ fileName: "", file: "" },
+		],
+	},
 
 	// applicant declaration
 	[fieldNames.declaration]: [{ fileName: "", file: "" }],

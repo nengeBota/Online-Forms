@@ -21,6 +21,8 @@ const corporateStructureValidations =
 const finCapabilityValidations = validations[fieldNames.finCapability._];
 const getLocalContentFieldValidation = (field) =>
 	validations[fieldNames.localContent._][field];
+const getMiscFilesValidation = (field) =>
+	validations[fieldNames.miscFiles._][field];
 
 const corporateStructureFields = fieldNames.corporateStructureAndServices;
 
@@ -169,7 +171,49 @@ export const healthSafetySecurityEnvDesc = z.object({
 	[fieldNames.healthSafetySecurityEnv.hssePolicyAndObj]: file,
 });
 export const declarationDesc = file;
-export const miscFilesDesc = file;
+export const miscFilesDesc = z.object({
+	[fieldNames.miscFiles.certificateOfIncorporation]: getMiscFilesValidation(
+		fieldNames.miscFiles.certificateOfIncorporation
+	),
+	[fieldNames.miscFiles.certificateToCommenceBusiness]:
+		getMiscFilesValidation(
+			fieldNames.miscFiles.certificateToCommenceBusiness
+		),
+	[fieldNames.miscFiles.companyRegulationsDocument]: getMiscFilesValidation(
+		fieldNames.miscFiles.companyRegulationsDocument
+	),
+	[fieldNames.miscFiles.currentAuditedFinReportsOrProjectedRevenue]:
+		getMiscFilesValidation(
+			fieldNames.miscFiles.currentAuditedFinReportsOrProjectedRevenue
+		),
+	[fieldNames.miscFiles.validTaxClearanceCertificate]: getMiscFilesValidation(
+		fieldNames.miscFiles.validTaxClearanceCertificate
+	),
+	[fieldNames.miscFiles.vatCertificate]: getMiscFilesValidation(
+		fieldNames.miscFiles.vatCertificate
+	),
+	[fieldNames.miscFiles.validSSNITClearanceCertificate]:
+		getMiscFilesValidation(fieldNames.miscFiles.validSSNITClearanceCertificate),
+	[fieldNames.miscFiles.companyProfileAndBusinessPlan]:
+		getMiscFilesValidation(
+			fieldNames.miscFiles.companyProfileAndBusinessPlan
+		),
+	[fieldNames.miscFiles.EPAPermit]: getMiscFilesValidation(
+		fieldNames.miscFiles.EPAPermit
+	),
+	[fieldNames.miscFiles.airOperatorCertificate]: getMiscFilesValidation(
+		fieldNames.miscFiles.airOperatorCertificate
+	),
+	[fieldNames.miscFiles.aviationLicense]: getMiscFilesValidation(
+		fieldNames.miscFiles.aviationLicense
+	),
+	[fieldNames.miscFiles.fdaHygieneCertificate]: getMiscFilesValidation(
+		fieldNames.miscFiles.fdaHygieneCertificate
+	),
+	[fieldNames.miscFiles.copyOfApplicationPackReceipt]: getMiscFilesValidation(
+		fieldNames.miscFiles.copyOfApplicationPackReceipt
+	),
+});
 export const coverPageDesc = file;
 export const checkListDesc = z.object({
 	[fieldNames.checkList.coverPage]: mustBeTrue,

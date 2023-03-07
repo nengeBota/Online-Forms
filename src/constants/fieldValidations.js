@@ -166,6 +166,21 @@ const validations = {
 			})
 		),
 	},
+	[fieldNames.miscFiles._]: {
+		[fieldNames.miscFiles.certificateOfIncorporation]: file,
+		[fieldNames.miscFiles.certificateToCommenceBusiness]: file,
+		[fieldNames.miscFiles.companyRegulationsDocument]: file,
+		[fieldNames.miscFiles.currentAuditedFinReportsOrProjectedRevenue]: file,
+		[fieldNames.miscFiles.validTaxClearanceCertificate]: file,
+		[fieldNames.miscFiles.vatCertificate]: file,
+		[fieldNames.miscFiles.validSSNITClearanceCertificate]: file,
+		[fieldNames.miscFiles.companyProfileAndBusinessPlan]: file,
+		[fieldNames.miscFiles.EPAPermit]: file,
+		[fieldNames.miscFiles.airOperatorCertificate]: file,
+		[fieldNames.miscFiles.aviationLicense]: file,
+		[fieldNames.miscFiles.fdaHygieneCertificate]: file,
+		[fieldNames.miscFiles.copyOfApplicationPackReceipt]: file,
+	},
 };
 
 export default validations;
