@@ -118,8 +118,10 @@ function Miscellaneous({ data, setData, errors, setErrors }) {
 					term of imprisonment of not less than two years and not more
 					than five years or to both.
 				</p>
-                <p>
-                <span style={{ color: 'red' }}>there's some missing text here</span>
+				<p>
+					<span style={{ color: "red" }}>
+						there's some missing text here
+					</span>
 					deceive the Commission as representing an indigenous
 					Ghanaian company to achieve the local content requirement
 					under these Regulations, commits an offence and is liable on
@@ -137,6 +139,9 @@ function Miscellaneous({ data, setData, errors, setErrors }) {
 			<hr />
 			<FormGroup>
 				<FormLabel>
+					<span style={{ color: "red" }}>
+						this link doesn't trigger the file download yet
+					</span>
 					<a href="#" download>
 						Click to download
 					</a>{" "}
