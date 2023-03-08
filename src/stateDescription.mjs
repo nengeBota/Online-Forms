@@ -193,7 +193,9 @@ export const miscFilesDesc = z.object({
 		fieldNames.miscFiles.vatCertificate
 	),
 	[fieldNames.miscFiles.validSSNITClearanceCertificate]:
-		getMiscFilesValidation(fieldNames.miscFiles.validSSNITClearanceCertificate),
+		getMiscFilesValidation(
+			fieldNames.miscFiles.validSSNITClearanceCertificate
+		),
 	[fieldNames.miscFiles.companyProfileAndBusinessPlan]:
 		getMiscFilesValidation(
 			fieldNames.miscFiles.companyProfileAndBusinessPlan
@@ -228,8 +230,11 @@ export const checkListDesc = z.object({
 	[fieldNames.checkList.vatCertificate]: mustBeTrue,
 	[fieldNames.checkList.originalSsnitClearanceCertificate]: mustBeTrue,
 	[fieldNames.checkList.companyProfileAndBusinessPlan]: mustBeTrue,
-	[fieldNames.checkList.copiesOfOtherRegulatoryCerts]: mustBeTrue,
 	[fieldNames.checkList.copyOfApplicationPackReceipt]: mustBeTrue,
+	[fieldNames.checkList.EPAPermit]: mustBeTrue,
+	[fieldNames.checkList.airOperatorCertificate]: mustBeTrue,
+	[fieldNames.checkList.aviationLicense]: mustBeTrue,
+	[fieldNames.checkList.fdaHygieneCertificate]: mustBeTrue,
 });
 
 const state = z.object({

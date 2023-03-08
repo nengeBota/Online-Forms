@@ -45,7 +45,7 @@ async function submit(values, setShowSubmittingModal) {
 		});
 		console.log("value of response -> ", response);
 	} catch (error) {
-		console.log("failed to foetch -> ", error);
+		console.log("failed to fetch -> ", error);
 	} finally {
 		setShowSubmittingModal(false);
 	}

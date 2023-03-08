@@ -39,7 +39,7 @@ const getMiscFilesErrors = (field, errors) => {
 };
 
 function Miscellaneous({ data, setData, errors, setErrors }) {
-	const onStage = useCallback((fieldName, value) => {
+	const onStage = (fieldName, value) => {
 		setData(
 			(prev) => ({
 				...prev,
@@ -47,10 +47,14 @@ function Miscellaneous({ data, setData, errors, setErrors }) {
 					...prev[fieldNames.healthSafetySecurityEnv._],
 					[fieldName]: value,
 				},
+				[fieldNames.checkList._]: {
+					...prev[fieldNames.checkList._],
+					[fieldName]: true,
+				},
 			}),
 			[]
 		);
-	});
+	};
 
 	//For Part 6 miscellaneous
 	const { miscFiles, hssePolicyAndObj, coverPage } = getFields(data);
@@ -60,6 +64,10 @@ function Miscellaneous({ data, setData, errors, setErrors }) {
 			[fieldNames.miscFiles._]: {
 				...prev[fieldNames.miscFiles._],
 				[field]: value,
+			},
+			[fieldNames.checkList._]: {
+				...prev[fieldNames.checkList._],
+				[field]: true,
 			},
 		}));
 	};
@@ -461,6 +469,9 @@ function Miscellaneous({ data, setData, errors, setErrors }) {
 						setData((prev) => ({
 							...prev,
 							[fieldNames.declaration]: file,
+							[fieldNames.checkList._]: {
+								...prev[fieldNames.checkList._],
+							},
 						}));
 					}}
 				/>
@@ -483,6 +494,10 @@ function Miscellaneous({ data, setData, errors, setErrors }) {
 						setData((prev) => ({
 							...prev,
 							[fieldNames.coverPage]: file,
+							[fieldNames.checkList._]: {
+								...prev[fieldNames.checkList._],
+								[fieldNames.checkList.coverPage]: true,
+							},
 						}));
 					}}
 				/>

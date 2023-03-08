@@ -3,8 +3,8 @@ import { fieldNames } from "../constants.mjs";
 const fields = fieldNames.checkList;
 
 const getErrors = (field, errors) => {
-    if (!errors) return [];
-    // seems to be the only way to set a custom error for z.literal
+	if (!errors) return [];
+	// seems to be the only way to set a custom error for z.literal
 	return errors?.[field]?._errors?.length > 0 ? ["Must be checked"] : [];
 };
 
@@ -55,7 +55,20 @@ export default function formatChecklistErrors(checklistErrors) {
 			fields.copyOfApplicationPackReceipt,
 			errors
 		),
-    };
-    
-    return result;
+		[fieldNames.checkList.epaPermit]: getErrors(fields.epaPermit, errors),
+		[fieldNames.checkList.airOperatorCertificate]: getErrors(
+			fields.airOperatorCertificate,
+			errors
+		),
+		[fieldNames.checkList.aviationLicense]: getErrors(
+			fields.aviationLicense,
+			errors
+		),
+		[fieldNames.checkList.fdaHygieneCertificate]: getErrors(
+			fields.fdaHygieneCertificate,
+			errors
+		),
+	};
+
+	return result;
 }

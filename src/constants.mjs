@@ -7,6 +7,24 @@ export const FIN_CAPABILITY_WHAT_APPLIES_OPTIONS = {
 	newlyIncorporated: "newlyIncorporated",
 };
 
+// creating these so that they can be shared between miscFiles and checklist names
+const hssePolicyAndObj = "hssePolicyAndObj";
+const certificateOfIncorporation = "certificateOfIncorporation";
+const certificateToCommenceBusiness = "certificateToCommenceBusiness";
+const companyRegulationsDocument = "companyRegulationsDocument";
+const currentAuditedFinReportsOrProjectedRevenue =
+	"currentAuditedFinReportsOrProjectedRevenue";
+const validTaxClearanceCertificate = "validTaxClearanceCertificate";
+const vatCertificate = "vatCertificate";
+const validSSNITClearanceCertificate = "validSSNITClearanceCertificate";
+const companyProfileAndBusinessPlan = "companyProfileAndBusinessPlan";
+const epaPermit = "epaPermit";
+const airOperatorCertificate = "airOpeartorCertificate";
+const aviationLicense = "aviationLicense";
+const fdaHygieneCertificate = "fdaHygieneCertificate";
+const copyOfApplicationPackReceipt = "copyOfApplicationPackReceipt";
+const coverPage = "coverPage";
+
 export const fieldNames = {
 	// PAGE 1 - CORPORATE STRUCTURE AND SERVICES
 	corporateStructureAndServices: {
@@ -128,51 +146,54 @@ export const fieldNames = {
 	// healthSafetySecurityEnv
 	healthSafetySecurityEnv: {
 		_: "healthSafetySecurityEnv",
-		hssePolicyAndObj: "hssePolicyAndObj",
+		hssePolicyAndObj: hssePolicyAndObj,
 	},
 
 	// misc files
 	miscFiles: {
 		_: "miscFiles",
-		certificateOfIncorporation: "certificateOfIncorporation",
-		certificateToCommenceBusiness: "certificateToCommenceBusiness",
-		companyRegulationsDocument: "companyRegulationsDocument",
-		signedHSSEPolicyAndObj: "signedHSSEPolicyAndObj",
+		certificateOfIncorporation: certificateOfIncorporation,
+		certificateToCommenceBusiness: certificateToCommenceBusiness,
+		companyRegulationsDocument: companyRegulationsDocument,
+		signedHSSEPolicyAndObj: hssePolicyAndObj,
 		currentAuditedFinReportsOrProjectedRevenue:
-			"currentAuditedFinReportsOrProjectedRevenue",
-		validTaxClearanceCertificate: "validTaxClearanceCertificate",
-		vatCertificate: "vatCertificate",
-		validSSNITClearanceCertificate: "validSSNITClearanceCertificate",
-		companyProfileAndBusinessPlan: "companyProfileAndBusinessPlan",
-		EPAPermit: "EPAPermit",
-		airOperatorCertificate: "airOperatorCertificate",
-		aviationLicense: "aviationLicense",
-		fdaHygieneCertificate: "fdaHygieneCertificate",
-		copyOfApplicationPackReceipt: "copyOfApplicationPackReceipt",
+			currentAuditedFinReportsOrProjectedRevenue,
+		validTaxClearanceCertificate: validTaxClearanceCertificate,
+		vatCertificate: vatCertificate,
+		validSSNITClearanceCertificate: validSSNITClearanceCertificate,
+		companyProfileAndBusinessPlan: companyProfileAndBusinessPlan,
+		EPAPermit: epaPermit,
+		airOperatorCertificate: airOperatorCertificate,
+		aviationLicense: aviationLicense,
+		fdaHygieneCertificate: fdaHygieneCertificate,
+		copyOfApplicationPackReceipt: copyOfApplicationPackReceipt,
 	},
 	// applicant declaration
 	declaration: "declaration",
 
 	// cover page
-	coverPage: "coverPage",
+	coverPage: coverPage,
 
 	// checklist
 	checkList: {
 		_: "checkList",
-		coverPage: "coverPage",
+		coverPage: coverPage,
 		applicationForm: "applicationForm",
-		certificateOfIncorporation: "certificateOfIncorporation",
-		certificateToCommenceBusiness: "certificateToCommenceBusiness",
-		companyRegulations: "companyRegulations",
-		signedHssePolicyAndObj: "signedHssePolicyAndObj",
+		certificateOfIncorporation: certificateOfIncorporation,
+		certificateToCommenceBusiness: certificateToCommenceBusiness,
+		companyRegulations: companyRegulationsDocument,
+		signedHssePolicyAndObj: hssePolicyAndObj,
 		currentAuditedFinReportsOrProjectedRevenue:
-			"currentAuditedFinReportsOrProjectedRevenue",
-		validTaxClearanceCertificate: "validTaxClearanceCertificate",
-		vatCertificate: "vatCertificate",
-		originalSsnitClearanceCertificate: "originalSsnitClearanceCertificate",
-		companyProfileAndBusinessPlan: "companyProfileAndBusinessPlan",
-		copiesOfOtherRegulatoryCerts: "copiesOfOtherRegulatoryCerts",
-		copyOfApplicationPackReceipt: "copyOfApplicationPackReceipt",
+			currentAuditedFinReportsOrProjectedRevenue,
+		validTaxClearanceCertificate: validTaxClearanceCertificate,
+		vatCertificate: vatCertificate,
+		originalSsnitClearanceCertificate: validSSNITClearanceCertificate,
+		companyProfileAndBusinessPlan: companyProfileAndBusinessPlan,
+		EPAPermit: epaPermit,
+		airOperatorCertificate: airOperatorCertificate,
+		aviationLicense: aviationLicense,
+		fdaHygieneCertificate: fdaHygieneCertificate,
+		copyOfApplicationPackReceipt: copyOfApplicationPackReceipt,
 	},
 };
 
@@ -371,20 +392,23 @@ export const initialErrorState = {
 
 	// checklist
 	[fieldNames.checkList._]: {
-		[fieldNames.checkList.coverPage]: false,
-		[fieldNames.checkList.applicationForm]: false,
-		[fieldNames.checkList.certificateOfIncorporation]: false,
-		[fieldNames.checkList.certificateToCommenceBusiness]: false,
-		[fieldNames.checkList.companyRegulations]: false,
-		[fieldNames.checkList.signedHssePolicyAndObj]: false,
+		[fieldNames.checkList.coverPage]: [],
+		[fieldNames.checkList.applicationForm]: [],
+		[fieldNames.checkList.certificateOfIncorporation]: [],
+		[fieldNames.checkList.certificateToCommenceBusiness]: [],
+		[fieldNames.checkList.companyRegulations]: [],
+		[fieldNames.checkList.signedHssePolicyAndObj]: [],
 		[fieldNames.checkList
-			.currentAuditedFinReportsOrProjectedRevenue]: false,
-		[fieldNames.checkList.validTaxClearanceCertificate]: false,
-		[fieldNames.checkList.vatCertificate]: false,
-		[fieldNames.checkList.originalSsnitClearanceCertificate]: false,
-		[fieldNames.checkList.companyProfileAndBusinessPlan]: false,
-		[fieldNames.checkList.copiesOfOtherRegulatoryCerts]: false,
-		[fieldNames.checkList.copyOfApplicationPackReceipt]: false,
+			.currentAuditedFinReportsOrProjectedRevenue]: [],
+		[fieldNames.checkList.validTaxClearanceCertificate]: [],
+		[fieldNames.checkList.vatCertificate]: [],
+		[fieldNames.checkList.originalSsnitClearanceCertificate]: [],
+		[fieldNames.checkList.companyProfileAndBusinessPlan]: [],
+        [fieldNames.checkList.epaPermit]: [],
+        [fieldNames.checkList.airOperatorCertificate]: [],
+        [fieldNames.checkList.aviationLicense]: [],
+        [fieldNames.checkList.fdaHygieneCertificate]: [],
+		[fieldNames.checkList.copyOfApplicationPackReceipt]: [],
 	},
 };
 
@@ -637,7 +661,7 @@ export const initialState = {
 	// checklist
 	[fieldNames.checkList._]: {
 		[fieldNames.checkList.coverPage]: false,
-		[fieldNames.checkList.applicationForm]: false,
+		[fieldNames.checkList.applicationForm]: true,
 		[fieldNames.checkList.certificateOfIncorporation]: false,
 		[fieldNames.checkList.certificateToCommenceBusiness]: false,
 		[fieldNames.checkList.companyRegulations]: false,
@@ -648,7 +672,10 @@ export const initialState = {
 		[fieldNames.checkList.vatCertificate]: false,
 		[fieldNames.checkList.originalSsnitClearanceCertificate]: false,
 		[fieldNames.checkList.companyProfileAndBusinessPlan]: false,
-		[fieldNames.checkList.copiesOfOtherRegulatoryCerts]: false,
+        [fieldNames.checkList.EPAPermit]: false,
+        [fieldNames.checkList.airOperatorCertificate]: false,
+        [fieldNames.checkList.aviationLicense]: false,
+        [fieldNames.checkList.fdaHygieneCertificate]: false,
 		[fieldNames.checkList.copyOfApplicationPackReceipt]: false,
 	},
 };
