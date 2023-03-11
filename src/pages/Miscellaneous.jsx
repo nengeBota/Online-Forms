@@ -1,5 +1,4 @@
-import { useCallback } from "react";
-import { Form, FormGroup, FormLabel, Button } from "react-bootstrap";
+import { Form, FormGroup, FormLabel } from "react-bootstrap";
 import Errors from "../components/Errors";
 import FileInput from "../components/FileInput";
 import Heading from "../components/Heading";
@@ -7,16 +6,6 @@ import { fieldNames } from "../constants.mjs";
 
 //Incomplete work done for part 5 and 6
 
-const getFields = (data) => {
-	const miscFiles = data[fieldNames.miscFiles._];
-	const coverPage = data[fieldNames.coverPage];
-	const hssePolicyAndObj =
-		data[fieldNames.healthSafetySecurityEnv._][
-			fieldNames.healthSafetySecurityEnv.hssePolicyAndObj
-		];
-
-	return { miscFiles, hssePolicyAndObj, coverPage };
-};
 
 const getHsseErrors = (errors) => {
 	return errors?.[fieldNames.healthSafetySecurityEnv._]?.[
@@ -57,7 +46,6 @@ function Miscellaneous({ data, setData, errors, setErrors }) {
 	};
 
 	//For Part 6 miscellaneous
-	const { miscFiles, hssePolicyAndObj, coverPage } = getFields(data);
 	const onChange = (field, value) => {
 		setData((prev) => ({
 			...prev,
@@ -86,7 +74,7 @@ function Miscellaneous({ data, setData, errors, setErrors }) {
 				<Errors errors={getHsseErrors(errors)} />
 				<FileInput
 					value={
-						data[
+						data[fieldNames.healthSafetySecurityEnv._][
 							fieldNames.healthSafetySecurityEnv.hssePolicyAndObj
 						]
 					}
@@ -130,7 +118,9 @@ function Miscellaneous({ data, setData, errors, setErrors }) {
 				/>
 				<FileInput
 					value={
-						data[fieldNames.miscFiles.certificateOfIncorporation]
+						data[fieldNames.miscFiles._][
+							fieldNames.miscFiles.certificateOfIncorporation
+						]
 					}
 					multiple={true}
 					onChange={(files) => {
@@ -156,7 +146,11 @@ function Miscellaneous({ data, setData, errors, setErrors }) {
 					)}
 				/>
 				<FileInput
-					multiple={true}
+					value={
+						data[fieldNames.miscFiles._][
+							fieldNames.miscFiles.certificateToCommenceBusiness
+						]
+					}
 					onChange={(files) => {
 						const field =
 							fieldNames.miscFiles.certificateToCommenceBusiness;
@@ -179,7 +173,11 @@ function Miscellaneous({ data, setData, errors, setErrors }) {
 					)}
 				/>
 				<FileInput
-					multiple={true}
+					value={
+						data[fieldNames.miscFiles._][
+							fieldNames.miscFiles.companyRegulationsDocument
+						]
+					}
 					onChange={(files) => {
 						const field =
 							fieldNames.miscFiles.companyRegulationsDocument;
@@ -203,7 +201,12 @@ function Miscellaneous({ data, setData, errors, setErrors }) {
 					)}
 				/>
 				<FileInput
-					multiple={true}
+					value={
+						data[fieldNames.miscFiles._][
+							fieldNames.miscFiles
+								.currentAuditedFinReportsOrProjectedRevenue
+						]
+					}
 					onChange={(files) => {
 						const field =
 							fieldNames.miscFiles
@@ -228,7 +231,11 @@ function Miscellaneous({ data, setData, errors, setErrors }) {
 					)}
 				/>
 				<FileInput
-					multiple={true}
+					value={
+						data[fieldNames.miscFiles._][
+							fieldNames.miscFiles.vatCertificate
+						]
+					}
 					onChange={(files) => {
 						const field = fieldNames.miscFiles.vatCertificate;
 						const value = [];
@@ -247,7 +254,11 @@ function Miscellaneous({ data, setData, errors, setErrors }) {
 					)}
 				/>
 				<FileInput
-					multiple={true}
+					value={
+						data[fieldNames.miscFiles._][
+							fieldNames.miscFiles.validSSNITClearanceCertificate
+						]
+					}
 					onChange={(files) => {
 						const field =
 							fieldNames.miscFiles.validSSNITClearanceCertificate;
@@ -270,7 +281,11 @@ function Miscellaneous({ data, setData, errors, setErrors }) {
 					)}
 				/>
 				<FileInput
-					multiple={true}
+					value={
+						data[fieldNames.miscFiles._][
+							fieldNames.miscFiles.companyProfileAndBusinessPlan
+						]
+					}
 					onChange={(files) => {
 						const field =
 							fieldNames.miscFiles.companyProfileAndBusinessPlan;
@@ -293,7 +308,11 @@ function Miscellaneous({ data, setData, errors, setErrors }) {
 					)}
 				/>
 				<FileInput
-					multiple={true}
+					value={
+						data[fieldNames.miscFiles._][
+							fieldNames.miscFiles.EPAPermit
+						]
+					}
 					onChange={(files) => {
 						const field = fieldNames.miscFiles.EPAPermit;
 						const value = [];
@@ -312,7 +331,11 @@ function Miscellaneous({ data, setData, errors, setErrors }) {
 					)}
 				/>
 				<FileInput
-					multiple={true}
+					value={
+						data[fieldNames.miscFiles._][
+							fieldNames.miscFiles.airOperatorCertificate
+						]
+					}
 					onChange={(files) => {
 						const field =
 							fieldNames.miscFiles.airOperatorCertificate;
@@ -335,7 +358,11 @@ function Miscellaneous({ data, setData, errors, setErrors }) {
 					)}
 				/>
 				<FileInput
-					multiple={true}
+					value={
+						data[fieldNames.miscFiles._][
+							fieldNames.miscFiles.aviationLicense
+						]
+					}
 					onChange={(files) => {
 						const field = fieldNames.miscFiles.aviationLicense;
 						const value = [];
@@ -354,7 +381,11 @@ function Miscellaneous({ data, setData, errors, setErrors }) {
 					)}
 				/>
 				<FileInput
-					multiple={true}
+					value={
+						data[fieldNames.miscFiles._][
+							fieldNames.miscFiles.fdaHygieneCertificate
+						]
+					}
 					onChange={(files) => {
 						const field =
 							fieldNames.miscFiles.fdaHygieneCertificate;
@@ -377,7 +408,11 @@ function Miscellaneous({ data, setData, errors, setErrors }) {
 					)}
 				/>
 				<FileInput
-					multiple={true}
+					value={
+						data[fieldNames.miscFiles._][
+							fieldNames.miscFiles.copyOfApplicationPackReceipt
+						]
+					}
 					onChange={(files) => {
 						const field =
 							fieldNames.miscFiles.copyOfApplicationPackReceipt;
@@ -400,7 +435,11 @@ function Miscellaneous({ data, setData, errors, setErrors }) {
 					)}
 				/>
 				<FileInput
-					multiple={true}
+					value={
+						data[fieldNames.miscFiles._][
+							fieldNames.miscFiles.validTaxClearanceCertificate
+						]
+					}
 					onChange={(files) => {
 						const field =
 							fieldNames.miscFiles.validTaxClearanceCertificate;
@@ -461,6 +500,7 @@ function Miscellaneous({ data, setData, errors, setErrors }) {
 				</FormLabel>
 				<Errors errors={errors?.[fieldNames.declaration]} />
 				<FileInput
+					value={data[fieldNames.declaration]}
 					onChange={(file) => {
 						setErrors((prev) => ({
 							...prev,
@@ -486,6 +526,7 @@ function Miscellaneous({ data, setData, errors, setErrors }) {
 				<FormLabel>Upload Cover Page *</FormLabel>
 				<Errors errors={errors?.[fieldNames.coverPage]} />
 				<FileInput
+					value={data[fieldNames.coverPage]}
 					onChange={(file) => {
 						setErrors((prev) => ({
 							...prev,

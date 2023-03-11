@@ -11,26 +11,7 @@ const getErrors = (field, errors) => {
 };
 
 function PlansAndProgrammes({ data, setData, errors, setErrors }) {
-	const orgDevStrategy =
-		data[fieldNames.orgDevProgramAndBudget._][
-			fieldNames.orgDevProgramAndBudget.orgDevStrategy
-		];
-	const employmentPlan =
-		data[fieldNames.orgDevProgramAndBudget._][
-			fieldNames.orgDevProgramAndBudget.employmentPlan
-		];
-	const techTransferProgramAndBudget =
-		data[fieldNames.orgDevProgramAndBudget._][
-			fieldNames.orgDevProgramAndBudget.techTransferProgramAndBudget
-		];
-	const trainingProgramAndBudget =
-		data[fieldNames.orgDevProgramAndBudget._][
-			fieldNames.orgDevProgramAndBudget.trainingProgramAndBudget
-		];
-	const csrAndSocialDevProgramAndBudget =
-		data[fieldNames.orgDevProgramAndBudget._][
-			fieldNames.orgDevProgramAndBudget.csrAndSocialDevProgramAndBudget
-		];
+	
 
 	const onChange = (field, value) => {
 		setData((prev) => ({
@@ -57,6 +38,7 @@ function PlansAndProgrammes({ data, setData, errors, setErrors }) {
 				</FormLabel>
 				<Errors errors={getErrors(fields.orgDevStrategy, errors)} />
 				<FileInput
+					value={data[fields._][fields.orgDevStrategy]}
 					onChange={(file) => {
 						setErrors((prev) => ({
 							...prev,
@@ -80,6 +62,7 @@ function PlansAndProgrammes({ data, setData, errors, setErrors }) {
 				</FormLabel>
 				<Errors errors={getErrors(fields.employmentPlan, errors)} />
 				<FileInput
+					value={data[fields._][fields.employmentPlan]}
 					onChange={(file) => {
 						setErrors((prev) => ({
 							...prev,
@@ -105,6 +88,7 @@ function PlansAndProgrammes({ data, setData, errors, setErrors }) {
 					)}
 				/>
 				<FileInput
+					value={data[fields._][fields.techTransferProgramAndBudget]}
 					onChange={(file) => {
 						setErrors((prev) => ({
 							...prev,
@@ -131,6 +115,7 @@ function PlansAndProgrammes({ data, setData, errors, setErrors }) {
 					errors={getErrors(fields.trainingProgramAndBudget, errors)}
 				/>
 				<FileInput
+                    value={data[fields._][fields.trainingProgramAndBudget]}
 					onChange={(file) => {
 						setErrors((prev) => ({
 							...prev,
@@ -160,6 +145,7 @@ function PlansAndProgrammes({ data, setData, errors, setErrors }) {
 					)}
 				/>
 				<FileInput
+                    value={data[fields._][fields.csrAndSocialDevProgramAndBudget]}
 					onChange={(file) => {
 						setErrors((prev) => ({
 							...prev,

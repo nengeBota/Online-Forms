@@ -1,5 +1,4 @@
 import { Form } from "react-bootstrap";
-import { z } from "zod";
 import DynamicTable from "../components/DynamicTable";
 import Errors from "../components/Errors";
 import FileInput from "../components/FileInput";
@@ -10,18 +9,11 @@ import {
 	permitCategoryOptions,
 	PERMIT_CATEGORIES,
 } from "../constants.mjs";
-import fieldsConfig from "../constants/fieldsConfig";
 import validations, { singleShareholder } from "../constants/fieldValidations";
 import {
 	formatBeneficialFieldErrors,
-	formatShareholdersErrors,
 	formatSingleShareholderErrors,
 } from "../helpers/formatCorporateStructureAndServicesErrors";
-import {
-	corporateStructureAndServicesDesc,
-	dateBeforeToday,
-	nonEmptyString,
-} from "../stateDescription.mjs";
 
 const getValue = (data) => {
 	const fields = data[fieldNames.corporateStructureAndServices._];
@@ -578,8 +570,8 @@ function CorporateStructureAndServices({ data, setData, errors, setErrors }) {
 							);
 						}}
 					/>
-                </Section>
-                
+				</Section>
+
 				<Section>
 					<Form.Label>Email of Contact Person</Form.Label>
 					<Errors
@@ -715,6 +707,7 @@ function CorporateStructureAndServices({ data, setData, errors, setErrors }) {
 					</Form.Label>
 					<Errors errors={getError(f.corporateStructure, errors)} />
 					<FileInput
+						value={data?.[f._][f.corporateStructure]}
 						onChange={(files) => {
 							onChange(
 								fieldNames.corporateStructureAndServices

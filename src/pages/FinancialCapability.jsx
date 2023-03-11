@@ -132,7 +132,6 @@ function FinancialCapability({ data, setData, errors, setErrors }) {
 										marginBottom: 0,
 									}}
 									onChange={(e) => {
-										console.log("event -> ", e);
 										setData((prev) => ({
 											...prev,
 											[fieldNames.finCapability._]: {
@@ -159,6 +158,12 @@ function FinancialCapability({ data, setData, errors, setErrors }) {
 							)}
 						/>
 						<FileInput
+							value={
+								data[fieldNames.finCapability._][
+									fieldNames.finCapability
+										.whatAppliesUploadedDocument
+								]
+							}
 							onChange={(file) => {
 								setErrors((prev) => ({
 									...prev,
@@ -250,6 +255,12 @@ function FinancialCapability({ data, setData, errors, setErrors }) {
 							)}
 						/>
 						<FileInput
+							value={
+								data[fieldNames.mgtAndTechnicalCompetencies._][
+									fieldNames.mgtAndTechnicalCompetencies
+										.orgChart
+								]
+							}
 							onChange={(file) => {
 								setErrors((prev) => ({
 									...prev,
@@ -292,6 +303,11 @@ function FinancialCapability({ data, setData, errors, setErrors }) {
 							)}
 						/>
 						<FileInput
+							value={
+								data[fieldNames.mgtAndTechnicalCompetencies._][
+									fieldNames.mgtAndTechnicalCompetencies.detailedStaffInfo
+								]
+							}
 							onChange={(file) => {
 								setErrors((prev) => ({
 									...prev,
