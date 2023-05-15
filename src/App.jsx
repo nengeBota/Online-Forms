@@ -266,7 +266,7 @@ const PageWrapper = styled.div`
 	display: flex;
 	flex-direction: column;
 	margin: 0 auto;
-	border: 1px solid black;
+	/* border: 1px solid black; */
 	min-height: 100vh;
 	padding: 30px;
 
