@@ -469,17 +469,14 @@ function Miscellaneous({ data, setData, errors, setErrors }) {
 					than five years or to both.
 				</p>
 				<p>
-					<span style={{ color: "red" }}>
-						there's some missing text here
-					</span>
-					deceive the Commission as representing an indigenous
-					Ghanaian company to achieve the local content requirement
-					under these Regulations, commits an offence and is liable on
-					summary conviction to a fine of not less than one hundred
-					thousand penalty units and not more than two hundred and
-					fifty thousand penalty units or to a term of imprisonment of
-					not less than one year and not more than two years or to
-					both
+					2. A citizen who acts as a front or connives with a foreign 
+					citizen or company to deceive the Commission as representing 
+					an indigenous Ghanaian company to achieve the local content 
+					requirement under these Regulations, commits an offence and 
+					is liable on summary conviction to a fine of not less than 
+					one hundred thousand penalty units and not more than two hundred 
+					and fifty thousand penalty units or to a term of imprisonment of
+					not less than one year and not more than two years or to both.
 				</p>
 			</h6>
 
@@ -489,14 +486,13 @@ function Miscellaneous({ data, setData, errors, setErrors }) {
 			<hr />
 			<FormGroup>
 				<FormLabel>
-					<span style={{ color: "red" }}>
-						this link doesn't trigger the file download yet
-					</span>
-					<a href="#" download>
+					<a href="/declarationPage.pdf" download>
 						Click to download
 					</a>{" "}
 					the declaration form to fill <br />
+					<br></br>
 					Please upload the filled and signed declaration form *
+					
 				</FormLabel>
 				<Errors errors={errors?.[fieldNames.declaration]} />
 				<FileInput

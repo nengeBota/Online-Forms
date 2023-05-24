@@ -3,13 +3,28 @@ import express from "express";
 import bodyparser from "body-parser";
 import cors from "cors";
 import { default as schema } from "../src/stateDescription.mjs";
-import pg from "pg";
+//import pg from "pg";
+import mongoose from 'mongoose';
 import formatAllErrorsForState from "../src/helpers/formatAllErrorsForState.js";
+import permitRouter from "./route.js"
 
-dotenv.config();
+
+dotenv.config({path:"../.env"});
 const server = express();
 server.use(bodyparser.json());
 server.use(cors());
+
+
+const uri = process.env.MONGODB_URI;
+//const uri="mongodb+srv://PermitAdmin:n6rsQss47jRcWcZC@clusterpc.wfmylaz.mongodb.net/PermitWebApp?retryWrites=true&w=majority"
+//connection to mongodb keeps failing
+//console.log(uri);
+mongoose.connect(uri).then(
+	() => { console.log("connection to atlas server successful") },
+	err => { console.log(err) }
+  );
+
+/** 
 const { Client } = pg;
 const client = new Client({
 	host: process.env.DB_HOST || "127.0.0.1",
@@ -18,9 +33,9 @@ const client = new Client({
 	password: process.env.DB_PASSWORD || "G0ldilocks",
 	database: process.env.DB_DATABASE || "tester",
 });
-
+*/
 // client.connect();
-
+/**
 server.get("/", (req, res) => {
 	console.log("this is what alvin says i should do");
 	return res.json({ message: "welcome" });
@@ -171,6 +186,8 @@ server.get("/categorylist", async (req, res) => {
  * this session is dependent on category & categoryList
  * from the category and categorylist session on the form, save the ids from the respective tables
  */
+
+/** 
 server.post("/applicantpermitcategory", async (req, res) => {
 	const {
 		applicantuniqueid,
@@ -401,5 +418,9 @@ server.post("/additionalinformation", async (req, res) => {
 		res.status(500).json({ error: error.toString() });
 	}
 });
+*/
+
+//const permitRouter = require('./route.js');
+server.use('/submit', permitRouter );
 
 server.listen(5001, () => console.log("success"));

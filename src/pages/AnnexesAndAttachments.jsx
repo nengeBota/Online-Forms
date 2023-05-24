@@ -85,8 +85,8 @@ function AnnexesAndAttachments({ data, setData, errors, setErrors }) {
 				<hr />
 
 				<p>
-					Please complete the relevant checklist to ensure that you
-					have attached all required documents
+					Please note that, the checked items are the files that you have attached to your application form. 
+					Please review and ensure you have attached all necessary documents. 
 				</p>
 
 				<Table>
@@ -536,6 +536,7 @@ function AnnexesAndAttachments({ data, setData, errors, setErrors }) {
 						</tr>
 					</tbody>
 				</Table>
+				<p>** Requirements 8-10 are not applicable to newly registered External companies</p>
 			</Form>
 			<br />
 			<br />
