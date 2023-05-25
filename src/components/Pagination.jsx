@@ -7,11 +7,12 @@ function Pagination({
 	pages = [],
 }) {
 	return (
-		<Wrapper>
+		<Wrapper id='noprint'>
 			{pages.map((_, index) => {
 				const pageValue = index + 1;
 				return (
-					<PaginationButton
+          <PaginationButton
+            id='noprint'
 						isCurrentPage={pageValue === currentPage}
 						onClick={() => onClick(pageValue)}
 						type="button"

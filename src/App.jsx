@@ -123,7 +123,8 @@ function App() {
 			<br />
 
 			<ButtonGroup>
-				<Button
+        <Button
+          id="noprint"
 					disabled={page === 1}
 					onClick={() => setPage((prev) => prev - 1)}
 					variant="secondary"
@@ -137,7 +138,8 @@ function App() {
 				) : null} */}
 
 				{page < pages.length ? (
-					<Button
+          <Button
+            id="noprint"
 						onClick={() => {
 							const validationFn = () =>
 								currentValidationFn(
@@ -152,7 +154,8 @@ function App() {
 						Next
 					</Button>
 				) : (
-					<Button
+            <Button
+              id="noprint"
 						variant="success"
 						onClick={() => {
 							if (!validate(data, setErrors, setPage)) {
@@ -229,7 +232,7 @@ function validate(data, setErrors, setPage) {
 
 	if (!error) return true;
 
-	const summary = {
+  const summary = {
 		page1: Boolean(page1Errors),
 		page2:
 			Boolean(page2Errors1) ||

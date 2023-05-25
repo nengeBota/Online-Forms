@@ -30,6 +30,7 @@ import {
 import { fieldNames, initialErrorState } from "../constants.mjs";
 import formatMiscellaneousErrors from "../helpers/formatMiscellaneousErrors.js";
 import InitialInfoScreen from "../pages/InitialInfoScreen.jsx";
+import Success from "../pages/SuccessScreen.jsx";
 
 //info: the position of the page determines its page number. so CorporateStructureAndServices is page 1 because its first in this array, etc..
 
@@ -356,6 +357,10 @@ const pages = [
       }
     },
   },
+  {
+    page: Success,
+    validate: () => true
+  }
 ];
 
 export default pages;

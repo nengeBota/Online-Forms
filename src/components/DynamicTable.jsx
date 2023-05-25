@@ -25,7 +25,7 @@ function DynamicTable({
 					{columns.map((each) => (
 						<th key={each.name}>{each.name}</th>
 					))}
-					<th>
+					<th id='noprint'>
 						<Button type="button" size="sm" onClick={addNewRow}>
 							Add
 						</Button>
@@ -66,7 +66,7 @@ function DynamicTable({
 								</td>
 							)
 						)}
-						<td>
+						<td id='noprint'>
 							{val.isEditing ? (
 								<Button
 									size="sm"
