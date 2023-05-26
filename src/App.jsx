@@ -122,7 +122,7 @@ function App() {
 			<br />
 			<br />
 
-			<ButtonGroup>
+			{page < pages.length ? <ButtonGroup>
         <Button
           id="noprint"
 					disabled={page === 1}
@@ -137,7 +137,7 @@ function App() {
 					<Button variant="secondary">Preview</Button>
 				) : null} */}
 
-				{page < pages.length ? (
+				{page < pages.length - 1 ? (
           <Button
             id="noprint"
 						onClick={() => {
@@ -169,7 +169,7 @@ function App() {
 						Submit
 					</Button>
 				)}
-			</ButtonGroup>
+			</ButtonGroup>: null}
 
 			<Pagination
 				validationSummary={errors?.summary}
