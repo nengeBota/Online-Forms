@@ -9,10 +9,14 @@ import {
 	permitCategoryOptions,
 	PERMIT_CATEGORIES,
 } from "../constants.mjs";
-import validations, { singleShareholder } from "../constants/fieldValidations";
+import validations, {
+	singleShareholder,
+	singlecontactPerson,
+} from "../constants/fieldValidations";
 import {
 	formatBeneficialFieldErrors,
 	formatSingleShareholderErrors,
+	formatSinglecontactPersonErrors,
 } from "../helpers/formatCorporateStructureAndServicesErrors";
 
 const getValue = (data) => {
@@ -360,6 +364,35 @@ function CorporateStructureAndServices({ data, setData, errors, setErrors }) {
 					/>
 
 					<Errors
+						testId={CORP.contactDetails.GHpost}
+						errors={getError(CORP.contactDetails._, errors)?.GHpost}
+					/>
+					<Form.Control
+						placeholder="Ghana Post GPS Address"
+						value={contactDetails?.GHpost}
+						onChange={(e) => {
+							onChange(
+								fieldNames.corporateStructureAndServices
+									.contactDetails._,
+								{
+									...contactDetails,
+									[fieldNames.corporateStructureAndServices
+										.contactDetails.GHpost]: e.target.value,
+								}
+							);
+						}}
+						onBlur={(e) => {
+							const { error } = getValidation(
+								f.contactDetails._
+							)?.GHpost?.safeParse(contactDetails.GHpost);
+							updateContactDetailsErrors(
+								CORP.contactDetails.GHpost,
+								formatError(error)
+							);
+						}}
+					/>
+
+					<Errors
 						testId={CORP.contactDetails.postalAddress}
 						errors={
 							getError(CORP.contactDetails._, errors)
@@ -389,102 +422,6 @@ function CorporateStructureAndServices({ data, setData, errors, setErrors }) {
 							);
 							updateContactDetailsErrors(
 								CORP.contactDetails.postalAddress,
-								formatError(error)
-							);
-						}}
-					/>
-
-					<Errors
-						testId={CORP.contactDetails?.city}
-						errors={getError(CORP.contactDetails._, errors)?.city}
-					/>
-					<Form.Control
-						placeholder="City"
-						value={contactDetails?.city}
-						onChange={(e) => {
-							onChange(
-								fieldNames.corporateStructureAndServices
-									.contactDetails._,
-								{
-									...contactDetails,
-									[fieldNames.corporateStructureAndServices
-										.contactDetails.city]: e.target.value,
-								}
-							);
-						}}
-						onBlur={() => {
-							const { error } = getValidation(
-								f.contactDetails._
-							)?.[f.contactDetails.city].safeParse(
-								contactDetails?.city
-							);
-							updateContactDetailsErrors(
-								CORP.contactDetails.city,
-								formatError(error)
-							);
-						}}
-					/>
-
-					<Errors
-						testId={CORP.contactDetails?.region}
-						errors={
-							getError(CORP.contactDetails?._, errors)?.region
-						}
-					/>
-					<Form.Control
-						placeholder="Region"
-						value={contactDetails?.region}
-						onChange={(e) => {
-							onChange(
-								fieldNames.corporateStructureAndServices
-									.contactDetails._,
-								{
-									...contactDetails,
-									[fieldNames.corporateStructureAndServices
-										.contactDetails.region]: e.target.value,
-								}
-							);
-						}}
-						onBlur={() => {
-							const { error } = getValidation(
-								f.contactDetails._
-							)?.[f.contactDetails.region].safeParse(
-								contactDetails?.region
-							);
-							updateContactDetailsErrors(
-								CORP.contactDetails.region,
-								formatError(error)
-							);
-						}}
-					/>
-
-					<Errors
-						testId={CORP.contactDetails?.country}
-						errors={
-							getError(CORP.contactDetails?._, errors)?.country
-						}
-					/>
-					<Form.Control
-						placeholder="Country"
-						value={contactDetails?.country}
-						onChange={(e) => {
-							onChange(
-								fieldNames.corporateStructureAndServices
-									.contactDetails._,
-								{
-									...contactDetails,
-									[fieldNames.corporateStructureAndServices
-										.contactDetails.country]:
-										e.target.value,
-								}
-							);
-						}}
-						onBlur={() => {
-							const { error } = getValidation(
-								f.contactDetails._
-							)?.country.safeParse(contactDetails?.country);
-							updateContactDetailsErrors(
-								CORP.contactDetails.country,
 								formatError(error)
 							);
 						}}
@@ -538,113 +475,91 @@ function CorporateStructureAndServices({ data, setData, errors, setErrors }) {
 						}}
 					/>
 				</Section>
+
 				<Section>
-					<Form.Label>Contact Person</Form.Label>
-					<Errors
-						testId={CORP.contactPerson?.name}
-						errors={getError(CORP.contactPerson._, errors)?.name}
-					/>
-					<Form.Control
-						placeholder="Contact Person"
-						value={contactPerson?.name}
-						onChange={(e) => {
+					<Form.Label>
+						Detail of contact Person or Persons (Note: JV companies
+						should include contact details for both parties)
+					</Form.Label>
+					<DynamicTable
+						columns={[
+							{
+								name: "Contact Person",
+								key: f.contactPerson.name,
+							},
+							{ name: "Email", key: f.contactPerson.email },
+							{
+								name: "Mobile Number",
+								key: f.contactPerson.phoneNumber,
+							},
+						]}
+						data={contactPerson}
+						onBlur={(index = 0) => {
+							const { error } = singlecontactPerson.safeParse(
+								data[
+									fieldNames.corporateStructureAndServices._
+								][f.contactPerson._][index]
+							);
+
+							errors[fieldNames.corporateStructureAndServices._][
+								f.contactPerson._
+							][index] = formatSinglecontactPersonErrors(
+								error?.format()
+							);
+
+							setErrors({ ...errors });
+						}}
+						addNewRow={() => {
 							onChange(
 								fieldNames.corporateStructureAndServices
 									.contactPerson._,
-								{
+								[
 									...contactPerson,
-									[fieldNames.corporateStructureAndServices
-										.contactPerson.name]: e.target.value,
-								}
+									{
+										name: "",
+										email: "",
+										mobileNumber: "",
+										isEditing: true,
+									},
+								]
 							);
 						}}
-						onBlur={() => {
-							const { error } = getValidation(
-								f.contactPerson._
-							)?.[f.contactPerson.name].safeParse(
-								contactPerson?.name
-							);
-							updateContactPersonErrors(
-								CORP.contactPerson.name,
-								formatError(error)
-							);
-						}}
-					/>
-				</Section>
-
-				<Section>
-					<Form.Label>Email of Contact Person</Form.Label>
-					<Errors
-						testId={CORP.contactPerson.email}
-						errors={getError(CORP.contactPerson._, errors)?.email}
-					/>
-					<Form.Control
-						required
-						placeholder="person@mail.com"
-						value={contactPerson?.email}
-						onChange={(e) => {
+						updateRow={(index, key, value) => {
+							contactPerson[index][key] = value;
 							onChange(
 								fieldNames.corporateStructureAndServices
 									.contactPerson._,
-								{
-									...contactPerson,
-									[fieldNames.corporateStructureAndServices
-										.contactPerson.email]: e.target.value,
-								}
+								[...contactPerson]
 							);
 						}}
-						onBlur={() => {
-							const { error } = getValidation(
-								f.contactPerson._
-							)?.[f.contactPerson.email].safeParse(
-								contactPerson?.email
-							);
-
-							updateContactPersonErrors(
-								CORP.contactPerson.email,
-								formatError(error)
-							);
-						}}
-					/>
-				</Section>
-				<Section>
-					<Form.Label>Mobile Number of Contact Person</Form.Label>
-					<Errors
-						testId={CORP.contactPerson.mobileNumber}
-						errors={
-							getError(CORP.contactPerson._, errors)?.mobileNumber
-						}
-					/>
-					<Form.Control
-						placeholder="23326262626"
-						value={contactPerson?.mobileNumber}
-						type="number"
-						onChange={(e) => {
+						saveRow={(index) => {
+							contactPerson[index]["isEditing"] = false;
 							onChange(
 								fieldNames.corporateStructureAndServices
 									.contactPerson._,
-								{
-									...contactPerson,
-									[fieldNames.corporateStructureAndServices
-										.contactPerson.mobileNumber]:
-										e.target.value,
-								}
+								[...contactPerson]
 							);
 						}}
-						onBlur={() => {
-							const { error } = getValidation(
-								f.contactPerson._
-							)?.[f.contactPerson.mobileNumber].safeParse(
-								contactPerson?.mobileNumber
-							);
-
-							updateContactPersonErrors(
-								CORP.contactPerson.mobileNumber,
-								formatError(error)
+						editRow={(index) => {
+							contactPerson[index]["isEditing"] = true;
+							onChange(
+								fieldNames.corporateStructureAndServices
+									.contactPerson._,
+								[...contactPerson]
 							);
 						}}
+						deleteRow={(index) => {
+							contactPerson.splice(index, 1);
+							onChange(
+								fieldNames.corporateStructureAndServices
+									.contactPerson._,
+								[...contactPerson]
+							);
+						}}
+						errors={errors?.[f._]?.[f.contactPerson._]}
 					/>
 				</Section>
+
 				<Section>
 					<Form.Label>
 						4. Name of Subsidiary or Affiliate (if applicable).{" "}
@@ -746,7 +661,7 @@ function CorporateStructureAndServices({ data, setData, errors, setErrors }) {
 								key: f.shareholders.nationality,
 							},
 							{
-								name: "Percentage",
+								name: "Percentage Share",
 								key: f.shareholders.percentage,
 							},
 						]}
@@ -829,7 +744,7 @@ function CorporateStructureAndServices({ data, setData, errors, setErrors }) {
 							{ name: "Beneficial", key: "name" },
 							{ name: "Address", key: "address" },
 							{ name: "Nationality", key: "nationality" },
-							{ name: "Percentage", key: "percentage" },
+							{ name: "Percentage Share", key: "percentage" },
 						]}
 						errors={
 							errors?.[

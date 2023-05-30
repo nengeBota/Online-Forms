@@ -69,7 +69,7 @@ function InitialInfoScreen() {
         <tbody>
           <tr>
             <td>6</td>
-            <td>signed Hsse Policy And Objectives</td>
+            <td>signed HSE Policy And Objectives</td>
           </tr>
         </tbody>
         <tbody>

@@ -31,29 +31,37 @@ const validations = {
 		[corporateStructureAndServices.applicantName]: nonEmptyString,
 		[corporateStructureAndServices.dateOfIncorporation]: dateBeforeToday,
 		[corporateStructureAndServices.placeOfIncorporation]: nonEmptyString,
+
 		[corporateStructureAndServices.contactDetails._]: {
 			[corporateStructureAndServices.contactDetails.officeAddress]:
 				nonEmptyString,
 			[corporateStructureAndServices.contactDetails.postalAddress]:
 				nonEmptyString,
-			[corporateStructureAndServices.contactDetails.city]: nonEmptyString,
-			[corporateStructureAndServices.contactDetails.region]:
-				nonEmptyString,
-			[corporateStructureAndServices.contactDetails.country]:
+			[corporateStructureAndServices.contactDetails.GHpost]:
 				nonEmptyString,
 		},
+
 		[corporateStructureAndServices.emailAddress]: z.string().email(),
 		[corporateStructureAndServices.website]: optional(
 			z.string().url({
 				message: "Invalid URL. Please ensure it includes http/https",
 			})
 		),
-		[corporateStructureAndServices.contactPerson._]: {
-			[corporateStructureAndServices.contactPerson.name]: nonEmptyString,
-			[corporateStructureAndServices.contactPerson.mobileNumber]:
-				nonEmptyString,
-			[corporateStructureAndServices.contactPerson.email]: nonEmptyString,
-		},
+		//made some changes here
+		[corporateStructureAndServices.contactPerson._]: z.array(
+			z.object({
+				[corporateStructureAndServices.contactPerson.name]:
+					nonEmptyString,
+				[corporateStructureAndServices.contactPerson.mobileNumber]:
+					nonEmptyString,
+				[corporateStructureAndServices.contactPerson.email]: z
+					.string()
+					.email(),
+				[corporateStructureAndServices.beneficial.isEditing]:
+					z.boolean(),
+			})
+		),
+
 		[corporateStructureAndServices.nameOfSubsidiaryOrAffiliate]:
 			optional(nonEmptyString),
 		[corporateStructureAndServices.nationalityOfAffiliate]:
@@ -184,6 +192,12 @@ const validations = {
 };
 
 export default validations;
+
+export const singlecontactPerson = z.object({
+	[corporateStructureAndServices.contactPerson.name]: nonEmptyString,
+	[corporateStructureAndServices.contactPerson.email]: nonEmptyString,
+	[corporateStructureAndServices.contactPerson.mobileNumber]: nonEmptyString,
+});
 
 export const singleShareholder = z.object({
 	[corporateStructureAndServices.shareholders.name]: nonEmptyString,

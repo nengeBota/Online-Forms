@@ -148,7 +148,7 @@ function FinancialCapability({ data, setData, errors, setErrors }) {
 								{each.text}
 							</p>
 						))}
-						<br />
+						
 						<div>Please upload documents as per your choice *</div>
 						<Errors
 							errors={getFinCapabilityErrors(
@@ -188,7 +188,7 @@ function FinancialCapability({ data, setData, errors, setErrors }) {
 							}}
 						/>
 					</li>
-
+							<br></br>
 					<li>
 						<div>
 							Indicate sources where applicant intends raising
@@ -243,11 +243,11 @@ function FinancialCapability({ data, setData, errors, setErrors }) {
 			</FormGroup>
 
 			<div>
-				<h4>B. Management and Technical Competencies</h4>
+				<h4>B. Key Personnel and Technical Competencies</h4>
 				<hr />
 				<FormGroup>
 					<div>
-						<div>3.a. Provide Organizational Chart</div>
+						<div>3. Provide Organizational Chart</div>
 						<Errors
 							errors={getMgtErrors(
 								fieldNames.mgtAndTechnicalCompetencies.orgChart,
@@ -290,7 +290,7 @@ function FinancialCapability({ data, setData, errors, setErrors }) {
 
 					<div>
 						<div>
-							b. Provide detailed information on the number of
+							4. Provide detailed information on the number of
 							staff and their expertise. (Include Name, Gender,
 							Position and Nationality of Staff). *
 						</div>
@@ -335,7 +335,7 @@ function FinancialCapability({ data, setData, errors, setErrors }) {
 					<br />
 					<div>
 						<div>
-							c. Indicate expertise to be sourced locally and
+							5. (this has to be removed) Indicate expertise to be sourced locally and
 							internationally. *
 						</div>
 
@@ -393,7 +393,7 @@ function FinancialCapability({ data, setData, errors, setErrors }) {
 					<br />
 					<div>
 						<div>
-							4. Indicate sources from which applicant proposes to
+							5. Indicate sources from which applicant proposes to
 							obtain equipment and other facilities to support
 							petroleum activities. *
 						</div>

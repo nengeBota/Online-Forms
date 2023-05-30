@@ -1,21 +1,21 @@
 import { fieldNames, PERMIT_CATEGORIES } from "../constants.mjs";
 
 export const SUMMARY_EXPLANATIONS = {
-  fix: 'Please fix the errors in the form',
-  fill: 'Please fill in the required fields',
-}
+	fix: "Please fix the errors in the form",
+	fill: "Please fill in the required fields",
+};
 
 const DEFAULT_SUMMARY = {
-  errorsExist: true,
-  message: SUMMARY_EXPLANATIONS.fill,
-}
+	errorsExist: true,
+	message: SUMMARY_EXPLANATIONS.fill,
+};
 
 const initialErrorState = {
-  summary:DEFAULT_SUMMARY,
+	summary: DEFAULT_SUMMARY,
 
 	// PAGE 1 - CORPORATE STRUCTURE AND SERVICES
-  [fieldNames.corporateStructureAndServices._]: {
-    summary: DEFAULT_SUMMARY,
+	[fieldNames.corporateStructureAndServices._]: {
+		summary: DEFAULT_SUMMARY,
 
 		[fieldNames.corporateStructureAndServices.applicantName]: [],
 		[fieldNames.corporateStructureAndServices.dateOfIncorporation]: [],
@@ -33,12 +33,21 @@ const initialErrorState = {
 		},
 		[fieldNames.corporateStructureAndServices.emailAddress]: [],
 		[fieldNames.corporateStructureAndServices.website]: [],
-		[fieldNames.corporateStructureAndServices.contactPerson._]: {
-			[fieldNames.corporateStructureAndServices.contactPerson.name]: [],
-			[fieldNames.corporateStructureAndServices.contactPerson
-				.mobileNumber]: [],
-    },
-    
+		
+		//edited here
+		[fieldNames.corporateStructureAndServices.contactPerson._]: [
+			{
+				[fieldNames.corporateStructureAndServices.contactPerson.name]:
+					[],
+				[fieldNames.corporateStructureAndServices.contactPerson
+					.mobileNumber]: [],
+				[fieldNames.corporateStructureAndServices.contactPerson.email]:
+					[],
+				[fieldNames.corporateStructureAndServices.contactPerson
+					.isEditing]: true,
+			},
+		],
+
 		[fieldNames.corporateStructureAndServices.nameOfSubsidiaryOrAffiliate]:
 			[],
 		[fieldNames.corporateStructureAndServices.nationalityOfAffiliate]: [],

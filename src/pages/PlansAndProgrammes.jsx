@@ -11,8 +11,6 @@ const getErrors = (field, errors) => {
 };
 
 function PlansAndProgrammes({ data, setData, errors, setErrors }) {
-	
-
 	const onChange = (field, value) => {
 		setData((prev) => ({
 			...prev,
@@ -75,11 +73,61 @@ function PlansAndProgrammes({ data, setData, errors, setErrors }) {
 					}}
 				/>
 			</FormGroup>
+
+			<FormGroup>
+				<FormLabel>
+					iii. Indicate expertise to be sourced locally and internationally.
+				</FormLabel>
+				<Errors errors={getErrors(fields.expertise, errors)} />
+				<FileInput
+					value={data[fields._][fields.expertise]}
+					onChange={(file) => {
+						setErrors((prev) => ({
+							...prev,
+							[fields._]: {
+								...prev[fields._],
+								[fields.expertise]: [],
+							},
+						}));
+						onChange(fields.expertise, file);
+					}}
+				/>
+			</FormGroup>
+
+			<FormGroup>
+				<FormLabel>
+					iv. GIPC Quotas obtained for expatriate work Permit.
+				</FormLabel>
+				<Errors errors={getErrors(fields.GIPCQuota, errors)} />
+				<FileInput
+					value={data[fields._][fields.GIPCQuota]}
+					onChange={(file) => {
+						setErrors((prev) => ({
+							...prev,
+							[fields._]: {
+								...prev[fields._],
+								[fields.GIPCQuota]: [],
+							},
+						}));
+						onChange(fields.GIPCQuota, file);
+					}}
+				/>
+			</FormGroup>
 			<br />
 
 			<FormGroup>
 				<FormLabel>
-					b. Technology Transfer Programme and Budget
+					b. Technology Transfer Programme and Budget <br />
+					The Technology Transfer Programme should outline
+					progressively how skills, know-how and technology shall be
+					transferred to the Indigenous Ghanaian Company or Ghanaian
+					employees in the indigenous Ghanaian company in the
+					following areas:
+					<span style={{ fontWeight: "bold" }}>
+						{" "}
+						i. Technical know-how, ii. Hardware and software, iii.
+						Organisational development{" "}
+					</span>
 				</FormLabel>
 				<Errors
 					errors={getErrors(
@@ -105,8 +153,9 @@ function PlansAndProgrammes({ data, setData, errors, setErrors }) {
 					}}
 				/>
 			</FormGroup>
-
+			<br />
 			<FormGroup>
+				<p style={{ color:"red", fontWeight: "bold" }}>Note: This section should be completed by JV companies only</p>
 				<FormLabel>
 					c. Training Programe and Budget - (Company's training
 					programme should reflect its line of business)
@@ -115,7 +164,7 @@ function PlansAndProgrammes({ data, setData, errors, setErrors }) {
 					errors={getErrors(fields.trainingProgramAndBudget, errors)}
 				/>
 				<FileInput
-                    value={data[fields._][fields.trainingProgramAndBudget]}
+					value={data[fields._][fields.trainingProgramAndBudget]}
 					onChange={(file) => {
 						setErrors((prev) => ({
 							...prev,
@@ -132,7 +181,7 @@ function PlansAndProgrammes({ data, setData, errors, setErrors }) {
 					}}
 				/>
 			</FormGroup>
-
+			<br />
 			<FormGroup>
 				<FormLabel>
 					d. Corporate Social Responsibility & Social Development
@@ -145,7 +194,9 @@ function PlansAndProgrammes({ data, setData, errors, setErrors }) {
 					)}
 				/>
 				<FileInput
-                    value={data[fields._][fields.csrAndSocialDevProgramAndBudget]}
+					value={
+						data[fields._][fields.csrAndSocialDevProgramAndBudget]
+					}
 					onChange={(file) => {
 						setErrors((prev) => ({
 							...prev,

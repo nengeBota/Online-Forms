@@ -63,13 +63,14 @@ function Miscellaneous({ data, setData, errors, setErrors }) {
 	return (
 		<Form>
 			<Heading>
-				Part Five - Health, Safety, Security And Environment
+				Part Five - Health, Safety And Environment
 			</Heading>
 			<hr />
 			<FormGroup>
 				<FormLabel>
-					Provide a signed copy of the Company's HSSE Policy and
-					Objectives *
+					Provide a signed copy of the Company's HSE Policy and
+					Objectives * <br/>
+					<span style={{fontWeight:"bold"}}>Kindly attach relevant certificates if any</span>
 				</FormLabel>
 				<Errors errors={getHsseErrors(errors)} />
 				<FileInput

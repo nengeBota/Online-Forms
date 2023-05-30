@@ -7,6 +7,21 @@ function getErrorValue(field, errors) {
 	return errors[field]?._errors || [];
 }
 
+export function formatSinglecontactPersonErrors(singlecontactPersonErrors) {
+	const each = singlecontactPersonErrors;
+
+	return {
+		[corporateStructure.contactPerson.name]:
+			each?.[corporateStructure.contactPerson.name]?._errors,
+		[corporateStructure.contactPerson.email]:
+			each?.[corporateStructure.contactPerson.email]?._errors,
+		[corporateStructure.contactPerson.mobileNumber]:
+			each?.[corporateStructure.contactPerson.mobileNumber]?._errors,
+		[corporateStructure.contactPerson.isEditing]:
+			each?.[corporateStructure.contactPerson.isEditing]?._errors,
+	};
+}
+
 export function formatSingleShareholderErrors(singleShareholderErrors) {
 	const each = singleShareholderErrors;
 
@@ -80,6 +95,7 @@ export default function formatCorporateStructureAndServicesErrors(
 			getErrorValue(corporateStructure.dateOfIncorporation, errors),
 		[fieldNames.corporateStructureAndServices.placeOfIncorporation]:
 			getErrorValue(corporateStructure.placeOfIncorporation, errors),
+
 		[fieldNames.corporateStructureAndServices.contactDetails._]: {
 			[fieldNames.corporateStructureAndServices.contactDetails
 				.officeAddress]:
@@ -91,17 +107,9 @@ export default function formatCorporateStructureAndServicesErrors(
 				errors?.[corporateStructure.contactDetails._]?.[
 					corporateStructure.contactDetails.postalAddress
 				]?._errors,
-			[fieldNames.corporateStructureAndServices.contactDetails.city]:
+				[fieldNames.corporateStructureAndServices.contactDetails.GHpost]:
 				errors?.[corporateStructure.contactDetails._]?.[
-					corporateStructure.contactDetails.city
-				]?._errors,
-			[fieldNames.corporateStructureAndServices.contactDetails.region]:
-				errors?.[corporateStructure.contactDetails._]?.[
-					corporateStructure.contactDetails.region
-				]?._errors,
-			[fieldNames.corporateStructureAndServices.contactDetails.country]:
-				errors?.[corporateStructure.contactDetails._]?.[
-					corporateStructure.contactDetails.country
+					corporateStructure.contactDetails.GHpost
 				]?._errors,
 		},
 		[fieldNames.corporateStructureAndServices.emailAddress]: getErrorValue(

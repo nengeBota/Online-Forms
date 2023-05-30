@@ -227,7 +227,7 @@ function AnnexesAndAttachments({ data, setData, errors, setErrors }) {
 						</tr>
 						<tr>
 							<td>
-								<div>5. Company Regulations</div>
+								<div>5. Company Regulations and Form 3 & Form 4</div>
 								<Errors
 									errors={getErrors(
 										fieldNames.checkList.companyRegulations,
@@ -258,7 +258,7 @@ function AnnexesAndAttachments({ data, setData, errors, setErrors }) {
 						</tr>
 						<tr>
 							<td>
-								<div>6. Signed HSSE Policy and Objectives</div>
+								<div>6. Signed HSE Policy and Objectives</div>
 								<Errors
 									errors={getErrors(
 										fieldNames.checkList

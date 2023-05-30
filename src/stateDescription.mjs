@@ -58,6 +58,7 @@ export const corporateStructureAndServicesDesc = z.object({
 			][corporateStructureFields.contactDetails.country],
 	}),
 
+	/** WE WILL COME BACK TO THIS
 	[corporateStructureAndServices.contactPerson._]: z.object({
 		[corporateStructureAndServices.contactPerson.name]:
 			corporateStructureValidations[
@@ -68,7 +69,9 @@ export const corporateStructureAndServicesDesc = z.object({
 				corporateStructureFields.contactPerson._
 			][corporateStructureFields.contactPerson.mobileNumber],
 	}),
+	 */
 });
+
 
 export const financialCapabilityDesc = z.object({
 	[fieldNames.finCapability.whatApplies]:

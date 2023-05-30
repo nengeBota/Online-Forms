@@ -8,7 +8,7 @@ export const FIN_CAPABILITY_WHAT_APPLIES_OPTIONS = {
 };
 
 // creating these so that they can be shared between miscFiles and checklist names
-const hssePolicyAndObj = "hssePolicyAndObj";
+const hssePolicyAndObj = "hsePolicyAndObj";
 const certificateOfIncorporation = "certificateOfIncorporation";
 const certificateToCommenceBusiness = "certificateToCommenceBusiness";
 const companyRegulationsDocument = "companyRegulationsDocument";
@@ -39,15 +39,20 @@ export const fieldNames = {
 			city: "city",
 			region: "region",
 			country: "country",
+			GHpost:"GHpost"
 		},
 		emailAddress: "emailAddress",
 		website: "website",
+
+		//made some change here
 		contactPerson: {
 			_: "contactPerson",
 			name: "name",
 			mobileNumber: "mobileNumber",
 			email: "email",
+			isEditing: "isEditing",
 		},
+
 		nameOfSubsidiaryOrAffiliate: "nameOfSubsidiaryOrAffiliate",
 		nationalityOfAffiliate: "nationalityOfAffiliate",
 		permitCategory: "permitCategory",
@@ -109,6 +114,8 @@ export const fieldNames = {
 		_: "orgDevProgramAndBudget",
 		orgDevStrategy: "orgDevStrategy",
 		employmentPlan: "employmentPlan",
+		expertise:"expertise",
+		GIPCQuota:"GIPCQuota",
 		techTransferProgramAndBudget: "techTransferProgramAndBudget",
 		trainingProgramAndBudget: "trainingProgramAndBudget",
 		csrAndSocialDevProgramAndBudget: "scrAndSocialDevProgramAndBudget",
@@ -223,6 +230,7 @@ export const initialErrorState = {
 		[fieldNames.corporateStructureAndServices.applicantName]: [],
 		[fieldNames.corporateStructureAndServices.dateOfIncorporation]: [],
 		[fieldNames.corporateStructureAndServices.placeOfIncorporation]: [],
+
 		[fieldNames.corporateStructureAndServices.contactDetails._]: {
 			[fieldNames.corporateStructureAndServices.contactDetails
 				.officeAddress]: [],
@@ -233,15 +241,26 @@ export const initialErrorState = {
 				[],
 			[fieldNames.corporateStructureAndServices.contactDetails.country]:
 				[],
+				[fieldNames.corporateStructureAndServices.contactDetails.GHpost]:
+				[],
 		},
+
 		[fieldNames.corporateStructureAndServices.emailAddress]: [],
 		[fieldNames.corporateStructureAndServices.website]: [],
-		[fieldNames.corporateStructureAndServices.contactPerson._]: {
-			[fieldNames.corporateStructureAndServices.contactPerson.name]: [],
-			[fieldNames.corporateStructureAndServices.contactPerson
-				.mobileNumber]: [],
-			[fieldNames.corporateStructureAndServices.contactPerson.email]: [],
-		},
+
+		//made some change here
+		[fieldNames.corporateStructureAndServices.contactPerson._]: [
+			{
+				[fieldNames.corporateStructureAndServices.contactPerson.name]:
+					[],
+				[fieldNames.corporateStructureAndServices.contactPerson
+					.mobileNumber]: [],
+				[fieldNames.corporateStructureAndServices.contactPerson.email]:
+					[],
+				[fieldNames.corporateStructureAndServices.contactPerson
+					.isEditing]: true,
+			},
+		],
 
 		[fieldNames.corporateStructureAndServices.nameOfSubsidiaryOrAffiliate]:
 			[],
@@ -322,6 +341,8 @@ export const initialErrorState = {
 	[fieldNames.orgDevProgramAndBudget._]: {
 		[fieldNames.orgDevProgramAndBudget.orgDevStrategy]: [],
 		[fieldNames.orgDevProgramAndBudget.employmentPlan]: [],
+		[fieldNames.orgDevProgramAndBudget.expertise]: [],
+		[fieldNames.orgDevProgramAndBudget.GIPCQuota]: [],
 		[fieldNames.orgDevProgramAndBudget.techTransferProgramAndBudget]: [],
 		[fieldNames.orgDevProgramAndBudget.trainingProgramAndBudget]: [],
 		[fieldNames.orgDevProgramAndBudget.csrAndSocialDevProgramAndBudget]: [],
@@ -398,16 +419,15 @@ export const initialErrorState = {
 		[fieldNames.checkList.certificateToCommenceBusiness]: [],
 		[fieldNames.checkList.companyRegulations]: [],
 		[fieldNames.checkList.signedHssePolicyAndObj]: [],
-		[fieldNames.checkList
-			.currentAuditedFinReportsOrProjectedRevenue]: [],
+		[fieldNames.checkList.currentAuditedFinReportsOrProjectedRevenue]: [],
 		[fieldNames.checkList.validTaxClearanceCertificate]: [],
 		[fieldNames.checkList.vatCertificate]: [],
 		[fieldNames.checkList.originalSsnitClearanceCertificate]: [],
 		[fieldNames.checkList.companyProfileAndBusinessPlan]: [],
-        [fieldNames.checkList.epaPermit]: [],
-        [fieldNames.checkList.airOperatorCertificate]: [],
-        [fieldNames.checkList.aviationLicense]: [],
-        [fieldNames.checkList.fdaHygieneCertificate]: [],
+		[fieldNames.checkList.epaPermit]: [],
+		[fieldNames.checkList.airOperatorCertificate]: [],
+		[fieldNames.checkList.aviationLicense]: [],
+		[fieldNames.checkList.fdaHygieneCertificate]: [],
 		[fieldNames.checkList.copyOfApplicationPackReceipt]: [],
 	},
 };
@@ -428,15 +448,23 @@ export const initialState = {
 				"",
 			[fieldNames.corporateStructureAndServices.contactDetails.country]:
 				"",
+				[fieldNames.corporateStructureAndServices.contactDetails.GHpost]:
+				"",
 		},
 		[fieldNames.corporateStructureAndServices.emailAddress]: "",
 		[fieldNames.corporateStructureAndServices.website]: "",
-		[fieldNames.corporateStructureAndServices.contactPerson._]: {
+
+		//some change here too
+		[fieldNames.corporateStructureAndServices.contactPerson._]: [
+			{
 			[fieldNames.corporateStructureAndServices.contactPerson.name]: "",
 			[fieldNames.corporateStructureAndServices.contactPerson
 				.mobileNumber]: "",
 			[fieldNames.corporateStructureAndServices.contactPerson.email]: "",
-		},
+			[fieldNames.corporateStructureAndServices.contactPerson
+				.isEditing]: true,
+		}
+	],
 
 		[fieldNames.corporateStructureAndServices.nameOfSubsidiaryOrAffiliate]:
 			"",
@@ -548,6 +576,18 @@ export const initialState = {
 				fileName: "",
 				file: "",
 			},
+		],
+		[fieldNames.orgDevProgramAndBudget.expertise]:[
+			{
+				fileName:"",
+				file:"",
+			}
+		],
+		[fieldNames.orgDevProgramAndBudget.GIPCQuota]:[
+			{
+				fileName:"",
+				file:"",
+			}
 		],
 		[fieldNames.orgDevProgramAndBudget.techTransferProgramAndBudget]: [
 			{
@@ -672,10 +712,10 @@ export const initialState = {
 		[fieldNames.checkList.vatCertificate]: false,
 		[fieldNames.checkList.originalSsnitClearanceCertificate]: false,
 		[fieldNames.checkList.companyProfileAndBusinessPlan]: false,
-        [fieldNames.checkList.EPAPermit]: false,
-        [fieldNames.checkList.airOperatorCertificate]: false,
-        [fieldNames.checkList.aviationLicense]: false,
-        [fieldNames.checkList.fdaHygieneCertificate]: false,
+		[fieldNames.checkList.EPAPermit]: false,
+		[fieldNames.checkList.airOperatorCertificate]: false,
+		[fieldNames.checkList.aviationLicense]: false,
+		[fieldNames.checkList.fdaHygieneCertificate]: false,
 		[fieldNames.checkList.copyOfApplicationPackReceipt]: false,
 	},
 };
@@ -786,32 +826,18 @@ export const permitCategoryOptions = {
 export const financialCapabilityOptions = [
 	{
 		value: FIN_CAPABILITY_WHAT_APPLIES_OPTIONS.newlyIncorporated,
-		text: `For newly incorporated companies, provide a three
-  year projected revenue for intended upstream oil and
-  gas activities.`,
+		text: `Newly incorporated company: Provide a three-year projected revenue for intended upstream oil and gas activities.`,
 	},
 	{
 		value: FIN_CAPABILITY_WHAT_APPLIES_OPTIONS.upstreamPetroleumIndustryOnly,
-		text: `For existing companies which undertake services
-  solely for the upstream petroleum industry, provide
-  Audited Financial Reports for the past three years`,
+		text: `Companies already operating solely in the upstream petroleum industry: Provide Audited Financial Reports for the previous financial year.`,
 	},
 	{
 		value: FIN_CAPABILITY_WHAT_APPLIES_OPTIONS.upstreamPetroleumIndustryAndOtherSectors,
-		text: `For existing companies which undertake services for
-  the upstream petroleum industry and other sectors,
-  in addition to Audited Financial Reports, provide
-  leter from Auditors showing your upstream oil and
-  gas revenue for the past year under audit.`,
+		text: `Companies which undertake services in the upstream petroleum industry and other sectors:  Provide Audited Financial Reports for the past year, and letter from your Auditors showing applicant’s upstream oil and gas revenue for the past year.`,
 	},
 	{
 		value: FIN_CAPABILITY_WHAT_APPLIES_OPTIONS.existingButNewToUpstreamPetroleumIndustry,
-		text: `For existing companies which are new to the upstream
-  petroleum industry (ie. Companies which have never
-  received a contract for service in the upstream
-  petroleum industry), provide Audited Financial
-  Report for the past year and a three year projected
-  revenue for intended upstream oil and gas
-  activities.`,
+		text: `For existing companies which are new to the upstream petroleum industry (ie. Companies which have never executed a contract or purchase order in the upstream petroleum industry): Provide Audited Financial Report for the past year and a three-year projected revenue for intended upstream oil and gas activities.`,
 	},
 ];
