@@ -72,7 +72,14 @@ export const fieldNames = {
 			percentage: "percentage",
 			isEditing: "isEditing",
 		},
-		executiveDirectors: "executiveDirectors",
+		executiveDirectors: {
+			_: "executiveDirectors",
+			name:"name",
+			email:"email",
+			contact:"contact",
+			nationality:"nationality",
+			position:"position"
+		},
 		activities: "activities",
 		corporateStructure: "corporateStructure",
 		description: "description",
@@ -218,12 +225,12 @@ export const NEW_VALUE_OF_SERVICE = {
 
 export const initialErrorState = {
 	summary: {
-		page1: false,
 		page2: false,
 		page3: false,
 		page4: false,
 		page5: false,
 		page6: false,
+		page7: false,
 	},
 	// PAGE 1 - CORPORATE STRUCTURE AND SERVICES
 	[fieldNames.corporateStructureAndServices._]: {
@@ -706,8 +713,7 @@ export const initialState = {
 		[fieldNames.checkList.certificateToCommenceBusiness]: false,
 		[fieldNames.checkList.companyRegulations]: false,
 		[fieldNames.checkList.signedHssePolicyAndObj]: false,
-		[fieldNames.checkList
-			.currentAuditedFinReportsOrProjectedRevenue]: false,
+		[fieldNames.checkList.currentAuditedFinReportsOrProjectedRevenue]: false,
 		[fieldNames.checkList.validTaxClearanceCertificate]: false,
 		[fieldNames.checkList.vatCertificate]: false,
 		[fieldNames.checkList.originalSsnitClearanceCertificate]: false,

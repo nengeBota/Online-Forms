@@ -12,11 +12,13 @@ import {
 import validations, {
 	singleShareholder,
 	singlecontactPerson,
+	singleexecutiveDirectors,
 } from "../constants/fieldValidations";
 import {
 	formatBeneficialFieldErrors,
 	formatSingleShareholderErrors,
 	formatSinglecontactPersonErrors,
+	formatSingleexecutiveDirectorsErrors
 } from "../helpers/formatCorporateStructureAndServicesErrors";
 
 const getValue = (data) => {
@@ -735,8 +737,8 @@ function CorporateStructureAndServices({ data, setData, errors, setErrors }) {
 				<Section>
 					<Form.Label>
 						7b. Beneficial Ownership - if shareholders in 7a. are
-						companies, please provide a list all individual
-						shareholders in the company stated in 7a.
+						companies, please provide a list of all individual
+						shareholders in the company as stated above.
 					</Form.Label>
 
 					<DynamicTable
@@ -820,36 +822,105 @@ function CorporateStructureAndServices({ data, setData, errors, setErrors }) {
 				</Section>
 				<Section>
 					<Form.Label>
-						8. List Executive Directors and Senior Management Team
+                    8. List Executive Directors and Senior Management Team
 						of the Company (Please do not list non-executive
 						directors)
 					</Form.Label>
-					<Errors
-						testId={CORP.executiveDirectors}
-						errors={getError(CORP.executiveDirectors, errors)}
-					/>
-					<Form.Control
-						as="textarea"
-						value={executiveDirectors}
-						onChange={(e) => {
+					<DynamicTable
+						columns={[
+							{
+								name: "Management Name",
+								key: f.executiveDirectors.name,
+							},
+							{ name: "Occupation", key: f.executiveDirectors.occupation },
+							{
+								name: "Email",
+								key: f.executiveDirectors.email,
+							},
+							{
+								name: "Contact",
+								key: f.executiveDirectors.contact,
+							},
+                            {
+								name: "Nationality",
+								key: f.executiveDirectors.nationality,
+							},
+                            {
+								name: "Position in Company",
+								key: f.executiveDirectors.position,
+							},
+                            
+						]}
+						data={executiveDirectors}
+						onBlur={(index = 0) => {
+							const { error } = singleexecutiveDirectors.safeParse(
+								data[
+									fieldNames.corporateStructureAndServices._
+								][f.executiveDirectors._][index]
+							);
+
+							errors[fieldNames.corporateStructureAndServices._][
+								f.executiveDirectors._
+							][index] = formatSingleexecutiveDirectorsErrors(
+								error?.format()
+							);
+
+							setErrors({ ...errors });
+						}}
+						addNewRow={() => {
 							onChange(
 								fieldNames.corporateStructureAndServices
-									.executiveDirectors,
-								e.target.value
+									.executiveDirectors._,
+								[
+									...executiveDirectors,
+									{
+										name: "",
+										occupation: "",
+										email: "",
+										contact: "",
+                                        nationality:"",
+                                        position:"",
+										isEditing: true,
+									},
+								]
 							);
 						}}
-						onBlur={() => {
-							const { error } = getValidation(
-								f.executiveDirectors
-							).safeParse(executiveDirectors);
-							updateErrors(
-								f.executiveDirectors,
-								formatError(error)
+						updateRow={(index, key, value) => {
+							executiveDirectors[index][key] = value;
+							onChange(
+								fieldNames.corporateStructureAndServices
+									.executiveDirectors._,
+								[...executiveDirectors]
 							);
 						}}
+						saveRow={(index) => {
+							executiveDirectors[index]["isEditing"] = false;
+							onChange(
+								fieldNames.corporateStructureAndServices
+									.executiveDirectors._,
+								[...executiveDirectors]
+							);
+						}}
+						editRow={(index) => {
+							executiveDirectors[index]["isEditing"] = true;
+							onChange(
+								fieldNames.corporateStructureAndServices
+									.executiveDirectors._,
+								[...executiveDirectors]
+							);
+						}}
+						deleteRow={(index) => {
+							executiveDirectors.splice(index, 1);
+							onChange(
+								fieldNames.corporateStructureAndServices
+									.executiveDirectors._,
+								[...executiveDirectors]
+							);
+						}}
+						errors={errors?.[f._]?.[f.executiveDirectors._]}
 					/>
 				</Section>
-
+				
 				<Section>
 					<Form.Label>9. Category of Permit applied for</Form.Label>
 					<br />

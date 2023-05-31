@@ -56,6 +56,30 @@ export function formatSingleBeneficiaryErrors(singleBeneficiaryErrors) {
 	};
 }
 
+export function formatSingleexecutiveDirectorsErrors(
+	singleexecutiveDirectorsErrors
+) {
+	const errors = singleexecutiveDirectorsErrors;
+
+	return {
+		[corporateStructure.executiveDirectors.name]:
+			errors?.[corporateStructure.executiveDirectors.name]?._errors,
+		[corporateStructure.executiveDirectors.occupation]:
+			errors?.[corporateStructure.executiveDirectors.occupation]?._errors,
+		[corporateStructure.executiveDirectors.email]:
+			errors?.[corporateStructure.executiveDirectors.email]?._errors,
+		[corporateStructure.executiveDirectors.contact]:
+			errors?.[corporateStructure.executiveDirectors.contact]?._errors,
+		[corporateStructure.executiveDirectors.nationality]:
+			errors?.[corporateStructure.executiveDirectors.nationality]
+				?._errors,
+		[corporateStructure.executiveDirectors.position]:
+			errors?.[corporateStructure.executiveDirectors.position]?._errors,
+		[corporateStructure.executiveDirectors.isEditing]:
+			errors?.[corporateStructure.executiveDirectors.isEditing]?._errors,
+	};
+}
+
 export function formatShareholdersErrors(shareholdersErrors, state) {
 	const errors = shareholdersErrors;
 	const shareholdersState =
@@ -107,7 +131,7 @@ export default function formatCorporateStructureAndServicesErrors(
 				errors?.[corporateStructure.contactDetails._]?.[
 					corporateStructure.contactDetails.postalAddress
 				]?._errors,
-				[fieldNames.corporateStructureAndServices.contactDetails.GHpost]:
+			[fieldNames.corporateStructureAndServices.contactDetails.GHpost]:
 				errors?.[corporateStructure.contactDetails._]?.[
 					corporateStructure.contactDetails.GHpost
 				]?._errors,

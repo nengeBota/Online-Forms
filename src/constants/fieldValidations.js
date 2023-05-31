@@ -97,7 +97,26 @@ const validations = {
 			})
 		),
 
-		[corporateStructureAndServices.executiveDirectors]: nonEmptyString,
+		[corporateStructureAndServices.executiveDirectors._]: z.array(
+			z.object({
+				[corporateStructureAndServices.executiveDirectors.name]:
+					nonEmptyString,
+				[corporateStructureAndServices.executiveDirectors.occupation]:
+					nonEmptyString,
+				[corporateStructureAndServices.executiveDirectors.email]: z
+					.string()
+					.email(),
+				[corporateStructureAndServices.executiveDirectors.contact]:
+					z.number,
+				[corporateStructureAndServices.executiveDirectors.nationality]:
+					nonEmptyString,
+				[corporateStructureAndServices.executiveDirectors.position]:
+					nonEmptyString,
+				[corporateStructureAndServices.executiveDirectors.isEditing]:
+					z.boolean(),
+			})
+		),
+
 		[corporateStructureAndServices.activities]: z
 			.array(nonEmptyString)
 			.length(2, { message: "Must select exactly two items" }),
@@ -195,7 +214,7 @@ export default validations;
 
 export const singlecontactPerson = z.object({
 	[corporateStructureAndServices.contactPerson.name]: nonEmptyString,
-	[corporateStructureAndServices.contactPerson.email]: nonEmptyString,
+	[corporateStructureAndServices.contactPerson.email]: z.string().email(),
 	[corporateStructureAndServices.contactPerson.mobileNumber]: nonEmptyString,
 });
 
@@ -204,6 +223,17 @@ export const singleShareholder = z.object({
 	[corporateStructureAndServices.shareholders.address]: nonEmptyString,
 	[corporateStructureAndServices.shareholders.nationality]: nonEmptyString,
 	[corporateStructureAndServices.shareholders.percentage]: percentage,
+});
+
+export const singleexecutiveDirectors = z.object({
+	[corporateStructureAndServices.executiveDirectors.name]: nonEmptyString,
+	[corporateStructureAndServices.executiveDirectors.occupation]:
+		nonEmptyString,
+	[corporateStructureAndServices.executiveDirectors.email]: z.string().email(),
+	[corporateStructureAndServices.executiveDirectors.contact]: z.number,
+	[corporateStructureAndServices.executiveDirectors.nationality]:
+		nonEmptyString,
+	[corporateStructureAndServices.executiveDirectors.position]: nonEmptyString,
 });
 
 export const singleServiceProvided = z.object({
