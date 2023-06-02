@@ -33,18 +33,18 @@ function DynamicTable({
 				</tr>
 			</thead>
 			<tbody>
-				{data.map((val, index) => (
+				{data?.map((val, index) => (
 					<tr key={index}>
 						{columns.map((col) =>
 							!val.isEditing ? (
-								<td>
+								<td key={col.key + index}>
 									<div>{val[col.key]}</div>
 									<Errors
 										errors={errors?.[index]?.[col.key]}
 									/>
 								</td>
 							) : (
-								<td>
+								<td key={col.key + index}>
 									<Form.Control
 										style={{
 											width: "100px",
