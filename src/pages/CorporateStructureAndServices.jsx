@@ -55,7 +55,7 @@ const getValue = (data) => {
 	const executiveDirectors =
 		fields[fieldNames.corporateStructureAndServices.executiveDirectors._];
 	const activities =
-		fields[fieldNames.corporateStructureAndServices.activities];
+    fields[fieldNames.corporateStructureAndServices.activities];
 
 	return {
 		applicantName,
@@ -76,6 +76,7 @@ const getValue = (data) => {
 		activities,
 	};
 };
+
 
 const getError = (field, errors) =>
 	errors[fieldNames.corporateStructureAndServices._][field];
