@@ -2,7 +2,7 @@ import { useState } from "react";
 import styled from "styled-components";
 import Pagination from "./components/Pagination";
 import Image from "react-bootstrap/Image";
-import { categoryfxn } from "./api";
+//import { categoryfxn } from "./api";
 import {
 	Button,
 	ButtonGroup,
@@ -52,7 +52,7 @@ async function submit(values, setShowSubmittingModal) {
 }
 
 function App() {
-	const [category, setcategory] = useState([]);
+	//const [category, setcategory] = useState([]);
 	const [page, setPage] = useState(1);
 
 	const [data, setData] = useState(initialState);
@@ -60,11 +60,12 @@ function App() {
 	const [showErrorModal, setShowErrorModal] = useState(false);
 	const [showSubmittingModal, setShowSubmittingModal] = useState(false);
 
+	/**
 	async function fetchcategories() {
 		const result = await categoryfxn();
 		setcategory(result.data);
 	}
-
+ */
 	// useEffect(function () {
 	// 	fetchcategories();
 	// }, []);

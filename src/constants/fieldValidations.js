@@ -57,7 +57,7 @@ const validations = {
 				[corporateStructureAndServices.contactPerson.email]: z
 					.string()
 					.email(),
-				[corporateStructureAndServices.beneficial.isEditing]:
+				[corporateStructureAndServices.contactPerson.isEditing]:
 					z.boolean(),
 			})
 		),
@@ -79,7 +79,7 @@ const validations = {
 					nonEmptyString,
 				[corporateStructureAndServices.shareholders.percentage]:
 					percentage,
-				[corporateStructureAndServices.beneficial.isEditing]:
+				[corporateStructureAndServices.shareholders.isEditing]:
 					z.boolean(),
 			})
 		),

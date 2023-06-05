@@ -53,7 +53,7 @@ const getValue = (data) => {
 	const permitCategory =
 		fields[fieldNames.corporateStructureAndServices.permitCategory];
 	const executiveDirectors =
-		fields[fieldNames.corporateStructureAndServices.executiveDirectors];
+		fields[fieldNames.corporateStructureAndServices.executiveDirectors._];
 	const activities =
 		fields[fieldNames.corporateStructureAndServices.activities];
 
@@ -197,6 +197,7 @@ function CorporateStructureAndServices({ data, setData, errors, setErrors }) {
 		}));
 	};
 
+	console.log(executiveDirectors);
 	return (
 		<div>
 			<Form>

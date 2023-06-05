@@ -110,21 +110,7 @@ function AnnexesAndAttachments({ data, setData, errors, setErrors }) {
 							<td>
 								<FormCheck
 									checked={coverPage}
-									// onChange={() => {
-									// 	setErrors((prev) => ({
-									// 		...prev,
-									// 		[fieldNames.checkList._]: {
-									// 			...prev[fieldNames.checkList._],
-									// 			[fieldNames.checkList
-									// 				.coverPage]: [],
-									// 		},
-									// 	}));
 
-									// 	onChange(
-									// 		fieldNames.checkList.coverPage,
-									// 		!coverPage
-									// 	);
-									// }}
 								/>
 							</td>
 						</tr>
@@ -141,21 +127,7 @@ function AnnexesAndAttachments({ data, setData, errors, setErrors }) {
 							<td>
 								<FormCheck
 									checked={applicationForm}
-									// onChange={() => {
-									// 	setErrors((prev) => ({
-									// 		...prev,
-									// 		[fieldNames.checkList._]: {
-									// 			...prev[fieldNames.checkList._],
-									// 			[fieldNames.checkList
-									// 				.applicationForm]: [],
-									// 		},
-									// 	}));
-									// 	onChange(
-									// 		fieldNames.checkList
-									// 			.applicationForm,
-									// 		!applicationForm
-									// 	);
-									// }}
+
 								/>
 							</td>
 						</tr>
@@ -173,22 +145,7 @@ function AnnexesAndAttachments({ data, setData, errors, setErrors }) {
 							<td>
 								<FormCheck
 									checked={certificateOfIncorporation}
-									// onChange={() => {
-									// 	setErrors((prev) => ({
-									// 		...prev,
-									// 		[fieldNames.checkList._]: {
-									// 			...prev[fieldNames.checkList._],
-									// 			[fieldNames.checkList
-									// 				.certificateOfIncorporation]:
-									// 				[],
-									// 		},
-									// 	}));
-									// 	onChange(
-									// 		fieldNames.checkList
-									// 			.certificateOfIncorporation,
-									// 		!certificateOfIncorporation
-									// 	);
-									// }}
+
 								/>
 							</td>
 						</tr>
@@ -206,22 +163,7 @@ function AnnexesAndAttachments({ data, setData, errors, setErrors }) {
 							<td>
 								<FormCheck
 									checked={certificateToCommenceBusiness}
-									// onChange={() => {
-									// 	setErrors((prev) => ({
-									// 		...prev,
-									// 		[fieldNames.checkList._]: {
-									// 			...prev[fieldNames.checkList._],
-									// 			[fieldNames.checkList
-									// 				.certificateToCommenceBusiness]:
-									// 				[],
-									// 		},
-									// 	}));
-									// 	onChange(
-									// 		fieldNames.checkList
-									// 			.certificateToCommenceBusiness,
-									// 		!certificateToCommenceBusiness
-									// 	);
-									// }}
+
 								/>
 							</td>
 						</tr>
@@ -238,21 +180,7 @@ function AnnexesAndAttachments({ data, setData, errors, setErrors }) {
 							<td>
 								<FormCheck
 									checked={companyRegulations}
-									// onChange={() => {
-									// 	setErrors((prev) => ({
-									// 		...prev,
-									// 		[fieldNames.checkList._]: {
-									// 			...prev[fieldNames.checkList._],
-									// 			[fieldNames.checkList
-									// 				.companyRegulations]: [],
-									// 		},
-									// 	}));
-									// 	onChange(
-									// 		fieldNames.checkList
-									// 			.companyRegulations,
-									// 		!companyRegulations
-									// 	);
-									// }}
+
 								/>
 							</td>
 						</tr>
@@ -270,22 +198,7 @@ function AnnexesAndAttachments({ data, setData, errors, setErrors }) {
 							<td>
 								<FormCheck
 									checked={signedHssePolicyAndObj}
-									// onChange={() => {
-									// 	setErrors((prev) => ({
-									// 		...prev,
-									// 		[fieldNames.checkList._]: {
-									// 			...prev[fieldNames.checkList._],
-									// 			[fieldNames.checkList
-									// 				.signedHssePolicyAndObj]:
-									// 				[],
-									// 		},
-									// 	}));
-									// 	onChange(
-									// 		fieldNames.checkList
-									// 			.signedHssePolicyAndObj,
-									// 		!signedHssePolicyAndObj
-									// 	);
-									// }}
+
 								/>
 							</td>
 						</tr>
@@ -309,22 +222,7 @@ function AnnexesAndAttachments({ data, setData, errors, setErrors }) {
 									checked={
 										currentAuditedFinReportsOrProjectedRevenue
 									}
-									// onChange={() => {
-									// 	setErrors((prev) => ({
-									// 		...prev,
-									// 		[fieldNames.checkList._]: {
-									// 			...prev[fieldNames.checkList._],
-									// 			[fieldNames.checkList
-									// 				.currentAuditedFinReportsOrProjectedRevenue]:
-									// 				[],
-									// 		},
-									// 	}));
-									// 	onChange(
-									// 		fieldNames.checkList
-									// 			.currentAuditedFinReportsOrProjectedRevenue,
-									// 		!currentAuditedFinReportsOrProjectedRevenue
-									// 	);
-									// }}
+
 								/>
 							</td>
 						</tr>
@@ -345,22 +243,7 @@ function AnnexesAndAttachments({ data, setData, errors, setErrors }) {
 							<td>
 								<FormCheck
 									checked={validTaxClearanceCertificate}
-									// onChange={() => {
-									// 	setErrors((prev) => ({
-									// 		...prev,
-									// 		[fieldNames.checkList._]: {
-									// 			...prev[fieldNames.checkList._],
-									// 			[fieldNames.checkList
-									// 				.validTaxClearanceCertificate]:
-									// 				[],
-									// 		},
-									// 	}));
-									// 	onChange(
-									// 		fieldNames.checkList
-									// 			.validTaxClearanceCertificate,
-									// 		!validTaxClearanceCertificate
-									// 	);
-									// }}
+
 								/>
 							</td>
 						</tr>
@@ -377,20 +260,7 @@ function AnnexesAndAttachments({ data, setData, errors, setErrors }) {
 							<td>
 								<FormCheck
 									checked={vatCertificate}
-									// onChange={() => {
-									// 	setErrors((prev) => ({
-									// 		...prev,
-									// 		[fieldNames.checkList._]: {
-									// 			...prev[fieldNames.checkList._],
-									// 			[fieldNames.checkList
-									// 				.vatCertificate]: [],
-									// 		},
-									// 	}));
-									// 	onChange(
-									// 		fieldNames.checkList.vatCertificate,
-									// 		!vatCertificate
-									// 	);
-									// }}
+
 								/>
 							</td>
 						</tr>
@@ -411,22 +281,7 @@ function AnnexesAndAttachments({ data, setData, errors, setErrors }) {
 							<td>
 								<FormCheck
 									checked={originalSsnitClearanceCertificate}
-									// onChange={() => {
-									// 	setErrors((prev) => ({
-									// 		...prev,
-									// 		[fieldNames.checkList._]: {
-									// 			...prev[fieldNames.checkList._],
-									// 			[fieldNames.checkList
-									// 				.originalSsnitClearanceCertificate]:
-									// 				[],
-									// 		},
-									// 	}));
-									// 	onChange(
-									// 		fieldNames.checkList
-									// 			.originalSsnitClearanceCertificate,
-									// 		!originalSsnitClearanceCertificate
-									// 	);
-									// }}
+	
 								/>
 							</td>
 						</tr>
@@ -444,22 +299,7 @@ function AnnexesAndAttachments({ data, setData, errors, setErrors }) {
 							<td>
 								<FormCheck
 									checked={companyProfileandBusinessPlan}
-									// onChange={() => {
-									// 	setErrors((prev) => ({
-									// 		...prev,
-									// 		[fieldNames.checkList._]: {
-									// 			...prev[fieldNames.checkList._],
-									// 			[fieldNames.checkList
-									// 				.companyProfileAndBusinessPlan]:
-									// 				[],
-									// 		},
-									// 	}));
-									// 	onChange(
-									// 		fieldNames.checkList
-									// 			.companyProfileAndBusinessPlan,
-									// 		!companyProfileandBusinessPlan
-									// 	);
-									// }}
+	
 								/>
 							</td>
 						</tr>
@@ -515,22 +355,7 @@ function AnnexesAndAttachments({ data, setData, errors, setErrors }) {
 							<td>
 								<FormCheck
 									checked={copyOfApplicationPackReceipt}
-									// onChange={() => {
-									// 	setErrors((prev) => ({
-									// 		...prev,
-									// 		[fieldNames.checkList._]: {
-									// 			...prev[fieldNames.checkList._],
-									// 			[fieldNames.checkList
-									// 				.copyOfApplicationPackReceipt]:
-									// 				[],
-									// 		},
-									// 	}));
-									// 	onChange(
-									// 		fieldNames.checkList
-									// 			.copyOfApplicationPackReceipt,
-									// 		!copyOfApplicationPackReceipt
-									// 	);
-									// }}
+			
 								/>
 							</td>
 						</tr>

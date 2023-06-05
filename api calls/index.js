@@ -16,9 +16,7 @@ server.use(cors());
 
 
 const uri = process.env.MONGODB_URI;
-//const uri="mongodb+srv://PermitAdmin:n6rsQss47jRcWcZC@clusterpc.wfmylaz.mongodb.net/PermitWebApp?retryWrites=true&w=majority"
-//connection to mongodb keeps failing
-//console.log(uri);
+
 mongoose.connect(uri).then(
 	() => { console.log("connection to atlas server successful") },
 	err => { console.log(err) }

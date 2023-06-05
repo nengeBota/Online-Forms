@@ -39,7 +39,7 @@ export const fieldNames = {
 			city: "city",
 			region: "region",
 			country: "country",
-			GHpost:"GHpost"
+			GHpost: "GHpost",
 		},
 		emailAddress: "emailAddress",
 		website: "website",
@@ -74,11 +74,12 @@ export const fieldNames = {
 		},
 		executiveDirectors: {
 			_: "executiveDirectors",
-			name:"name",
-			email:"email",
-			contact:"contact",
-			nationality:"nationality",
-			position:"position"
+			name: "name",
+			email: "email",
+			contact: "contact",
+			nationality: "nationality",
+			position: "position",
+			isEditing: "isEditing",
 		},
 		activities: "activities",
 		corporateStructure: "corporateStructure",
@@ -121,8 +122,8 @@ export const fieldNames = {
 		_: "orgDevProgramAndBudget",
 		orgDevStrategy: "orgDevStrategy",
 		employmentPlan: "employmentPlan",
-		expertise:"expertise",
-		GIPCQuota:"GIPCQuota",
+		expertise: "expertise",
+		GIPCQuota: "GIPCQuota",
 		techTransferProgramAndBudget: "techTransferProgramAndBudget",
 		trainingProgramAndBudget: "trainingProgramAndBudget",
 		csrAndSocialDevProgramAndBudget: "scrAndSocialDevProgramAndBudget",
@@ -225,12 +226,12 @@ export const NEW_VALUE_OF_SERVICE = {
 
 export const initialErrorState = {
 	summary: {
+		page1: false,
 		page2: false,
 		page3: false,
 		page4: false,
 		page5: false,
 		page6: false,
-		page7: false,
 	},
 	// PAGE 1 - CORPORATE STRUCTURE AND SERVICES
 	[fieldNames.corporateStructureAndServices._]: {
@@ -248,7 +249,7 @@ export const initialErrorState = {
 				[],
 			[fieldNames.corporateStructureAndServices.contactDetails.country]:
 				[],
-				[fieldNames.corporateStructureAndServices.contactDetails.GHpost]:
+			[fieldNames.corporateStructureAndServices.contactDetails.GHpost]:
 				[],
 		},
 
@@ -301,7 +302,24 @@ export const initialErrorState = {
 					.isEditing]: true,
 			},
 		],
-		[fieldNames.corporateStructureAndServices.executiveDirectors]: [],
+		[fieldNames.corporateStructureAndServices.executiveDirectors]: [
+			{
+				[fieldNames.corporateStructureAndServices.executiveDirectors
+					.name]: [],
+				[fieldNames.corporateStructureAndServices.executiveDirectors
+					.occupation]: [],
+				[fieldNames.corporateStructureAndServices.executiveDirectors
+					.email]: [],
+				[fieldNames.corporateStructureAndServices.executiveDirectors
+					.contact]: [],
+				[fieldNames.corporateStructureAndServices.executiveDirectors
+					.nationality]: [],
+				[fieldNames.corporateStructureAndServices.executiveDirectors
+					.position]: [],
+				[fieldNames.corporateStructureAndServices.executiveDirectors
+					.isEditing]: true,
+			},
+		],
 		[fieldNames.corporateStructureAndServices.activities]: [],
 		[fieldNames.corporateStructureAndServices.corporateStructure]: [],
 		[fieldNames.corporateStructureAndServices.description]: [],
@@ -455,7 +473,7 @@ export const initialState = {
 				"",
 			[fieldNames.corporateStructureAndServices.contactDetails.country]:
 				"",
-				[fieldNames.corporateStructureAndServices.contactDetails.GHpost]:
+			[fieldNames.corporateStructureAndServices.contactDetails.GHpost]:
 				"",
 		},
 		[fieldNames.corporateStructureAndServices.emailAddress]: "",
@@ -464,14 +482,16 @@ export const initialState = {
 		//some change here too
 		[fieldNames.corporateStructureAndServices.contactPerson._]: [
 			{
-			[fieldNames.corporateStructureAndServices.contactPerson.name]: "",
-			[fieldNames.corporateStructureAndServices.contactPerson
-				.mobileNumber]: "",
-			[fieldNames.corporateStructureAndServices.contactPerson.email]: "",
-			[fieldNames.corporateStructureAndServices.contactPerson
-				.isEditing]: true,
-		}
-	],
+				[fieldNames.corporateStructureAndServices.contactPerson.name]:
+					"",
+				[fieldNames.corporateStructureAndServices.contactPerson
+					.mobileNumber]: "",
+				[fieldNames.corporateStructureAndServices.contactPerson.email]:
+					"",
+				[fieldNames.corporateStructureAndServices.contactPerson
+					.isEditing]: true,
+			},
+		],
 
 		[fieldNames.corporateStructureAndServices.nameOfSubsidiaryOrAffiliate]:
 			"",
@@ -505,7 +525,24 @@ export const initialState = {
 					.isEditing]: true,
 			},
 		],
-		[fieldNames.corporateStructureAndServices.executiveDirectors]: "",
+		[fieldNames.corporateStructureAndServices.executiveDirectors._]: [
+			{
+				[fieldNames.corporateStructureAndServices.executiveDirectors
+					.name]: "",
+				[fieldNames.corporateStructureAndServices.executiveDirectors
+					.occupation]: "",
+				[fieldNames.corporateStructureAndServices.executiveDirectors
+					.email]: "",
+				[fieldNames.corporateStructureAndServices.executiveDirectors
+					.contact]: "",
+				[fieldNames.corporateStructureAndServices.executiveDirectors
+					.nationality]: "",
+				[fieldNames.corporateStructureAndServices.executiveDirectors
+					.position]: "",
+				[fieldNames.corporateStructureAndServices.executiveDirectors
+					.isEditing]: true,
+			},
+		],
 		[fieldNames.corporateStructureAndServices.activities]: [],
 		[fieldNames.corporateStructureAndServices.corporateStructure]: [
 			{
@@ -584,17 +621,17 @@ export const initialState = {
 				file: "",
 			},
 		],
-		[fieldNames.orgDevProgramAndBudget.expertise]:[
+		[fieldNames.orgDevProgramAndBudget.expertise]: [
 			{
-				fileName:"",
-				file:"",
-			}
+				fileName: "",
+				file: "",
+			},
 		],
-		[fieldNames.orgDevProgramAndBudget.GIPCQuota]:[
+		[fieldNames.orgDevProgramAndBudget.GIPCQuota]: [
 			{
-				fileName:"",
-				file:"",
-			}
+				fileName: "",
+				file: "",
+			},
 		],
 		[fieldNames.orgDevProgramAndBudget.techTransferProgramAndBudget]: [
 			{
@@ -713,7 +750,8 @@ export const initialState = {
 		[fieldNames.checkList.certificateToCommenceBusiness]: false,
 		[fieldNames.checkList.companyRegulations]: false,
 		[fieldNames.checkList.signedHssePolicyAndObj]: false,
-		[fieldNames.checkList.currentAuditedFinReportsOrProjectedRevenue]: false,
+		[fieldNames.checkList
+			.currentAuditedFinReportsOrProjectedRevenue]: false,
 		[fieldNames.checkList.validTaxClearanceCertificate]: false,
 		[fieldNames.checkList.vatCertificate]: false,
 		[fieldNames.checkList.originalSsnitClearanceCertificate]: false,
