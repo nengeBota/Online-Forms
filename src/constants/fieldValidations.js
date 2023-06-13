@@ -4,6 +4,7 @@ import {
 	FIN_CAPABILITY_WHAT_APPLIES_OPTIONS,
 	PERMIT_CATEGORIES,
 } from "../constants.mjs";
+import {localContentFieldValidations} from "../helpers/localContent/index.js";
 // import { file } from "../stateDescription.mjs";
 // import { dateBeforeToday, file, nonEmptyString } from "../stateDescription.mjs";
 
@@ -156,43 +157,8 @@ const validations = {
 			})
 		),
 	},
-	[fieldNames.localContent._]: {
-		[fieldNames.localContent.percentageOfGhanaianParticipation]:
-			positiveNumber,
-		[fieldNames.localContent.ghanaianMgtStaffBreakdown]: positiveNumber,
-		[fieldNames.localContent.foreignMgtStaffBreakdown]: positiveNumber,
-		[fieldNames.localContent.totalMgtStaffBreakdown]: positiveNumber,
-		[fieldNames.localContent.ghanaianOtherStaffBreakdown]: positiveNumber,
-		[fieldNames.localContent.foreignOtherStaffBreakdown]: positiveNumber,
-		[fieldNames.localContent.totalOtherStaffBreakdown]: positiveNumber,
-		[fieldNames.localContent.infraExpenditure]: positiveNumber,
-		[fieldNames.localContent.rawMaterials]: nonEmptyString,
-		[fieldNames.localContent.ghanaianFinishedGoods]: nonEmptyString,
-		[fieldNames.localContent.valueOfServiceReceived._]: z.array(
-			z.object({
-				[fieldNames.localContent.valueOfServiceReceived.isEditing]:
-					z.boolean(),
-				[fieldNames.localContent.valueOfServiceReceived.typeOfService]:
-					nonEmptyString,
-				[fieldNames.localContent.valueOfServiceReceived.contractSum]:
-					positiveNumber,
-				[fieldNames.localContent.valueOfServiceReceived
-					.nameOfClientCompany]: nonEmptyString,
-			})
-		),
-		[fieldNames.localContent.valueOfServiceProvided._]: z.array(
-			z.object({
-				[fieldNames.localContent.valueOfServiceProvided.isEditing]:
-					z.boolean(),
-				[fieldNames.localContent.valueOfServiceProvided.typeOfService]:
-					nonEmptyString,
-				[fieldNames.localContent.valueOfServiceProvided.contractSum]:
-					positiveNumber,
-				[fieldNames.localContent.valueOfServiceProvided
-					.nameOfClientCompany]: nonEmptyString,
-			})
-		),
-	},
+	[fieldNames.localContent._]: localContentFieldValidations,
+
 	[fieldNames.miscFiles._]: {
 		[fieldNames.miscFiles.certificateOfIncorporation]: file,
 		[fieldNames.miscFiles.certificateToCommenceBusiness]: file,
@@ -229,29 +195,49 @@ export const singleexecutiveDirectors = z.object({
 	[corporateStructureAndServices.executiveDirectors.name]: nonEmptyString,
 	[corporateStructureAndServices.executiveDirectors.occupation]:
 		nonEmptyString,
-	[corporateStructureAndServices.executiveDirectors.email]: z.string().email(),
+	[corporateStructureAndServices.executiveDirectors.email]: z
+		.string()
+		.email(),
 	[corporateStructureAndServices.executiveDirectors.contact]: z.number,
 	[corporateStructureAndServices.executiveDirectors.nationality]:
 		nonEmptyString,
 	[corporateStructureAndServices.executiveDirectors.position]: nonEmptyString,
 });
 
-export const singleServiceProvided = z.object({
-	[fieldNames.localContent.valueOfServiceProvided.isEditing]: z.boolean(),
-	[fieldNames.localContent.valueOfServiceProvided.typeOfService]:
-		nonEmptyString,
-	[fieldNames.localContent.valueOfServiceProvided.contractSum]:
-		positiveNumber,
-	[fieldNames.localContent.valueOfServiceProvided.nameOfClientCompany]:
-		nonEmptyString,
+export const singleServiceRendered = z.object({
+	serviceRecipient: nonEmptyString,
+	scopeOfWork: nonEmptyString,
+	contractStartDate: nonEmptyString,
+	contractEndDate: nonEmptyString,
+	contractValue: nonEmptyString,
+	paymentsReceivedInLast12Months: nonEmptyString,
 });
 
 export const singleServiceReceived = z.object({
-	[fieldNames.localContent.valueOfServiceReceived.isEditing]: z.boolean(),
-	[fieldNames.localContent.valueOfServiceReceived.typeOfService]:
-		nonEmptyString,
-	[fieldNames.localContent.valueOfServiceReceived.contractSum]:
-		positiveNumber,
-	[fieldNames.localContent.valueOfServiceReceived.nameOfClientCompany]:
-		nonEmptyString,
+	serviceProvider: nonEmptyString,
+	scopeOfWork: nonEmptyString,
+	contractStartDate: nonEmptyString,
+	contractEndDate: nonEmptyString,
+	contractValue: nonEmptyString,
+	paymentsReceivedInLast12Months: nonEmptyString,
 });
+
+// export const singleServiceProvided = z.object({
+// 	[fieldNames.localContent.valueOfServiceProvided.isEditing]: z.boolean(),
+// 	[fieldNames.localContent.valueOfServiceProvided.typeOfService]:
+// 		nonEmptyString,
+// 	[fieldNames.localContent.valueOfServiceProvided.contractSum]:
+// 		positiveNumber,
+// 	[fieldNames.localContent.valueOfServiceProvided.nameOfClientCompany]:
+// 		nonEmptyString,
+// });
+
+// export const singleServiceReceived = z.object({
+// 	[fieldNames.localContent.valueOfServiceReceived.isEditing]: z.boolean(),
+// 	[fieldNames.localContent.valueOfServiceReceived.typeOfService]:
+// 		nonEmptyString,
+// 	[fieldNames.localContent.valueOfServiceReceived.contractSum]:
+// 		positiveNumber,
+// 	[fieldNames.localContent.valueOfServiceReceived.nameOfClientCompany]:
+// 		nonEmptyString,
+// });

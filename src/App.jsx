@@ -27,7 +27,6 @@ import state, {
 	orgDevProgramAndBudgetDesc,
 } from "./stateDescription.mjs";
 import formatAllErrorsForState from "./helpers/formatAllErrorsForState";
-
 import pages from "./constants/pages";
 
 async function submit(values, setShowSubmittingModal) {
@@ -52,22 +51,12 @@ async function submit(values, setShowSubmittingModal) {
 }
 
 function App() {
-	const [category, setcategory] = useState([]);
-	const [page, setPage] = useState(1);
-
+	const [page, setPage] = useState(5);
 	const [data, setData] = useState(initialState);
 	const [errors, setErrors] = useState(initialErrorState);
 	const [showErrorModal, setShowErrorModal] = useState(false);
 	const [showSubmittingModal, setShowSubmittingModal] = useState(false);
 
-	async function fetchcategories() {
-		const result = await categoryfxn();
-		setcategory(result.data);
-	}
-
-	// useEffect(function () {
-	// 	fetchcategories();
-	// }, []);
 
 	const CurrentPage = pages[page - 1]?.page;
 	const currentValidationFn = pages[page - 1]?.validate;

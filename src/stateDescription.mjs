@@ -5,6 +5,7 @@ import {
 	PERMIT_CATEGORIES,
 } from "./constants.mjs";
 import validations from "./constants/fieldValidations.js";
+import localContentSchema from "./helpers/localContent/localContent.schema.js";
 
 export const nonEmptyString = z.string().min(1, { message: "Required" });
 export const file = z.array(
@@ -122,54 +123,8 @@ export const orgDevProgramAndBudgetDesc = z.object({
 	[fieldNames.orgDevProgramAndBudget.trainingProgramAndBudget]: file,
 	[fieldNames.orgDevProgramAndBudget.csrAndSocialDevProgramAndBudget]: file,
 });
-export const localContentDesc = z.object({
-	[fieldNames.localContent.percentageOfGhanaianParticipation]:
-		getLocalContentFieldValidation(
-			fieldNames.localContent.percentageOfGhanaianParticipation
-		),
-	[fieldNames.localContent.ghanaianMgtStaffBreakdown]:
-		getLocalContentFieldValidation(
-			fieldNames.localContent.ghanaianMgtStaffBreakdown
-		),
-	[fieldNames.localContent.foreignMgtStaffBreakdown]:
-		getLocalContentFieldValidation(
-			fieldNames.localContent.foreignMgtStaffBreakdown
-		),
-	[fieldNames.localContent.totalMgtStaffBreakdown]:
-		getLocalContentFieldValidation(
-			fieldNames.localContent.totalMgtStaffBreakdown
-		),
-	[fieldNames.localContent.ghanaianOtherStaffBreakdown]:
-		getLocalContentFieldValidation(
-			fieldNames.localContent.ghanaianOtherStaffBreakdown
-		),
-	[fieldNames.localContent.foreignOtherStaffBreakdown]:
-		getLocalContentFieldValidation(
-			fieldNames.localContent.foreignOtherStaffBreakdown
-		),
-	[fieldNames.localContent.totalOtherStaffBreakdown]:
-		getLocalContentFieldValidation(
-			fieldNames.localContent.totalOtherStaffBreakdown
-		),
-	[fieldNames.localContent.infraExpenditure]: getLocalContentFieldValidation(
-		fieldNames.localContent.infraExpenditure
-	),
-	[fieldNames.localContent.rawMaterials]: getLocalContentFieldValidation(
-		fieldNames.localContent.rawMaterials
-	),
-	[fieldNames.localContent.ghanaianFinishedGoods]:
-		getLocalContentFieldValidation(
-			fieldNames.localContent.ghanaianFinishedGoods
-		),
-	[fieldNames.localContent.valueOfServiceReceived._]:
-		getLocalContentFieldValidation(
-			fieldNames.localContent.valueOfServiceReceived._
-		),
-	[fieldNames.localContent.valueOfServiceProvided._]:
-		getLocalContentFieldValidation(
-			fieldNames.localContent.valueOfServiceProvided._
-		),
-});
+export const localContentDesc = localContentSchema;
+
 export const healthSafetySecurityEnvDesc = z.object({
 	[fieldNames.healthSafetySecurityEnv.hssePolicyAndObj]: file,
 });
@@ -252,7 +207,7 @@ const state = z.object({
 
 	[fieldNames.orgDevProgramAndBudget._]: orgDevProgramAndBudgetDesc,
 
-	[fieldNames.localContent._]: localContentDesc,
+	[fieldNames.localContent._]: localContentSchema,
 
 	[fieldNames.healthSafetySecurityEnv._]: healthSafetySecurityEnvDesc,
 

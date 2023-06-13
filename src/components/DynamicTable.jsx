@@ -19,7 +19,7 @@ function DynamicTable({
 	errors,
 }) {
 	return (
-		<Table>
+		<Table striped>
 			<thead>
 				<tr>
 					{columns.map((each) => (
@@ -58,7 +58,7 @@ function DynamicTable({
 												e.target.value
 											)
 										}
-										onBlur={() => onBlur(index)}
+										onBlur={() => onBlur(index, col.key)}
 									/>
 									<Errors
 										errors={errors?.[index]?.[col.key]}

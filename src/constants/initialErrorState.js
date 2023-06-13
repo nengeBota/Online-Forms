@@ -133,40 +133,40 @@ const initialErrorState = {
 	},
 
 	// local content
-	[fieldNames.localContent._]: {
-		[fieldNames.localContent.percentageOfGhanaianParticipation]: [],
-		[fieldNames.localContent.ghanaianMgtStaffBreakdown]: [],
-		[fieldNames.localContent.foreignMgtStaffBreakdown]: [],
-		[fieldNames.localContent.totalMgtStaffBreakdown]: [],
-		[fieldNames.localContent.ghanaianOtherStaffBreakdown]: [],
-		[fieldNames.localContent.foreignOtherStaffBreakdown]: [],
-		[fieldNames.localContent.totalOtherStaffBreakdown]: [],
-		[fieldNames.localContent.infraExpenditure]: [],
-		[fieldNames.localContent.rawMaterials]: [],
-		[fieldNames.localContent.ghanaianFinishedGoods]: [],
-		[fieldNames.localContent.valueOfServiceProvided._]: [
-			{
-				[fieldNames.localContent.valueOfServiceProvided.isEditing]: [],
-				[fieldNames.localContent.valueOfServiceProvided.typeOfService]:
-					[],
-				[fieldNames.localContent.valueOfServiceProvided.contractSum]:
-					[],
-				[fieldNames.localContent.valueOfServiceProvided
-					.nameOfClientCompany]: [],
-			},
-		],
-		[fieldNames.localContent.valueOfServiceReceived._]: [
-			{
-				[fieldNames.localContent.valueOfServiceReceived.isEditing]: [],
-				[fieldNames.localContent.valueOfServiceReceived.typeOfService]:
-					[],
-				[fieldNames.localContent.valueOfServiceReceived.contractSum]:
-					[],
-				[fieldNames.localContent.valueOfServiceReceived
-					.nameOfClientCompany]: [],
-			},
-		],
-	},
+	// [fieldNames.localContent._]: {
+	// 	[fieldNames.localContent.percentageOfGhanaianParticipation]: [],
+	// 	[fieldNames.localContent.ghanaianMgtStaffBreakdown]: [],
+	// 	[fieldNames.localContent.foreignMgtStaffBreakdown]: [],
+	// 	[fieldNames.localContent.totalMgtStaffBreakdown]: [],
+	// 	[fieldNames.localContent.ghanaianOtherStaffBreakdown]: [],
+	// 	[fieldNames.localContent.foreignOtherStaffBreakdown]: [],
+	// 	[fieldNames.localContent.totalOtherStaffBreakdown]: [],
+	// 	[fieldNames.localContent.infraExpenditure]: [],
+	// 	[fieldNames.localContent.rawMaterials]: [],
+	// 	[fieldNames.localContent.ghanaianFinishedGoods]: [],
+	// 	[fieldNames.localContent.valueOfServiceProvided._]: [
+	// 		{
+	// 			[fieldNames.localContent.valueOfServiceProvided.isEditing]: [],
+	// 			[fieldNames.localContent.valueOfServiceProvided.typeOfService]:
+	// 				[],
+	// 			[fieldNames.localContent.valueOfServiceProvided.contractSum]:
+	// 				[],
+	// 			[fieldNames.localContent.valueOfServiceProvided
+	// 				.nameOfClientCompany]: [],
+	// 		},
+	// 	],
+	// 	[fieldNames.localContent.valueOfServiceReceived._]: [
+	// 		{
+	// 			[fieldNames.localContent.valueOfServiceReceived.isEditing]: [],
+	// 			[fieldNames.localContent.valueOfServiceReceived.typeOfService]:
+	// 				[],
+	// 			[fieldNames.localContent.valueOfServiceReceived.contractSum]:
+	// 				[],
+	// 			[fieldNames.localContent.valueOfServiceReceived
+	// 				.nameOfClientCompany]: [],
+	// 		},
+	// 	],
+	// },
 
 	[fieldNames.healthSafetySecurityEnv._]: {
 		[fieldNames.healthSafetySecurityEnv.hssePolicyAndObj]: [],

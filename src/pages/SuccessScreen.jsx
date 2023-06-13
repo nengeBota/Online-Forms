@@ -1,7 +1,7 @@
 import AnnexesAndAttachments from "./AnnexesAndAttachments";
 import CorporateStructureAndServices from "./CorporateStructureAndServices";
 import FinancialCapability from "./FinancialCapability";
-import LocalContent from "./LocalContent";
+import LocalContent from "./LocalContent2";
 import Miscellaneous from "./Miscellaneous";
 import PlansAndProgrammes from "./PlansAndProgrammes";
 

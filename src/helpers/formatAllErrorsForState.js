@@ -6,7 +6,7 @@ import formatDeclarationErrors from "./formatDeclarationErrors.js";
 import formatDetailsOfExperienceErrors from "./formatDetailsOfExperienceErrors.js";
 import formatFinCapabilityErrors from "./formatFinCapabilityErrors.js";
 import formatHealthSafetySecurityEnvErrors from "./formatHealthSafetySecurityEnvErrors.js";
-import formatLocalContentErrors from "./formatLocalContentErrors.js";
+import {formatLocalContentErrors} from "./localContent/index.js";
 import formatMgtAndTechnicalCompetenciesErrors from "./formatMgtAndTechnicalCompetenciesErrors.js";
 import formatMiscellaneousErrors from "./formatMiscellaneousErrors.js";
 import formatOrgDevProgramAndBudgetErrors from "./formatOrgDevProgramAndBudgetErrors.js";
