@@ -412,13 +412,14 @@ export default function LocalContent({ data, setData, errors, setErrors }) {
 						"we should confirm whether this is the correct input type to use",
 					]}
 				/>
+				<Errors errors={localContentErrors[f.capitalInvestment]} />
 				<textarea
 					style={{ width: "100%", minHeight: "100px" }}
 					{...register(f.capitalInvestment)}
 				/>
 			</FormGroup>
 
-			<FormGroup>
+			<FormGroup className="mt-100">
 				<FormLabel>
 					3. Subcontracts or POs Issued Services rendered by other
 					companies to the applicant in the past twelve (12) months in
@@ -429,7 +430,7 @@ export default function LocalContent({ data, setData, errors, setErrors }) {
 					columns={[
 						{
 							name: "Name of company work was done for",
-							key: f.servicesRendered.serviceRecepient,
+							key: f.servicesRendered.serviceRecipient,
 						},
 						{
 							name: "Scope of work",

@@ -5,7 +5,10 @@ import formatDeclarationErrors from "../helpers/formatDeclarationErrors.js";
 import formatDetailsOfExperienceErrors from "../helpers/formatDetailsOfExperienceErrors.js";
 import formatFinCapabilityErrors from "../helpers/formatFinCapabilityErrors.js";
 import formatHealthSafetySecurityEnvErrors from "../helpers/formatHealthSafetySecurityEnvErrors.js";
-import { formatLocalContentErrors, localContentSchema } from "../helpers/localContent/index.js";
+import {
+	formatLocalContentErrors,
+	localContentSchema,
+} from "../helpers/localContent/index.js";
 import formatMgtAndTechnicalCompetenciesErrors from "../helpers/formatMgtAndTechnicalCompetenciesErrors.js";
 import formatOrgDevProgramAndBudgetErrors from "../helpers/formatOrgDevProgramAndBudgetErrors.js";
 import AnnexesAndAttachments from "../pages/AnnexesAndAttachments2.jsx";
@@ -31,7 +34,7 @@ import formatMiscellaneousErrors from "../helpers/formatMiscellaneousErrors.js";
 import InitialInfoScreen from "../pages/InitialInfoScreen.jsx";
 import Success from "../pages/SuccessScreen.jsx";
 
-//info: the position of the page determines its page number. so InitialInfoScreen is page 1 because its first in this array, etc..
+//*info: the position of the page determines its page number. so InitialInfoScreen is page 1 because its first in this array, etc..
 
 const pages = [
 	{ page: InitialInfoScreen, validate: () => true },
@@ -82,7 +85,6 @@ const pages = [
 	{
 		page: FinancialCapability,
 		validate: (data, setErrors, showModal) => {
-			// use the safeParse to validate,
 			const { error: finCapabilityErrors } =
 				financialCapabilityDesc.safeParse(
 					data?.[fieldNames.finCapability._]
@@ -154,7 +156,6 @@ const pages = [
 	{
 		page: PlansAndProgrammes,
 		validate: (data, setErrors, showModal) => {
-			// use the safeParse to validate,
 			const { error } = orgDevProgramAndBudgetDesc.safeParse(
 				data?.[fieldNames.orgDevProgramAndBudget._]
 			);
@@ -198,7 +199,6 @@ const pages = [
 	{
 		page: LocalContent,
 		validate: (data, setErrors, showModal) => {
-			// use the safeParse to validate,
 			const { error } = localContentSchema.safeParse(data.localContent);
 
 			if (!error) {
@@ -237,7 +237,6 @@ const pages = [
 	{
 		page: Miscellaneous,
 		validate: (data, setErrors, showModal) => {
-			// use the safeParse to validate,
 			const { error: healthSafetySecurityEnvErrors } =
 				healthSafetySecurityEnvDesc.safeParse(
 					data?.[fieldNames.healthSafetySecurityEnv._]
@@ -317,7 +316,6 @@ const pages = [
 	{
 		page: AnnexesAndAttachments,
 		validate: (data, setErrors, showModal) => {
-			// use the safeParse to validate,
 			const { error } = checkListDesc.safeParse(
 				data?.[fieldNames.checkList._]
 			);

@@ -89,7 +89,7 @@ export default function formatLocalContentErrors(localContentErrors) {
 		),
 
 		[f.servicesReceived._]: formatServicesReceivedErrors(
-			localContentErrors[f.serviceReceived._]
+			localContentErrors[f.servicesReceived._]
 		),
 
 		[f.servicesRendered._]: formatServicesRenderedErrors(
@@ -174,8 +174,8 @@ function formatSingleServiceRenderedError(singleServiceRenderedError) {
 			f.servicesRendered.contractEndDate,
 			singleServiceRenderedError
 		),
-		[f.servicesRendered.serviceRecepient]: getErrors(
-			f.servicesRendered.serviceRecepient,
+		[f.servicesRendered.serviceRecipient]: getErrors(
+			f.servicesRendered.serviceRecipient,
 			singleServiceRenderedError
 		),
 		[f.servicesRendered.contractStartDate]: getErrors(

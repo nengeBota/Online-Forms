@@ -1,9 +1,5 @@
 import { z } from "zod";
-import {
-	fieldNames,
-	FIN_CAPABILITY_WHAT_APPLIES_OPTIONS,
-	PERMIT_CATEGORIES,
-} from "./constants.mjs";
+import { fieldNames } from "./constants.mjs";
 import validations from "./constants/fieldValidations.js";
 import localContentSchema from "./helpers/localContent/localContent.schema.js";
 
@@ -20,8 +16,8 @@ const mustBeTrue = z.literal(true);
 const corporateStructureValidations =
 	validations[fieldNames.corporateStructureAndServices._];
 const finCapabilityValidations = validations[fieldNames.finCapability._];
-const getLocalContentFieldValidation = (field) =>
-	validations[fieldNames.localContent._][field];
+// const getLocalContentFieldValidation = (field) =>
+// 	validations[fieldNames.localContent._][field];
 const getMiscFilesValidation = (field) =>
 	validations[fieldNames.miscFiles._][field];
 
@@ -43,20 +39,20 @@ export const corporateStructureAndServicesDesc = z.object({
 				corporateStructureFields.contactDetails._
 			][corporateStructureFields.contactDetails.postalAddress],
 
-		[corporateStructureAndServices.contactDetails.city]:
+		[corporateStructureAndServices.contactDetails.GHpost]:
 			corporateStructureValidations[
 				corporateStructureFields.contactDetails._
-			][corporateStructureFields.contactDetails.city],
+			][corporateStructureFields.contactDetails.GHpost],
 
-		[corporateStructureAndServices.contactDetails.region]:
-			corporateStructureValidations[
-				corporateStructureFields.contactDetails._
-			][corporateStructureFields.contactDetails.region],
+		// [corporateStructureAndServices.contactDetails.region]:
+		// 	corporateStructureValidations[
+		// 		corporateStructureFields.contactDetails._
+		// 	][corporateStructureFields.contactDetails.region],
 
-		[corporateStructureAndServices.contactDetails.country]:
-			corporateStructureValidations[
-				corporateStructureFields.contactDetails._
-			][corporateStructureFields.contactDetails.country],
+		// [corporateStructureAndServices.contactDetails.country]:
+		// 	corporateStructureValidations[
+		// 		corporateStructureFields.contactDetails._
+		// 	][corporateStructureFields.contactDetails.country],
 	}),
 
 	/** WE WILL COME BACK TO THIS
@@ -72,7 +68,6 @@ export const corporateStructureAndServicesDesc = z.object({
 	}),
 	 */
 });
-
 
 export const financialCapabilityDesc = z.object({
 	[fieldNames.finCapability.whatApplies]:

@@ -5,12 +5,11 @@ const positiveNumber = z.coerce.number({ min: 0 });
 const nonEmptyString = z.string().min(1, { message: "Required" });
 
 export const singleServiceRendered = z.object({
-	[f.servicesRendered.serviceRecepient]: nonEmptyString,
+	[f.servicesRendered.serviceRecipient]: nonEmptyString,
 	[f.servicesRendered.scopeOfWork]: nonEmptyString,
 	[f.servicesRendered.contractStartDate]: nonEmptyString,
 	[f.servicesRendered.contractEndDate]: nonEmptyString,
 	[f.servicesRendered.paymentsReceivedInLast12Months]: nonEmptyString,
-	[f.servicesRendered.isEditing]: true,
 });
 
 export const singleServiceReceived = z.object({
@@ -19,7 +18,6 @@ export const singleServiceReceived = z.object({
 	[f.servicesReceived.contractStartDate]: nonEmptyString,
 	[f.servicesReceived.contractEndDate]: nonEmptyString,
 	[f.servicesReceived.paymentsReceivedInLast12Months]: nonEmptyString,
-	[f.servicesReceived.isEditing]: true,
 });
 
 const localContentFieldValidations = {
@@ -46,27 +44,9 @@ const localContentFieldValidations = {
 
 	[f.capitalInvestment]: nonEmptyString,
 
-	[f.servicesReceived._]: z.array(
-		z.object({
-			[f.servicesReceived.serviceProvider]: nonEmptyString,
-			[f.servicesReceived.scopeOfWork]: nonEmptyString,
-			[f.servicesReceived.contractStartDate]: nonEmptyString,
-			[f.servicesReceived.contractEndDate]: nonEmptyString,
-			[f.servicesReceived.paymentsReceivedInLast12Months]: nonEmptyString,
-			[f.servicesReceived.isEditing]: true,
-		})
-	),
+	[f.servicesReceived._]: z.array(singleServiceReceived),
 
-	[f.servicesRendered._]: z.array(
-		z.object({
-			[f.servicesRendered.serviceRecepient]: nonEmptyString,
-			[f.servicesRendered.scopeOfWork]: nonEmptyString,
-			[f.servicesRendered.contractStartDate]: nonEmptyString,
-			[f.servicesRendered.contractEndDate]: nonEmptyString,
-			[f.servicesRendered.paymentsReceivedInLast12Months]: nonEmptyString,
-			[f.servicesRendered.isEditing]: true,
-		})
-	),
+	[f.servicesRendered._]: z.array(singleServiceRendered),
 
 	[f.professionalServicesDetails.insuranceServices.serviceProvider]:
 		nonEmptyString,

@@ -1,4 +1,4 @@
-import { fieldNames } from "../constants.mjs";
+import { fieldNames, initialErrorState } from "../constants.mjs";
 import formatChecklistErrors from "./formatChecklistErrors.js";
 import formatCorporateStructureAndServicesErrors from "./formatCorporateStructureAndServicesErrors.js";
 import formatCoverpageErrors from "./formatCoverpageErrors.js";
@@ -25,7 +25,8 @@ function formatAllErrorsForState(zodFormattedErrors, currentState) {
 	const localContentErrors = zodFormattedErrors[fieldNames.localContent._];
 	const healthSafetySecurityEnvErrors =
 		zodFormattedErrors[fieldNames.healthSafetySecurityEnv._];
-	const checklistErrors = zodFormattedErrors[fieldNames.checkList._];
+  const checklistErrors = zodFormattedErrors[fieldNames.checkList._];
+  
 
 	return {
 		// page 1
