@@ -3,10 +3,6 @@ import Heading from "../components/Heading";
 import Errors from "../components/Errors.jsx";
 import DynamicTable from "../components/DynamicTable";
 import {
-	localContentInitialState,
-	localContentSchema,
-} from "../helpers/localContent";
-import {
 	localContentFieldNames as f,
 	localContentFieldValidations as v,
 } from "../helpers/localContent/index.js";
@@ -78,6 +74,24 @@ export default function LocalContent({ data, setData, errors, setErrors }) {
 										f.staffBreakdown.ghanaian.mgt,
 										{ type: "number" }
 									)}
+									onChange={(e) => {
+										const value = e.target.value;
+										setData((prev) => ({
+											...prev,
+											[f._]: {
+												...prev[f._],
+												[f.staffBreakdown.ghanaian.mgt]:
+													value,
+												[f.staffBreakdown.total.mgt]:
+													parseInt(
+														localContentData[
+															f.staffBreakdown
+																.foreigners.mgt
+														]
+													) + parseInt(value),
+											},
+										}));
+									}}
 								/>
 								<Errors
 									errors={
@@ -93,6 +107,24 @@ export default function LocalContent({ data, setData, errors, setErrors }) {
 										f.staffBreakdown.foreigners.mgt,
 										{ type: "number" }
 									)}
+									onChange={(e) => {
+										const value = e.target.value;
+										setData((prev) => ({
+											...prev,
+											[f._]: {
+												...prev[f._],
+												[f.staffBreakdown.foreigners
+													.mgt]: value,
+												[f.staffBreakdown.total.mgt]:
+													parseInt(
+														localContentData[
+															f.staffBreakdown
+																.ghanaian.mgt
+														]
+													) + parseInt(value),
+											},
+										}));
+									}}
 								/>
 								<Errors
 									errors={
@@ -128,6 +160,26 @@ export default function LocalContent({ data, setData, errors, setErrors }) {
 											.technicalCoreStaff,
 										{ type: "number" }
 									)}
+									onChange={(e) => {
+										const value = e.target.value;
+										setData((prev) => ({
+											...prev,
+											[f._]: {
+												...prev[f._],
+												[f.staffBreakdown.ghanaian
+													.technicalCoreStaff]: value,
+												[f.staffBreakdown.total
+													.technicalCoreStaff]:
+													parseInt(
+														localContentData[
+															f.staffBreakdown
+																.foreigners
+																.technicalCoreStaff
+														]
+													) + parseInt(value),
+											},
+										}));
+									}}
 								/>
 								<Errors
 									errors={
@@ -145,6 +197,26 @@ export default function LocalContent({ data, setData, errors, setErrors }) {
 											.technicalCoreStaff,
 										{ type: "number" }
 									)}
+									onChange={(e) => {
+										const value = e.target.value;
+										setData((prev) => ({
+											...prev,
+											[f._]: {
+												...prev[f._],
+												[f.staffBreakdown.foreigners
+													.technicalCoreStaff]: value,
+												[f.staffBreakdown.total
+													.technicalCoreStaff]:
+													parseInt(
+														localContentData[
+															f.staffBreakdown
+																.ghanaian
+																.technicalCoreStaff
+														]
+													) + parseInt(value),
+											},
+										}));
+									}}
 								/>
 								<Errors
 									errors={
@@ -182,6 +254,25 @@ export default function LocalContent({ data, setData, errors, setErrors }) {
 										f.staffBreakdown.ghanaian.other,
 										{ type: "number" }
 									)}
+									onChange={(e) => {
+										const value = e.target.value;
+										setData((prev) => ({
+											...prev,
+											[f._]: {
+												...prev[f._],
+												[f.staffBreakdown.ghanaian
+													.other]: value,
+												[f.staffBreakdown.total.other]:
+													parseInt(
+														localContentData[
+															f.staffBreakdown
+																.foreigners
+																.other
+														]
+													) + parseInt(value),
+											},
+										}));
+									}}
 								/>
 								<Errors
 									errors={
@@ -197,6 +288,24 @@ export default function LocalContent({ data, setData, errors, setErrors }) {
 										f.staffBreakdown.foreigners.other,
 										{ type: "number" }
 									)}
+									onChange={(e) => {
+										const value = e.target.value;
+										setData((prev) => ({
+											...prev,
+											[f._]: {
+												...prev[f._],
+												[f.staffBreakdown.foreigners
+													.other]: value,
+												[f.staffBreakdown.total.other]:
+													parseInt(
+														localContentData[
+															f.staffBreakdown
+																.ghanaian.other
+														]
+													) + parseInt(value),
+											},
+										}));
+									}}
 								/>
 								<Errors
 									errors={
@@ -246,6 +355,26 @@ export default function LocalContent({ data, setData, errors, setErrors }) {
 										f.staffBreakdown.ghanaian.fullTime,
 										{ type: "number" }
 									)}
+									onChange={(e) => {
+										const value = e.target.value;
+										setData((prev) => ({
+											...prev,
+											[f._]: {
+												...prev[f._],
+												[f.staffBreakdown.ghanaian
+													.fullTime]: value,
+												[f.staffBreakdown.total
+													.fullTime]:
+													parseInt(
+														localContentData[
+															f.staffBreakdown
+																.foreigners
+																.fullTime
+														]
+													) + parseInt(value),
+											},
+										}));
+									}}
 								/>
 								<Errors
 									errors={
@@ -261,6 +390,27 @@ export default function LocalContent({ data, setData, errors, setErrors }) {
 										f.staffBreakdown.foreigners.fullTime,
 										{ type: "number" }
 									)}
+									onChange={(e) => {
+										const value = e.target.value;
+
+										setData((prev) => ({
+											...prev,
+											[f._]: {
+												...prev[f._],
+												[f.staffBreakdown.foreigners
+													.fullTime]: value,
+												[f.staffBreakdown.total
+													.fullTime]:
+													parseInt(
+														localContentData[
+															f.staffBreakdown
+																.ghanaian
+																.fullTime
+														]
+													) + parseInt(value),
+											},
+										}));
+									}}
 								/>
 								<Errors
 									errors={
@@ -295,6 +445,26 @@ export default function LocalContent({ data, setData, errors, setErrors }) {
 										f.staffBreakdown.ghanaian.partTime,
 										{ type: "number" }
 									)}
+									onChange={(e) => {
+										const value = e.target.value;
+										setData((prev) => ({
+											...prev,
+											[f._]: {
+												...prev[f._],
+												[f.staffBreakdown.ghanaian
+													.partTime]: value,
+												[f.staffBreakdown.total
+													.partTime]:
+													parseInt(
+														localContentData[
+															f.staffBreakdown
+																.foreigners
+																.partTime
+														]
+													) + parseInt(value),
+											},
+										}));
+									}}
 								/>
 								<Errors
 									errors={
@@ -310,6 +480,26 @@ export default function LocalContent({ data, setData, errors, setErrors }) {
 										f.staffBreakdown.foreigners.partTime,
 										{ type: "number" }
 									)}
+									onChange={(e) => {
+										const value = e.target.value;
+										setData((prev) => ({
+											...prev,
+											[f._]: {
+												...prev[f._],
+												[f.staffBreakdown.foreigners
+													.partTime]: value,
+												[f.staffBreakdown.total
+													.partTime]:
+													parseInt(
+														localContentData[
+															f.staffBreakdown
+																.ghanaian
+																.partTime
+														]
+													) + parseInt(value),
+											},
+										}));
+									}}
 								/>
 								<Errors
 									errors={
@@ -345,6 +535,27 @@ export default function LocalContent({ data, setData, errors, setErrors }) {
 											.internsOrNationalService,
 										{ type: "number" }
 									)}
+									onChange={(e) => {
+										const value = e.target.value;
+										setData((prev) => ({
+											...prev,
+											[f._]: {
+												...prev[f._],
+												[f.staffBreakdown.ghanaian
+													.internsOrNationalService]:
+													value,
+												[f.staffBreakdown.total
+													.internsOrNationalService]:
+													parseInt(
+														localContentData[
+															f.staffBreakdown
+																.foreigners
+																.internsOrNationalService
+														]
+													) + parseInt(value),
+											},
+										}));
+									}}
 								/>
 								<Errors
 									errors={
@@ -362,6 +573,27 @@ export default function LocalContent({ data, setData, errors, setErrors }) {
 											.internsOrNationalService,
 										{ type: "number" }
 									)}
+									onChange={(e) => {
+										const value = e.target.value;
+										setData((prev) => ({
+											...prev,
+											[f._]: {
+												...prev[f._],
+												[f.staffBreakdown.foreigners
+													.internsOrNationalService]:
+													value,
+												[f.staffBreakdown.total
+													.internsOrNationalService]:
+													parseInt(
+														localContentData[
+															f.staffBreakdown
+																.ghanaian
+																.internsOrNationalService
+														]
+													) + parseInt(value),
+											},
+										}));
+									}}
 								/>
 								<Errors
 									errors={
@@ -824,7 +1056,3 @@ export default function LocalContent({ data, setData, errors, setErrors }) {
 		</Form>
 	);
 }
-
-const initialState = localContentInitialState;
-
-export const localContentValidationSchema = localContentSchema;
