@@ -116,7 +116,9 @@ export const orgDevProgramAndBudgetDesc = z.object({
 	[fieldNames.orgDevProgramAndBudget.employmentPlan]: file,
 	[fieldNames.orgDevProgramAndBudget.techTransferProgramAndBudget]: file,
 	[fieldNames.orgDevProgramAndBudget.trainingProgramAndBudget]: file,
-	[fieldNames.orgDevProgramAndBudget.csrAndSocialDevProgramAndBudget]: file,
+  [fieldNames.orgDevProgramAndBudget.csrAndSocialDevProgramAndBudget]: file,
+  [fieldNames.orgDevProgramAndBudget.expertise]: file,
+  [fieldNames.orgDevProgramAndBudget.GIPCQuota]: file,
 });
 export const localContentDesc = localContentSchema;
 

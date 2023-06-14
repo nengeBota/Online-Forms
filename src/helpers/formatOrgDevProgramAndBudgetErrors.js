@@ -3,12 +3,12 @@ import { fieldNames } from "../constants.mjs";
 const fields = fieldNames.orgDevProgramAndBudget;
 
 const getErrors = (field, errors) => {
-    if (!errors) return [];
-    
+	if (!errors) return [];
+
 	return Object.keys(errors?.[field] || {})
 		?.filter((key) => key !== "_errors")
 		?.reduce((acc, key) => {
-            const recordError = errors?.[field]?.[key]?.fileName?._errors || [];
+			const recordError = errors?.[field]?.[key]?.fileName?._errors || [];
 			return [...acc, ...recordError];
 		}, []);
 };
@@ -33,5 +33,7 @@ export default function formatOrgDevProgramAndBudgetErrors(
 			fields.csrAndSocialDevProgramAndBudget,
 			errors
 		),
+		[fields.GIPCQuota]: getErrors(fields.GIPCQuota, errors),
+		[fields.expertise]: getErrors(fields.expertise, errors),
 	};
 }
