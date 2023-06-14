@@ -172,8 +172,10 @@ function formatServicesRenderedErrors(serviceRenderedErrors) {
 		});
 }
 
-function formatSingleServiceRenderedError(singleServiceRenderedError) {
-	return {
+export function formatSingleServiceRenderedError(singleServiceRenderedError) {
+	if (!singleServiceRenderedError) return {};
+
+	const result = {
 		[f.servicesRendered.contractEndDate]: getErrors(
 			f.servicesRendered.contractEndDate,
 			singleServiceRenderedError
@@ -203,6 +205,8 @@ function formatSingleServiceRenderedError(singleServiceRenderedError) {
 			singleServiceRenderedError
 		),
 	};
+
+	return result;
 }
 
 function formatServicesReceivedErrors(serviceReceivedErrors) {
@@ -216,7 +220,9 @@ function formatServicesReceivedErrors(serviceReceivedErrors) {
 		});
 }
 
-function formatSingleServiceReceivedError(singleServiceReceivedError) {
+export function formatSingleServiceReceivedError(singleServiceReceivedError) {
+	if (!singleServiceReceivedError) return {};
+
 	return {
 		[f.servicesReceived.serviceProvider]: getErrors(
 			f.servicesReceived.serviceProvider,

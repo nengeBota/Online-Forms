@@ -6,8 +6,18 @@ import {
 	localContentFieldNames as f,
 	localContentFieldValidations as v,
 } from "../helpers/localContent/index.js";
-import { singleServiceRendered } from "../constants/fieldValidations";
-import { NEW_SERVICE_RECEIVED_ITEM, NEW_SERVICE_RENDERED_ITEM } from "../helpers/localContent/localContent.initialState";
+import {
+	singleServiceReceived,
+	singleServiceRendered,
+} from "../helpers/localContent/localContent.fieldValidations.js";
+import {
+	NEW_SERVICE_RECEIVED_ITEM,
+	NEW_SERVICE_RENDERED_ITEM,
+} from "../helpers/localContent/localContent.initialState";
+import {
+	formatSingleServiceReceivedError,
+	formatSingleServiceRenderedError,
+} from "../helpers/localContent/localContent.formatErrors";
 
 export default function LocalContent({ data, setData, errors, setErrors }) {
 	const localContentData = data.localContent;
@@ -311,7 +321,7 @@ export default function LocalContent({ data, setData, errors, setErrors }) {
 								<Errors
 									errors={
 										localContentErrors[
-											f.staffBreakdown.total.other
+											f.staffBreakdown.foreigners.other
 										]
 									}
 								/>
@@ -655,9 +665,8 @@ export default function LocalContent({ data, setData, errors, setErrors }) {
 			<FormGroup className="mt-100">
 				<FormLabel>
 					3. Subcontracts or POs Issued Services rendered by applicant
-					to other companies in the past twelve (12) months in
-					order for applicant to operate. (ie. Catering, Logistics,
-					etc)
+					to other companies in the past twelve (12) months in order
+					for applicant to operate. (ie. Catering, Logistics, etc)
 				</FormLabel>
 				<DynamicTable
 					columns={[
@@ -725,12 +734,16 @@ export default function LocalContent({ data, setData, errors, setErrors }) {
 							localContentData[f.servicesRendered._][index];
 						const { error } =
 							singleServiceRendered.safeParse(value);
-						const field = f.servicesRendered._;
+            const field = f.servicesRendered._;
+            
+						localContentErrors[field][index] =
+							formatSingleServiceRenderedError(error?.format());
+
 						setErrors((prev) => ({
 							...prev,
 							localContent: {
 								...prev.localContent,
-								[field]: error?.format()?._errors,
+								...localContentErrors,
 							},
 						}));
 					}}
@@ -767,7 +780,8 @@ export default function LocalContent({ data, setData, errors, setErrors }) {
 						},
 						{
 							name: "Payments Received (past 12 months)",
-							key: f.servicesReceived.paymentsReceivedInLast12Months,
+							key: f.servicesReceived
+								.paymentsReceivedInLast12Months,
 						},
 					]}
 					data={localContentData[f.servicesReceived._]}
@@ -801,6 +815,24 @@ export default function LocalContent({ data, setData, errors, setErrors }) {
 						const value = localContentData[f.servicesReceived._];
 						value[index][col] = newValue;
 						onChange(field, [...value]);
+					}}
+					onBlur={(index) => {
+						const value =
+							localContentData[f.servicesReceived._][index];
+						const { error } =
+							singleServiceReceived.safeParse(value);
+						const field = f.servicesReceived._;
+
+						localContentErrors[field][index] =
+							formatSingleServiceReceivedError(error?.format());
+
+						setErrors((prev) => ({
+							...prev,
+							localContent: {
+								...prev.localContent,
+								...localContentErrors,
+							},
+						}));
 					}}
 				/>
 			</FormGroup>

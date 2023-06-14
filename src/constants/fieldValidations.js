@@ -202,23 +202,23 @@ export const singleexecutiveDirectors = z.object({
 	[corporateStructureAndServices.executiveDirectors.position]: nonEmptyString,
 });
 
-export const singleServiceRendered = z.object({
-	serviceRecipient: nonEmptyString,
-	scopeOfWork: nonEmptyString,
-	contractStartDate: nonEmptyString,
-	contractEndDate: nonEmptyString,
-	contractValue: nonEmptyString,
-	paymentsReceivedInLast12Months: nonEmptyString,
-});
+// export const singleServiceRendered = z.object({
+// 	serviceRecipient: nonEmptyString,
+// 	scopeOfWork: nonEmptyString,
+// 	contractStartDate: nonEmptyString,
+// 	contractEndDate: nonEmptyString,
+// 	contractValue: nonEmptyString,
+// 	paymentsReceivedInLast12Months: nonEmptyString,
+// });
 
-export const singleServiceReceived = z.object({
-	serviceProvider: nonEmptyString,
-	scopeOfWork: nonEmptyString,
-	contractStartDate: nonEmptyString,
-	contractEndDate: nonEmptyString,
-	contractValue: nonEmptyString,
-	paymentsReceivedInLast12Months: nonEmptyString,
-});
+// export const singleServiceReceived = z.object({
+// 	serviceProvider: nonEmptyString,
+// 	scopeOfWork: nonEmptyString,
+// 	contractStartDate: nonEmptyString,
+// 	contractEndDate: nonEmptyString,
+// 	contractValue: nonEmptyString,
+// 	paymentsReceivedInLast12Months: nonEmptyString,
+// });
 
 // export const singleServiceProvided = z.object({
 // 	[fieldNames.localContent.valueOfServiceProvided.isEditing]: z.boolean(),
