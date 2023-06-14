@@ -312,6 +312,25 @@ function AnnexesAndAttachments({ data, errors,}) {
 							</td>
 						</tr>
 						<tr>
+							<td>
+								<div>
+									13. Copy of application pack receipt
+								</div>
+								<Errors
+									errors={getErrors(
+										fieldNames.checkList
+											.copiesOfOtherRegulatoryCerts,
+										errors
+									)}
+								/>
+							</td>
+							<td>
+								<FormCheck
+									checked={copiesOfOtherRegulatoryCerts}
+								/>
+							</td>
+						</tr>
+						<tr>
 							<td colspan="2">
 								<div style={{ color: "red", fontSize: "16px" }}>
 									means we'll need to provide a way for them
