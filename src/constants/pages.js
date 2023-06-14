@@ -46,8 +46,6 @@ const pages = [
 				data?.[fieldNames.corporateStructureAndServices._]
       );
       
-      console.log('page 1 errors -> ', error);
-
 			if (!error) {
 				setErrors((prev) => ({
 					...prev,
@@ -101,7 +99,8 @@ const pages = [
 				);
 
 			if (
-				!finCapabilityErrors &&
+        !finCapabilityErrors
+        &&
 				!mgtAndTechnicalErrors &&
 				!detailsOfExperienceErrors
 			) {

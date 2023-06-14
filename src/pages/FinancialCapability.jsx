@@ -333,7 +333,7 @@ function FinancialCapability({ data, setData, errors, setErrors }) {
 						/>
 					</div>
 					<br />
-					<div>
+					{/* <div>
 						<div>
 							5. (this has to be removed) Indicate expertise to be sourced locally and
 							internationally. *
@@ -387,10 +387,10 @@ function FinancialCapability({ data, setData, errors, setErrors }) {
 								}));
 							}}
 						/>
-					</div>
+					</div> */}
 
-					<br />
-					<br />
+					{/* <br /> */}
+					{/* <br /> */}
 					<div>
 						<div>
 							5. Indicate sources from which applicant proposes to

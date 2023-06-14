@@ -28,32 +28,32 @@ const { corporateStructureAndServices } = fieldNames;
 export const corporateStructureAndServicesDesc = z.object({
 	...corporateStructureValidations,
 
-	// [corporateStructureAndServices.contactDetails._]: z.object({
-	// 	[corporateStructureAndServices.contactDetails.officeAddress]:
-	// 		corporateStructureValidations[
-	// 			corporateStructureFields.contactDetails._
-	// 		][corporateStructureFields.contactDetails.officeAddress],
+	[corporateStructureAndServices.contactDetails._]: z.object({
+		[corporateStructureAndServices.contactDetails.officeAddress]:
+			corporateStructureValidations[
+				corporateStructureFields.contactDetails._
+			][corporateStructureFields.contactDetails.officeAddress],
 
-	// 	[corporateStructureAndServices.contactDetails.postalAddress]:
-	// 		corporateStructureValidations[
-	// 			corporateStructureFields.contactDetails._
-	// 		][corporateStructureFields.contactDetails.postalAddress],
+		[corporateStructureAndServices.contactDetails.postalAddress]:
+			corporateStructureValidations[
+				corporateStructureFields.contactDetails._
+			][corporateStructureFields.contactDetails.postalAddress],
 
-	// 	[corporateStructureAndServices.contactDetails.GHpost]:
-	// 		corporateStructureValidations[
-	// 			corporateStructureFields.contactDetails._
-	// 		][corporateStructureFields.contactDetails.GHpost],
+		[corporateStructureAndServices.contactDetails.GHpost]:
+			corporateStructureValidations[
+				corporateStructureFields.contactDetails._
+			][corporateStructureFields.contactDetails.GHpost],
 
-	// 	// [corporateStructureAndServices.contactDetails.region]:
-	// 	// 	corporateStructureValidations[
-	// 	// 		corporateStructureFields.contactDetails._
-	// 	// 	][corporateStructureFields.contactDetails.region],
+		// [corporateStructureAndServices.contactDetails.region]:
+		// 	corporateStructureValidations[
+		// 		corporateStructureFields.contactDetails._
+		// 	][corporateStructureFields.contactDetails.region],
 
-	// 	// [corporateStructureAndServices.contactDetails.country]:
-	// 	// 	corporateStructureValidations[
-	// 	// 		corporateStructureFields.contactDetails._
-	// 	// 	][corporateStructureFields.contactDetails.country],
-	// }),
+		// [corporateStructureAndServices.contactDetails.country]:
+		// 	corporateStructureValidations[
+		// 		corporateStructureFields.contactDetails._
+		// 	][corporateStructureFields.contactDetails.country],
+	}),
 
 	/** WE WILL COME BACK TO THIS
 	[corporateStructureAndServices.contactPerson._]: z.object({
@@ -88,10 +88,10 @@ export const mgtAndTechnicalCompetenciesDesc = z.object({
 		validations[fieldNames.mgtAndTechnicalCompetencies._][
 			fieldNames.mgtAndTechnicalCompetencies.detailedStaffInfo
 		],
-	[fieldNames.mgtAndTechnicalCompetencies.requiredExpertise]:
-		validations[fieldNames.mgtAndTechnicalCompetencies._][
-			fieldNames.mgtAndTechnicalCompetencies.requiredExpertise
-		],
+	// [fieldNames.mgtAndTechnicalCompetencies.requiredExpertise]:
+	// 	validations[fieldNames.mgtAndTechnicalCompetencies._][
+	// 		fieldNames.mgtAndTechnicalCompetencies.requiredExpertise
+	// 	],
 	[fieldNames.mgtAndTechnicalCompetencies.sourcesOfEquipment]:
 		validations[fieldNames.mgtAndTechnicalCompetencies._][
 			fieldNames.mgtAndTechnicalCompetencies.sourcesOfEquipment

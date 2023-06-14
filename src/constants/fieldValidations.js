@@ -132,8 +132,8 @@ const validations = {
 	[fieldNames.mgtAndTechnicalCompetencies._]: {
 		[fieldNames.mgtAndTechnicalCompetencies.orgChart]: file,
 		[fieldNames.mgtAndTechnicalCompetencies.detailedStaffInfo]: file,
-		[fieldNames.mgtAndTechnicalCompetencies.requiredExpertise]:
-			nonEmptyString,
+		// [fieldNames.mgtAndTechnicalCompetencies.requiredExpertise]:
+		// 	nonEmptyString,
 		[fieldNames.mgtAndTechnicalCompetencies.sourcesOfEquipment]:
 			nonEmptyString,
 	},
