@@ -494,7 +494,7 @@ function CorporateStructureAndServices({ data, setData, errors, setErrors }) {
 							{ name: "Email", key: f.contactPerson.email },
 							{
 								name: "Mobile Number",
-								key: f.contactPerson.phoneNumber,
+								key: f.contactPerson.mobileNumber,
 							},
 						]}
 						data={contactPerson}
@@ -863,7 +863,9 @@ function CorporateStructureAndServices({ data, setData, errors, setErrors }) {
 										fieldNames.corporateStructureAndServices
 											._
 									][f.executiveDirectors._][index]
-								);
+                );
+              
+              console.log('erreor on executive directors row -> ', error);
 
 							errors[fieldNames.corporateStructureAndServices._][
 								f.executiveDirectors._
