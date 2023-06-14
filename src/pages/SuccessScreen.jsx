@@ -1,4 +1,4 @@
-import AnnexesAndAttachments from "./AnnexesAndAttachments";
+import AnnexesAndAttachments from "./AnnexesAndAttachments2";
 import CorporateStructureAndServices from "./CorporateStructureAndServices";
 import FinancialCapability from "./FinancialCapability";
 import LocalContent from "./LocalContent2";

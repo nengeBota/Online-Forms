@@ -16,57 +16,12 @@ const mustBeTrue = z.literal(true);
 const corporateStructureValidations =
 	validations[fieldNames.corporateStructureAndServices._];
 const finCapabilityValidations = validations[fieldNames.finCapability._];
-// const getLocalContentFieldValidation = (field) =>
-// 	validations[fieldNames.localContent._][field];
+
 const getMiscFilesValidation = (field) =>
 	validations[fieldNames.miscFiles._][field];
 
-const corporateStructureFields = fieldNames.corporateStructureAndServices;
-
-const { corporateStructureAndServices } = fieldNames;
-
 export const corporateStructureAndServicesDesc = z.object({
 	...corporateStructureValidations,
-
-	[corporateStructureAndServices.contactDetails._]: z.object({
-		[corporateStructureAndServices.contactDetails.officeAddress]:
-			corporateStructureValidations[
-				corporateStructureFields.contactDetails._
-			][corporateStructureFields.contactDetails.officeAddress],
-
-		[corporateStructureAndServices.contactDetails.postalAddress]:
-			corporateStructureValidations[
-				corporateStructureFields.contactDetails._
-			][corporateStructureFields.contactDetails.postalAddress],
-
-		[corporateStructureAndServices.contactDetails.GHpost]:
-			corporateStructureValidations[
-				corporateStructureFields.contactDetails._
-			][corporateStructureFields.contactDetails.GHpost],
-
-		// [corporateStructureAndServices.contactDetails.region]:
-		// 	corporateStructureValidations[
-		// 		corporateStructureFields.contactDetails._
-		// 	][corporateStructureFields.contactDetails.region],
-
-		// [corporateStructureAndServices.contactDetails.country]:
-		// 	corporateStructureValidations[
-		// 		corporateStructureFields.contactDetails._
-		// 	][corporateStructureFields.contactDetails.country],
-	}),
-
-	/** WE WILL COME BACK TO THIS
-	[corporateStructureAndServices.contactPerson._]: z.object({
-		[corporateStructureAndServices.contactPerson.name]:
-			corporateStructureValidations[
-				corporateStructureFields.contactPerson._
-			][corporateStructureFields.contactPerson.name],
-		[corporateStructureAndServices.contactPerson.mobileNumber]:
-			corporateStructureValidations[
-				corporateStructureFields.contactPerson._
-			][corporateStructureFields.contactPerson.mobileNumber],
-	}),
-	 */
 });
 
 export const financialCapabilityDesc = z.object({
@@ -88,10 +43,6 @@ export const mgtAndTechnicalCompetenciesDesc = z.object({
 		validations[fieldNames.mgtAndTechnicalCompetencies._][
 			fieldNames.mgtAndTechnicalCompetencies.detailedStaffInfo
 		],
-	// [fieldNames.mgtAndTechnicalCompetencies.requiredExpertise]:
-	// 	validations[fieldNames.mgtAndTechnicalCompetencies._][
-	// 		fieldNames.mgtAndTechnicalCompetencies.requiredExpertise
-	// 	],
 	[fieldNames.mgtAndTechnicalCompetencies.sourcesOfEquipment]:
 		validations[fieldNames.mgtAndTechnicalCompetencies._][
 			fieldNames.mgtAndTechnicalCompetencies.sourcesOfEquipment
@@ -116,9 +67,9 @@ export const orgDevProgramAndBudgetDesc = z.object({
 	[fieldNames.orgDevProgramAndBudget.employmentPlan]: file,
 	[fieldNames.orgDevProgramAndBudget.techTransferProgramAndBudget]: file,
 	[fieldNames.orgDevProgramAndBudget.trainingProgramAndBudget]: file,
-  [fieldNames.orgDevProgramAndBudget.csrAndSocialDevProgramAndBudget]: file,
-  [fieldNames.orgDevProgramAndBudget.expertise]: file,
-  [fieldNames.orgDevProgramAndBudget.GIPCQuota]: file,
+	[fieldNames.orgDevProgramAndBudget.csrAndSocialDevProgramAndBudget]: file,
+	[fieldNames.orgDevProgramAndBudget.expertise]: file,
+	[fieldNames.orgDevProgramAndBudget.GIPCQuota]: file,
 });
 export const localContentDesc = localContentSchema;
 

@@ -223,19 +223,20 @@ function validate(data, setErrors, setPage) {
 	if (!error) return true;
 
 	const summary = {
-		page1: Boolean(page1Errors),
-		page2:
+		page1: false,
+		page2: Boolean(page1Errors),
+		page3:
 			Boolean(page2Errors1) ||
 			Boolean(page2Errors2) ||
 			Boolean(page2Errors3),
-		page3: Boolean(page3Errors),
-		page4: Boolean(page4Errors),
-		page5:
+		page4: Boolean(page3Errors),
+		page5: Boolean(page4Errors),
+		page6:
 			Boolean(page5Errors1) ||
 			Boolean(page5Errors2) ||
 			Boolean(page5Errors3) ||
 			Boolean(page5Errors4),
-		page6: Boolean(page6Errors),
+		page7: Boolean(page6Errors),
 	};
 
 	// transition to the correct page

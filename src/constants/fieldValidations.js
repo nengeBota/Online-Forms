@@ -4,9 +4,7 @@ import {
 	FIN_CAPABILITY_WHAT_APPLIES_OPTIONS,
 	PERMIT_CATEGORIES,
 } from "../constants.mjs";
-import {localContentFieldValidations} from "../helpers/localContent/index.js";
-// import { file } from "../stateDescription.mjs";
-// import { dateBeforeToday, file, nonEmptyString } from "../stateDescription.mjs";
+import { localContentFieldValidations } from "../helpers/localContent/index.js";
 
 export const nonEmptyString = z.string().min(1, { message: "Required" });
 export const file = z.array(
@@ -201,41 +199,3 @@ export const singleexecutiveDirectors = z.object({
 		nonEmptyString,
 	[corporateStructureAndServices.executiveDirectors.position]: nonEmptyString,
 });
-
-// export const singleServiceRendered = z.object({
-// 	serviceRecipient: nonEmptyString,
-// 	scopeOfWork: nonEmptyString,
-// 	contractStartDate: nonEmptyString,
-// 	contractEndDate: nonEmptyString,
-// 	contractValue: nonEmptyString,
-// 	paymentsReceivedInLast12Months: nonEmptyString,
-// });
-
-// export const singleServiceReceived = z.object({
-// 	serviceProvider: nonEmptyString,
-// 	scopeOfWork: nonEmptyString,
-// 	contractStartDate: nonEmptyString,
-// 	contractEndDate: nonEmptyString,
-// 	contractValue: nonEmptyString,
-// 	paymentsReceivedInLast12Months: nonEmptyString,
-// });
-
-// export const singleServiceProvided = z.object({
-// 	[fieldNames.localContent.valueOfServiceProvided.isEditing]: z.boolean(),
-// 	[fieldNames.localContent.valueOfServiceProvided.typeOfService]:
-// 		nonEmptyString,
-// 	[fieldNames.localContent.valueOfServiceProvided.contractSum]:
-// 		positiveNumber,
-// 	[fieldNames.localContent.valueOfServiceProvided.nameOfClientCompany]:
-// 		nonEmptyString,
-// });
-
-// export const singleServiceReceived = z.object({
-// 	[fieldNames.localContent.valueOfServiceReceived.isEditing]: z.boolean(),
-// 	[fieldNames.localContent.valueOfServiceReceived.typeOfService]:
-// 		nonEmptyString,
-// 	[fieldNames.localContent.valueOfServiceReceived.contractSum]:
-// 		positiveNumber,
-// 	[fieldNames.localContent.valueOfServiceReceived.nameOfClientCompany]:
-// 		nonEmptyString,
-// });
