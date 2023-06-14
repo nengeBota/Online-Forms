@@ -44,7 +44,9 @@ const pages = [
 		validate: (data, setErrors, showModal) => {
 			const { error } = corporateStructureAndServicesDesc.safeParse(
 				data?.[fieldNames.corporateStructureAndServices._]
-			);
+      );
+      
+      console.log('page 1 errors -> ', error);
 
 			if (!error) {
 				setErrors((prev) => ({

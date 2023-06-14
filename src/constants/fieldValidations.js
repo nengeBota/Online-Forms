@@ -33,14 +33,14 @@ const validations = {
 		[corporateStructureAndServices.dateOfIncorporation]: dateBeforeToday,
 		[corporateStructureAndServices.placeOfIncorporation]: nonEmptyString,
 
-		[corporateStructureAndServices.contactDetails._]: {
+		[corporateStructureAndServices.contactDetails._]: z.object({
 			[corporateStructureAndServices.contactDetails.officeAddress]:
 				nonEmptyString,
 			[corporateStructureAndServices.contactDetails.postalAddress]:
 				nonEmptyString,
 			[corporateStructureAndServices.contactDetails.GHpost]:
 				nonEmptyString,
-		},
+		}),
 
 		[corporateStructureAndServices.emailAddress]: z.string().email(),
 		[corporateStructureAndServices.website]: optional(
@@ -108,13 +108,11 @@ const validations = {
 					.string()
 					.email(),
 				[corporateStructureAndServices.executiveDirectors.contact]:
-					z.number,
+					nonEmptyString,
 				[corporateStructureAndServices.executiveDirectors.nationality]:
 					nonEmptyString,
 				[corporateStructureAndServices.executiveDirectors.position]:
 					nonEmptyString,
-				[corporateStructureAndServices.executiveDirectors.isEditing]:
-					z.boolean(),
 			})
 		),
 

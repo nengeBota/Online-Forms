@@ -7,19 +7,31 @@ function getErrorValue(field, errors) {
 	return errors[field]?._errors || [];
 }
 
-export function formatSinglecontactPersonErrors(singlecontactPersonErrors) {
+export function formatSingleContactPersonErrors(singlecontactPersonErrors) {
 	const each = singlecontactPersonErrors;
 
 	return {
 		[corporateStructure.contactPerson.name]:
-			each?.[corporateStructure.contactPerson.name]?._errors,
+			each?.[corporateStructure.contactPerson.name]?._errors ?? [],
 		[corporateStructure.contactPerson.email]:
-			each?.[corporateStructure.contactPerson.email]?._errors,
+			each?.[corporateStructure.contactPerson.email]?._errors ?? [],
 		[corporateStructure.contactPerson.mobileNumber]:
-			each?.[corporateStructure.contactPerson.mobileNumber]?._errors,
+			each?.[corporateStructure.contactPerson.mobileNumber]?._errors ??
+			[],
 		[corporateStructure.contactPerson.isEditing]:
-			each?.[corporateStructure.contactPerson.isEditing]?._errors,
+			each?.[corporateStructure.contactPerson.isEditing]?._errors ?? [],
 	};
+}
+
+export function formatContactPersonErrors(contactPersonErrors, state) {
+	const errors = contactPersonErrors;
+	const contactPersonsState =
+		state[fieldNames.corporateStructureAndServices.shareholders._];
+	if (!errors) return [];
+
+	return contactPersonsState.map((_, index) =>
+		formatSingleContactPersonErrors(errors[index])
+	);
 }
 
 export function formatSingleShareholderErrors(singleShareholderErrors) {
@@ -80,6 +92,16 @@ export function formatSingleexecutiveDirectorsErrors(
 	};
 }
 
+function formatExecutiveDirectorsErrors(executiveDirectorsErrors, state) {
+	const errors = executiveDirectorsErrors;
+	const executiveDirectorsState =
+		state[fieldNames.corporateStructureAndServices.executiveDirectors._];
+	if (!errors) return [];
+	return executiveDirectorsState.map((_, index) =>
+		formatSingleexecutiveDirectorsErrors(errors[index])
+	);
+}
+
 export function formatShareholdersErrors(shareholdersErrors, state) {
 	const errors = shareholdersErrors;
 	const shareholdersState =
@@ -125,16 +147,16 @@ export default function formatCorporateStructureAndServicesErrors(
 				.officeAddress]:
 				errors?.[corporateStructure.contactDetails._]?.[
 					corporateStructure?.contactDetails?.officeAddress
-				]?._errors,
+				]?._errors ?? [],
 			[fieldNames.corporateStructureAndServices.contactDetails
 				.postalAddress]:
 				errors?.[corporateStructure.contactDetails._]?.[
 					corporateStructure.contactDetails.postalAddress
-				]?._errors,
+				]?._errors ?? [],
 			[fieldNames.corporateStructureAndServices.contactDetails.GHpost]:
 				errors?.[corporateStructure.contactDetails._]?.[
 					corporateStructure.contactDetails.GHpost
-				]?._errors,
+				]?._errors ?? [],
 		},
 		[fieldNames.corporateStructureAndServices.emailAddress]: getErrorValue(
 			corporateStructure.emailAddress,
@@ -144,21 +166,11 @@ export default function formatCorporateStructureAndServicesErrors(
 			corporateStructure.website,
 			errors
 		),
-		[fieldNames.corporateStructureAndServices.contactPerson._]: {
-			[fieldNames.corporateStructureAndServices.contactPerson.name]:
-				errors?.[corporateStructure.contactPerson._]?.[
-					corporateStructure.contactPerson.name
-				]?._errors,
-			[fieldNames.corporateStructureAndServices.contactPerson
-				.mobileNumber]:
-				errors?.[corporateStructure.contactPerson._]?.[
-					corporateStructure.contactPerson.mobileNumber
-				]?._errors,
-			[fieldNames.corporateStructureAndServices.contactPerson.email]:
-				errors?.[corporateStructure.contactPerson._]?.[
-					corporateStructure.contactPerson.email
-				]?._errors,
-		},
+		[fieldNames.corporateStructureAndServices.contactPerson._]:
+			formatContactPersonErrors(
+				errors?.[corporateStructure.contactPerson._],
+				state
+			),
 
 		[fieldNames.corporateStructureAndServices.nameOfSubsidiaryOrAffiliate]:
 			getErrorValue(
@@ -180,8 +192,11 @@ export default function formatCorporateStructureAndServicesErrors(
 			state
 		),
 
-		[fieldNames.corporateStructureAndServices.executiveDirectors]:
-			getErrorValue(corporateStructure.executiveDirectors, errors),
+		[fieldNames.corporateStructureAndServices.executiveDirectors._]:
+			formatExecutiveDirectorsErrors(
+				errors?.[corporateStructure.executiveDirectors._],
+				state
+			),
 		[fieldNames.corporateStructureAndServices.activities]: getErrorValue(
 			corporateStructure.activities,
 			errors

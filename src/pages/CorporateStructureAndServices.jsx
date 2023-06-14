@@ -17,8 +17,8 @@ import validations, {
 import {
 	formatBeneficialFieldErrors,
 	formatSingleShareholderErrors,
-	formatSinglecontactPersonErrors,
-	formatSingleexecutiveDirectorsErrors
+	formatSingleContactPersonErrors,
+	formatSingleexecutiveDirectorsErrors,
 } from "../helpers/formatCorporateStructureAndServicesErrors";
 
 const getValue = (data) => {
@@ -56,6 +56,8 @@ const getValue = (data) => {
 		fields[fieldNames.corporateStructureAndServices.executiveDirectors._];
 	const activities =
     fields[fieldNames.corporateStructureAndServices.activities];
+  
+  
 
 	return {
 		applicantName,
@@ -76,7 +78,6 @@ const getValue = (data) => {
 		activities,
 	};
 };
-
 
 const getError = (field, errors) =>
 	errors[fieldNames.corporateStructureAndServices._][field];
@@ -506,7 +507,7 @@ function CorporateStructureAndServices({ data, setData, errors, setErrors }) {
 
 							errors[fieldNames.corporateStructureAndServices._][
 								f.contactPerson._
-							][index] = formatSinglecontactPersonErrors(
+							][index] = formatSingleContactPersonErrors(
 								error?.format()
 							);
 
@@ -823,7 +824,7 @@ function CorporateStructureAndServices({ data, setData, errors, setErrors }) {
 				</Section>
 				<Section>
 					<Form.Label>
-                    8. List Executive Directors and Senior Management Team
+						8. List Executive Directors and Senior Management Team
 						of the Company (Please do not list non-executive
 						directors)
 					</Form.Label>
@@ -833,7 +834,10 @@ function CorporateStructureAndServices({ data, setData, errors, setErrors }) {
 								name: "Management Name",
 								key: f.executiveDirectors.name,
 							},
-							{ name: "Occupation", key: f.executiveDirectors.occupation },
+							{
+								name: "Occupation",
+								key: f.executiveDirectors.occupation,
+							},
 							{
 								name: "Email",
 								key: f.executiveDirectors.email,
@@ -842,23 +846,24 @@ function CorporateStructureAndServices({ data, setData, errors, setErrors }) {
 								name: "Contact",
 								key: f.executiveDirectors.contact,
 							},
-                            {
+							{
 								name: "Nationality",
 								key: f.executiveDirectors.nationality,
 							},
-                            {
+							{
 								name: "Position in Company",
 								key: f.executiveDirectors.position,
 							},
-                            
 						]}
 						data={executiveDirectors}
 						onBlur={(index = 0) => {
-							const { error } = singleexecutiveDirectors.safeParse(
-								data[
-									fieldNames.corporateStructureAndServices._
-								][f.executiveDirectors._][index]
-							);
+							const { error } =
+								singleexecutiveDirectors.safeParse(
+									data[
+										fieldNames.corporateStructureAndServices
+											._
+									][f.executiveDirectors._][index]
+								);
 
 							errors[fieldNames.corporateStructureAndServices._][
 								f.executiveDirectors._
@@ -879,8 +884,8 @@ function CorporateStructureAndServices({ data, setData, errors, setErrors }) {
 										occupation: "",
 										email: "",
 										contact: "",
-                                        nationality:"",
-                                        position:"",
+										nationality: "",
+										position: "",
 										isEditing: true,
 									},
 								]
@@ -921,7 +926,7 @@ function CorporateStructureAndServices({ data, setData, errors, setErrors }) {
 						errors={errors?.[f._]?.[f.executiveDirectors._]}
 					/>
 				</Section>
-				
+
 				<Section>
 					<Form.Label>9. Category of Permit applied for</Form.Label>
 					<br />

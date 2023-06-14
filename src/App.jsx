@@ -57,7 +57,6 @@ function App() {
 	const [showErrorModal, setShowErrorModal] = useState(false);
 	const [showSubmittingModal, setShowSubmittingModal] = useState(false);
 
-
 	const CurrentPage = pages[page - 1]?.page;
 	const currentValidationFn = pages[page - 1]?.validate;
 
@@ -111,54 +110,56 @@ function App() {
 			<br />
 			<br />
 
-			{page < pages.length ? <ButtonGroup>
-        <Button
-          id="noprint"
-					disabled={page === 1}
-					onClick={() => setPage((prev) => prev - 1)}
-					variant="secondary"
-				>
-					Back
-				</Button>
+			{page < pages.length ? (
+				<ButtonGroup>
+					<Button
+						id="noprint"
+						disabled={page === 1}
+						onClick={() => setPage((prev) => prev - 1)}
+						variant="secondary"
+					>
+						Back
+					</Button>
 
-				{/* todo: enable once preview feature is completed */}
-				{/* {page === pages.length ? (
+					{/* todo: enable once preview feature is completed */}
+					{/* {page === pages.length ? (
 					<Button variant="secondary">Preview</Button>
 				) : null} */}
 
-				{page < pages.length - 1 ? (
-          <Button
-            id="noprint"
-						onClick={() => {
-							const validationFn = () =>
-								currentValidationFn(
-									data,
-									setErrors,
-									setShowErrorModal
-								);
-							onClickSetPage(page + 1, validationFn);
-						}}
-						variant="primary"
-					>
-						Next
-					</Button>
-				) : (
-            <Button
-              id="noprint"
-						variant="success"
-						onClick={() => {
-							if (!validate(data, setErrors, setPage)) {
-								setShowErrorModal(true);
-								return;
-							}
-							submit(data, setShowSubmittingModal);
-						}}
-					>
-						{" "}
-						Submit
-					</Button>
-				)}
-			</ButtonGroup>: null}
+					{page < pages.length - 1 ? (
+						<Button
+							id="noprint"
+							onClick={() => {
+								const validationFn = () =>
+									currentValidationFn(
+										data,
+										setErrors,
+										setShowErrorModal
+									);
+								onClickSetPage(page + 1, validationFn);
+							}}
+							variant="primary"
+						>
+							Next
+						</Button>
+					) : (
+						<Button
+							id="noprint"
+							variant="success"
+							onClick={() => {
+								if (!validate(data, setErrors, setPage)) {
+									setShowErrorModal(true);
+									return;
+								}
+								submit(data, setShowSubmittingModal);
+							}}
+						>
+							{" "}
+							Submit
+						</Button>
+					)}
+				</ButtonGroup>
+			) : null}
 
 			<Pagination
 				validationSummary={errors?.summary}
@@ -221,7 +222,7 @@ function validate(data, setErrors, setPage) {
 
 	if (!error) return true;
 
-  const summary = {
+	const summary = {
 		page1: Boolean(page1Errors),
 		page2:
 			Boolean(page2Errors1) ||
@@ -269,5 +270,9 @@ const PageWrapper = styled.div`
 	img {
 		width: 100%;
 		margin-bottom: 30px;
+	}
+
+	@media (min-width: 500px) {
+		max-width: 1000px;
 	}
 `;

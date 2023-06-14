@@ -47,7 +47,6 @@ function DynamicTable({
 								<td key={col.key + index}>
 									<Form.Control
 										style={{
-											width: "100px",
 											minWidth: "0",
 										}}
 										value={val[col.key]}
