@@ -1,5 +1,4 @@
 import f from "./localContent.fieldNames.js";
-import localContentInitialErrorState from "./localContent.initialErrorState.js";
 
 const getErrors = (field, errors) => {
 	if (!errors) return [];
@@ -160,12 +159,14 @@ export default function formatLocalContentErrors(localContentErrors) {
 }
 
 function formatServicesRenderedErrors(serviceRenderedErrors) {
-	if (!Array.isArray(serviceRenderedErrors))
-		return localContentInitialErrorState[f.servicesRendered._];
+	const serviceRenderedErrorKeys = Object.keys(serviceRenderedErrors);
 
-	return serviceRenderedErrors.map((each) =>
-		formatSingleServiceRenderedError(each)
-	);
+	return serviceRenderedErrorKeys
+		.filter((key) => key !== "_errors")
+		.map((key) => {
+			const serviceRenderedErrorValue = serviceRenderedErrors[key];
+			return formatSingleServiceRenderedError(serviceRenderedErrorValue);
+		});
 }
 
 function formatSingleServiceRenderedError(singleServiceRenderedError) {
@@ -186,20 +187,30 @@ function formatSingleServiceRenderedError(singleServiceRenderedError) {
 			f.servicesRendered.contractEndDate,
 			singleServiceRenderedError
 		),
+		[f.servicesRendered.scopeOfWork]: getErrors(
+			f.servicesRendered.scopeOfWork,
+			singleServiceRenderedError
+		),
 		[f.servicesRendered.paymentsReceivedInLast12Months]: getErrors(
 			f.servicesRendered.paymentsReceivedInLast12Months,
+			singleServiceRenderedError
+		),
+		[f.servicesRendered.contractValue]: getErrors(
+			f.servicesRendered.contractValue,
 			singleServiceRenderedError
 		),
 	};
 }
 
 function formatServicesReceivedErrors(serviceReceivedErrors) {
-	if (!Array.isArray(serviceReceivedErrors))
-		return localContentInitialErrorState[f.servicesReceived._];
+	const serviceReceivedErrorKeys = Object.keys(serviceReceivedErrors);
 
-	return serviceReceivedErrors.map((each) =>
-		formatSingleServiceReceivedError(each)
-	);
+	return serviceReceivedErrorKeys
+		.filter((key) => key !== "_errors")
+		.map((key) => {
+			const serviceReceivedErrorValue = serviceReceivedErrors[key];
+			return formatSingleServiceReceivedError(serviceReceivedErrorValue);
+		});
 }
 
 function formatSingleServiceReceivedError(singleServiceReceivedError) {
@@ -209,19 +220,23 @@ function formatSingleServiceReceivedError(singleServiceReceivedError) {
 			singleServiceReceivedError
 		),
 		[f.servicesReceived.scopeOfWork]: getErrors(
-			f.serviceReceived.scopeOfWork,
+			f.servicesReceived.scopeOfWork,
 			singleServiceReceivedError
 		),
 		[f.servicesReceived.contractStartDate]: getErrors(
-			f.serviceReceived.contractStartDate,
+			f.servicesReceived.contractStartDate,
 			singleServiceReceivedError
 		),
 		[f.servicesReceived.contractEndDate]: getErrors(
-			f.serviceReceived.contractEndDate,
+			f.servicesReceived.contractEndDate,
 			singleServiceReceivedError
 		),
 		[f.servicesReceived.paymentsReceivedInLast12Months]: getErrors(
 			f.servicesReceived.paymentsReceivedInLast12Months,
+			singleServiceReceivedError
+		),
+		[f.servicesReceived.contractValue]: getErrors(
+			f.servicesReceived.contractValue,
 			singleServiceReceivedError
 		),
 	};

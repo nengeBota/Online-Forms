@@ -7,6 +7,7 @@ import {
 	localContentFieldValidations as v,
 } from "../helpers/localContent/index.js";
 import { singleServiceRendered } from "../constants/fieldValidations";
+import { NEW_SERVICE_RECEIVED_ITEM, NEW_SERVICE_RENDERED_ITEM } from "../helpers/localContent/localContent.initialState";
 
 export default function LocalContent({ data, setData, errors, setErrors }) {
 	const localContentData = data.localContent;
@@ -653,8 +654,8 @@ export default function LocalContent({ data, setData, errors, setErrors }) {
 
 			<FormGroup className="mt-100">
 				<FormLabel>
-					3. Subcontracts or POs Issued Services rendered by other
-					companies to the applicant in the past twelve (12) months in
+					3. Subcontracts or POs Issued Services rendered by applicant
+					to other companies in the past twelve (12) months in
 					order for applicant to operate. (ie. Catering, Logistics,
 					etc)
 				</FormLabel>
@@ -689,15 +690,7 @@ export default function LocalContent({ data, setData, errors, setErrors }) {
 					data={localContentData[f.servicesRendered._]}
 					errors={localContentErrors[f.servicesRendered._]}
 					addNewRow={() => {
-						const newRow = {
-							serviceProvider: "",
-							scopeOfWork: "",
-							contractStartDate: "",
-							contractEndDate: "",
-							contractValue: "",
-							paymentsReceivedInLast12Months: "",
-							isEditing: true,
-						};
+						const newRow = NEW_SERVICE_RENDERED_ITEM;
 						const field = f.servicesRendered._;
 						const value = localContentData[f.servicesRendered._];
 						onChange(field, [...value, newRow]);
@@ -746,49 +739,41 @@ export default function LocalContent({ data, setData, errors, setErrors }) {
 
 			<FormGroup className="mt-100">
 				<FormLabel>
-					4. Contracts executed or POs obtained Services rendered by
+					4. Contracts executed or POs obtained Services received by
 					the applicant in the past twelve (12) months to other
 					companies
 				</FormLabel>
 				<DynamicTable
 					columns={[
 						{
-							name: "Name of company work was done for",
-							key: "serviceRecipient",
+							name: "Name of company that did the work",
+							key: f.servicesReceived.serviceProvider,
 						},
 						{
 							name: "Scope of work",
-							key: "scopeOfWork",
+							key: f.servicesReceived.scopeOfWork,
 						},
 						{
 							name: "Contract Start Date",
-							key: "contractStartDate",
+							key: f.servicesReceived.contractStartDate,
 						},
 						{
 							name: "Contract End Date",
-							key: "contractEndDate",
+							key: f.servicesReceived.contractEndDate,
 						},
 						{
 							name: "Contract Value (Sum)",
-							key: "contractValue",
+							key: f.servicesReceived.contractValue,
 						},
 						{
 							name: "Payments Received (past 12 months)",
-							key: "paymentsReceivedInLast12Months",
+							key: f.servicesReceived.paymentsReceivedInLast12Months,
 						},
 					]}
 					data={localContentData[f.servicesReceived._]}
 					errors={localContentErrors[f.servicesReceived._]}
 					addNewRow={() => {
-						const newRow = {
-							serviceRecepient: "",
-							scopeOfWork: "",
-							contractStartDate: "",
-							contractEndDate: "",
-							contractValue: "",
-							paymentsReceivedInLast12Months: "",
-							isEditing: true,
-						};
+						const newRow = NEW_SERVICE_RECEIVED_ITEM;
 						const field = f.servicesReceived._;
 						const value = localContentData[f.servicesReceived._];
 						onChange(field, [...value, newRow]);

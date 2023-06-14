@@ -31,6 +31,7 @@ const localContentInitialState = {
 			[f.servicesReceived.contractStartDate]: "",
 			[f.servicesReceived.contractEndDate]: "",
 			[f.servicesReceived.paymentsReceivedInLast12Months]: "",
+			[f.servicesReceived.contractValue]: 0,
 			isEditing: true,
 		},
 	],
@@ -42,6 +43,7 @@ const localContentInitialState = {
 			[f.servicesRendered.contractStartDate]: "",
 			[f.servicesRendered.contractEndDate]: "",
 			[f.servicesRendered.paymentsReceivedInLast12Months]: "",
+			[f.servicesRendered.contractValue]: 0,
 			isEditing: true,
 		},
 	],
@@ -67,3 +69,23 @@ const localContentInitialState = {
 };
 
 export default localContentInitialState;
+
+export const NEW_SERVICE_RECEIVED_ITEM = {
+	[f.servicesReceived.serviceProvider]: "",
+	[f.servicesReceived.scopeOfWork]: "",
+	[f.servicesReceived.contractStartDate]: "",
+	[f.servicesReceived.contractEndDate]: "",
+	[f.servicesReceived.paymentsReceivedInLast12Months]: "",
+	[f.servicesReceived.contractValue]: 0,
+	isEditing: true,
+};
+
+export const NEW_SERVICE_RENDERED_ITEM = {
+	[f.servicesReceived.serviceProvider]: "",
+	[f.servicesReceived.scopeOfWork]: "",
+	[f.servicesReceived.contractStartDate]: "",
+	[f.servicesReceived.contractEndDate]: "",
+	[f.servicesReceived.paymentsReceivedInLast12Months]: "",
+	[f.servicesReceived.contractValue]: 0,
+	isEditing: true,
+};
