@@ -9,7 +9,7 @@ export const singleServiceRendered = z.object({
 	[f.servicesRendered.scopeOfWork]: nonEmptyString,
 	[f.servicesRendered.contractStartDate]: nonEmptyString,
 	[f.servicesRendered.contractEndDate]: nonEmptyString,
-	[f.servicesRendered.paymentsReceivedInLast12Months]: nonEmptyString,
+	[f.servicesRendered.paymentsReceivedInLast12Months]: positiveNumber,
 	[f.servicesRendered.contractValue]: positiveNumber,
 });
 
@@ -18,7 +18,7 @@ export const singleServiceReceived = z.object({
 	[f.servicesReceived.scopeOfWork]: nonEmptyString,
 	[f.servicesReceived.contractStartDate]: nonEmptyString,
 	[f.servicesReceived.contractEndDate]: nonEmptyString,
-	[f.servicesReceived.paymentsReceivedInLast12Months]: nonEmptyString,
+	[f.servicesReceived.paymentsReceivedInLast12Months]: positiveNumber,
 	[f.servicesReceived.contractValue]: positiveNumber,
 });
 

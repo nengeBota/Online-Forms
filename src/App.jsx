@@ -44,14 +44,15 @@ async function submit(values, setShowSubmittingModal) {
 		});
 		console.log("value of response -> ", response);
 	} catch (error) {
-		console.log("failed to fetch -> ", error);
+    console.log("failed to fetch -> ", error);
+    alert(error.toString())
 	} finally {
 		setShowSubmittingModal(false);
 	}
 }
 
 function App() {
-	const [page, setPage] = useState(5);
+	const [page, setPage] = useState(1);
 	const [data, setData] = useState(initialState);
 	const [errors, setErrors] = useState(initialErrorState);
 	const [showErrorModal, setShowErrorModal] = useState(false);
