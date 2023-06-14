@@ -128,7 +128,10 @@ export default function formatLocalContentErrors(localContentErrors) {
 		),
 
 		[f.professionalServicesDetails.indigenousBanks.serviceProvider]:
-			getErrors("", localContentErrors),
+			getErrors(
+				f.professionalServicesDetails.indigenousBanks.serviceProvider,
+				localContentErrors
+			),
 		[f.professionalServicesDetails.indigenousBanks.location]: getErrors(
 			f.professionalServicesDetails.indigenousBanks.location,
 			localContentErrors
