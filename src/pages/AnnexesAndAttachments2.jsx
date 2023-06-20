@@ -1,7 +1,8 @@
-import { ButtonGroup, Form, FormCheck, Table, Button } from "react-bootstrap";
+import { Form, FormCheck, Table } from "react-bootstrap";
 import Heading from "../components/Heading";
 import { fieldNames } from "../constants.mjs";
 import Errors from "../components/Errors";
+import checkCopiesOfOtherRegulatoryCerts from "../helpers/annexesAndAttachmentsChecklist/checkCopiesOfOtherRegulatoryCerts";
 
 const getValues = (data) => {
 	const fields = data[fieldNames.checkList._];
@@ -23,8 +24,7 @@ const getValues = (data) => {
 		fields[fieldNames.checkList.originalSsnitClearanceCertificate];
 	const companyProfileandBusinessPlan =
 		fields[fieldNames.checkList.companyProfileAndBusinessPlan];
-	const copiesOfOtherRegulatoryCerts =
-		fields[fieldNames.checkList.copiesOfOtherRegulatoryCerts];
+  const copiesOfOtherRegulatoryCerts = checkCopiesOfOtherRegulatoryCerts(data);
 	const copyOfApplicationPackReceipt =
 		fields[fieldNames.checkList.copyOfApplicationPackReceipt];
 
