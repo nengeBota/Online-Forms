@@ -14,6 +14,7 @@ import validations, {
 	singlecontactPerson,
 	singleexecutiveDirectors,
 } from "../constants/fieldValidations";
+import { localValidations } from "../helpers/corporateStructureAndServices/index.js";
 import {
 	formatBeneficialFieldErrors,
 	formatSingleShareholderErrors,
@@ -55,9 +56,7 @@ const getValue = (data) => {
 	const executiveDirectors =
 		fields[fieldNames.corporateStructureAndServices.executiveDirectors._];
 	const activities =
-    fields[fieldNames.corporateStructureAndServices.activities];
-  
-  
+		fields[fieldNames.corporateStructureAndServices.activities];
 
 	return {
 		applicantName,
@@ -356,9 +355,10 @@ function CorporateStructureAndServices({ data, setData, errors, setErrors }) {
 							);
 						}}
 						onBlur={() => {
-							const { error } = v[f.contactDetails._][
-								f.contactDetails.officeAddress
-							].safeParse(contactDetails.officeAddress);
+							const { error } =
+								localValidations.contactDetails.officeAddress.safeParse(
+									contactDetails.officeAddress
+								);
 
 							updateContactDetailsErrors(
 								f.contactDetails.officeAddress,
@@ -386,9 +386,10 @@ function CorporateStructureAndServices({ data, setData, errors, setErrors }) {
 							);
 						}}
 						onBlur={(e) => {
-							const { error } = getValidation(
-								f.contactDetails._
-							)?.GHpost?.safeParse(contactDetails.GHpost);
+							const { error } =
+								localValidations.contactDetails.GHpost.safeParse(
+									contactDetails.GHpost
+								);
 							updateContactDetailsErrors(
 								CORP.contactDetails.GHpost,
 								formatError(error)
@@ -419,11 +420,10 @@ function CorporateStructureAndServices({ data, setData, errors, setErrors }) {
 							);
 						}}
 						onBlur={(e) => {
-							const { error } = getValidation(
-								f.contactDetails._
-							)?.postalAddress?.safeParse(
-								contactDetails.postalAddress
-							);
+							const { error } =
+								localValidations.contactDetails.postalAddress.safeParse(
+									contactDetails.postalAddress
+								);
 							updateContactDetailsErrors(
 								CORP.contactDetails.postalAddress,
 								formatError(error)
@@ -482,7 +482,7 @@ function CorporateStructureAndServices({ data, setData, errors, setErrors }) {
 
 				<Section>
 					<Form.Label>
-						Detail of contact Person or Persons (Note: JV companies
+						Details of Contact Person or Persons (Note: JV companies
 						should include contact details for both parties)
 					</Form.Label>
 					<DynamicTable
@@ -859,13 +859,9 @@ function CorporateStructureAndServices({ data, setData, errors, setErrors }) {
 						onBlur={(index = 0) => {
 							const { error } =
 								singleexecutiveDirectors.safeParse(
-									data[
-										fieldNames.corporateStructureAndServices
-											._
-									][f.executiveDirectors._][index]
-                );
-              
-              console.log('erreor on executive directors row -> ', error);
+									data.corporateStructureAndServices
+										.executiveDirectors[index]
+								);
 
 							errors[fieldNames.corporateStructureAndServices._][
 								f.executiveDirectors._

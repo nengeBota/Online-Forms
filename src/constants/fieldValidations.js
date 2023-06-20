@@ -188,14 +188,10 @@ export const singleShareholder = z.object({
 });
 
 export const singleexecutiveDirectors = z.object({
-	[corporateStructureAndServices.executiveDirectors.name]: nonEmptyString,
-	[corporateStructureAndServices.executiveDirectors.occupation]:
-		nonEmptyString,
-	[corporateStructureAndServices.executiveDirectors.email]: z
-		.string()
-		.email(),
-	[corporateStructureAndServices.executiveDirectors.contact]: z.number,
-	[corporateStructureAndServices.executiveDirectors.nationality]:
-		nonEmptyString,
-	[corporateStructureAndServices.executiveDirectors.position]: nonEmptyString,
+	name: nonEmptyString,
+	occupation: nonEmptyString,
+	email: z.string().email(),
+	contact: nonEmptyString,
+	nationality: nonEmptyString,
+	position: nonEmptyString,
 });

@@ -84,7 +84,8 @@ export const fieldNames = {
 			email: "email",
 			contact: "contact",
 			nationality: "nationality",
-			position: "position",
+      position: "position",
+      occupation: "occupation",
 		},
 		activities: "activities",
 		corporateStructure: "corporateStructure",
@@ -469,7 +470,8 @@ export const initialState = {
 				[fieldNames.corporateStructureAndServices.executiveDirectors
 					.email]: "",
 				[fieldNames.corporateStructureAndServices.executiveDirectors
-					.nationality]: "",
+          .nationality]: "",
+        occupation: "",
 				[fieldNames.corporateStructureAndServices.executiveDirectors
 					.position]: "",
 				isEditing: true,
