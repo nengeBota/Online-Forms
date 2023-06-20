@@ -2,7 +2,6 @@ import { useState } from "react";
 import styled from "styled-components";
 import Pagination from "./components/Pagination";
 import Image from "react-bootstrap/Image";
-import { categoryfxn } from "./api";
 import {
 	Button,
 	ButtonGroup,
@@ -40,11 +39,11 @@ async function submit(values, setShowSubmittingModal) {
 			headers: {
 				"Content-Type": "application/json",
 			},
-			body: JSON.stringify(prepareForSubmission(values)),
+			body:prepareForSubmission(values),
 		});
 		console.log("value of response -> ", response);
 	} catch (error) {
-    console.log("failed to fetch -> ", error);
+    console.log("failed to submit -> ", error);
     alert(error.toString())
 	} finally {
 		setShowSubmittingModal(false);
