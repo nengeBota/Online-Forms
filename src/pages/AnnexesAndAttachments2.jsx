@@ -24,7 +24,8 @@ const getValues = (data) => {
 		fields[fieldNames.checkList.originalSsnitClearanceCertificate];
 	const companyProfileandBusinessPlan =
 		fields[fieldNames.checkList.companyProfileAndBusinessPlan];
-  const copiesOfOtherRegulatoryCerts = checkCopiesOfOtherRegulatoryCerts(data);
+	const copiesOfOtherRegulatoryCerts =
+		checkCopiesOfOtherRegulatoryCerts(data);
 	const copyOfApplicationPackReceipt =
 		fields[fieldNames.checkList.copyOfApplicationPackReceipt];
 
@@ -48,7 +49,7 @@ const getValues = (data) => {
 const getErrors = (field, errors) =>
 	errors?.[fieldNames.checkList._]?.[field] || [];
 
-function AnnexesAndAttachments({ data, errors,}) {
+function AnnexesAndAttachments({ data, errors }) {
 	const {
 		coverPage,
 		applicationForm,
@@ -97,9 +98,7 @@ function AnnexesAndAttachments({ data, errors,}) {
 								/>
 							</td>
 							<td>
-								<FormCheck
-									checked={coverPage}
-								/>
+								<FormCheck checked={coverPage} />
 							</td>
 						</tr>
 						<tr>
@@ -113,9 +112,7 @@ function AnnexesAndAttachments({ data, errors,}) {
 								/>
 							</td>
 							<td>
-								<FormCheck
-									checked={applicationForm}
-								/>
+								<FormCheck checked={applicationForm} />
 							</td>
 						</tr>
 						<tr>
@@ -165,9 +162,7 @@ function AnnexesAndAttachments({ data, errors,}) {
 								/>
 							</td>
 							<td>
-								<FormCheck
-									checked={companyRegulations}
-								/>
+								<FormCheck checked={companyRegulations} />
 							</td>
 						</tr>
 						<tr>
@@ -182,9 +177,7 @@ function AnnexesAndAttachments({ data, errors,}) {
 								/>
 							</td>
 							<td>
-								<FormCheck
-									checked={signedHssePolicyAndObj}
-								/>
+								<FormCheck checked={signedHssePolicyAndObj} />
 							</td>
 						</tr>
 						<tr>
@@ -241,9 +234,7 @@ function AnnexesAndAttachments({ data, errors,}) {
 								/>
 							</td>
 							<td>
-								<FormCheck
-									checked={vatCertificate}
-								/>
+								<FormCheck checked={vatCertificate} />
 							</td>
 						</tr>
 						<tr>
@@ -310,20 +301,18 @@ function AnnexesAndAttachments({ data, errors,}) {
 						</tr>
 						<tr>
 							<td>
-								<div>
-									13. Copy of application pack receipt
-								</div>
+								<div>13. Copy of application pack receipt</div>
 								<Errors
 									errors={getErrors(
 										fieldNames.checkList
-											.copiesOfOtherRegulatoryCerts,
+											.copyOfApplicationPackReceipt,
 										errors
 									)}
 								/>
 							</td>
 							<td>
 								<FormCheck
-									checked={copiesOfOtherRegulatoryCerts}
+									checked={copyOfApplicationPackReceipt}
 								/>
 							</td>
 						</tr>
@@ -342,18 +331,9 @@ function AnnexesAndAttachments({ data, errors,}) {
 						<tr>
 							<td>
 								<div>A copy of the Joint Venture Agreement</div>
-								<Errors
-									errors={getErrors(
-										fieldNames.checkList
-											.copyOfApplicationPackReceipt,
-										errors
-									)}
-								/>
 							</td>
 							<td>
-								<FormCheck
-									checked={false}
-								/>
+								<FormCheck checked={false} />
 							</td>
 						</tr>
 						<tr>
@@ -362,18 +342,9 @@ function AnnexesAndAttachments({ data, errors,}) {
 									A copy of the strategic plan for IGCs in a
 									JVC
 								</div>
-								<Errors
-									errors={getErrors(
-										fieldNames.checkList
-											.copyOfApplicationPackReceipt,
-										errors
-									)}
-								/>
 							</td>
 							<td>
-								<FormCheck
-									checked={false}
-								/>
+								<FormCheck checked={false} />
 							</td>
 						</tr>
 						<tr>
@@ -381,17 +352,10 @@ function AnnexesAndAttachments({ data, errors,}) {
 								<div>
 									Board Resolution for both parent companies
 								</div>
-								<Errors
-									errors={getErrors(
-										fieldNames.checkList
-											.copyOfApplicationPackReceipt,
-										errors
-									)}
-								/>
 							</td>
 							<td>
 								<FormCheck
-									checked={copyOfApplicationPackReceipt}
+									checked={false}
 								/>
 							</td>
 						</tr>

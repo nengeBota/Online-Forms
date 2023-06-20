@@ -132,9 +132,9 @@ export const checkListDesc = z.object({
 	[fieldNames.checkList.signedHssePolicyAndObj]: mustBeTrue,
 	[fieldNames.checkList.currentAuditedFinReportsOrProjectedRevenue]:
 		mustBeTrue,
-	[fieldNames.checkList.validTaxClearanceCertificate]: mustBeTrue,
-	[fieldNames.checkList.vatCertificate]: mustBeTrue,
-	[fieldNames.checkList.originalSsnitClearanceCertificate]: mustBeTrue,
+	[fieldNames.checkList.validTaxClearanceCertificate]: z.boolean(),
+	[fieldNames.checkList.vatCertificate]: z.boolean(),
+	[fieldNames.checkList.originalSsnitClearanceCertificate]: z.boolean(),
 	[fieldNames.checkList.companyProfileAndBusinessPlan]: mustBeTrue,
 	[fieldNames.checkList.copyOfApplicationPackReceipt]: mustBeTrue,
 	[fieldNames.checkList.EPAPermit]: mustBeTrue,
