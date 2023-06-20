@@ -266,7 +266,7 @@ const permitInfoScheme = new mongoose.Schema({
       file: String,
     },
   ],
-});
+}, {strict: false});
 
 const permitInfo = mongoose.model(
   "permitInfo",

@@ -39,12 +39,13 @@ async function submit(values, setShowSubmittingModal) {
 			headers: {
 				"Content-Type": "application/json",
 			},
-			body:prepareForSubmission(values),
+			body: prepareForSubmission(values),
 		});
-		console.log("value of response -> ", response);
+    const result = await response.json();
+		alert(result.message);
 	} catch (error) {
-    console.log("failed to submit -> ", error);
-    alert(error.toString())
+		console.log("failed to submit -> ", error);
+		alert(error.toString());
 	} finally {
 		setShowSubmittingModal(false);
 	}
