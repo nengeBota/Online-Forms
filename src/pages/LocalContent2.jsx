@@ -67,6 +67,7 @@ export default function LocalContent({ data, setData, errors, setErrors }) {
 					1. Employment: Please provide a breakdown of your company's
 					staff
 				</FormLabel>
+				<p>a. Staff Category</p>
 				<Table striped>
 					<thead>
 						<tr>
@@ -347,7 +348,7 @@ export default function LocalContent({ data, setData, errors, setErrors }) {
 				</Table>
 
 				<div style={{ marginBottom: "50px" }} />
-
+				<p>b. Employment Type</p>
 				<Table striped>
 					<thead>
 						<tr>
@@ -665,7 +666,7 @@ export default function LocalContent({ data, setData, errors, setErrors }) {
 			<FormGroup className="mt-100">
 				<FormLabel>
 					3. Subcontracts or POs Issued Services rendered by applicant
-					to other companies in the past twelve (12) months in order
+					to other companies in the past year in order
 					for applicant to operate. (ie. Catering, Logistics, etc)
 				</FormLabel>
 				<DynamicTable
@@ -691,7 +692,7 @@ export default function LocalContent({ data, setData, errors, setErrors }) {
 							key: f.servicesRendered.contractValue,
 						},
 						{
-							name: "Payments Received (past 12 months)",
+							name: "Payments Received year",
 							key: f.servicesRendered
 								.paymentsReceivedInLast12Months,
 						},
@@ -753,7 +754,7 @@ export default function LocalContent({ data, setData, errors, setErrors }) {
 			<FormGroup className="mt-100">
 				<FormLabel>
 					4. Contracts executed or POs obtained Services received by
-					the applicant in the past twelve (12) months to other
+					the applicant in the past year to other
 					companies
 				</FormLabel>
 				<DynamicTable
@@ -779,7 +780,7 @@ export default function LocalContent({ data, setData, errors, setErrors }) {
 							key: f.servicesReceived.contractValue,
 						},
 						{
-							name: "Payments Received (past 12 months)",
+							name: "Payments Received year",
 							key: f.servicesReceived
 								.paymentsReceivedInLast12Months,
 						},
@@ -845,7 +846,7 @@ export default function LocalContent({ data, setData, errors, setErrors }) {
 							<th></th>
 							<th>Name of Service Provider(s)</th>
 							<th>Location</th>
-							<th>Expenditure in the past 12 months</th>
+							<th>Expenditure in the past year</th>
 						</tr>
 					</thead>
 					<tbody>

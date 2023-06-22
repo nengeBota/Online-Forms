@@ -69,7 +69,7 @@ function Miscellaneous({ data, setData, errors, setErrors }) {
 			<FormGroup>
 				<FormLabel>
 					Provide a signed copy of the Company's HSE Policy and
-					Objectives * <br/>
+					Objectives and plan* <br/>
 					<span style={{fontWeight:"bold"}}>Kindly attach relevant certificates if any</span>
 				</FormLabel>
 				<Errors errors={getHsseErrors(errors)} />
@@ -166,7 +166,7 @@ function Miscellaneous({ data, setData, errors, setErrors }) {
 			</FormGroup>
 			{/* company regulations document */}
 			<FormGroup>
-				<FormLabel>Company Regulations Document</FormLabel>
+				<FormLabel>Company Regulations, Form 3 & Form 4</FormLabel>
 				<Errors
 					errors={getMiscFilesErrors(
 						fieldNames.miscFiles.companyRegulationsDocument,
@@ -193,7 +193,7 @@ function Miscellaneous({ data, setData, errors, setErrors }) {
 			</FormGroup>
 			{/* current audited financial reports */}
 			<FormGroup>
-				<FormLabel>Current audited financial reports</FormLabel>
+				<FormLabel>Current Audited Financial Reports/ Projected Revenue for Upstream Petroleum Activities</FormLabel>
 				<Errors
 					errors={getMiscFilesErrors(
 						fieldNames.miscFiles
@@ -299,7 +299,67 @@ function Miscellaneous({ data, setData, errors, setErrors }) {
 					}}
 				/>
 			</FormGroup>
+					{/* copy of application pack receipt */}
+					<FormGroup>
+				<FormLabel>Copy of application pack receipt</FormLabel>
+				<Errors
+					errors={getMiscFilesErrors(
+						fieldNames.miscFiles.copyOfApplicationPackReceipt,
+						errors
+					)}
+				/>
+				<FileInput
+					value={
+						data[fieldNames.miscFiles._][
+							fieldNames.miscFiles.copyOfApplicationPackReceipt
+						]
+					}
+					onChange={(files) => {
+						const field =
+							fieldNames.miscFiles.copyOfApplicationPackReceipt;
+						const value = [];
+						updateMiscFilesErrors(field, value, setErrors);
+						onChange(
+							fieldNames.miscFiles.copyOfApplicationPackReceipt,
+							files
+						);
+					}}
+				/>
+			</FormGroup>
+			{/* valid tax clearance certificate */}
+			<FormGroup>
+				<FormLabel>Valid tax clearance certificate</FormLabel>
+				<Errors
+					errors={getMiscFilesErrors(
+						fieldNames.miscFiles.validTaxClearanceCertificate,
+						errors
+					)}
+				/>
+				<FileInput
+					value={
+						data[fieldNames.miscFiles._][
+							fieldNames.miscFiles.validTaxClearanceCertificate
+						]
+					}
+					onChange={(files) => {
+						const field =
+							fieldNames.miscFiles.validTaxClearanceCertificate;
+						const value = [];
+						updateMiscFilesErrors(field, value, setErrors);
+						onChange(
+							fieldNames.miscFiles.validTaxClearanceCertificate,
+							files
+						);
+					}}
+				/>
+			</FormGroup>
+			<Errors
+					errors={[
+						"we should probably remove the epa etc and replace with copies of valid ....",
+					]}
+				/>
 			{/* EPA permit */}
+
 			<FormGroup>
 				<FormLabel>EPA permit</FormLabel>
 				<Errors
@@ -399,60 +459,11 @@ function Miscellaneous({ data, setData, errors, setErrors }) {
 					}}
 				/>
 			</FormGroup>
-			{/* copy of application pack receipt */}
-			<FormGroup>
-				<FormLabel>Copy of application pack receipt</FormLabel>
-				<Errors
-					errors={getMiscFilesErrors(
-						fieldNames.miscFiles.copyOfApplicationPackReceipt,
-						errors
-					)}
+			<Errors
+					errors={[
+						"the three specified uploads for a joint venture",
+					]}
 				/>
-				<FileInput
-					value={
-						data[fieldNames.miscFiles._][
-							fieldNames.miscFiles.copyOfApplicationPackReceipt
-						]
-					}
-					onChange={(files) => {
-						const field =
-							fieldNames.miscFiles.copyOfApplicationPackReceipt;
-						const value = [];
-						updateMiscFilesErrors(field, value, setErrors);
-						onChange(
-							fieldNames.miscFiles.copyOfApplicationPackReceipt,
-							files
-						);
-					}}
-				/>
-			</FormGroup>
-			{/* valid tax clearance certificate */}
-			<FormGroup>
-				<FormLabel>Valid tax clearance certificate</FormLabel>
-				<Errors
-					errors={getMiscFilesErrors(
-						fieldNames.miscFiles.validTaxClearanceCertificate,
-						errors
-					)}
-				/>
-				<FileInput
-					value={
-						data[fieldNames.miscFiles._][
-							fieldNames.miscFiles.validTaxClearanceCertificate
-						]
-					}
-					onChange={(files) => {
-						const field =
-							fieldNames.miscFiles.validTaxClearanceCertificate;
-						const value = [];
-						updateMiscFilesErrors(field, value, setErrors);
-						onChange(
-							fieldNames.miscFiles.validTaxClearanceCertificate,
-							files
-						);
-					}}
-				/>
-			</FormGroup>
 
 			<br />
 			<h6>

@@ -22,6 +22,7 @@ import {
 	formatSingleexecutiveDirectorsErrors,
 } from "../helpers/formatCorporateStructureAndServicesErrors";
 
+
 const getValue = (data) => {
 	const fields = data[fieldNames.corporateStructureAndServices._];
 	const applicantName =
@@ -433,7 +434,7 @@ function CorporateStructureAndServices({ data, setData, errors, setErrors }) {
 				</Section>
 				<br />
 				<Section>
-					<Form.Label>Email address</Form.Label>
+					<Form.Label>Organisation's Email address</Form.Label>
 
 					<Errors
 						testId={CORP.emailAddress}

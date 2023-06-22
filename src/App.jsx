@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import styled from "styled-components";
 import Pagination from "./components/Pagination";
 import Image from "react-bootstrap/Image";
@@ -72,6 +72,12 @@ function App() {
 		setPage(value);
 	};
 
+	
+//testing top scolling
+useEffect(() => {
+	window.scrollTo({top: 0, left: 0, behavior: 'smooth'});
+  }, []);
+
 	return (
 		<PageWrapper>
 			<div>
@@ -130,7 +136,7 @@ function App() {
 					{page < pages.length - 1 ? (
 						<Button
 							id="noprint"
-							onClick={() => {
+							onClick={() => { window.scrollTo({top: 0, left: 0, behavior: 'smooth'});
 								const validationFn = () =>
 									currentValidationFn(
 										data,

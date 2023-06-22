@@ -455,7 +455,7 @@ function FinancialCapability({ data, setData, errors, setErrors }) {
 			<hr />
 			<FormGroup>
 				<div>
-					5. Describe company's past petroleum industry experience,
+					6. Describe company's past petroleum industry experience,
 					including locations and dates of significant activities or
 					contracts. (this should be the past petroleum industry
 					experience of the applicant and not the Affiliate/Parent
@@ -504,7 +504,7 @@ function FinancialCapability({ data, setData, errors, setErrors }) {
 			<br />
 			<FormGroup>
 				<div>
-					6. In which countries do applicant, parent company and
+					7. In which countries do applicant, parent company and
 					affiliates currently have Petroleum industry activities or
 					contracts? List all current operations globally. *{" "}
 				</div>
@@ -543,10 +543,12 @@ function FinancialCapability({ data, setData, errors, setErrors }) {
 					}}
 				/>
 			</FormGroup>
-			<br />
-			<br />
+		
+			{/**
 			<FormGroup>
+				
 				<div>
+					
 					7. Indicate contracts executed in respect of upstream
 					petroleum support services over the past year. *
 				</div>
@@ -620,7 +622,9 @@ function FinancialCapability({ data, setData, errors, setErrors }) {
 						);
 					}}
 				/>
+				
 			</FormGroup>
+			 */}
 		</div>
 	);
 }

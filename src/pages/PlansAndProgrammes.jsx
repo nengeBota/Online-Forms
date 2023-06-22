@@ -25,6 +25,7 @@ function PlansAndProgrammes({ data, setData, errors, setErrors }) {
 		<Form>
 			<Heading>Part 3 - Plans and Programs</Heading>
 			<hr />
+			<p><span style={{ fontWeight: "bold" }}>Provide the company’s Plans and Programmes for Ghana for the next three (3) years to include the following:</span></p>
 			<FormLabel>
 				a. Organizational Development Programme and Budget
 			</FormLabel>
@@ -114,10 +115,69 @@ function PlansAndProgrammes({ data, setData, errors, setErrors }) {
 				/>
 			</FormGroup>
 			<br />
-
+			<FormGroup>
+				
+				<FormLabel>
+					b. Training Programe and Budget - (Company's training
+					programme should reflect its line of business)
+				</FormLabel>
+				<Errors
+					errors={getErrors(fields.trainingProgramAndBudget, errors)}
+				/>
+				<FileInput
+					value={data[fields._][fields.trainingProgramAndBudget]}
+					onChange={(file) => {
+						setErrors((prev) => ({
+							...prev,
+							[fields._]: {
+								...prev[fields._],
+								[fields.trainingProgramAndBudget]: [],
+							},
+						}));
+						onChange(
+							fieldNames.orgDevProgramAndBudget
+								.trainingProgramAndBudget,
+							file
+						);
+					}}
+				/>
+			</FormGroup>
+			<br />
 			<FormGroup>
 				<FormLabel>
-					b. Technology Transfer Programme and Budget <br />
+					c. Corporate Social Responsibility & Social Development
+					Programme and Budget
+				</FormLabel>
+				<Errors
+					errors={getErrors(
+						fields.csrAndSocialDevProgramAndBudget,
+						errors
+					)}
+				/>
+				<FileInput
+					value={
+						data[fields._][fields.csrAndSocialDevProgramAndBudget]
+					}
+					onChange={(file) => {
+						setErrors((prev) => ({
+							...prev,
+							[fields._]: {
+								...prev[fields._],
+								[fields.csrAndSocialDevProgramAndBudget]: [],
+							},
+						}));
+						onChange(
+							fieldNames.orgDevProgramAndBudget
+								.csrAndSocialDevProgramAndBudget,
+							file
+						);
+					}}
+				/>
+			</FormGroup>
+			<FormGroup>
+			<p style={{ color:"red", fontWeight: "bold" }}>Note: <i> "Section d" </i>should be completed by JV companies only</p>
+				<FormLabel>
+					d. Technology Transfer Programme and Budget <br />
 					The Technology Transfer Programme should outline
 					progressively how skills, know-how and technology shall be
 					transferred to the Indigenous Ghanaian Company or Ghanaian
@@ -154,65 +214,7 @@ function PlansAndProgrammes({ data, setData, errors, setErrors }) {
 				/>
 			</FormGroup>
 			<br />
-			<FormGroup>
-				<p style={{ color:"red", fontWeight: "bold" }}>Note: This section should be completed by JV companies only</p>
-				<FormLabel>
-					c. Training Programe and Budget - (Company's training
-					programme should reflect its line of business)
-				</FormLabel>
-				<Errors
-					errors={getErrors(fields.trainingProgramAndBudget, errors)}
-				/>
-				<FileInput
-					value={data[fields._][fields.trainingProgramAndBudget]}
-					onChange={(file) => {
-						setErrors((prev) => ({
-							...prev,
-							[fields._]: {
-								...prev[fields._],
-								[fields.trainingProgramAndBudget]: [],
-							},
-						}));
-						onChange(
-							fieldNames.orgDevProgramAndBudget
-								.trainingProgramAndBudget,
-							file
-						);
-					}}
-				/>
-			</FormGroup>
-			<br />
-			<FormGroup>
-				<FormLabel>
-					d. Corporate Social Responsibility & Social Development
-					Programme and Budget
-				</FormLabel>
-				<Errors
-					errors={getErrors(
-						fields.csrAndSocialDevProgramAndBudget,
-						errors
-					)}
-				/>
-				<FileInput
-					value={
-						data[fields._][fields.csrAndSocialDevProgramAndBudget]
-					}
-					onChange={(file) => {
-						setErrors((prev) => ({
-							...prev,
-							[fields._]: {
-								...prev[fields._],
-								[fields.csrAndSocialDevProgramAndBudget]: [],
-							},
-						}));
-						onChange(
-							fieldNames.orgDevProgramAndBudget
-								.csrAndSocialDevProgramAndBudget,
-							file
-						);
-					}}
-				/>
-			</FormGroup>
+			
 		</Form>
 	);
 }
