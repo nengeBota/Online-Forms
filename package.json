@@ -21,7 +21,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "BUILD_PATH='./api calls/public' react-scripts build",
+    "build": "react-scripts build && mv build 'api calls'/public",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },

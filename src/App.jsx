@@ -28,7 +28,7 @@ import state, {
 import formatAllErrorsForState from "./helpers/formatAllErrorsForState";
 import pages from "./constants/pages";
 
-async function submit(values, setShowSubmittingModal) {
+async function submit(values, setShowSubmittingModal, goToNextPage) {
 	const API_ENDPOINT = process.env.REACT_APP_API_ENDPOINT;
 
 	try {
@@ -42,7 +42,8 @@ async function submit(values, setShowSubmittingModal) {
 			body: prepareForSubmission(values),
 		});
     const result = await response.json();
-		alert(result.message);
+		// todo: take the user to the next page
+		goToNextPage();
 	} catch (error) {
 		console.log("failed to submit -> ", error);
 		alert(error.toString());
@@ -158,7 +159,7 @@ useEffect(() => {
 									setShowErrorModal(true);
 									return;
 								}
-								submit(data, setShowSubmittingModal);
+								submit(data, setShowSubmittingModal, () => {setPage(page => page+1)});
 							}}
 						>
 							{" "}

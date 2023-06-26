@@ -97,7 +97,7 @@ const pages = [
 				detailsOfExperienceDesc.safeParse(
 					data?.[fieldNames.detailsOfExperience._]
 				);
-
+					console.log({finCapabilityErrors, mgtAndTechnicalErrors, detailsOfExperienceErrors})
 			if (
         !finCapabilityErrors
         &&

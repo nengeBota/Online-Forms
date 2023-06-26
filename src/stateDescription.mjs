@@ -57,10 +57,10 @@ export const detailsOfExperienceDesc = z.object({
 		validations[fieldNames.detailsOfExperience._][
 			fieldNames.detailsOfExperience.countries
 		],
-	[fieldNames.detailsOfExperience.contractsExecuted._]:
+	/**[fieldNames.detailsOfExperience.contractsExecuted._]:
 		validations[fieldNames.detailsOfExperience._][
 			fieldNames.detailsOfExperience.contractsExecuted._
-		],
+		],*/
 });
 export const orgDevProgramAndBudgetDesc = z.object({
 	[fieldNames.orgDevProgramAndBudget.orgDevStrategy]: file,

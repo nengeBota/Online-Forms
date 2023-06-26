@@ -5,9 +5,10 @@ function InitialInfoScreen() {
   return (
     <Form>
       <Form.Group>
-        <p>
+        {
+          /**<p>
         Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. In hendrerit gravida rutrum quisque non. Ipsum consequat nisl vel pretium lectus quam id. Lorem ipsum dolor sit amet consectetur. Magna sit amet purus gravida quis blandit turpis. Ultrices neque ornare aenean euismod elementum. Orci sagittis eu volutpat odio. Orci dapibus ultrices in iaculis nunc sed augue. Ultrices in iaculis nunc sed augue lacus. Fames ac turpis egestas sed tempus urna et pharetra. Et leo duis ut diam quam nulla porttitor. Dolor sit amet consectetur adipiscing elit duis tristique sollicitudin. Elit ullamcorper dignissim cras tincidunt lobortis feugiat vivamus. Dignissim cras tincidunt lobortis feugiat vivamus. Sodales ut etiam sit amet nisl purus. Vel pharetra vel turpis nunc eget lorem dolor. At in tellus integer feugiat scelerisque varius morbi enim nunc. Pretium lectus quam id leo in vitae turpis massa sed. Neque volutpat ac tincidunt vitae. Ut eu sem integer vitae justo eget magna fermentum.
-        </p>
+        </p>*/}
       </Form.Group>
       <br></br>
       <h4>Guidelines</h4>
@@ -114,9 +115,27 @@ function InitialInfoScreen() {
             <td>Copy of Application Pack Receipt</td>
           </tr>
         </tbody>
+        <tbody>
+          <tr>
+            <td>14</td>
+            <td>A copy of the Joint Venture Agreement</td>
+          </tr>
+        </tbody>
+        <tbody>
+          <tr>
+            <td>15</td>
+            <td>A copy of strategic plan for IGCs in a JVC</td>
+          </tr>
+        </tbody>
+        <tbody>
+          <tr>
+            <td>16</td>
+            <td>A copy of strategic plan for IGCs in a JVC</td>
+          </tr>
+        </tbody>
       </Table>
-      <FormText>**Requirements 8-10 are not applicable to newly registered External Companies</FormText>
-      <br></br>
+      <FormText>**Requirements 8-10 are not applicable to newly registered External Companies</FormText><br />
+      <FormText>**Requirements 14-16 is applicable to only Joint Venture Companies</FormText>
       <br></br>
       <hr></hr>
       <h3>Contact of Relevant Departments</h3>

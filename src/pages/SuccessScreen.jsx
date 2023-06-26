@@ -4,8 +4,12 @@ import FinancialCapability from "./FinancialCapability";
 import LocalContent from "./LocalContent2";
 import Miscellaneous from "./Miscellaneous";
 import PlansAndProgrammes from "./PlansAndProgrammes";
+import { useEffect } from 'react';
 
 export default function Success({ data, errors }) {
+	useEffect(() => {
+		window.scrollTo(0,0)
+	}, [])
 	return (
     <div>
       <div id='noprint'>
