@@ -42,7 +42,7 @@ function FileInput({ value = [], onChange }) {
 						? value?.reduce(
 								(acc, each, i) =>
 									`${acc} ${each?.fileName}${
-										i > 0 ? "," : ""
+										i < value.length - 1 ? "," : ""
 									}`,
 
 								""

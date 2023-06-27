@@ -106,18 +106,18 @@ export const miscFilesDesc = z.object({
 		getMiscFilesValidation(
 			fieldNames.miscFiles.companyProfileAndBusinessPlan
 		),
-	[fieldNames.miscFiles.EPAPermit]: getMiscFilesValidation(
-		fieldNames.miscFiles.EPAPermit
-	),
-	[fieldNames.miscFiles.airOperatorCertificate]: getMiscFilesValidation(
-		fieldNames.miscFiles.airOperatorCertificate
-	),
-	[fieldNames.miscFiles.aviationLicense]: getMiscFilesValidation(
-		fieldNames.miscFiles.aviationLicense
-	),
-	[fieldNames.miscFiles.fdaHygieneCertificate]: getMiscFilesValidation(
-		fieldNames.miscFiles.fdaHygieneCertificate
-	),
+	// [fieldNames.miscFiles.EPAPermit]: getMiscFilesValidation(
+	// 	fieldNames.miscFiles.EPAPermit
+	// ),
+	// [fieldNames.miscFiles.airOperatorCertificate]: getMiscFilesValidation(
+	// 	fieldNames.miscFiles.airOperatorCertificate
+	// ),
+	// [fieldNames.miscFiles.aviationLicense]: getMiscFilesValidation(
+	// 	fieldNames.miscFiles.aviationLicense
+	// ),
+	// [fieldNames.miscFiles.fdaHygieneCertificate]: getMiscFilesValidation(
+	// 	fieldNames.miscFiles.fdaHygieneCertificate
+	// ),
 	[fieldNames.miscFiles.copyOfApplicationPackReceipt]: getMiscFilesValidation(
 		fieldNames.miscFiles.copyOfApplicationPackReceipt
 	),

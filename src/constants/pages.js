@@ -97,7 +97,6 @@ const pages = [
 				detailsOfExperienceDesc.safeParse(
 					data?.[fieldNames.detailsOfExperience._]
 				);
-					console.log({finCapabilityErrors, mgtAndTechnicalErrors, detailsOfExperienceErrors})
 			if (
         !finCapabilityErrors
         &&
@@ -247,12 +246,12 @@ const pages = [
 			);
 			const { error: coverPageErrors } = coverPageDesc.safeParse(
 				data?.[fieldNames.coverPage]
-			);
-
+      );
+      
 			const { error: miscErrors } = miscFilesDesc.safeParse(
 				data?.[fieldNames.miscFiles._]
-			);
-
+      );
+      
 			if (
 				!healthSafetySecurityEnvErrors &&
 				!declarationErrors &&

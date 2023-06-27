@@ -6,7 +6,6 @@ import { fieldNames } from "../constants.mjs";
 
 //Incomplete work done for part 5 and 6
 
-
 const getHsseErrors = (errors) => {
 	return errors?.[fieldNames.healthSafetySecurityEnv._]?.[
 		fieldNames.healthSafetySecurityEnv.hssePolicyAndObj
@@ -62,15 +61,15 @@ function Miscellaneous({ data, setData, errors, setErrors }) {
 
 	return (
 		<Form>
-			<Heading>
-				Part Five - Health, Safety And Environment
-			</Heading>
+			<Heading>Part Five - Health, Safety And Environment</Heading>
 			<hr />
 			<FormGroup>
 				<FormLabel>
 					Provide a signed copy of the Company's HSE Policy and
-					Objectives and plan* <br/>
-					<span style={{fontWeight:"bold"}}>Kindly attach relevant certificates if any</span>
+					Objectives and plan* <br />
+					<span style={{ fontWeight: "bold" }}>
+						Kindly attach relevant certificates if any
+					</span>
 				</FormLabel>
 				<Errors errors={getHsseErrors(errors)} />
 				<FileInput
@@ -193,7 +192,10 @@ function Miscellaneous({ data, setData, errors, setErrors }) {
 			</FormGroup>
 			{/* current audited financial reports */}
 			<FormGroup>
-				<FormLabel>Current Audited Financial Reports/ Projected Revenue for Upstream Petroleum Activities</FormLabel>
+				<FormLabel>
+					Current Audited Financial Reports/ Projected Revenue for
+					Upstream Petroleum Activities
+				</FormLabel>
 				<Errors
 					errors={getMiscFilesErrors(
 						fieldNames.miscFiles
@@ -299,8 +301,8 @@ function Miscellaneous({ data, setData, errors, setErrors }) {
 					}}
 				/>
 			</FormGroup>
-					{/* copy of application pack receipt */}
-					<FormGroup>
+			{/* copy of application pack receipt */}
+			<FormGroup>
 				<FormLabel>Copy of application pack receipt</FormLabel>
 				<Errors
 					errors={getMiscFilesErrors(
@@ -353,14 +355,34 @@ function Miscellaneous({ data, setData, errors, setErrors }) {
 					}}
 				/>
 			</FormGroup>
-			<Errors
-					errors={[
-						"we should probably remove the epa etc and replace with copies of valid ....",
-					]}
-				/>
-			{/* EPA permit */}
 
 			<FormGroup>
+				<FormLabel>Other valid files and certificates</FormLabel>
+				<Errors
+					errors={getMiscFilesErrors(
+						fieldNames.miscFiles.otherValidFilesAndCertificates,
+						errors
+					)}
+				/>
+				<FileInput
+					value={
+						data[fieldNames.miscFiles._][
+							fieldNames.miscFiles.otherValidFilesAndCertificates
+						]
+					}
+					onChange={(files) => {
+						const field =
+							fieldNames.miscFiles.otherValidFilesAndCertificates;
+						const value = [];
+						updateMiscFilesErrors(field, value, setErrors);
+						onChange(field, files);
+					}}
+				/>
+			</FormGroup>
+
+			{/* EPA permit */}
+
+			{/* <FormGroup>
 				<FormLabel>EPA permit</FormLabel>
 				<Errors
 					errors={getMiscFilesErrors(
@@ -381,9 +403,9 @@ function Miscellaneous({ data, setData, errors, setErrors }) {
 						onChange(fieldNames.miscFiles.EPAPermit, files);
 					}}
 				/>
-			</FormGroup>
+			</FormGroup> */}
 			{/* air operator certificate */}
-			<FormGroup>
+			{/* <FormGroup>
 				<FormLabel>Air Operator Certificate</FormLabel>
 				<Errors
 					errors={getMiscFilesErrors(
@@ -408,9 +430,9 @@ function Miscellaneous({ data, setData, errors, setErrors }) {
 						);
 					}}
 				/>
-			</FormGroup>
+			</FormGroup> */}
 			{/* aviation license */}
-			<FormGroup>
+			{/* <FormGroup>
 				<FormLabel>Aviation License</FormLabel>
 				<Errors
 					errors={getMiscFilesErrors(
@@ -431,9 +453,9 @@ function Miscellaneous({ data, setData, errors, setErrors }) {
 						onChange(fieldNames.miscFiles.aviationLicense, files);
 					}}
 				/>
-			</FormGroup>
+			</FormGroup> */}
 			{/* FDA hygiene certificate */}
-			<FormGroup>
+			{/* <FormGroup>
 				<FormLabel>FDA hygiene certificate</FormLabel>
 				<Errors
 					errors={getMiscFilesErrors(
@@ -458,12 +480,10 @@ function Miscellaneous({ data, setData, errors, setErrors }) {
 						);
 					}}
 				/>
-			</FormGroup>
+			</FormGroup> */}
 			<Errors
-					errors={[
-						"the three specified uploads for a joint venture",
-					]}
-				/>
+				errors={["the three specified uploads for a joint venture"]}
+			/>
 
 			<br />
 			<h6>
@@ -481,14 +501,15 @@ function Miscellaneous({ data, setData, errors, setErrors }) {
 					than five years or to both.
 				</p>
 				<p>
-					2. A citizen who acts as a front or connives with a foreign 
-					citizen or company to deceive the Commission as representing 
-					an indigenous Ghanaian company to achieve the local content 
-					requirement under these Regulations, commits an offence and 
-					is liable on summary conviction to a fine of not less than 
-					one hundred thousand penalty units and not more than two hundred 
-					and fifty thousand penalty units or to a term of imprisonment of
-					not less than one year and not more than two years or to both.
+					2. A citizen who acts as a front or connives with a foreign
+					citizen or company to deceive the Commission as representing
+					an indigenous Ghanaian company to achieve the local content
+					requirement under these Regulations, commits an offence and
+					is liable on summary conviction to a fine of not less than
+					one hundred thousand penalty units and not more than two
+					hundred and fifty thousand penalty units or to a term of
+					imprisonment of not less than one year and not more than two
+					years or to both.
 				</p>
 			</h6>
 
@@ -504,7 +525,6 @@ function Miscellaneous({ data, setData, errors, setErrors }) {
 					the declaration form to fill <br />
 					<br></br>
 					Please upload the filled and signed declaration form *
-					
 				</FormLabel>
 				<Errors errors={errors?.[fieldNames.declaration]} />
 				<FileInput

@@ -30,6 +30,7 @@ const aviationLicense = "aviationLicense";
 const fdaHygieneCertificate = "fdaHygieneCertificate";
 const copyOfApplicationPackReceipt = "copyOfApplicationPackReceipt";
 const coverPage = "coverPage";
+const otherValidFilesAndCertificates = "otherValidFilesAndCertificates";
 
 export const fieldNames = {
 	// PAGE 1 - CORPORATE STRUCTURE AND SERVICES
@@ -84,8 +85,8 @@ export const fieldNames = {
 			email: "email",
 			contact: "contact",
 			nationality: "nationality",
-      position: "position",
-      occupation: "occupation",
+			position: "position",
+			occupation: "occupation",
 		},
 		activities: "activities",
 		corporateStructure: "corporateStructure",
@@ -162,6 +163,7 @@ export const fieldNames = {
 		aviationLicense: aviationLicense,
 		fdaHygieneCertificate: fdaHygieneCertificate,
 		copyOfApplicationPackReceipt: copyOfApplicationPackReceipt,
+		otherValidFilesAndCertificates: otherValidFilesAndCertificates,
 	},
 	// applicant declaration
 	declaration: "declaration",
@@ -183,11 +185,12 @@ export const fieldNames = {
 		validTaxClearanceCertificate: validTaxClearanceCertificate,
 		vatCertificate: vatCertificate,
 		originalSsnitClearanceCertificate: validSSNITClearanceCertificate,
-		companyProfileAndBusinessPlan: companyProfileAndBusinessPlan,
-		EPAPermit: epaPermit,
-		airOperatorCertificate: airOperatorCertificate,
-		aviationLicense: aviationLicense,
-		fdaHygieneCertificate: fdaHygieneCertificate,
+    companyProfileAndBusinessPlan: companyProfileAndBusinessPlan,
+    otherValidFilesAndCertificates: otherValidFilesAndCertificates,
+		// EPAPermit: epaPermit,
+		// airOperatorCertificate: airOperatorCertificate,
+		// aviationLicense: aviationLicense,
+		// fdaHygieneCertificate: fdaHygieneCertificate,
 		copyOfApplicationPackReceipt: copyOfApplicationPackReceipt,
 	},
 };
@@ -359,10 +362,11 @@ export const initialErrorState = {
 		[fieldNames.miscFiles.vatCertificate]: [],
 		[fieldNames.miscFiles.validSSNITClearanceCertificate]: [],
 		[fieldNames.miscFiles.companyProfileAndBusinessPlan]: [],
-		[fieldNames.miscFiles.EPAPermit]: [],
-		[fieldNames.miscFiles.airOperatorCertificate]: [],
-		[fieldNames.miscFiles.aviationLicense]: [],
-		[fieldNames.miscFiles.fdaHygieneCertificate]: [],
+		[fieldNames.miscFiles.otherValidFilesAndCertificates]: [],
+		// [fieldNames.miscFiles.EPAPermit]: [],
+		// [fieldNames.miscFiles.airOperatorCertificate]: [],
+		// [fieldNames.miscFiles.aviationLicense]: [],
+		// [fieldNames.miscFiles.fdaHygieneCertificate]: [],
 		[fieldNames.miscFiles.copyOfApplicationPackReceipt]: [],
 	},
 
@@ -470,8 +474,8 @@ export const initialState = {
 				[fieldNames.corporateStructureAndServices.executiveDirectors
 					.email]: "",
 				[fieldNames.corporateStructureAndServices.executiveDirectors
-          .nationality]: "",
-        occupation: "",
+					.nationality]: "",
+				occupation: "",
 				[fieldNames.corporateStructureAndServices.executiveDirectors
 					.position]: "",
 				isEditing: true,
@@ -622,14 +626,17 @@ export const initialState = {
 		[fieldNames.miscFiles.companyProfileAndBusinessPlan]: [
 			{ fileName: "", file: "" },
 		],
-		[fieldNames.miscFiles.EPAPermit]: [{ fileName: "", file: "" }],
-		[fieldNames.miscFiles.airOperatorCertificate]: [
+		[fieldNames.miscFiles.otherValidFilesAndCertificates]: [
 			{ fileName: "", file: "" },
 		],
-		[fieldNames.miscFiles.aviationLicense]: [{ fileName: "", file: "" }],
-		[fieldNames.miscFiles.fdaHygieneCertificate]: [
-			{ fileName: "", file: "" },
-		],
+		// [fieldNames.miscFiles.EPAPermit]: [{ fileName: "", file: "" }],
+		// [fieldNames.miscFiles.airOperatorCertificate]: [
+		// 	{ fileName: "", file: "" },
+		// ],
+		// [fieldNames.miscFiles.aviationLicense]: [{ fileName: "", file: "" }],
+		// [fieldNames.miscFiles.fdaHygieneCertificate]: [
+		// 	{ fileName: "", file: "" },
+		// ],
 		[fieldNames.miscFiles.copyOfApplicationPackReceipt]: [
 			{ fileName: "", file: "" },
 		],
@@ -654,11 +661,12 @@ export const initialState = {
 		[fieldNames.checkList.validTaxClearanceCertificate]: false,
 		[fieldNames.checkList.vatCertificate]: false,
 		[fieldNames.checkList.originalSsnitClearanceCertificate]: false,
-		[fieldNames.checkList.companyProfileAndBusinessPlan]: false,
-		[fieldNames.checkList.EPAPermit]: false,
-		[fieldNames.checkList.airOperatorCertificate]: false,
-		[fieldNames.checkList.aviationLicense]: false,
-		[fieldNames.checkList.fdaHygieneCertificate]: false,
+    [fieldNames.checkList.companyProfileAndBusinessPlan]: false,
+    [fieldNames.checkList.otherValidFilesAndCertificates]: false,
+		// [fieldNames.checkList.EPAPermit]: false,
+		// [fieldNames.checkList.airOperatorCertificate]: false,
+		// [fieldNames.checkList.aviationLicense]: false,
+		// [fieldNames.checkList.fdaHygieneCertificate]: false,
 		[fieldNames.checkList.copyOfApplicationPackReceipt]: false,
 	},
 };

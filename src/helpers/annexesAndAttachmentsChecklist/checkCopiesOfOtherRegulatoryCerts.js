@@ -1,17 +1,20 @@
 export default function checkCopiesOfOtherRegulatoryCerts(data) {
-	const {
-		airOperatorCertificate,
-		aviationLicense,
-		fdaHygieneCertificate,
-		epaPermit,
-	} = data.miscFiles;
 
-	return (
-		fileIsNotEmpty(airOperatorCertificate) &&
-		fileIsNotEmpty(aviationLicense) &&
-		fileIsNotEmpty(fdaHygieneCertificate) &&
-		fileIsNotEmpty(epaPermit)
-	);
+  return fileIsNotEmpty(data.miscFiles.otherValidFilesAndCertificates);
+
+	// const {
+	// 	airOperatorCertificate,
+	// 	aviationLicense,
+	// 	fdaHygieneCertificate,
+	// 	epaPermit,
+	// } = data.miscFiles;
+
+	// return (
+	// 	fileIsNotEmpty(airOperatorCertificate) &&
+	// 	fileIsNotEmpty(aviationLicense) &&
+	// 	fileIsNotEmpty(fdaHygieneCertificate) &&
+	// 	fileIsNotEmpty(epaPermit)
+	// );
 }
 
 function fileIsNotEmpty(fileState) {
