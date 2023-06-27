@@ -1,6 +1,7 @@
 export const data =
 {
 	"corporateStructureAndServices": {
+    "companyIsJointVenture": true,
 	  "applicantName": "tester",
 	  "dateOfIncorporation": "2023-04-27",
 	  "placeOfIncorporation": "tester",

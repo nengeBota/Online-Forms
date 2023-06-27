@@ -22,7 +22,6 @@ import {
 	formatSingleexecutiveDirectorsErrors,
 } from "../helpers/formatCorporateStructureAndServicesErrors";
 
-
 const getValue = (data) => {
 	const fields = data[fieldNames.corporateStructureAndServices._];
 	const applicantName =
@@ -58,6 +57,8 @@ const getValue = (data) => {
 		fields[fieldNames.corporateStructureAndServices.executiveDirectors._];
 	const activities =
 		fields[fieldNames.corporateStructureAndServices.activities];
+	const companyIsJVA =
+		fields[fieldNames.corporateStructureAndServices.companyIsJointVenture];
 
 	return {
 		applicantName,
@@ -76,6 +77,7 @@ const getValue = (data) => {
 		permitCategory,
 		executiveDirectors,
 		activities,
+		companyIsJVA,
 	};
 };
 
@@ -110,6 +112,7 @@ function CorporateStructureAndServices({ data, setData, errors, setErrors }) {
 		permitCategory,
 		executiveDirectors,
 		activities,
+		companyIsJVA,
 	} = getValue(data);
 
 	const onChange = (field, value) => {
@@ -186,18 +189,36 @@ function CorporateStructureAndServices({ data, setData, errors, setErrors }) {
 		}));
 	};
 
-	const updateContactPersonErrors = (field, value) => {
-		setErrors((prev) => ({
+	const updateIsCompanyJointVenture = (companyIsJointVenture) => {
+		setData((prev) => ({
 			...prev,
-			[f._]: {
-				...prev[f._],
-				[f.contactPerson._]: {
-					...prev[f._][f.contactPerson._],
-					[field]: value,
-				},
+			corporateStructureAndServices: {
+				...prev.corporateStructureAndServices,
+				companyIsJointVenture,
+			},
+			miscFiles: {
+				...prev.miscFiles,
+				companyIsJointVenture,
+			},
+			checkList: {
+				...prev.checkList,
+				companyIsJointVenture,
 			},
 		}));
 	};
+
+	// const updateContactPersonErrors = (field, value) => {
+	// 	setErrors((prev) => ({
+	// 		...prev,
+	// 		[f._]: {
+	// 			...prev[f._],
+	// 			[f.contactPerson._]: {
+	// 				...prev[f._][f.contactPerson._],
+	// 				[field]: value,
+	// 			},
+	// 		},
+	// 	}));
+	// };
 
 	return (
 		<div>
@@ -482,6 +503,30 @@ function CorporateStructureAndServices({ data, setData, errors, setErrors }) {
 				</Section>
 
 				<Section>
+					<Form.Label>Is the company a Joint Venture?</Form.Label>{" "}
+					<br />
+					<Form.Check
+						inline
+						label="Company is a Joint Venture"
+						type="radio"
+						checked={companyIsJVA}
+						onChange={() => {
+							updateIsCompanyJointVenture(true);
+						}}
+					/>
+					<br />
+					<Form.Check
+						inline
+						label="Company is NOT a Joint Venture"
+						type="radio"
+						checked={!companyIsJVA}
+						onChange={() => {
+							updateIsCompanyJointVenture(false);
+						}}
+					/>
+				</Section>
+
+				<Section>
 					<Form.Label>
 						Details of Contact Person or Persons (Note: JV companies
 						should include contact details for both parties)
@@ -562,6 +607,12 @@ function CorporateStructureAndServices({ data, setData, errors, setErrors }) {
 							);
 						}}
 						errors={errors?.[f._]?.[f.contactPerson._]}
+					/>
+					<Errors
+						errors={
+							errors?.corporateStructureAndServices
+								?.contactPersonGeneralErrors ?? []
+						}
 					/>
 				</Section>
 
@@ -763,7 +814,7 @@ function CorporateStructureAndServices({ data, setData, errors, setErrors }) {
 						onBlur={() => {
 							const { error } = getValidation(
 								f.beneficial._
-							)?.safeParse(data[f._][f.beneficial._]);
+							).safeParse(data[f._][f.beneficial._]);
 
 							updateErrors(
 								f.beneficial._,

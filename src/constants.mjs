@@ -49,7 +49,8 @@ export const fieldNames = {
 			GHpost: "GHpost",
 		},
 		emailAddress: "emailAddress",
-		website: "website",
+    website: "website",
+    companyIsJointVenture: 'companyIsJointVenture',
 
 		//made some change here
 		contactPerson: {
@@ -210,7 +211,8 @@ export const initialErrorState = {
 		page7: false,
 	},
 	// PAGE 1 - CORPORATE STRUCTURE AND SERVICES
-	[fieldNames.corporateStructureAndServices._]: {
+  [fieldNames.corporateStructureAndServices._]: {
+    [fieldNames.corporateStructureAndServices.companyIsJointVenture]: [],
 		[fieldNames.corporateStructureAndServices.applicantName]: [],
 		[fieldNames.corporateStructureAndServices.dateOfIncorporation]: [],
 		[fieldNames.corporateStructureAndServices.placeOfIncorporation]: [],
@@ -233,6 +235,7 @@ export const initialErrorState = {
 		[fieldNames.corporateStructureAndServices.website]: [],
 
 		//made some change here
+    contactPersonGeneralErrors: [],
 		[fieldNames.corporateStructureAndServices.contactPerson._]: [
 			{
 				[fieldNames.corporateStructureAndServices.contactPerson.name]:
@@ -399,7 +402,8 @@ export const initialErrorState = {
 
 export const initialState = {
 	// PAGE 1 - CORPORATE STRUCTURE AND SERVICES
-	[fieldNames.corporateStructureAndServices._]: {
+  [fieldNames.corporateStructureAndServices._]: {
+    [fieldNames.corporateStructureAndServices.companyIsJointVenture]: false,
 		[fieldNames.corporateStructureAndServices.applicantName]: "",
 		[fieldNames.corporateStructureAndServices.dateOfIncorporation]: "",
 		[fieldNames.corporateStructureAndServices.placeOfIncorporation]: "",

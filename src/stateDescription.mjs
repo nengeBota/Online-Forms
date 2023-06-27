@@ -20,9 +20,35 @@ const finCapabilityValidations = validations[fieldNames.finCapability._];
 const getMiscFilesValidation = (field) =>
 	validations[fieldNames.miscFiles._][field];
 
-export const corporateStructureAndServicesDesc = z.object({
-	...corporateStructureValidations,
-});
+export const corporateStructureAndServicesDesc = z
+	.object({
+		...corporateStructureValidations,
+	})
+	.superRefine((data, ctx) => {
+		const { companyIsJointVenture = false, contactPerson } = data;
+		console.log({ contactPerson, companyIsJointVenture, data });
+
+		if (companyIsJointVenture) {
+			if (!Array.isArray(contactPerson)) {
+				ctx.addIssue({
+					code: z.ZodIssueCode.invalid_type,
+          message: "Should be a list of contact persons",
+          path: ['contactPerson']
+				});
+
+				return;
+			}
+
+			if (contactPerson.length < 2) {
+				ctx.addIssue({
+          code: z.ZodIssueCode.too_small,
+          path: ['contactPerson'],
+					message:
+						"Joint Ventures should provide at least 2 contact persons; one from each party",
+				});
+			}
+		}
+	});
 
 export const financialCapabilityDesc = z.object({
 	[fieldNames.finCapability.whatApplies]:
@@ -77,95 +103,117 @@ export const healthSafetySecurityEnvDesc = z.object({
 	[fieldNames.healthSafetySecurityEnv.hssePolicyAndObj]: file,
 });
 export const declarationDesc = file;
-export const miscFilesDesc = z.object({
-	[fieldNames.miscFiles.certificateOfIncorporation]: getMiscFilesValidation(
-		fieldNames.miscFiles.certificateOfIncorporation
-	),
-	[fieldNames.miscFiles.certificateToCommenceBusiness]:
-		getMiscFilesValidation(
-			fieldNames.miscFiles.certificateToCommenceBusiness
+export const miscFilesDesc = z
+	.object({
+		[fieldNames.miscFiles.certificateOfIncorporation]:
+			getMiscFilesValidation(
+				fieldNames.miscFiles.certificateOfIncorporation
+			),
+		[fieldNames.miscFiles.certificateToCommenceBusiness]:
+			getMiscFilesValidation(
+				fieldNames.miscFiles.certificateToCommenceBusiness
+			),
+		[fieldNames.miscFiles.companyRegulationsDocument]:
+			getMiscFilesValidation(
+				fieldNames.miscFiles.companyRegulationsDocument
+			),
+		[fieldNames.miscFiles.currentAuditedFinReportsOrProjectedRevenue]:
+			getMiscFilesValidation(
+				fieldNames.miscFiles.currentAuditedFinReportsOrProjectedRevenue
+			),
+		[fieldNames.miscFiles.validTaxClearanceCertificate]:
+			getMiscFilesValidation(
+				fieldNames.miscFiles.validTaxClearanceCertificate
+			),
+		[fieldNames.miscFiles.vatCertificate]: getMiscFilesValidation(
+			fieldNames.miscFiles.vatCertificate
 		),
-	[fieldNames.miscFiles.companyRegulationsDocument]: getMiscFilesValidation(
-		fieldNames.miscFiles.companyRegulationsDocument
-	),
-	[fieldNames.miscFiles.currentAuditedFinReportsOrProjectedRevenue]:
-		getMiscFilesValidation(
-			fieldNames.miscFiles.currentAuditedFinReportsOrProjectedRevenue
-		),
-	[fieldNames.miscFiles.validTaxClearanceCertificate]: getMiscFilesValidation(
-		fieldNames.miscFiles.validTaxClearanceCertificate
-	),
-	[fieldNames.miscFiles.vatCertificate]: getMiscFilesValidation(
-		fieldNames.miscFiles.vatCertificate
-	),
-	[fieldNames.miscFiles.validSSNITClearanceCertificate]:
-		getMiscFilesValidation(
-			fieldNames.miscFiles.validSSNITClearanceCertificate
-		),
-	[fieldNames.miscFiles.companyProfileAndBusinessPlan]:
-		getMiscFilesValidation(
-			fieldNames.miscFiles.companyProfileAndBusinessPlan
-		),
-	// [fieldNames.miscFiles.EPAPermit]: getMiscFilesValidation(
-	// 	fieldNames.miscFiles.EPAPermit
-	// ),
-	// [fieldNames.miscFiles.airOperatorCertificate]: getMiscFilesValidation(
-	// 	fieldNames.miscFiles.airOperatorCertificate
-	// ),
-	// [fieldNames.miscFiles.aviationLicense]: getMiscFilesValidation(
-	// 	fieldNames.miscFiles.aviationLicense
-	// ),
-	// [fieldNames.miscFiles.fdaHygieneCertificate]: getMiscFilesValidation(
-	// 	fieldNames.miscFiles.fdaHygieneCertificate
-	// ),
-	[fieldNames.miscFiles.copyOfApplicationPackReceipt]: getMiscFilesValidation(
-		fieldNames.miscFiles.copyOfApplicationPackReceipt
-	),
-});
+		[fieldNames.miscFiles.validSSNITClearanceCertificate]:
+			getMiscFilesValidation(
+				fieldNames.miscFiles.validSSNITClearanceCertificate
+			),
+		[fieldNames.miscFiles.companyProfileAndBusinessPlan]:
+			getMiscFilesValidation(
+				fieldNames.miscFiles.companyProfileAndBusinessPlan
+			),
+		// [fieldNames.miscFiles.EPAPermit]: getMiscFilesValidation(
+		// 	fieldNames.miscFiles.EPAPermit
+		// ),
+		// [fieldNames.miscFiles.airOperatorCertificate]: getMiscFilesValidation(
+		// 	fieldNames.miscFiles.airOperatorCertificate
+		// ),
+		// [fieldNames.miscFiles.aviationLicense]: getMiscFilesValidation(
+		// 	fieldNames.miscFiles.aviationLicense
+		// ),
+		// [fieldNames.miscFiles.fdaHygieneCertificate]: getMiscFilesValidation(
+		// 	fieldNames.miscFiles.fdaHygieneCertificate
+		// ),
+		[fieldNames.miscFiles.copyOfApplicationPackReceipt]:
+			getMiscFilesValidation(
+				fieldNames.miscFiles.copyOfApplicationPackReceipt
+			),
+	})
+	.superRefine((data, ctx) => {
+		const { companyIsJointVenture } = data;
+
+		/**
+		 * if company is joint venture, then expect the jv file uploads to not be empty
+		 */
+	});
 export const coverPageDesc = file;
-export const checkListDesc = z.object({
-	[fieldNames.checkList.coverPage]: mustBeTrue,
-	[fieldNames.checkList.applicationForm]: mustBeTrue,
-	[fieldNames.checkList.certificateOfIncorporation]: mustBeTrue,
-	[fieldNames.checkList.certificateToCommenceBusiness]: mustBeTrue,
-	[fieldNames.checkList.companyRegulations]: mustBeTrue,
-	[fieldNames.checkList.signedHssePolicyAndObj]: mustBeTrue,
-	[fieldNames.checkList.currentAuditedFinReportsOrProjectedRevenue]:
-		mustBeTrue,
-	[fieldNames.checkList.validTaxClearanceCertificate]: z.boolean(),
-	[fieldNames.checkList.vatCertificate]: z.boolean(),
-	[fieldNames.checkList.originalSsnitClearanceCertificate]: z.boolean(),
-	[fieldNames.checkList.companyProfileAndBusinessPlan]: mustBeTrue,
-	[fieldNames.checkList.copyOfApplicationPackReceipt]: mustBeTrue,
-	[fieldNames.checkList.EPAPermit]: mustBeTrue,
-	[fieldNames.checkList.airOperatorCertificate]: mustBeTrue,
-	[fieldNames.checkList.aviationLicense]: mustBeTrue,
-	[fieldNames.checkList.fdaHygieneCertificate]: mustBeTrue,
-});
+export const checkListDesc = z
+	.object({
+		[fieldNames.checkList.coverPage]: mustBeTrue,
+		[fieldNames.checkList.applicationForm]: mustBeTrue,
+		[fieldNames.checkList.certificateOfIncorporation]: mustBeTrue,
+		[fieldNames.checkList.certificateToCommenceBusiness]: mustBeTrue,
+		[fieldNames.checkList.companyRegulations]: mustBeTrue,
+		[fieldNames.checkList.signedHssePolicyAndObj]: mustBeTrue,
+		[fieldNames.checkList.currentAuditedFinReportsOrProjectedRevenue]:
+			mustBeTrue,
+		[fieldNames.checkList.validTaxClearanceCertificate]: z.boolean(),
+		[fieldNames.checkList.vatCertificate]: z.boolean(),
+		[fieldNames.checkList.originalSsnitClearanceCertificate]: z.boolean(),
+		[fieldNames.checkList.companyProfileAndBusinessPlan]: mustBeTrue,
+		[fieldNames.checkList.copyOfApplicationPackReceipt]: mustBeTrue,
+		// [fieldNames.checkList.EPAPermit]: mustBeTrue,
+		// [fieldNames.checkList.airOperatorCertificate]: mustBeTrue,
+		// [fieldNames.checkList.aviationLicense]: mustBeTrue,
+		// [fieldNames.checkList.fdaHygieneCertificate]: mustBeTrue,
+	})
+	.superRefine((data, ctx) => {
+		const { companyIsJointVenture } = data;
 
-const state = z.object({
-	[fieldNames.corporateStructureAndServices._]:
-		corporateStructureAndServicesDesc,
+		/**
+		 * if company is joint venture, then expect
+		 */
+	});
 
-	[fieldNames.finCapability._]: financialCapabilityDesc,
+const state = z
+  .object({
+    [fieldNames.corporateStructureAndServices._]:
+      corporateStructureAndServicesDesc,
 
-	[fieldNames.mgtAndTechnicalCompetencies._]: mgtAndTechnicalCompetenciesDesc,
+    [fieldNames.finCapability._]: financialCapabilityDesc,
 
-	[fieldNames.detailsOfExperience._]: detailsOfExperienceDesc,
+    [fieldNames.mgtAndTechnicalCompetencies._]:
+      mgtAndTechnicalCompetenciesDesc,
 
-	[fieldNames.orgDevProgramAndBudget._]: orgDevProgramAndBudgetDesc,
+    [fieldNames.detailsOfExperience._]: detailsOfExperienceDesc,
 
-	[fieldNames.localContent._]: localContentSchema,
+    [fieldNames.orgDevProgramAndBudget._]: orgDevProgramAndBudgetDesc,
 
-	[fieldNames.healthSafetySecurityEnv._]: healthSafetySecurityEnvDesc,
+    [fieldNames.localContent._]: localContentSchema,
 
-	[fieldNames.miscFiles._]: miscFilesDesc,
+    [fieldNames.healthSafetySecurityEnv._]: healthSafetySecurityEnvDesc,
 
-	[fieldNames.declaration]: declarationDesc,
+    [fieldNames.miscFiles._]: miscFilesDesc,
 
-	[fieldNames.coverPage]: coverPageDesc,
+    [fieldNames.declaration]: declarationDesc,
 
-	[fieldNames.checkList._]: checkListDesc,
-});
+    [fieldNames.coverPage]: coverPageDesc,
+
+    [fieldNames.checkList._]: checkListDesc,
+  });
 
 export default state;

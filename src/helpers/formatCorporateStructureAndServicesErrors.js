@@ -130,13 +130,14 @@ export default function formatCorporateStructureAndServicesErrors(
 	currentState
 ) {
 	const errors = corporateStructureAndServicesErrors;
-	const state = currentState[fieldNames.corporateStructureAndServices._];
-
+  const state = currentState[fieldNames.corporateStructureAndServices._];
+  
 	return {
 		[fieldNames.corporateStructureAndServices.applicantName]: getErrorValue(
 			corporateStructure.applicantName,
 			errors
-		),
+    ),
+    contactPersonGeneralErrors: errors?.contactPerson?._errors ?? [],
 		[fieldNames.corporateStructureAndServices.dateOfIncorporation]:
 			getErrorValue(corporateStructure.dateOfIncorporation, errors),
 		[fieldNames.corporateStructureAndServices.placeOfIncorporation]:

@@ -38,7 +38,8 @@ const validations = {
 				nonEmptyString,
 			[corporateStructureAndServices.contactDetails.GHpost]:
 				nonEmptyString,
-		}),
+    }),
+    [corporateStructureAndServices.companyIsJointVenture]: z.boolean(),
 
 		[corporateStructureAndServices.emailAddress]: z.string().email(),
 		[corporateStructureAndServices.website]: optional(
