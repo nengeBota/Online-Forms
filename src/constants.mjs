@@ -516,7 +516,7 @@ export const initialState = {
 				file: "",
 			},
 		],
-		[fieldNames.mgtAndTechnicalCompetencies.requiredExpertise]: "",
+		//[fieldNames.mgtAndTechnicalCompetencies.requiredExpertise]: "",
 		[fieldNames.mgtAndTechnicalCompetencies.sourcesOfEquipment]: "",
 	},
 
@@ -524,20 +524,20 @@ export const initialState = {
 	[fieldNames.detailsOfExperience._]: {
 		[fieldNames.detailsOfExperience.companyExperience]: "",
 		[fieldNames.detailsOfExperience.countries]: "",
-		[fieldNames.detailsOfExperience.contractsExecuted._]: [
-			{
-				[fieldNames.detailsOfExperience.contractsExecuted
-					.isEditing]: true,
-				[fieldNames.detailsOfExperience.contractsExecuted
-					.descriptionOfContract]: "",
-				[fieldNames.detailsOfExperience.contractsExecuted
-					.nameOfCompanyWorkWasDoneFor]: "",
-				[fieldNames.detailsOfExperience.contractsExecuted
-					.contractDuration]: "",
-				[fieldNames.detailsOfExperience.contractsExecuted
-					.contractValue]: "",
-			},
-		],
+		// [fieldNames.detailsOfExperience.contractsExecuted._]: [
+		// 	{
+		// 		[fieldNames.detailsOfExperience.contractsExecuted
+		// 			.isEditing]: true,
+		// 		[fieldNames.detailsOfExperience.contractsExecuted
+		// 			.descriptionOfContract]: "",
+		// 		[fieldNames.detailsOfExperience.contractsExecuted
+		// 			.nameOfCompanyWorkWasDoneFor]: "",
+		// 		[fieldNames.detailsOfExperience.contractsExecuted
+		// 			.contractDuration]: "",
+		// 		[fieldNames.detailsOfExperience.contractsExecuted
+		// 			.contractValue]: "",
+		// 	},
+		// ],
 	},
 
 	// part 3 - plans and programmes

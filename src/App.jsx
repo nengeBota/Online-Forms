@@ -27,6 +27,7 @@ import state, {
 } from "./stateDescription.mjs";
 import formatAllErrorsForState from "./helpers/formatAllErrorsForState";
 import pages from "./constants/pages";
+import { data as testData } from "./constants/testData";
 
 async function submit(values, setShowSubmittingModal, goToNextPage) {
 	const API_ENDPOINT = process.env.REACT_APP_API_ENDPOINT;
@@ -84,6 +85,17 @@ useEffect(() => {
 			<div>
 				<Image src="/logo.png" />
 			</div>
+
+			<button type='button' style={{
+				position: 'absolute',
+				top: 10,
+				right: 10,
+				background: 'transparent',
+				border: '5px solid black',
+				
+			}}
+			onClick={() => {setData(testData)}}
+			>Auto-populate all fields</button>
 
 			<CurrentPage
 				data={data}

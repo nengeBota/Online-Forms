@@ -1,7 +1,7 @@
 import { fieldNames } from "./constants.mjs";
 
 function prepareForSubmission(data) {
-	return JSON.stringify({
+	const preparedData = {
 		...data,
 		[fieldNames.coverPage]: data.coverPage[0],
 
@@ -12,7 +12,11 @@ function prepareForSubmission(data) {
 					fieldNames.finCapability.whatAppliesUploadedDocument
 				][0],
 		},
-	});
+	};
+
+	delete preparedData.checkList
+
+	return JSON.stringify(preparedData);
 }
 
 export default prepareForSubmission;

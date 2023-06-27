@@ -1,6 +1,7 @@
 import mongoose from 'mongoose';
 
 const permitInfoScheme = new mongoose.Schema({
+  /**
   applicantName: String,
   dateOfIncorporation: Date,
   placeOfIncorporation: String,
@@ -174,15 +175,6 @@ const permitInfoScheme = new mongoose.Schema({
     },
   ],
 
- /**
-  hssePolicyAndObj: [
-    {
-      fileName: String,
-      file: String,
-    },
-  ],
- */
-
   currentAuditedFinReportsOrProjectedRevenue: [
     {
       fileName: String,
@@ -266,6 +258,7 @@ const permitInfoScheme = new mongoose.Schema({
       file: String,
     },
   ],
+   */
 }, {strict: false});
 
 const permitInfo = mongoose.model(
