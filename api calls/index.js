@@ -1,7 +1,7 @@
 import dotenv from "dotenv";
 import express from "express";
 import bodyparser from "body-parser";
-import path from 'path'
+import path from "path";
 import cors from "cors";
 import { default as schema } from "../src/stateDescription.mjs";
 //import pg from "pg";
@@ -14,11 +14,13 @@ dotenv.config({ path: "../.env" });
 const server = express();
 server.use(bodyparser.json({ limit: "10mb" }));
 server.use(bodyparser.urlencoded({ extended: true, limit: "10mb" }));
-server.use(cors());
+
+if (process.env.NODE_ENV === "development") {
+	server.use(cors());
+}
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
-
 
 const uri = process.env.MONGODB_URI;
 mongoose.connect(uri).then(
@@ -33,6 +35,8 @@ mongoose.connect(uri).then(
 server.use(express.static("public"));
 
 server.use("/submit", permitRouter);
-server.use('/', (_, res) => res.sendFile(path.join(__dirname, "public", "index.html")))
+server.use("/", (_, res) =>
+	res.sendFile(path.join(__dirname, "public", "index.html"))
+);
 
 server.listen(5001, () => console.log("success"));
