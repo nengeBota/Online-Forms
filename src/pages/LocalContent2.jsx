@@ -681,20 +681,24 @@ export default function LocalContent({ data, setData, errors, setErrors }) {
 						},
 						{
 							name: "Contract Start Date",
-							key: f.servicesRendered.contractStartDate,
+              key: f.servicesRendered.contractStartDate,
+              type: 'date',
 						},
 						{
 							name: "Contract End Date",
-							key: f.servicesRendered.contractEndDate,
+              key: f.servicesRendered.contractEndDate,
+              type: 'date',
 						},
 						{
 							name: "Contract Value (Sum)",
-							key: f.servicesRendered.contractValue,
+              key: f.servicesRendered.contractValue,
+              type: 'number'
 						},
 						{
 							name: "Payments Received year",
 							key: f.servicesRendered
-								.paymentsReceivedInLast12Months,
+                .paymentsReceivedInLast12Months,
+              type: 'number',
 						},
 					]}
 					data={localContentData[f.servicesRendered._]}
@@ -769,20 +773,24 @@ export default function LocalContent({ data, setData, errors, setErrors }) {
 						},
 						{
 							name: "Contract Start Date",
-							key: f.servicesReceived.contractStartDate,
+              key: f.servicesReceived.contractStartDate,
+              type: 'date',
 						},
 						{
 							name: "Contract End Date",
-							key: f.servicesReceived.contractEndDate,
+              key: f.servicesReceived.contractEndDate,
+              type: 'date',
 						},
 						{
 							name: "Contract Value (Sum)",
-							key: f.servicesReceived.contractValue,
+              key: f.servicesReceived.contractValue,
+              type: 'number',
 						},
 						{
 							name: "Payments Received year",
 							key: f.servicesReceived
-								.paymentsReceivedInLast12Months,
+                .paymentsReceivedInLast12Months,
+              type: 'number',
 						},
 					]}
 					data={localContentData[f.servicesReceived._]}
@@ -891,7 +899,8 @@ export default function LocalContent({ data, setData, errors, setErrors }) {
 										f.professionalServicesDetails
 											.insuranceServices
 											.expenditureInLast12Months
-									)}
+                  )}
+                  type='number'
 								/>
 								<Errors
 									errors={
@@ -945,7 +954,8 @@ export default function LocalContent({ data, setData, errors, setErrors }) {
 										f.professionalServicesDetails
 											.financialServices
 											.expenditureInLast12Months
-									)}
+                  )}
+                  type='number'
 								/>
 								<Errors
 									errors={
@@ -998,7 +1008,8 @@ export default function LocalContent({ data, setData, errors, setErrors }) {
 										f.professionalServicesDetails
 											.indigenousBanks
 											.expenditureInLast12Months
-									)}
+                  )}
+                  type='number'
 								/>
 								<Errors
 									errors={
@@ -1051,7 +1062,8 @@ export default function LocalContent({ data, setData, errors, setErrors }) {
 										f.professionalServicesDetails
 											.legalServices
 											.expenditureInLast12Months
-									)}
+                  )}
+                  type='number'
 								/>
 								<Errors
 									errors={

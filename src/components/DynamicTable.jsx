@@ -1,9 +1,27 @@
 import { Button, ButtonGroup, Form, Table } from "react-bootstrap";
 import Errors from "./Errors";
 
+const columnTypes = {
+	date: "date",
+	text: "text",
+	nationality: "nationality",
+	phone: "tel",
+	number: "number",
+};
+
+function showNormalInput(columnType) {
+	return !!(
+		columnType === columnTypes.date ||
+		columnType === columnTypes.text ||
+		columnType === columnTypes.phone ||
+		columnType === columnTypes.number ||
+		!columnType
+	);
+}
+
 /**
  *
- * column [{name, key, }]
+ * column [{name, key, type }]
  * data [{isEditing, columnName: colValue, }]
  */
 
@@ -25,7 +43,7 @@ function DynamicTable({
 					{columns.map((each) => (
 						<th key={each.name}>{each.name}</th>
 					))}
-					<th id='noprint'>
+					<th id="noprint">
 						<Button type="button" size="sm" onClick={addNewRow}>
 							Add
 						</Button>
@@ -45,27 +63,32 @@ function DynamicTable({
 								</td>
 							) : (
 								<td key={col.key + index}>
-									<Form.Control
-										style={{
-											minWidth: "0",
-										}}
-										value={val[col.key]}
-										onChange={(e) =>
-											updateRow(
-												index,
-												col.key,
-												e.target.value
-											)
-										}
-										onBlur={() => onBlur(index, col.key)}
-									/>
+									{showNormalInput(col.type) ? (
+										<Form.Control
+											style={{
+												minWidth: "0",
+											}}
+											type={col.type}
+											value={val[col.key]}
+											onChange={(e) =>
+												updateRow(
+													index,
+													col.key,
+													e.target.value
+												)
+											}
+											onBlur={() =>
+												onBlur(index, col.key)
+											}
+										/>
+									) : null}
 									<Errors
 										errors={errors?.[index]?.[col.key]}
 									/>
 								</td>
 							)
 						)}
-						<td id='noprint'>
+						<td id="noprint">
 							{val.isEditing ? (
 								<Button
 									size="sm"
