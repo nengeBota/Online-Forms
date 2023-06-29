@@ -21,6 +21,7 @@ import {
 	formatSingleContactPersonErrors,
 	formatSingleexecutiveDirectorsErrors,
 } from "../helpers/formatCorporateStructureAndServicesErrors";
+import NationalityDropdown from "../components/NationalityDropdown";
 
 const getValue = (data) => {
 	const fields = data[fieldNames.corporateStructureAndServices._];
@@ -42,7 +43,7 @@ const getValue = (data) => {
 			fieldNames.corporateStructureAndServices.nameOfSubsidiaryOrAffiliate
 		];
 	const nationalityOfAffiliate =
-		fields[fieldNames.corporateStructureAndServices.nationality];
+		fields[fieldNames.corporateStructureAndServices.nationalityOfAffiliate];
 	const corporateStructure =
 		fields[fieldNames.corporateStructureAndServices.corporateStructure];
 	const description =
@@ -652,14 +653,13 @@ function CorporateStructureAndServices({ data, setData, errors, setErrors }) {
 					<Errors
 						errors={getError(f.nationalityOfAffiliate, errors)}
 					/>
-					<Form.Control
-						placeholder="Nationality of Parent Company/ Affiliate"
+					<NationalityDropdown
 						value={nationalityOfAffiliate}
-						onChange={(e) => {
+						onChange={(country) => {
 							onChange(
 								fieldNames.corporateStructureAndServices
 									.nationalityOfAffiliate,
-								e.target.value
+								country
 							);
 						}}
 						onBlur={() => {
@@ -715,6 +715,7 @@ function CorporateStructureAndServices({ data, setData, errors, setErrors }) {
 							{
 								name: "Nationality",
 								key: f.shareholders.nationality,
+								type: "nationality",
 							},
 							{
 								name: "Percentage Share",
@@ -799,7 +800,11 @@ function CorporateStructureAndServices({ data, setData, errors, setErrors }) {
 						columns={[
 							{ name: "Beneficial", key: "name" },
 							{ name: "Address", key: "address" },
-							{ name: "Nationality", key: "nationality" },
+							{
+								name: "Nationality",
+								key: "nationality",
+								type: "nationality",
+							},
 							{ name: "Percentage Share", key: "percentage" },
 						]}
 						errors={
@@ -901,6 +906,7 @@ function CorporateStructureAndServices({ data, setData, errors, setErrors }) {
 							{
 								name: "Nationality",
 								key: f.executiveDirectors.nationality,
+								type: "nationality",
 							},
 							{
 								name: "Position in Company",

@@ -23,6 +23,8 @@ const percentage = z.coerce
 	.gt(0, { message: "Can't be less than 1%" })
 	.lt(101, { message: "Can't be greater than 100%" });
 
+const country = () => z.object({ name: z.string(), flag: z.string() });
+
 const corporateStructureAndServices = fieldNames.corporateStructureAndServices;
 
 const validations = {
@@ -38,8 +40,8 @@ const validations = {
 				nonEmptyString,
 			[corporateStructureAndServices.contactDetails.GHpost]:
 				nonEmptyString,
-    }),
-    [corporateStructureAndServices.companyIsJointVenture]: z.boolean(),
+		}),
+		[corporateStructureAndServices.companyIsJointVenture]: z.boolean(),
 
 		[corporateStructureAndServices.emailAddress]: z.string().email(),
 		[corporateStructureAndServices.website]: optional(
@@ -63,9 +65,9 @@ const validations = {
 		),
 
 		[corporateStructureAndServices.nameOfSubsidiaryOrAffiliate]:
-			optional(nonEmptyString),
+			nonEmptyString,
 		[corporateStructureAndServices.nationalityOfAffiliate]:
-			optional(nonEmptyString),
+			country().optional(),
 		[corporateStructureAndServices.permitCategory]: z.enum(
 			Object.values(PERMIT_CATEGORIES)
 		),
@@ -76,7 +78,7 @@ const validations = {
 				[corporateStructureAndServices.shareholders.address]:
 					nonEmptyString,
 				[corporateStructureAndServices.shareholders.nationality]:
-					nonEmptyString,
+					country(),
 				[corporateStructureAndServices.shareholders.percentage]:
 					percentage,
 				[corporateStructureAndServices.beneficial.isEditing]:
@@ -87,7 +89,7 @@ const validations = {
 			z.object({
 				[corporateStructureAndServices.beneficial.name]: nonEmptyString,
 				[corporateStructureAndServices.beneficial.nationality]:
-					nonEmptyString,
+					country(),
 				[corporateStructureAndServices.beneficial.percentage]:
 					percentage,
 				[corporateStructureAndServices.beneficial.address]:
@@ -109,7 +111,7 @@ const validations = {
 				[corporateStructureAndServices.executiveDirectors.contact]:
 					nonEmptyString,
 				[corporateStructureAndServices.executiveDirectors.nationality]:
-					nonEmptyString,
+					country(),
 				[corporateStructureAndServices.executiveDirectors.position]:
 					nonEmptyString,
 			})
@@ -164,7 +166,7 @@ const validations = {
 		[fieldNames.miscFiles.validTaxClearanceCertificate]: file,
 		[fieldNames.miscFiles.vatCertificate]: file,
 		[fieldNames.miscFiles.validSSNITClearanceCertificate]: file,
-    [fieldNames.miscFiles.companyProfileAndBusinessPlan]: file,
+		[fieldNames.miscFiles.companyProfileAndBusinessPlan]: file,
 		// [fieldNames.miscFiles.EPAPermit]: file,
 		// [fieldNames.miscFiles.airOperatorCertificate]: file,
 		// [fieldNames.miscFiles.aviationLicense]: file,
@@ -184,7 +186,7 @@ export const singlecontactPerson = z.object({
 export const singleShareholder = z.object({
 	[corporateStructureAndServices.shareholders.name]: nonEmptyString,
 	[corporateStructureAndServices.shareholders.address]: nonEmptyString,
-	[corporateStructureAndServices.shareholders.nationality]: nonEmptyString,
+	[corporateStructureAndServices.shareholders.nationality]: country(),
 	[corporateStructureAndServices.shareholders.percentage]: percentage,
 });
 
@@ -193,6 +195,6 @@ export const singleexecutiveDirectors = z.object({
 	occupation: nonEmptyString,
 	email: z.string().email(),
 	contact: nonEmptyString,
-	nationality: nonEmptyString,
+	nationality: country(),
 	position: nonEmptyString,
 });

@@ -1,5 +1,6 @@
 import { Button, ButtonGroup, Form, Table } from "react-bootstrap";
 import Errors from "./Errors";
+import NationalityDropdown from "./NationalityDropdown";
 
 const columnTypes = {
 	date: "date",
@@ -81,7 +82,23 @@ function DynamicTable({
 												onBlur(index, col.key)
 											}
 										/>
-									) : null}
+									) : (
+										<div style={{ marginBottom: 20 }}>
+											<NationalityDropdown
+												onChange={(country) => {
+													updateRow(
+														index,
+														col.key,
+														country
+													);
+												}}
+												onBlur={() => {
+													onBlur(index, col.key, col.type);
+												}}
+												value={val[col.key]}
+											/>
+										</div>
+									)}
 									<Errors
 										errors={errors?.[index]?.[col.key]}
 									/>
