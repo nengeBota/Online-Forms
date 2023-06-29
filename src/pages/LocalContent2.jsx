@@ -153,6 +153,7 @@ export default function LocalContent({ data, setData, errors, setErrors }) {
 											f.staffBreakdown.total.mgt
 										]
 									}
+									type="number"
 								/>
 								<Errors
 									errors={
@@ -247,6 +248,7 @@ export default function LocalContent({ data, setData, errors, setErrors }) {
 												.technicalCoreStaff
 										]
 									}
+									type="number"
 								/>
 								<Errors
 									errors={
@@ -334,6 +336,7 @@ export default function LocalContent({ data, setData, errors, setErrors }) {
 											f.staffBreakdown.total.other
 										]
 									}
+									type="number"
 								/>
 								<Errors
 									errors={
@@ -439,6 +442,7 @@ export default function LocalContent({ data, setData, errors, setErrors }) {
 											f.staffBreakdown.total.fullTime
 										]
 									}
+									type="number"
 								/>
 								<Errors
 									errors={
@@ -528,6 +532,7 @@ export default function LocalContent({ data, setData, errors, setErrors }) {
 											f.staffBreakdown.total.partTime
 										]
 									}
+									type="number"
 								/>
 								<Errors
 									errors={
@@ -624,6 +629,7 @@ export default function LocalContent({ data, setData, errors, setErrors }) {
 												.internsOrNationalService
 										]
 									}
+									type="number"
 								/>
 								<Errors
 									errors={
@@ -666,8 +672,8 @@ export default function LocalContent({ data, setData, errors, setErrors }) {
 			<FormGroup className="mt-100">
 				<FormLabel>
 					3. Subcontracts or POs Issued Services rendered by applicant
-					to other companies in the past year in order
-					for applicant to operate. (ie. Catering, Logistics, etc)
+					to other companies in the past year in order for applicant
+					to operate. (ie. Catering, Logistics, etc)
 				</FormLabel>
 				<DynamicTable
 					columns={[
@@ -681,24 +687,24 @@ export default function LocalContent({ data, setData, errors, setErrors }) {
 						},
 						{
 							name: "Contract Start Date",
-              key: f.servicesRendered.contractStartDate,
-              type: 'date',
+							key: f.servicesRendered.contractStartDate,
+							type: "date",
 						},
 						{
 							name: "Contract End Date",
-              key: f.servicesRendered.contractEndDate,
-              type: 'date',
+							key: f.servicesRendered.contractEndDate,
+							type: "date",
 						},
 						{
 							name: "Contract Value (Sum)",
-              key: f.servicesRendered.contractValue,
-              type: 'number'
+							key: f.servicesRendered.contractValue,
+							type: "number",
 						},
 						{
 							name: "Payments Received year",
 							key: f.servicesRendered
-                .paymentsReceivedInLast12Months,
-              type: 'number',
+								.paymentsReceivedInLast12Months,
+							type: "number",
 						},
 					]}
 					data={localContentData[f.servicesRendered._]}
@@ -739,8 +745,8 @@ export default function LocalContent({ data, setData, errors, setErrors }) {
 							localContentData[f.servicesRendered._][index];
 						const { error } =
 							singleServiceRendered.safeParse(value);
-            const field = f.servicesRendered._;
-            
+						const field = f.servicesRendered._;
+
 						localContentErrors[field][index] =
 							formatSingleServiceRenderedError(error?.format());
 
@@ -758,8 +764,7 @@ export default function LocalContent({ data, setData, errors, setErrors }) {
 			<FormGroup className="mt-100">
 				<FormLabel>
 					4. Contracts executed or POs obtained Services received by
-					the applicant in the past year to other
-					companies
+					the applicant in the past year to other companies
 				</FormLabel>
 				<DynamicTable
 					columns={[
@@ -773,24 +778,24 @@ export default function LocalContent({ data, setData, errors, setErrors }) {
 						},
 						{
 							name: "Contract Start Date",
-              key: f.servicesReceived.contractStartDate,
-              type: 'date',
+							key: f.servicesReceived.contractStartDate,
+							type: "date",
 						},
 						{
 							name: "Contract End Date",
-              key: f.servicesReceived.contractEndDate,
-              type: 'date',
+							key: f.servicesReceived.contractEndDate,
+							type: "date",
 						},
 						{
 							name: "Contract Value (Sum)",
-              key: f.servicesReceived.contractValue,
-              type: 'number',
+							key: f.servicesReceived.contractValue,
+							type: "number",
 						},
 						{
 							name: "Payments Received year",
 							key: f.servicesReceived
-                .paymentsReceivedInLast12Months,
-              type: 'number',
+								.paymentsReceivedInLast12Months,
+							type: "number",
 						},
 					]}
 					data={localContentData[f.servicesReceived._]}
@@ -899,8 +904,8 @@ export default function LocalContent({ data, setData, errors, setErrors }) {
 										f.professionalServicesDetails
 											.insuranceServices
 											.expenditureInLast12Months
-                  )}
-                  type='number'
+									)}
+									type="number"
 								/>
 								<Errors
 									errors={
@@ -954,8 +959,8 @@ export default function LocalContent({ data, setData, errors, setErrors }) {
 										f.professionalServicesDetails
 											.financialServices
 											.expenditureInLast12Months
-                  )}
-                  type='number'
+									)}
+									type="number"
 								/>
 								<Errors
 									errors={
@@ -1008,8 +1013,8 @@ export default function LocalContent({ data, setData, errors, setErrors }) {
 										f.professionalServicesDetails
 											.indigenousBanks
 											.expenditureInLast12Months
-                  )}
-                  type='number'
+									)}
+									type="number"
 								/>
 								<Errors
 									errors={
@@ -1062,8 +1067,8 @@ export default function LocalContent({ data, setData, errors, setErrors }) {
 										f.professionalServicesDetails
 											.legalServices
 											.expenditureInLast12Months
-                  )}
-                  type='number'
+									)}
+									type="number"
 								/>
 								<Errors
 									errors={
