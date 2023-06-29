@@ -220,11 +220,36 @@ export const checkListDesc = z
 	})
 	.passthrough()
 	.superRefine((data, ctx) => {
-		const { companyIsJointVenture } = data;
+		const {
+			companyIsJointVenture,
+			boardResolutionForBothParentCompanies,
+			copyOfJointVentureAgreement,
+			copyOfStrategicPlanForIGCsInJVA,
+		} = data;
 
-		/**
-		 * if company is joint venture, then expect
-		 */
+		if (companyIsJointVenture) {
+			if (!boardResolutionForBothParentCompanies) {
+				ctx.addIssue({
+					code: z.ZodIssueCode.invalid_literal,
+					message: "Required",
+					path: ["boardResolutionForBothParentCompanies"],
+				});
+			}
+			if (!copyOfJointVentureAgreement) {
+				ctx.addIssue({
+					code: z.ZodIssueCode.invalid_literal,
+					message: "Required",
+					path: ["copyOfJointVentureAgreement"],
+				});
+			}
+			if (!copyOfStrategicPlanForIGCsInJVA) {
+				ctx.addIssue({
+					code: z.ZodIssueCode.invalid_literal,
+					message: "Required",
+					path: ["copyOfStrategicPlanForIGCsInJVA"],
+				});
+			}
+		}
 	});
 
 const state = z.object({

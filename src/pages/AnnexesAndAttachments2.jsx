@@ -2,7 +2,6 @@ import { Form, FormCheck, Table } from "react-bootstrap";
 import Heading from "../components/Heading";
 import { fieldNames } from "../constants.mjs";
 import Errors from "../components/Errors";
-import checkCopiesOfOtherRegulatoryCerts from "../helpers/annexesAndAttachmentsChecklist/checkCopiesOfOtherRegulatoryCerts";
 
 const getValues = (data) => {
 	const fields = data[fieldNames.checkList._];
@@ -27,8 +26,19 @@ const getValues = (data) => {
 	const copiesOfOtherRegulatoryCerts = true;
 	const copyOfApplicationPackReceipt =
 		fields[fieldNames.checkList.copyOfApplicationPackReceipt];
+	const companyIsJointVenture =
+		fields[fieldNames.checkList.companyIsJointVenture];
+	const boardResolutionForBothParentCompanies =
+		fields[fieldNames.checkList.boardResolutionForBothParentCompanies];
+	const copyOfStrategicPlanForIGCsInJVA =
+		fields[fieldNames.checkList.copyOfStrategicPlanForIGCsInJVA];
+	const copyOfJointVentureAgreement =
+		fields[fieldNames.checkList.copyOfJointVentureAgreement];
 
 	return {
+		boardResolutionForBothParentCompanies,
+		copyOfStrategicPlanForIGCsInJVA,
+		copyOfJointVentureAgreement,
 		coverPage,
 		applicationForm,
 		certificateOfIncorporation,
@@ -42,6 +52,7 @@ const getValues = (data) => {
 		companyProfileandBusinessPlan,
 		copiesOfOtherRegulatoryCerts,
 		copyOfApplicationPackReceipt,
+		companyIsJointVenture,
 	};
 };
 
@@ -50,6 +61,7 @@ const getErrors = (field, errors) =>
 
 function AnnexesAndAttachments({ data, errors }) {
 	const {
+		companyIsJointVenture,
 		coverPage,
 		applicationForm,
 		certificateOfIncorporation,
@@ -63,6 +75,9 @@ function AnnexesAndAttachments({ data, errors }) {
 		companyProfileandBusinessPlan,
 		copiesOfOtherRegulatoryCerts,
 		copyOfApplicationPackReceipt,
+		boardResolutionForBothParentCompanies,
+		copyOfStrategicPlanForIGCsInJVA,
+		copyOfJointVentureAgreement,
 	} = getValues(data);
 
 	return (
@@ -315,47 +330,64 @@ function AnnexesAndAttachments({ data, errors }) {
 								/>
 							</td>
 						</tr>
-						<tr>
-							<td colspan="2">
-								<div style={{ color: "red", fontSize: "16px" }}>
-									means we'll need to provide a way for them
-									to do that in the misc
-								</div>
-								<h5>
-									In addition to the above, Joint Venture
-									Companies should attach the following:
-								</h5>
-							</td>
-						</tr>
-						<tr>
-							<td>
-								<div>A copy of the Joint Venture Agreement</div>
-							</td>
-							<td>
-								<FormCheck checked={false} />
-							</td>
-						</tr>
-						<tr>
-							<td>
-								<div>
-									A copy of the strategic plan for IGCs in a
-									JVC
-								</div>
-							</td>
-							<td>
-								<FormCheck checked={false} />
-							</td>
-						</tr>
-						<tr>
-							<td>
-								<div>
-									Board Resolution for both parent companies
-								</div>
-							</td>
-							<td>
-								<FormCheck checked={false} />
-							</td>
-						</tr>
+						{companyIsJointVenture ? (
+							<>
+								<tr>
+									<td colspan="2">
+										<h5>
+											In addition to the above, Joint
+											Venture Companies should attach the
+											following:
+										</h5>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<div>
+											14. A copy of the Joint Venture
+											Agreement
+										</div>
+									</td>
+									<td>
+										<FormCheck
+											checked={
+												copyOfJointVentureAgreement
+											}
+										/>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<div>
+											15. A copy of the strategic plan for
+											IGCs in a JVC
+										</div>
+									</td>
+									<td>
+										<FormCheck
+											checked={
+												copyOfStrategicPlanForIGCsInJVA
+											}
+										/>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<div>
+											16. Board Resolution for both parent
+											companies
+										</div>
+									</td>
+									<td>
+										<FormCheck
+											checked={
+												boardResolutionForBothParentCompanies
+											}
+										/>
+									</td>
+								</tr>
+							</>
+						) : null}
 					</tbody>
 				</Table>
 				<p>

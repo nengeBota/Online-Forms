@@ -200,7 +200,11 @@ export const fieldNames = {
 		// airOperatorCertificate: airOperatorCertificate,
 		// aviationLicense: aviationLicense,
 		// fdaHygieneCertificate: fdaHygieneCertificate,
-		copyOfApplicationPackReceipt: copyOfApplicationPackReceipt,
+    copyOfApplicationPackReceipt: copyOfApplicationPackReceipt,
+    companyIsJointVenture: 'companyIsJointVenture',
+    boardResolutionForBothParentCompanies,
+    copyOfJointVentureAgreement,
+    copyOfStrategicPlanForIGCsInJVA,
 	},
 };
 

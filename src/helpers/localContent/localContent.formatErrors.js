@@ -88,11 +88,11 @@ export default function formatLocalContentErrors(localContentErrors) {
 		),
 
 		[f.servicesReceived._]: formatServicesReceivedErrors(
-			localContentErrors[f.servicesReceived._]
+			localContentErrors?.[f.servicesReceived._]
 		),
 
 		[f.servicesRendered._]: formatServicesRenderedErrors(
-			localContentErrors[f.servicesRendered._]
+			localContentErrors?.[f.servicesRendered._]
 		),
 
 		[f.professionalServicesDetails.insuranceServices.serviceProvider]:
@@ -210,6 +210,7 @@ export function formatSingleServiceRenderedError(singleServiceRenderedError) {
 }
 
 function formatServicesReceivedErrors(serviceReceivedErrors) {
+  if (!serviceReceivedErrors) return [];
 	const serviceReceivedErrorKeys = Object.keys(serviceReceivedErrors);
 
 	return serviceReceivedErrorKeys

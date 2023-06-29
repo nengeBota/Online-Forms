@@ -4,8 +4,6 @@ import FileInput from "../components/FileInput";
 import Heading from "../components/Heading";
 import { fieldNames } from "../constants.mjs";
 
-//Incomplete work done for part 5 and 6
-
 const getHsseErrors = (errors) => {
 	return errors?.[fieldNames.healthSafetySecurityEnv._]?.[
 		fieldNames.healthSafetySecurityEnv.hssePolicyAndObj
@@ -465,7 +463,7 @@ function Miscellaneous({ data, setData, errors, setErrors }) {
 							onChange={(files) => {
 								const field =
 									fieldNames.miscFiles
-										.boardResolutionForBotParentCompanies;
+										.boardResolutionForBothParentCompanies;
 								const value = [];
 								updateMiscFilesErrors(field, value, setErrors);
 								onChange(field, files);
@@ -476,107 +474,6 @@ function Miscellaneous({ data, setData, errors, setErrors }) {
 				</>
 			) : null}
 
-			{/* EPA permit */}
-
-			{/* <FormGroup>
-				<FormLabel>EPA permit</FormLabel>
-				<Errors
-					errors={getMiscFilesErrors(
-						fieldNames.miscFiles.EPAPermit,
-						errors
-					)}
-				/>
-				<FileInput
-					value={
-						data[fieldNames.miscFiles._][
-							fieldNames.miscFiles.EPAPermit
-						]
-					}
-					onChange={(files) => {
-						const field = fieldNames.miscFiles.EPAPermit;
-						const value = [];
-						updateMiscFilesErrors(field, value, setErrors);
-						onChange(fieldNames.miscFiles.EPAPermit, files);
-					}}
-				/>
-			</FormGroup> */}
-			{/* air operator certificate */}
-			{/* <FormGroup>
-				<FormLabel>Air Operator Certificate</FormLabel>
-				<Errors
-					errors={getMiscFilesErrors(
-						fieldNames.miscFiles.airOperatorCertificate,
-						errors
-					)}
-				/>
-				<FileInput
-					value={
-						data[fieldNames.miscFiles._][
-							fieldNames.miscFiles.airOperatorCertificate
-						]
-					}
-					onChange={(files) => {
-						const field =
-							fieldNames.miscFiles.airOperatorCertificate;
-						const value = [];
-						updateMiscFilesErrors(field, value, setErrors);
-						onChange(
-							fieldNames.miscFiles.airOperatorCertificate,
-							files
-						);
-					}}
-				/>
-			</FormGroup> */}
-			{/* aviation license */}
-			{/* <FormGroup>
-				<FormLabel>Aviation License</FormLabel>
-				<Errors
-					errors={getMiscFilesErrors(
-						fieldNames.miscFiles.aviationLicense,
-						errors
-					)}
-				/>
-				<FileInput
-					value={
-						data[fieldNames.miscFiles._][
-							fieldNames.miscFiles.aviationLicense
-						]
-					}
-					onChange={(files) => {
-						const field = fieldNames.miscFiles.aviationLicense;
-						const value = [];
-						updateMiscFilesErrors(field, value, setErrors);
-						onChange(fieldNames.miscFiles.aviationLicense, files);
-					}}
-				/>
-			</FormGroup> */}
-			{/* FDA hygiene certificate */}
-			{/* <FormGroup>
-				<FormLabel>FDA hygiene certificate</FormLabel>
-				<Errors
-					errors={getMiscFilesErrors(
-						fieldNames.miscFiles.fdaHygieneCertificate,
-						errors
-					)}
-				/>
-				<FileInput
-					value={
-						data[fieldNames.miscFiles._][
-							fieldNames.miscFiles.fdaHygieneCertificate
-						]
-					}
-					onChange={(files) => {
-						const field =
-							fieldNames.miscFiles.fdaHygieneCertificate;
-						const value = [];
-						updateMiscFilesErrors(field, value, setErrors);
-						onChange(
-							fieldNames.miscFiles.fdaHygieneCertificate,
-							files
-						);
-					}}
-				/>
-			</FormGroup> */}
 
 			<br />
 			<h6>

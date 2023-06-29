@@ -42,8 +42,8 @@ async function submit(values, setShowSubmittingModal, goToNextPage) {
 			},
 			body: prepareForSubmission(values),
 		});
-    const result = await response.json();
-		// todo: take the user to the next page
+		await response.json();
+
 		goToNextPage();
 	} catch (error) {
 		console.log("failed to submit -> ", error);
@@ -74,11 +74,9 @@ function App() {
 		setPage(value);
 	};
 
-	
-//testing top scolling
-useEffect(() => {
-	window.scrollTo({top: 0, left: 0, behavior: 'smooth'});
-  }, []);
+	useEffect(() => {
+		window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
+	}, []);
 
 	return (
 		<PageWrapper>
@@ -86,16 +84,22 @@ useEffect(() => {
 				<Image src="/logo.png" />
 			</div>
 
-			<button type='button' style={{
-				position: 'absolute',
-				top: 10,
-				right: 10,
-				background: 'transparent',
-				border: '5px solid black',
-				
-			}}
-			onClick={() => {setData(testData)}}
-			>Auto-populate all fields</button>
+			<button
+				id="noprint"
+				type="button"
+				style={{
+					position: "absolute",
+					top: 10,
+					right: 10,
+					background: "transparent",
+					border: "5px solid black",
+				}}
+				onClick={() => {
+					setData(testData);
+				}}
+			>
+				Auto-populate all fields
+			</button>
 
 			<CurrentPage
 				data={data}
@@ -149,7 +153,12 @@ useEffect(() => {
 					{page < pages.length - 1 ? (
 						<Button
 							id="noprint"
-							onClick={() => { window.scrollTo({top: 0, left: 0, behavior: 'smooth'});
+							onClick={() => {
+								window.scrollTo({
+									top: 0,
+									left: 0,
+									behavior: "smooth",
+								});
 								const validationFn = () =>
 									currentValidationFn(
 										data,
@@ -171,7 +180,9 @@ useEffect(() => {
 									setShowErrorModal(true);
 									return;
 								}
-								submit(data, setShowSubmittingModal, () => {setPage(page => page+1)});
+								submit(data, setShowSubmittingModal, () => {
+									setPage((page) => page + 1);
+								});
 							}}
 						>
 							{" "}
