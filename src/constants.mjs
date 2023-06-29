@@ -31,7 +31,7 @@ const fdaHygieneCertificate = "fdaHygieneCertificate";
 const copyOfApplicationPackReceipt = "copyOfApplicationPackReceipt";
 const coverPage = "coverPage";
 const otherValidFilesAndCertificates = "otherValidFilesAndCertificates";
-const copyOfJointVentureAgreement = 'copyOfJointVentureAgreemente';
+const copyOfJointVentureAgreement = 'copyOfJointVentureAgreement';
 const copyOfStrategicPlanForIGCsInJVA = 'copyOfStrategicPlanForIGCsInJVA';
 const boardResolutionForBothParentCompanies = 'boardResolutionForBothParentCompanies';
 

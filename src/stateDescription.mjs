@@ -24,9 +24,9 @@ export const corporateStructureAndServicesDesc = z
 	.object({
 		...corporateStructureValidations,
 	})
+	.passthrough()
 	.superRefine((data, ctx) => {
 		const { companyIsJointVenture = false, contactPerson } = data;
-		console.log({ contactPerson, companyIsJointVenture, data });
 
 		if (companyIsJointVenture) {
 			if (!Array.isArray(contactPerson)) {
@@ -153,10 +153,12 @@ export const miscFilesDesc = z
 				fieldNames.miscFiles.copyOfApplicationPackReceipt
 			),
 	})
+	.passthrough()
 	.superRefine((data, ctx) => {
 		function fileIsEmpty(fileState) {
 			return (
-				Boolean(!fileState[0]?.fileName) || Boolean(!fileState[0]?.file)
+				Boolean(!fileState?.[0]?.fileName) ||
+				Boolean(!fileState?.[0]?.file)
 			);
 		}
 
@@ -165,37 +167,35 @@ export const miscFilesDesc = z
 			copyOfJointVentureAgreement,
 			boardResolutionForBothParentCompanies,
 			copyOfStrategicPlanForIGCsInJVA,
-    } = data;
-    
-    console.log({companyIsJointVenture, data})
+		} = data;
 
 		if (companyIsJointVenture) {
 			if (fileIsEmpty(copyOfJointVentureAgreement)) {
 				ctx.addIssue({
 					code: z.ZodIssueCode.too_small,
 					message: "Required",
-					path: ["copyOfJointVentureAgreement"],
+					path: ["copyOfJointVentureAgreement", "0", "fileName"],
 				});
 			}
 			if (fileIsEmpty(boardResolutionForBothParentCompanies)) {
 				ctx.addIssue({
 					code: z.ZodIssueCode.too_small,
 					message: "Required",
-					path: ["boardResolutionForBothParentCompanies"],
+					path: [
+						"boardResolutionForBothParentCompanies",
+						"0",
+						"fileName",
+					],
 				});
 			}
 			if (fileIsEmpty(copyOfStrategicPlanForIGCsInJVA)) {
 				ctx.addIssue({
 					code: z.ZodIssueCode.too_small,
 					message: "Required",
-					path: ["copyOfStrategicPlanForIGCsInJVA"],
+					path: ["copyOfStrategicPlanForIGCsInJVA", "0", "fileName"],
 				});
 			}
 		}
-
-		/**
-		 * if company is joint venture, then expect the jv file uploads to not be empty
-		 */
 	});
 export const coverPageDesc = file;
 export const checkListDesc = z
@@ -218,6 +218,7 @@ export const checkListDesc = z
 		// [fieldNames.checkList.aviationLicense]: mustBeTrue,
 		// [fieldNames.checkList.fdaHygieneCertificate]: mustBeTrue,
 	})
+	.passthrough()
 	.superRefine((data, ctx) => {
 		const { companyIsJointVenture } = data;
 

@@ -251,7 +251,7 @@ const pages = [
 			const { error: miscErrors } = miscFilesDesc.safeParse(
 				data?.[fieldNames.miscFiles._]
       );
-      
+
 			if (
 				!healthSafetySecurityEnvErrors &&
 				!declarationErrors &&
@@ -316,7 +316,7 @@ const pages = [
 	{
 		page: AnnexesAndAttachments,
 		validate: (data, setErrors, showModal) => {
-			const { error } = checkListDesc.safeParse(
+			const { error } = checkListDesc.passthrough().safeParse(
 				data?.[fieldNames.checkList._]
 			);
 

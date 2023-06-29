@@ -12,9 +12,21 @@ const getErrors = (field, errors) => {
 };
 
 function formatMiscellaneousErrors(miscellaneousErrors, data) {
-	const errors = miscellaneousErrors;
+  const errors = miscellaneousErrors;
 
 	return {
+		[fieldNames.miscFiles.copyOfJointVentureAgreement]: getErrors(
+			fieldNames.miscFiles.copyOfJointVentureAgreement,
+			errors
+		),
+		[fieldNames.miscFiles.boardResolutionForBothParentCompanies]: getErrors(
+			fieldNames.miscFiles.boardResolutionForBothParentCompanies,
+			errors
+		),
+		[fieldNames.miscFiles.copyOfStrategicPlanForIGCsInJVA]: getErrors(
+			fieldNames.miscFiles.copyOfStrategicPlanForIGCsInJVA,
+			errors
+		),
 		[fieldNames.miscFiles.certificateOfIncorporation]: getErrors(
 			fieldNames.miscFiles.certificateOfIncorporation,
 			errors
