@@ -31,6 +31,10 @@ const fdaHygieneCertificate = "fdaHygieneCertificate";
 const copyOfApplicationPackReceipt = "copyOfApplicationPackReceipt";
 const coverPage = "coverPage";
 const otherValidFilesAndCertificates = "otherValidFilesAndCertificates";
+const copyOfJointVentureAgreement = 'copyOfJointVentureAgreemente';
+const copyOfStrategicPlanForIGCsInJVA = 'copyOfStrategicPlanForIGCsInJVA';
+const boardResolutionForBothParentCompanies = 'boardResolutionForBothParentCompanies';
+
 
 export const fieldNames = {
 	// PAGE 1 - CORPORATE STRUCTURE AND SERVICES
@@ -148,7 +152,11 @@ export const fieldNames = {
 
 	// misc files
 	miscFiles: {
-		_: "miscFiles",
+    _: "miscFiles",
+    copyOfJointVentureAgreement: copyOfJointVentureAgreement,
+    boardResolutionForBothParentCompanies: boardResolutionForBothParentCompanies,
+    copyOfStrategicPlanForIGCsInJVA: copyOfStrategicPlanForIGCsInJVA,
+    
 		certificateOfIncorporation: certificateOfIncorporation,
 		certificateToCommenceBusiness: certificateToCommenceBusiness,
 		companyRegulationsDocument: companyRegulationsDocument,

@@ -24,8 +24,7 @@ const getValues = (data) => {
 		fields[fieldNames.checkList.originalSsnitClearanceCertificate];
 	const companyProfileandBusinessPlan =
 		fields[fieldNames.checkList.companyProfileAndBusinessPlan];
-	const copiesOfOtherRegulatoryCerts =
-		checkCopiesOfOtherRegulatoryCerts(data);
+	const copiesOfOtherRegulatoryCerts = true;
 	const copyOfApplicationPackReceipt =
 		fields[fieldNames.checkList.copyOfApplicationPackReceipt];
 
@@ -354,9 +353,7 @@ function AnnexesAndAttachments({ data, errors }) {
 								</div>
 							</td>
 							<td>
-								<FormCheck
-									checked={false}
-								/>
+								<FormCheck checked={false} />
 							</td>
 						</tr>
 					</tbody>

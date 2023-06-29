@@ -380,6 +380,102 @@ function Miscellaneous({ data, setData, errors, setErrors }) {
 				/>
 			</FormGroup>
 
+			{/* JVA UPLOADS */}
+			{data.miscFiles?.companyIsJointVenture ? (
+        <>
+          <br />
+          <h3>Joint Venture Companies Section</h3>
+          <hr />
+					<FormGroup>
+						<FormLabel>
+							Copy of the Joint Venture Agreement
+						</FormLabel>
+						<Errors
+							errors={getMiscFilesErrors(
+								fieldNames.miscFiles
+									.copyOfJointVentureAgreement,
+								errors
+							)}
+						/>
+						<FileInput
+							value={
+								data[fieldNames.miscFiles._][
+									fieldNames.miscFiles
+										.copyOfJointVentureAgreement
+								]
+							}
+							onChange={(files) => {
+								const field =
+									fieldNames.miscFiles
+										.copyOfJointVentureAgreement;
+								const value = [];
+								updateMiscFilesErrors(field, value, setErrors);
+								onChange(field, files);
+							}}
+						/>
+          </FormGroup>
+          
+					<FormGroup>
+						<FormLabel>
+							Copy of the strategic plan for IGCs in the Joint Venture Agreement
+						</FormLabel>
+						<Errors
+							errors={getMiscFilesErrors(
+								fieldNames.miscFiles
+									.copyOfStrategicPlanForIGCsInJVA,
+								errors
+							)}
+						/>
+						<FileInput
+							value={
+								data[fieldNames.miscFiles._][
+									fieldNames.miscFiles
+										.copyOfStrategicPlanForIGCsInJVA
+								]
+							}
+							onChange={(files) => {
+								const field =
+									fieldNames.miscFiles
+										.copyOfStrategicPlanForIGCsInJVA;
+								const value = [];
+								updateMiscFilesErrors(field, value, setErrors);
+								onChange(field, files);
+							}}
+						/>
+          </FormGroup>
+          
+					<FormGroup>
+						<FormLabel>
+							Board resolution for both parent companies
+						</FormLabel>
+						<Errors
+							errors={getMiscFilesErrors(
+								fieldNames.miscFiles
+									.boardResolutionForBothParentCompanies,
+								errors
+							)}
+						/>
+						<FileInput
+							value={
+								data[fieldNames.miscFiles._][
+									fieldNames.miscFiles
+										.boardResolutionForBothParentCompanies
+								]
+							}
+							onChange={(files) => {
+								const field =
+									fieldNames.miscFiles
+										.boardResolutionForBotParentCompanies;
+								const value = [];
+								updateMiscFilesErrors(field, value, setErrors);
+								onChange(field, files);
+							}}
+						/>
+          </FormGroup>
+          <br />
+				</>
+			) : null}
+
 			{/* EPA permit */}
 
 			{/* <FormGroup>
@@ -481,9 +577,6 @@ function Miscellaneous({ data, setData, errors, setErrors }) {
 					}}
 				/>
 			</FormGroup> */}
-			<Errors
-				errors={["the three specified uploads for a joint venture"]}
-			/>
 
 			<br />
 			<h6>

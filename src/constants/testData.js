@@ -198,7 +198,8 @@ export const data =
 		}
 	  ]
 	},
-	"miscFiles": {
+  "miscFiles": {
+    "companyIsJointVenture": true,
 	  "certificateOfIncorporation": [
 		{
 		  "fileName": "use-caution-when-reinitializing-variables-inside-a-loop.txt",

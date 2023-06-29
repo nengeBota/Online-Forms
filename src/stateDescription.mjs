@@ -32,8 +32,8 @@ export const corporateStructureAndServicesDesc = z
 			if (!Array.isArray(contactPerson)) {
 				ctx.addIssue({
 					code: z.ZodIssueCode.invalid_type,
-          message: "Should be a list of contact persons",
-          path: ['contactPerson']
+					message: "Should be a list of contact persons",
+					path: ["contactPerson"],
 				});
 
 				return;
@@ -41,8 +41,8 @@ export const corporateStructureAndServicesDesc = z
 
 			if (contactPerson.length < 2) {
 				ctx.addIssue({
-          code: z.ZodIssueCode.too_small,
-          path: ['contactPerson'],
+					code: z.ZodIssueCode.too_small,
+					path: ["contactPerson"],
 					message:
 						"Joint Ventures should provide at least 2 contact persons; one from each party",
 				});
@@ -154,7 +154,44 @@ export const miscFilesDesc = z
 			),
 	})
 	.superRefine((data, ctx) => {
-		const { companyIsJointVenture } = data;
+		function fileIsEmpty(fileState) {
+			return (
+				Boolean(!fileState[0]?.fileName) || Boolean(!fileState[0]?.file)
+			);
+		}
+
+		const {
+			companyIsJointVenture,
+			copyOfJointVentureAgreement,
+			boardResolutionForBothParentCompanies,
+			copyOfStrategicPlanForIGCsInJVA,
+    } = data;
+    
+    console.log({companyIsJointVenture, data})
+
+		if (companyIsJointVenture) {
+			if (fileIsEmpty(copyOfJointVentureAgreement)) {
+				ctx.addIssue({
+					code: z.ZodIssueCode.too_small,
+					message: "Required",
+					path: ["copyOfJointVentureAgreement"],
+				});
+			}
+			if (fileIsEmpty(boardResolutionForBothParentCompanies)) {
+				ctx.addIssue({
+					code: z.ZodIssueCode.too_small,
+					message: "Required",
+					path: ["boardResolutionForBothParentCompanies"],
+				});
+			}
+			if (fileIsEmpty(copyOfStrategicPlanForIGCsInJVA)) {
+				ctx.addIssue({
+					code: z.ZodIssueCode.too_small,
+					message: "Required",
+					path: ["copyOfStrategicPlanForIGCsInJVA"],
+				});
+			}
+		}
 
 		/**
 		 * if company is joint venture, then expect the jv file uploads to not be empty
@@ -189,31 +226,29 @@ export const checkListDesc = z
 		 */
 	});
 
-const state = z
-  .object({
-    [fieldNames.corporateStructureAndServices._]:
-      corporateStructureAndServicesDesc,
+const state = z.object({
+	[fieldNames.corporateStructureAndServices._]:
+		corporateStructureAndServicesDesc,
 
-    [fieldNames.finCapability._]: financialCapabilityDesc,
+	[fieldNames.finCapability._]: financialCapabilityDesc,
 
-    [fieldNames.mgtAndTechnicalCompetencies._]:
-      mgtAndTechnicalCompetenciesDesc,
+	[fieldNames.mgtAndTechnicalCompetencies._]: mgtAndTechnicalCompetenciesDesc,
 
-    [fieldNames.detailsOfExperience._]: detailsOfExperienceDesc,
+	[fieldNames.detailsOfExperience._]: detailsOfExperienceDesc,
 
-    [fieldNames.orgDevProgramAndBudget._]: orgDevProgramAndBudgetDesc,
+	[fieldNames.orgDevProgramAndBudget._]: orgDevProgramAndBudgetDesc,
 
-    [fieldNames.localContent._]: localContentSchema,
+	[fieldNames.localContent._]: localContentSchema,
 
-    [fieldNames.healthSafetySecurityEnv._]: healthSafetySecurityEnvDesc,
+	[fieldNames.healthSafetySecurityEnv._]: healthSafetySecurityEnvDesc,
 
-    [fieldNames.miscFiles._]: miscFilesDesc,
+	[fieldNames.miscFiles._]: miscFilesDesc,
 
-    [fieldNames.declaration]: declarationDesc,
+	[fieldNames.declaration]: declarationDesc,
 
-    [fieldNames.coverPage]: coverPageDesc,
+	[fieldNames.coverPage]: coverPageDesc,
 
-    [fieldNames.checkList._]: checkListDesc,
-  });
+	[fieldNames.checkList._]: checkListDesc,
+});
 
 export default state;
