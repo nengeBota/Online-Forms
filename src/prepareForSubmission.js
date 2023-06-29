@@ -1,8 +1,6 @@
-import { fieldNames } from "./constants.mjs";
-
 function prepareForSubmission(data) {
-  const preparedData = {...data};
-	delete preparedData.checkList
+	const preparedData = { ...data };
+	delete preparedData.checkList;
 
 	return JSON.stringify(preparedData);
 }
