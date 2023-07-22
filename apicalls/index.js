@@ -35,7 +35,7 @@ server.use(express.static("public"));
 
 server.use("/submit", permitRouter);
 server.use("/", (_, res) =>
-	res.sendFile(path.join(__dirname, "public", "index.html"))
+	res.sendFile(path.join(__dirname, "build", "index.html"))
 );
 
 server.listen(port, () => console.log("success"));
