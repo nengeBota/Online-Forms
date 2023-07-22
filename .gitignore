@@ -10,8 +10,8 @@ node_modules/*
 
 # production
 /build
-/api calls/public
-/api calls/node_modules/*
+/apicalls/public
+/apicalls/node_modules/*
 
 # misc
 .DS_Store
