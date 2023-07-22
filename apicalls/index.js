@@ -35,11 +35,8 @@ mongoose.connect(uri).then(
 	}
 );
 
-server.use(express.static("build"));
 
 server.use("/submit", permitRouter);
-server.use("/", (_, res) =>
-	res.sendFile(path.join(__dirname, "build", "index.html"))
-);
+server.use('/', express.static(path.join(__dirname, "build")));
 
 server.listen(port, () => console.log("success"));
