@@ -23,7 +23,7 @@
   },
   "scripts": {
     "start": "node apicalls/index.js",
-    "build": "react-scripts build && mv build apicalls/public",
+    "build": "react-scripts build && mv build apicalls/public && cd apicalls && npm install",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
