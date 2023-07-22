@@ -82,9 +82,8 @@ export default function formatLocalContentErrors(localContentErrors) {
 			localContentErrors
 		),
 
-		[f.capitalInvestment]: getErrors(
-			f.capitalInvestment,
-			localContentErrors
+		[f.capitalInvestment]: formatCapitalInvestmentErrors(
+			localContentErrors?.[f.capitalInvestment]
 		),
 
 		[f.servicesReceived._]: formatServicesReceivedErrors(
@@ -209,8 +208,41 @@ export function formatSingleServiceRenderedError(singleServiceRenderedError) {
 	return result;
 }
 
+function formatCapitalInvestmentErrors(companyInvestmentErrors) {
+	if (!companyInvestmentErrors) return [];
+	const companyInvestmentErrorKeys = Object.keys(companyInvestmentErrors);
+
+	return companyInvestmentErrorKeys
+		.filter((key) => key !== "_errors")
+		.map((key) => {
+			const singleCompanyInvestmentError = companyInvestmentErrors[key];
+			return formatSingleCapitalInvestmentError(
+				singleCompanyInvestmentError
+			);
+		});
+}
+
+export function formatSingleCapitalInvestmentError(singleCompanyInvestmentError) {
+	if (!singleCompanyInvestmentError) return {};
+	return {
+		descriptionOfInvestment: getErrors(
+			"descriptionOfInvestment",
+			singleCompanyInvestmentError
+		),
+		location: getErrors("location", singleCompanyInvestmentError),
+		totalCurrentExpenditureInUSD: getErrors(
+			"totalCurrentExpenditureInUSD",
+			singleCompanyInvestmentError
+		),
+		totalCumulativeExpenditureInUSD: getErrors(
+			"totalCumulativeExpenditureInUSD",
+			singleCompanyInvestmentError
+		),
+	};
+}
+
 function formatServicesReceivedErrors(serviceReceivedErrors) {
-  if (!serviceReceivedErrors) return [];
+	if (!serviceReceivedErrors) return [];
 	const serviceReceivedErrorKeys = Object.keys(serviceReceivedErrors);
 
 	return serviceReceivedErrorKeys

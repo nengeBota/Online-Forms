@@ -22,6 +22,16 @@ export const singleServiceReceived = z.object({
 	[f.servicesReceived.contractValue]: positiveNumber,
 });
 
+export const singleCapitalExpenditure = () =>
+	z
+		.object({
+			descriptionOfInvestment: z.string(),
+			location: z.string(),
+			totalCurrentExpenditureUSD: z.coerce.number(),
+			totalCumulativeExpenditureUSD: z.coerce.number(),
+		})
+		.required();
+
 const localContentFieldValidations = {
 	[f.staffBreakdown.ghanaian.mgt]: positiveNumber,
 	[f.staffBreakdown.ghanaian.technicalCoreStaff]: positiveNumber,
@@ -44,7 +54,7 @@ const localContentFieldValidations = {
 	[f.staffBreakdown.total.partTime]: positiveNumber,
 	[f.staffBreakdown.total.internsOrNationalService]: positiveNumber,
 
-	[f.capitalInvestment]: nonEmptyString,
+	[f.capitalInvestment]: z.array(singleCapitalExpenditure()),
 
 	[f.servicesReceived._]: z.array(singleServiceReceived),
 

@@ -22,7 +22,14 @@ const localContentInitialState = {
 	[f.staffBreakdown.total.partTime]: 0,
 	[f.staffBreakdown.total.internsOrNationalService]: 0,
 
-	[f.capitalInvestment]: "",
+	[f.capitalInvestment]: [
+		{
+			descriptionOfInvestment: "",
+			location: "",
+			totalCurrentExpenditureUSD: "",
+			totalCumulativeExpenditureUSD: "",
+		},
+	],
 
 	[f.servicesReceived._]: [
 		{

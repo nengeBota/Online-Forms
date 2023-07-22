@@ -7,6 +7,7 @@ import {
 	localContentFieldValidations as v,
 } from "../helpers/localContent/index.js";
 import {
+	singleCapitalExpenditure,
 	singleServiceReceived,
 	singleServiceRendered,
 } from "../helpers/localContent/localContent.fieldValidations.js";
@@ -15,6 +16,7 @@ import {
 	NEW_SERVICE_RENDERED_ITEM,
 } from "../helpers/localContent/localContent.initialState";
 import {
+	formatSingleCapitalInvestmentError,
 	formatSingleServiceReceivedError,
 	formatSingleServiceRenderedError,
 } from "../helpers/localContent/localContent.formatErrors";
@@ -645,7 +647,102 @@ export default function LocalContent({ data, setData, errors, setErrors }) {
 				</Table>
 			</FormGroup>
 
-			<FormGroup className="mt-100">
+			{/* <FormGroup>
+				<FormLabel>
+					2. Capital Investments -{" "}
+					<i>
+						(The company should outline any{" "}
+						<b>
+							<u>capital investments</u>
+						</b>{" "}
+						made towards its operations - infrastructure, equipment,
+						tools, machinery, etc.. in Ghana)
+					</i>
+				</FormLabel>
+				<Errors errors={localContentErrors[f.capitalInvestment]} />
+				<DynamicTable
+					columns={[
+						{
+							name: "Description of investment",
+							key: "descriptionOfInvestment",
+							type: "text",
+						},
+						{
+							name: "Location",
+							key: "location",
+							type: "text",
+						},
+						{
+							name: "Total current expenditure USD",
+							key: "totalCurrentExpenditureUSD",
+							type: "number",
+						},
+						{
+							name: "Total cumulative expenditure USD",
+							key: "totalCumulativeExpenditureUSD",
+							type: "number",
+						},
+					]}
+					data={localContentData[f.capitalInvestment]}
+					errors={localContentErrors[f.capitalInvestment]}
+					addNewRow={() => {
+						const newRow = {
+							descriptionOfInvestment: "",
+							location: "",
+							totalCurrentExpenditureInUSD: "",
+							totalCumulativeExpenditureUSD: "",
+						};
+						const field = f.capitalInvestment;
+						const value = localContentData[f.capitalInvestment];
+						onChange(field, [...value, newRow]);
+					}}
+					saveRow={(index) => {
+						const field = f.capitalInvestment;
+
+						const value = localContentData[f.capitalInvestment];
+						value[index].isEditing = false;
+						onChange(field, [...value]);
+					}}
+					editRow={(index) => {
+						const field = f.capitalInvestment;
+						const value = localContentData[f.capitalInvestment];
+						value[index].isEditing = true;
+						onChange(field, [...value]);
+					}}
+					deleteRow={(index) => {
+						const field = f.capitalInvestment;
+						const value = localContentData[f.capitalInvestment];
+						value.splice(index, 1);
+						onChange(field, [...value]);
+					}}
+					updateRow={(index, col, newValue) => {
+						const field = f.capitalInvestment;
+						const value = localContentData[f.capitalInvestment];
+						value[index][col] = newValue;
+						onChange(field, [...value]);
+					}}
+					onBlur={(index) => {
+						const value =
+							localContentData[f.capitalInvestment][index];
+						const { error } =
+							singleCapitalExpenditure.safeParse(value);
+						const field = f.capitalInvestment;
+
+						localContentErrors[field][index] =
+							formatSingleCapitalInvestmentError(error?.format());
+
+						setErrors((prev) => ({
+							...prev,
+							localContent: {
+								...prev.localContent,
+								...localContentErrors,
+							},
+						}));
+					}}
+				/>
+			</FormGroup> */}
+
+			{/* <FormGroup className="mt-100">
 				<FormLabel>
 					2. Capital Investments -{" "}
 					<i>
@@ -667,7 +764,7 @@ export default function LocalContent({ data, setData, errors, setErrors }) {
 					style={{ width: "100%", minHeight: "100px" }}
 					{...register(f.capitalInvestment)}
 				/>
-			</FormGroup>
+			</FormGroup> */}
 
 			<FormGroup className="mt-100">
 				<FormLabel>
