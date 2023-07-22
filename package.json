@@ -22,8 +22,8 @@
     "zod": "^3.21.4"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build && mv build 'api calls'/public",
+    "start": "node apicalls/index.js",
+    "build": "react-scripts build && mv build apicalls/public",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },

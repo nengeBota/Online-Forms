@@ -3,10 +3,7 @@ import express from "express";
 import bodyparser from "body-parser";
 import path from "path";
 import cors from "cors";
-import { default as schema } from "../src/stateDescription.mjs";
-//import pg from "pg";
 import mongoose from "mongoose";
-import formatAllErrorsForState from "../src/helpers/formatAllErrorsForState.js";
 import permitRouter from "./route.js";
 import { fileURLToPath } from "url";
 
