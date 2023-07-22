@@ -19,7 +19,9 @@ if (process.env.NODE_ENV === "development") {
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-const uri = process.env.MONGODB_URI;
+const uri = process.env.DATABASE_URL;
+const port = process.env.PORT || "3000";
+
 mongoose.connect(uri).then(
 	() => {
 		console.log("connection to atlas server successful");
@@ -36,4 +38,4 @@ server.use("/", (_, res) =>
 	res.sendFile(path.join(__dirname, "public", "index.html"))
 );
 
-server.listen(5001, () => console.log("success"));
+server.listen(port, () => console.log("success"));
