@@ -22,6 +22,10 @@ const __dirname = path.dirname(__filename);
 const uri = process.env.DATABASE_URL;
 const port = process.env.PORT || "3000";
 
+if (!uri) {
+	throw Error("no uri has been passed in the environment variables");
+}
+
 mongoose.connect(uri).then(
 	() => {
 		console.log("connection to atlas server successful");
@@ -31,7 +35,7 @@ mongoose.connect(uri).then(
 	}
 );
 
-server.use(express.static("public"));
+server.use(express.static("build"));
 
 server.use("/submit", permitRouter);
 server.use("/", (_, res) =>
